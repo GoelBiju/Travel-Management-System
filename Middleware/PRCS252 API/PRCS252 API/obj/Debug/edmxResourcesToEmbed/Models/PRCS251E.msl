@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DatabaseStoreContainer" CdmEntityContainer="Entities1">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Database">
     <EntitySetMapping Name="COACHES">
-      <EntityTypeMapping TypeName="Database.COACH">
+      <EntityTypeMapping TypeName="Model.COACH">
         <MappingFragment StoreEntitySet="COACHES">
           <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
           <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
@@ -13,7 +13,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CUSTOMERS">
-      <EntityTypeMapping TypeName="Database.CUSTOMER">
+      <EntityTypeMapping TypeName="Model.CUSTOMER">
         <MappingFragment StoreEntitySet="CUSTOMERS">
           <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
           <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
@@ -29,7 +29,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EMPLOYEES">
-      <EntityTypeMapping TypeName="Database.EMPLOYEE">
+      <EntityTypeMapping TypeName="Model.EMPLOYEE">
         <MappingFragment StoreEntitySet="EMPLOYEES">
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
           <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
@@ -40,7 +40,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ROUTES">
-      <EntityTypeMapping TypeName="Database.ROUTE">
+      <EntityTypeMapping TypeName="Model.ROUTE">
         <MappingFragment StoreEntitySet="ROUTES">
           <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
           <ScalarProperty Name="START_DESTINATION" ColumnName="START_DESTINATION" />
@@ -49,7 +49,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SHIFTS">
-      <EntityTypeMapping TypeName="Database.SHIFT">
+      <EntityTypeMapping TypeName="Model.SHIFT">
         <MappingFragment StoreEntitySet="SHIFTS">
           <ScalarProperty Name="SHIFT_ID" ColumnName="SHIFT_ID" />
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
@@ -59,7 +59,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="STATIONS">
-      <EntityTypeMapping TypeName="Database.STATION">
+      <EntityTypeMapping TypeName="Model.STATION">
         <MappingFragment StoreEntitySet="STATIONS">
           <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
           <ScalarProperty Name="STATION_NAME" ColumnName="STATION_NAME" />
@@ -67,7 +67,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TIMETABLES">
-      <EntityTypeMapping TypeName="Database.TIMETABLE">
+      <EntityTypeMapping TypeName="Model.TIMETABLE">
         <MappingFragment StoreEntitySet="TIMETABLES">
           <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
           <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />

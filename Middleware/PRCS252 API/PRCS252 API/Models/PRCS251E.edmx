@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Database.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="COACHES">
           <Key>
             <PropertyRef Name="COACH_ID" />
@@ -138,7 +138,7 @@ warning 6002: The table/view 'PRCS251E.TIMETABLES' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DatabaseStoreContainer">
+        <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="COACHES" EntityType="Self.COACHES" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" Schema="PRCS251E" store:Type="Tables" />
@@ -179,7 +179,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Database" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="COACH">
           <Key>
             <PropertyRef Name="COACH_ID" />
@@ -321,7 +321,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Database" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="COACHES" EntityType="Self.COACH" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
           <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEE" />
@@ -355,9 +355,9 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DatabaseStoreContainer" CdmEntityContainer="Entities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Database">
           <EntitySetMapping Name="COACHES">
-            <EntityTypeMapping TypeName="Database.COACH">
+            <EntityTypeMapping TypeName="Model.COACH">
               <MappingFragment StoreEntitySet="COACHES">
                 <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
                 <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
@@ -368,7 +368,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CUSTOMERS">
-            <EntityTypeMapping TypeName="Database.CUSTOMER">
+            <EntityTypeMapping TypeName="Model.CUSTOMER">
               <MappingFragment StoreEntitySet="CUSTOMERS">
                 <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
                 <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
@@ -384,7 +384,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLOYEES">
-            <EntityTypeMapping TypeName="Database.EMPLOYEE">
+            <EntityTypeMapping TypeName="Model.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEES">
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
                 <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
@@ -395,7 +395,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ROUTES">
-            <EntityTypeMapping TypeName="Database.ROUTE">
+            <EntityTypeMapping TypeName="Model.ROUTE">
               <MappingFragment StoreEntitySet="ROUTES">
                 <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
                 <ScalarProperty Name="START_DESTINATION" ColumnName="START_DESTINATION" />
@@ -404,7 +404,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SHIFTS">
-            <EntityTypeMapping TypeName="Database.SHIFT">
+            <EntityTypeMapping TypeName="Model.SHIFT">
               <MappingFragment StoreEntitySet="SHIFTS">
                 <ScalarProperty Name="SHIFT_ID" ColumnName="SHIFT_ID" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
@@ -414,7 +414,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="STATIONS">
-            <EntityTypeMapping TypeName="Database.STATION">
+            <EntityTypeMapping TypeName="Model.STATION">
               <MappingFragment StoreEntitySet="STATIONS">
                 <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
                 <ScalarProperty Name="STATION_NAME" ColumnName="STATION_NAME" />
@@ -422,7 +422,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIMETABLES">
-            <EntityTypeMapping TypeName="Database.TIMETABLE">
+            <EntityTypeMapping TypeName="Model.TIMETABLE">
               <MappingFragment StoreEntitySet="TIMETABLES">
                 <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
                 <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />

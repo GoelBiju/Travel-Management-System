@@ -13,10 +13,10 @@ namespace PRCS252_API.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities1 : DbContext
+    public partial class Database : DbContext
     {
-        public Entities1()
-            : base("name=Entities1")
+        public Database()
+            : base("name=Database")
         {
         }
     

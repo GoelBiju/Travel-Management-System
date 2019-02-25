@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Database" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="COACH">
     <Key>
       <PropertyRef Name="COACH_ID" />
@@ -141,7 +141,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Database" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="COACHES" EntityType="Self.COACH" />
     <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
     <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEE" />

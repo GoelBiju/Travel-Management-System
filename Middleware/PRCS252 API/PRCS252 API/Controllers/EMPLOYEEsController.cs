@@ -7,20 +7,21 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PRCS252_API.Models;
+using Database = PRCS252_API.Models.Database;
 
 namespace PRCS252_API.Controllers
 {
-    public class EMPLOYEEsController : Controller
+    public class EmployeesController : Controller
     {
-        private Entities1 db = new Entities1();
+        private Database db = new Database();
 
-        // GET: EMPLOYEEs
+        // GET: Employees
         public ActionResult Index()
         {
             return View(db.EMPLOYEES.ToList());
         }
 
-        // GET: EMPLOYEEs/Details/5
+        // GET: Employees/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -35,13 +36,13 @@ namespace PRCS252_API.Controllers
             return View(eMPLOYEE);
         }
 
-        // GET: EMPLOYEEs/Create
+        // GET: Employees/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EMPLOYEEs/Create
+        // POST: Employees/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,7 +59,7 @@ namespace PRCS252_API.Controllers
             return View(eMPLOYEE);
         }
 
-        // GET: EMPLOYEEs/Edit/5
+        // GET: Employees/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -73,7 +74,7 @@ namespace PRCS252_API.Controllers
             return View(eMPLOYEE);
         }
 
-        // POST: EMPLOYEEs/Edit/5
+        // POST: Employees/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,7 +90,7 @@ namespace PRCS252_API.Controllers
             return View(eMPLOYEE);
         }
 
-        // GET: EMPLOYEEs/Delete/5
+        // GET: Employees/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -104,7 +105,7 @@ namespace PRCS252_API.Controllers
             return View(eMPLOYEE);
         }
 
-        // POST: EMPLOYEEs/Delete/5
+        // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

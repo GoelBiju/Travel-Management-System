@@ -17,6 +17,7 @@
         <AssociationConnector Association="Model.SHIFTS_ROUTE_ID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.TIMETABLES_ROUTE_ID" ManuallyRouted="false" />
         <AssociationConnector Association="Model.TIMETABLES_STATION_ID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.EMPLOYEES_ARCHIVE" Width="1.5" PointX="6.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="335b12c51bbb4106973f9e190063966f" Name="Diagram1">
+        <EntityTypeShape EntityType="Database.COACH" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.CUSTOMER" Width="1.5" PointX="2.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.EMPLOYEE" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.ROUTE" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.SHIFT" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.STATION" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.TIMETABLE" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="Database.SHIFTS_COACH_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.SHIFTS_EMPLOYEE_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.SHIFTS_ROUTE_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.TIMETABLES_ROUTE_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.TIMETABLES_STATION_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

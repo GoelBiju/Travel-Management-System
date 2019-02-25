@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="COACH">
+    <Key>
+      <PropertyRef Name="COACH_ID" />
+    </Key>
+    <Property Name="COACH_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COACH_MAKE" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COACH_MODEL" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="REGISTRATION_PLATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CAPACITY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_COACH_ID_FK" FromRole="COACHES" ToRole="SHIFTS" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="CUSTOMER_ID" />
+    </Key>
+    <Property Name="CUSTOMER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LAST_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DATE_OF_BIRTH" Type="DateTime" Nullable="false" />
+    <Property Name="ADDRESS_LINE_1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ADDRESS_LINE_2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="POSTCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PHONE_NUMBER" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="EMPLOYEE_ID" />
+    </Key>
+    <Property Name="EMPLOYEE_ID" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LAST_NAME" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="JOB_ROLE" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_EMPLOYEE_ID_FK" FromRole="EMPLOYEES" ToRole="SHIFTS" />
+  </EntityType>
+  <EntityType Name="ROUTE">
+    <Key>
+      <PropertyRef Name="ROUTE_ID" />
+    </Key>
+    <Property Name="ROUTE_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="START_DESTINATION" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="END_DESTINATION" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_ROUTE_ID_FK" FromRole="ROUTES" ToRole="SHIFTS" />
+    <NavigationProperty Name="TIMETABLES" Relationship="Self.TIMETABLES_ROUTE_ID" FromRole="ROUTES" ToRole="TIMETABLES" />
+  </EntityType>
+  <EntityType Name="SHIFT">
+    <Key>
+      <PropertyRef Name="SHIFT_ID" />
+    </Key>
+    <Property Name="SHIFT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EMPLOYEE_ID" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ROUTE_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COACH_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="COACH" Relationship="Self.SHIFTS_COACH_ID_FK" FromRole="SHIFTS" ToRole="COACHES" />
+    <NavigationProperty Name="EMPLOYEE" Relationship="Self.SHIFTS_EMPLOYEE_ID_FK" FromRole="SHIFTS" ToRole="EMPLOYEES" />
+    <NavigationProperty Name="ROUTE" Relationship="Self.SHIFTS_ROUTE_ID_FK" FromRole="SHIFTS" ToRole="ROUTES" />
+  </EntityType>
+  <EntityType Name="STATION">
+    <Key>
+      <PropertyRef Name="STATION_ID" />
+    </Key>
+    <Property Name="STATION_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="STATION_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TIMETABLES" Relationship="Self.TIMETABLES_STATION_ID" FromRole="STATIONS" ToRole="TIMETABLES" />
+  </EntityType>
+  <EntityType Name="TIMETABLE">
+    <Key>
+      <PropertyRef Name="DEPARTURE_TIME" />
+      <PropertyRef Name="ARRIVAL_TIME" />
+      <PropertyRef Name="DAY_OF_JOURNEY" />
+    </Key>
+    <Property Name="ROUTE_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="STATION_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DEPARTURE_TIME" Type="DateTime" Nullable="false" />
+    <Property Name="ARRIVAL_TIME" Type="DateTime" Nullable="false" />
+    <Property Name="DAY_OF_JOURNEY" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ROUTE" Relationship="Self.TIMETABLES_ROUTE_ID" FromRole="TIMETABLES" ToRole="ROUTES" />
+    <NavigationProperty Name="STATION" Relationship="Self.TIMETABLES_STATION_ID" FromRole="TIMETABLES" ToRole="STATIONS" />
+  </EntityType>
+  <Association Name="SHIFTS_COACH_ID_FK">
+    <End Role="COACHES" Type="Self.COACH" Multiplicity="1" />
+    <End Role="SHIFTS" Type="Self.SHIFT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COACHES">
+        <PropertyRef Name="COACH_ID" />
+      </Principal>
+      <Dependent Role="SHIFTS">
+        <PropertyRef Name="COACH_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SHIFTS_EMPLOYEE_ID_FK">
+    <End Role="EMPLOYEES" Type="Self.EMPLOYEE" Multiplicity="1" />
+    <End Role="SHIFTS" Type="Self.SHIFT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEES">
+        <PropertyRef Name="EMPLOYEE_ID" />
+      </Principal>
+      <Dependent Role="SHIFTS">
+        <PropertyRef Name="EMPLOYEE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SHIFTS_ROUTE_ID_FK">
+    <End Role="ROUTES" Type="Self.ROUTE" Multiplicity="1" />
+    <End Role="SHIFTS" Type="Self.SHIFT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROUTES">
+        <PropertyRef Name="ROUTE_ID" />
+      </Principal>
+      <Dependent Role="SHIFTS">
+        <PropertyRef Name="ROUTE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TIMETABLES_ROUTE_ID">
+    <End Role="ROUTES" Type="Self.ROUTE" Multiplicity="0..1" />
+    <End Role="TIMETABLES" Type="Self.TIMETABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROUTES">
+        <PropertyRef Name="ROUTE_ID" />
+      </Principal>
+      <Dependent Role="TIMETABLES">
+        <PropertyRef Name="ROUTE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TIMETABLES_STATION_ID">
+    <End Role="STATIONS" Type="Self.STATION" Multiplicity="0..1" />
+    <End Role="TIMETABLES" Type="Self.TIMETABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATIONS">
+        <PropertyRef Name="STATION_ID" />
+      </Principal>
+      <Dependent Role="TIMETABLES">
+        <PropertyRef Name="STATION_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="COACHES" EntityType="Self.COACH" />
+    <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
+    <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEE" />
+    <EntitySet Name="ROUTES" EntityType="Self.ROUTE" />
+    <EntitySet Name="SHIFTS" EntityType="Self.SHIFT" />
+    <EntitySet Name="STATIONS" EntityType="Self.STATION" />
+    <EntitySet Name="TIMETABLES" EntityType="Self.TIMETABLE" />
+    <AssociationSet Name="SHIFTS_COACH_ID_FK" Association="Self.SHIFTS_COACH_ID_FK">
+      <End Role="COACHES" EntitySet="COACHES" />
+      <End Role="SHIFTS" EntitySet="SHIFTS" />
+    </AssociationSet>
+    <AssociationSet Name="SHIFTS_EMPLOYEE_ID_FK" Association="Self.SHIFTS_EMPLOYEE_ID_FK">
+      <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
+      <End Role="SHIFTS" EntitySet="SHIFTS" />
+    </AssociationSet>
+    <AssociationSet Name="SHIFTS_ROUTE_ID_FK" Association="Self.SHIFTS_ROUTE_ID_FK">
+      <End Role="ROUTES" EntitySet="ROUTES" />
+      <End Role="SHIFTS" EntitySet="SHIFTS" />
+    </AssociationSet>
+    <AssociationSet Name="TIMETABLES_ROUTE_ID" Association="Self.TIMETABLES_ROUTE_ID">
+      <End Role="ROUTES" EntitySet="ROUTES" />
+      <End Role="TIMETABLES" EntitySet="TIMETABLES" />
+    </AssociationSet>
+    <AssociationSet Name="TIMETABLES_STATION_ID" Association="Self.TIMETABLES_STATION_ID">
+      <End Role="STATIONS" EntitySet="STATIONS" />
+      <End Role="TIMETABLES" EntitySet="TIMETABLES" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

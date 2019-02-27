@@ -5,4 +5,5 @@
     <string name="log_in">Log In</string>
     <string name="create_account">Create Account</string>
     <string name="title_activity_create_account">CreateAccount</string>
+    <string name="login">Login</string>
 </resources>

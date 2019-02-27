@@ -13,12 +13,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get the create account button and when clicked make sure it directs to the
+        // CreateAccountActivity
         Button buttonCreateAccount = (Button)findViewById(R.id.buttonCreateAccount);
         Button buttonLogIn = (Button)findViewById(R.id.buttonLogIn);
         buttonCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startIntent = new Intent(getApplicationContext(), CreateAccount.class);
+                Intent startIntent = new Intent(getApplicationContext(), CreateAccountActivity.class);
                 startActivity(startIntent);
             }
         });

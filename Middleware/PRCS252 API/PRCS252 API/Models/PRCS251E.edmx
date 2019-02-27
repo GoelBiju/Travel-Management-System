@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="COACHES">
           <Key>
             <PropertyRef Name="COACH_ID" />
@@ -186,7 +186,8 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             <End Role="TIMETABLES" EntitySet="TIMETABLES" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -226,6 +227,16 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
           <Property Name="JOB_ROLE" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PASSWORD" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_EMPLOYEE_ID_FK" FromRole="EMPLOYEES" ToRole="SHIFTS" />
+        </EntityType>
+        <EntityType Name="EMPLOYEES_ARCHIVE">
+          <Key>
+            <PropertyRef Name="EMPLOYEE_ID" />
+          </Key>
+          <Property Name="EMPLOYEE_ID" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JOB_ROLE" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="112" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="ROUTE">
           <Key>
@@ -335,6 +346,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
           <EntitySet Name="COACHES" EntityType="Self.COACH" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
           <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEE" />
+          <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Self.EMPLOYEES_ARCHIVE" />
           <EntitySet Name="ROUTES" EntityType="Self.ROUTE" />
           <EntitySet Name="SHIFTS" EntityType="Self.SHIFT" />
           <EntitySet Name="STATIONS" EntityType="Self.STATION" />
@@ -359,18 +371,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             <End Role="STATIONS" EntitySet="STATIONS" />
             <End Role="TIMETABLES" EntitySet="TIMETABLES" />
           </AssociationSet>
-          <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Model.EMPLOYEES_ARCHIVE" />
         </EntityContainer>
-        <EntityType Name="EMPLOYEES_ARCHIVE">
-          <Key>
-            <PropertyRef Name="EMPLOYEE_ID" />
-          </Key>
-          <Property Name="EMPLOYEE_ID" Type="String" Nullable="false" MaxLength="112" FixedLength="false" Unicode="false" />
-          <Property Name="FIRST_NAME" Type="String" Nullable="false" MaxLength="112" FixedLength="false" Unicode="false" />
-          <Property Name="LAST_NAME" Type="String" Nullable="false" MaxLength="112" FixedLength="false" Unicode="false" />
-          <Property Name="JOB_ROLE" Type="String" Nullable="false" MaxLength="112" FixedLength="false" Unicode="false" />
-          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="112" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -415,6 +416,17 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEES_ARCHIVE">
+            <EntityTypeMapping TypeName="Model.EMPLOYEES_ARCHIVE">
+              <MappingFragment StoreEntitySet="EMPLOYEES_ARCHIVE">
+                <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="JOB_ROLE" ColumnName="JOB_ROLE" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ROUTES">
             <EntityTypeMapping TypeName="Model.ROUTE">
               <MappingFragment StoreEntitySet="ROUTES">
@@ -450,17 +462,6 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
                 <ScalarProperty Name="DEPARTURE_TIME" ColumnName="DEPARTURE_TIME" />
                 <ScalarProperty Name="ARRIVAL_TIME" ColumnName="ARRIVAL_TIME" />
                 <ScalarProperty Name="DAY_OF_JOURNEY" ColumnName="DAY_OF_JOURNEY" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EMPLOYEES_ARCHIVE">
-            <EntityTypeMapping TypeName="Model.EMPLOYEES_ARCHIVE">
-              <MappingFragment StoreEntitySet="EMPLOYEES_ARCHIVE">
-                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
-                <ScalarProperty Name="JOB_ROLE" ColumnName="JOB_ROLE" />
-                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
-                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
-                <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

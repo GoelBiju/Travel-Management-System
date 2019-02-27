@@ -28,10 +28,10 @@ namespace PRCS252_API.Models
         public virtual DbSet<COACH> COACHES { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERS { get; set; }
         public virtual DbSet<EMPLOYEE> EMPLOYEES { get; set; }
+        public virtual DbSet<EMPLOYEES_ARCHIVE> EMPLOYEES_ARCHIVE { get; set; }
         public virtual DbSet<ROUTE> ROUTES { get; set; }
         public virtual DbSet<SHIFT> SHIFTS { get; set; }
         public virtual DbSet<STATION> STATIONS { get; set; }
         public virtual DbSet<TIMETABLE> TIMETABLES { get; set; }
-        public virtual DbSet<EMPLOYEES_ARCHIVE> EMPLOYEES_ARCHIVE { get; set; }
     }
 }

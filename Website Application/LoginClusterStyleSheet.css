@@ -1,0 +1,61 @@
+﻿ /*LOGIN CLUSTER STYLING*/
+
+div.logincontainer {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    top: 50 %;
+    border: 1px solid #D3D3D3;
+    border-radius: 20px;
+    margin-top: 10 %;
+}
+
+#loginlabel {
+    font-family: Segoe UI Light;
+}
+
+#corner {
+    border-radius: 25px;
+    border: 1px solid #D3D3D3;
+    padding: 20px;
+    width: 250px;
+    height: 10px;
+    font-family: Segoe UI Light;
+    outline: 0;
+    margin-top: center;
+}
+
+#cornertwo {
+    border-radius: 25px;
+    border: 1px solid #D3D3D3;
+    padding: 20px;
+    width: 250px;
+    height: 10px;
+    font-family: Segoe UI Light;
+    outline: 0;
+    margin-top: center;
+}
+
+.loginbutton {
+    border-radius: 25px;
+    border: 1px solid #D3D3D3;
+    padding: 20px;
+    width: 100px;
+    height: 50px;
+    font-family: Segoe UI Light;
+    outline: 0;
+    margin-top: center;
+    background-color: white;
+    padding: 1px;
+    color: #8e8e8e;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.loginbuttontransition {
+    background-color: #FFFFF;
+}
+
+.loginbuttontransition:hover {
+        background-color: #D3D3D3;
+  }

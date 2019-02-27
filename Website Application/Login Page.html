@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <style>
+        /*LOGIN CLUSTER STYLING*/
+        div.logincontainer {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            top: 50 %;
+            border: 1px solid #D3D3D3;
+            border-radius: 20px;
+            margin-top: 10 %;
+        }
+
+        #loginlabel {
+            font-family: Segoe UI Light;
+        }
+
+        #inputfields {
+            border-radius: 25px;
+            border: 1px solid #D3D3D3;
+            padding: 20px;
+            width: 250px;
+            height: 10px;
+            font-family: Segoe UI Light;
+            outline: 0;
+            margin-top: center;
+        }
+
+        .loginbutton {
+            border-radius: 25px;
+            border: 1px solid #D3D3D3;
+            padding: 20px;
+            width: 100px;
+            height: 50px;
+            font-family: Segoe UI Light;
+            outline: 0;
+            margin-top: center;
+            background-color: white;
+            padding: 1px;
+            color: #8e8e8e;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .loginbuttontransition {
+            background-color: #FFFFF;
+        }
+
+        .loginbuttontransition:hover {
+                background-color: #D3D3D3;
+        }
+
+        .bottom {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #33C7FF;
+            color: white;
+            font-family: 'Segoe UI Light'; 
+            text-align: center;
+            height: 7%;
+        }
+
+        .helpbutton {
+            font-family: "Segoe UI Light";
+            outline: 0;
+            background-color: #FFFFFF;
+            border-radius: 25px;
+            border: 1px solid #D3D3D3;
+            width: 100px;
+            height: 50px;
+            margin-top: center;
+            color: #8e8e8e;
+            cursor: pointer;
+            transition-duration: 0.4s;
+
+        }
+    </style>
+
+ <div class="master"></div>  
+    <center>
+        <div class="logincontainer">
+            <center>
+                <p id="loginlabel">Please enter your credentials to login</p>
+                <input type="username" id="inputfields" placeholder="Employee ID..." />
+                <p></p>
+                <br />
+                <input type="password" id="inputfields" placeholder="Password..." />
+                <p></p>
+                <br />
+                <button type="button" class="loginbutton loginbuttontransition">Login</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="helpbutton loginbuttontransition">Help</button>
+
+            </center>
+        </div>
+    </center>
+
+    <div class="bottom">NationalCoach 2019 ©</div>
+
+</head>
+</html>

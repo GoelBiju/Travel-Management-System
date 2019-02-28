@@ -1,0 +1,2 @@
+CONSTRAINT job_role_check
+CHECK (job_role IN ('Administrator','Manager', 'Driver'));

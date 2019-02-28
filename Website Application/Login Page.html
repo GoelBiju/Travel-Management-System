@@ -82,6 +82,12 @@
         }
     </style>
 
+    <script>
+        function HelpFunction() {
+            window.alert("Please enter your login information in the fields provided. This should be your employee ID and your password. You should then click the 'login' button and wait for the authentication process to occur.");
+        }
+    </script>
+
  <div class="master"></div>  
     <center>
         <div class="logincontainer">
@@ -96,7 +102,7 @@
                 <button type="button" class="loginbutton loginbuttontransition">Login</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="helpbutton loginbuttontransition">Help</button>
+                <button type="button" onclick="HelpFunction()" class="helpbutton loginbuttontransition">Help</button>
 
             </center>
         </div>

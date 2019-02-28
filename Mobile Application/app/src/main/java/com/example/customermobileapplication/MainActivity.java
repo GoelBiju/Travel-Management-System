@@ -30,14 +30,13 @@ public class MainActivity extends AppCompatActivity {
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toastMe("Implement Login Button");
+                processLogin();
             }
         });
     }
 
 
-    public void toastMe(String message) {
-        Toast myToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-        myToast.show();
+    public void processLogin() {
+        Toast.makeText(this, getResources().getString(R.string.implement), Toast.LENGTH_SHORT).show();
     }
 }

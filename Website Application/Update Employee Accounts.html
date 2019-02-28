@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <style>
+
+        div.header {
+            border-bottom: 2px solid #000000;
+            padding-bottom:5%;
+        }
+
+        #pagename{
+            text-align:center;
+            margin:0;
+        }
+
+        #logoutbutton {
+            background-color:red;
+            color: white;
+            border: none;
+            padding: 30px 40px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            float:right;
+        }
+
+        #logoutbutton:hover {
+            background-color: #D3D3D3;
+        }
+
+        /*Dropdown menu*/
+        .dropdownmenu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdownbutton {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .menu-content a {
+           color: black;
+           padding: 12px 16px;
+           text-decoration: none;
+           display: block;
+        }
+
+        .menu-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdownmenu:hover .menu-content {
+            display: block;
+        }
+
+        .dropdownmenu:hover .dropdownbutton {
+            background-color: #3e8e41;
+        }
+
+        div.container {
+            align-content: center;
+            position: relative;
+            width: 500px;
+            height: 400px;
+            top: 50 %;
+            /*border: 1px solid #D3D3D3;*/
+            border-radius: 20px;
+            margin-top: 10%;
+        }
+
+        #inputfields {
+            border-radius: 25px;
+            border: 1px solid #D3D3D3;
+            padding: 20px;
+            width: 250px;
+            height: 10px;
+            font-family: Segoe UI Light;
+            outline: 0;
+            margin-top: center;
+        }
+
+        .button {
+            font-family: "Segoe UI Light";
+            outline: 0;
+            background-color: #FFFFFF;
+            border-radius: 25px;
+            border: 1px solid #D3D3D3;
+            width: 100px;
+            height: 50px;
+            margin-top: center;
+            color: #8e8e8e;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .button:hover {
+            background-color: #D3D3D3;
+        }
+
+        
+    </style>
+    <title></title>
+</head>
+<body>
+    <div class="header">
+        <h1 id="pagename">Update Employee Accounts</h1>
+        <button type="button" id="logoutbutton">Logout</button>
+    </div>
+
+    <div class="dropdownmenu">
+        <button class="dropdownbutton">Menu</button>
+        <div class="menu-content">
+            <a href="#">Create New Account</a>
+            <a href="#">Update Account</a>
+            <a href="#">Retrieve Account</a>
+            <a href="#">Archive Account</a>
+            <a href="#">Coaches</a>
+            <a href="#">Replacement Services</a>
+            <a href="#">Cusomers</a>
+            <a href="#">Timetables</a>
+            <a href="#">Routes<a>
+            <a href="#">Help</a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <p id="updateFields ">
+            First Name: <input type="text" id="inputfields" />
+            <br>
+            Last Name:  <input type="text" id="inputfields" />
+            <br>
+            Job Role:  <input type="text" id="inputfields" />
+            <br>
+            ID:  <input type="text" id="inputfields" />
+            <br>
+            Password:  <input type="text" id="inputfields" />
+            <br>
+            <button type="button" class="button">Update Account</button>
+            <button type="button" class="button">Help</button>
+        </p>
+    </div>
+
+
+</body>
+</html>

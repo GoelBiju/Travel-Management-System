@@ -8,109 +8,110 @@ using System.Web;
 using System.Web.Mvc;
 using PRCS252_API.Models;
 
+
 namespace PRCS252_API.Controllers
 {
-    public class CoachesController : Controller
+    public class StationsController : Controller
     {
         private Models.Database db = new Models.Database();
 
-        // GET: Coaches
+        // GET: Stations
         public ActionResult Index()
         {
-            return View(db.COACHES.ToList());
+            return View(db.STATIONS.ToList());
         }
 
-        // GET: Coaches/Details/5
+        // GET: Stations/Details/5
         public ActionResult Details(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            COACH cOACH = db.COACHES.Find(id);
-            if (cOACH == null)
+            STATION sTATION = db.STATIONS.Find(id);
+            if (sTATION == null)
             {
                 return HttpNotFound();
             }
-            return View(cOACH);
+            return View(sTATION);
         }
 
-        // GET: Coaches/Create
+        // GET: Stations/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Coaches/Create
+        // POST: Stations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "COACH_ID,COACH_MAKE,COACH_MODEL,REGISTRATION_PLATE,CAPACITY")] COACH cOACH)
+        public ActionResult Create([Bind(Include = "STATION_ID,STATION_NAME")] STATION sTATION)
         {
             if (ModelState.IsValid)
             {
-                db.COACHES.Add(cOACH);
+                db.STATIONS.Add(sTATION);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cOACH);
+            return View(sTATION);
         }
 
-        // GET: Coaches/Edit/5
+        // GET: Stations/Edit/5
         public ActionResult Edit(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            COACH cOACH = db.COACHES.Find(id);
-            if (cOACH == null)
+            STATION sTATION = db.STATIONS.Find(id);
+            if (sTATION == null)
             {
                 return HttpNotFound();
             }
-            return View(cOACH);
+            return View(sTATION);
         }
 
-        // POST: Coaches/Edit/5
+        // POST: Stations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "COACH_ID,COACH_MAKE,COACH_MODEL,REGISTRATION_PLATE,CAPACITY")] COACH cOACH)
+        public ActionResult Edit([Bind(Include = "STATION_ID,STATION_NAME")] STATION sTATION)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cOACH).State = EntityState.Modified;
+                db.Entry(sTATION).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cOACH);
+            return View(sTATION);
         }
 
-        // GET: Coaches/Delete/5
+        // GET: Stations/Delete/5
         public ActionResult Delete(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            COACH cOACH = db.COACHES.Find(id);
-            if (cOACH == null)
+            STATION sTATION = db.STATIONS.Find(id);
+            if (sTATION == null)
             {
                 return HttpNotFound();
             }
-            return View(cOACH);
+            return View(sTATION);
         }
 
-        // POST: Coaches/Delete/5
+        // POST: Stations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            COACH cOACH = db.COACHES.Find(id);
-            db.COACHES.Remove(cOACH);
+            STATION sTATION = db.STATIONS.Find(id);
+            db.STATIONS.Remove(sTATION);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -192,3 +192,7 @@ C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Middleware\PRCS252 API
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Middleware\PRCS252 API\PRCS252 API\bin\Microsoft.AI.Web.xml
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Middleware\PRCS252 API\PRCS252 API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Middleware\PRCS252 API\PRCS252 API\obj\Debug\PRCS252 API.csproj.CopyComplete
+C:\Users\adbellas\Desktop\prcs252-computer-science-ip-group_e\Middleware\PRCS252 API\PRCS252 API\obj\Debug\PRCS252 API.csprojAssemblyReference.cache
+C:\Users\adbellas\Desktop\prcs252-computer-science-ip-group_e\Middleware\PRCS252 API\PRCS252 API\obj\Debug\PRCS252 API.csproj.CoreCompileInputs.cache
+C:\Users\adbellas\Desktop\prcs252-computer-science-ip-group_e\Middleware\PRCS252 API\PRCS252 API\obj\Debug\PRCS252 API.dll
+C:\Users\adbellas\Desktop\prcs252-computer-science-ip-group_e\Middleware\PRCS252 API\PRCS252 API\obj\Debug\PRCS252 API.pdb

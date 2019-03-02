@@ -1,0 +1,90 @@
+﻿html, body {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font-family: Arial;
+}
+
+header {
+    overflow: hidden;
+    padding: 10px 10px;
+    margin-bottom:20px;
+    color: #333333;
+    font-family: Arial;
+}
+
+#pagename {
+    text-align: center;
+    margin: 0;
+    font-family: Arial;
+}
+
+#logout {
+    color: #8d0c0c;
+}
+
+#logout:hover {
+    color: #404040;
+}
+
+
+.updatefieldcontainer {
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    width: 500px;
+    height: 430px;
+
+    clear: both;
+}
+
+#inputfields {
+    text-align: center;
+    margin: 0;
+
+    border: 1px solid #8c8c8c;
+
+    padding: 20px;
+    width: 250px;
+    height: 10px;
+    outline: 0;
+    clear: both;
+}
+
+label {
+    color: #333333;
+}
+
+
+.button {
+    outline: 0;
+    background-color: #FFFFFF;
+
+    border: 1px solid #8c8c8c;
+    width: 135px;
+    height: 50px;
+    margin-top: center;
+    color: #333333;
+    font-size:14px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #cccccc;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #0059b3;
+    color: white;
+    font-family: 'Segoe UI Light';
+    text-align: center;
+    height: 7%;
+}

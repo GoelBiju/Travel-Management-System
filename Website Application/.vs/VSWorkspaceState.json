@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CSS",
+    "\\HTML",
+    "\\JavaScript"
   ],
+  "SelectedNode": "\\CSS\\LoginClusterStyleSheet.css",
   "PreviewInSolutionExplorer": false
 }

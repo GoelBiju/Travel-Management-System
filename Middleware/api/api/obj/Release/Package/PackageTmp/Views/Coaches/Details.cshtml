@@ -1,0 +1,50 @@
+﻿@model api.Models.COACH
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>COACH</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.COACH_MAKE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COACH_MAKE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COACH_MODEL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COACH_MODEL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REGISTRATION_PLATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REGISTRATION_PLATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CAPACITY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CAPACITY)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.COACH_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

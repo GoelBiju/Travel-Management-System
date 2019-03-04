@@ -1,0 +1,51 @@
+﻿@model IEnumerable<api.Models.COACH>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COACH_MAKE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COACH_MODEL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.REGISTRATION_PLATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CAPACITY)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COACH_MAKE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COACH_MODEL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.REGISTRATION_PLATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CAPACITY)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.COACH_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.COACH_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.COACH_ID })
+        </td>
+    </tr>
+}
+
+</table>

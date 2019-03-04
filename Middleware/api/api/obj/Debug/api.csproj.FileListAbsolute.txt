@@ -204,10 +204,6 @@ C:\Users\gbiju\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\ob
 C:\Users\gbiju\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csproj.CopyComplete
 C:\Users\gbiju\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.dll
 C:\Users\gbiju\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.pdb
-C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
-C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Text.Encoding.CodePages.dll
-C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\ApplicationInsights.config
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\api.dll.config
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\api.dll
@@ -225,6 +221,7 @@ C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.Managed.Core.targets
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.VisualBasic.Core.targets
@@ -238,6 +235,7 @@ C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.IO.FileSystem.Primitives.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.IO.Pipes.AccessControl.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Security.AccessControl.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Security.Claims.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Security.Cryptography.Algorithms.dll
@@ -245,6 +243,7 @@ C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Security.Cryptography.Primitives.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Text.Encoding.CodePages.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.ValueTuple.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Xml.ReaderWriter.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\System.Xml.XmlDocument.dll
@@ -254,6 +253,7 @@ C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\vbc.exe.config
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\vbc.rsp
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\VBCSCompiler.exe
+C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\Antlr3.Runtime.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\EntityFramework.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\EntityFramework.SqlServer.dll
@@ -306,4 +306,3 @@ C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csproj.CopyComplete
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.pdb
-C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csprojAssemblyReference.cache

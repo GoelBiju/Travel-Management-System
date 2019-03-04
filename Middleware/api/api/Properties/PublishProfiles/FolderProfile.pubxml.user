@@ -82,10 +82,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/04/2019 14:05:50</publishTime>
     </File>
     <File Include="bin/api.dll">
-      <publishTime>03/04/2019 21:59:48</publishTime>
+      <publishTime>03/04/2019 22:19:17</publishTime>
     </File>
     <File Include="bin/api.pdb">
-      <publishTime>03/04/2019 21:59:48</publishTime>
+      <publishTime>03/04/2019 22:19:17</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
       <publishTime>03/04/2019 14:05:48</publishTime>

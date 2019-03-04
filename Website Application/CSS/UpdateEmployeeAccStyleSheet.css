@@ -1,10 +1,11 @@
-﻿html, body {
-    margin: 0;
-    padding: 0
+﻿html * {
+    font-family:'Segoe UI Light';
 }
 
-body {
-    font-family: Arial;
+html, body {
+    margin: 0;
+    padding: 0;
+    
 }
 
 header {
@@ -22,7 +23,8 @@ header {
 }
 
 #logout {
-    color: #8d0c0c;
+    color: #eb1414;
+    font-weight:bold;
 }
 
 #logout:hover {
@@ -37,21 +39,17 @@ header {
     position: relative;
     width: 500px;
     height: 430px;
-
-    clear: both;
 }
 
 #inputfields {
-    text-align: center;
+    text-align:left;
     margin: 0;
-
+    border-radius: 25px;
     border: 1px solid #8c8c8c;
-
     padding: 20px;
     width: 250px;
     height: 10px;
     outline: 0;
-    clear: both;
 }
 
 label {
@@ -62,13 +60,13 @@ label {
 .button {
     outline: 0;
     background-color: #FFFFFF;
-
+    border-radius: 25px;
     border: 1px solid #8c8c8c;
     width: 135px;
     height: 50px;
     margin-top: center;
     color: #333333;
-    font-size:14px;
+    font-size: 14px;
     cursor: pointer;
     transition-duration: 0.4s;
 }
@@ -82,9 +80,8 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #0059b3;
+    background-color: #0073e6;
     color: white;
-    font-family: 'Segoe UI Light';
     text-align: center;
     height: 7%;
 }

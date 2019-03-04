@@ -1,5 +1,5 @@
 <resources>
-    <string name="implement">Feature needs to be implemented completely.</string>
+    <string name="implement">Feature needs to be implemented.</string>
 
     <!-- Resources for MainActivity -->
     <string name="app_name">Customer Mobile Application</string>

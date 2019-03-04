@@ -31,6 +31,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private DatePickerDialog datePickerDialog;
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +51,11 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
 
+    /**
+     *
+     */
     private void bindViews() {
+
         // Bind all fields from the layout to the class variables.
         editTextFirstName = findViewById(R.id.editTextFirstName);
         editTextLastName = findViewById(R.id.editTextLastName);
@@ -65,6 +73,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
 
+    /**
+     *
+     */
     private void setViewActions() {
 
         editTextDateOfBirth.setOnClickListener(this);
@@ -72,6 +83,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
 
+    /**
+     *
+     */
     private void prepareDatePickerDialog() {
         // Get current date.
         Calendar calendar = Calendar.getInstance();
@@ -87,6 +101,29 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
 
+    /**
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            // Show the Calendar if the date of birth is selected.
+            case R.id.editTextDateOfBirth:
+                datePickerDialog.show();
+                break;
+
+            // Proceed with the registration.
+            case R.id.registerButton:
+                processRegistration();
+                break;
+        }
+    }
+
+
+    /**
+     *
+     */
     private void processRegistration() {
 
         String firstName = editTextFirstName.getText().toString();
@@ -117,18 +154,4 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // Show the Calendar if the date of birth is selected.
-            case R.id.editTextDateOfBirth:
-                datePickerDialog.show();
-                break;
-
-            // Proceed with the registration.
-            case R.id.registerButton:
-                processRegistration();
-                break;
-        }
-    }
 }

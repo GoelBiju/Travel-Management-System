@@ -2,117 +2,118 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
 using api.Models;
 
 namespace api.Controllers
 {
-    public class StationsController : Controller
+    public class StationsController : ApiController
     {
         private Entities db = new Entities();
 
-        // GET: Stations
-        public ActionResult Index()
+        // GET: api/Stations
+        public IQueryable<STATION> GetSTATIONS()
         {
-            return View(db.STATIONS.ToList());
+            return db.STATIONS;
         }
 
-        // GET: Stations/Details/5
-        public ActionResult Details(decimal id)
+        // GET: api/Stations/5
+        [ResponseType(typeof(STATION))]
+        public IHttpActionResult GetSTATION(decimal id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             STATION sTATION = db.STATIONS.Find(id);
             if (sTATION == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(sTATION);
+
+            return Ok(sTATION);
         }
 
-        // GET: Stations/Create
-        public ActionResult Create()
+        // PUT: api/Stations/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutSTATION(decimal id, STATION sTATION)
         {
-            return View();
-        }
-
-        // POST: Stations/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "STATION_ID,STATION_NAME")] STATION sTATION)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.STATIONS.Add(sTATION);
+                return BadRequest(ModelState);
+            }
+
+            if (id != sTATION.STATION_ID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(sTATION).State = EntityState.Modified;
+
+            try
+            {
                 db.SaveChanges();
-                return RedirectToAction("Index");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!STATIONExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            return View(sTATION);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: Stations/Edit/5
-        public ActionResult Edit(decimal id)
+        // POST: api/Stations
+        [ResponseType(typeof(STATION))]
+        public IHttpActionResult PostSTATION(STATION sTATION)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
-            STATION sTATION = db.STATIONS.Find(id);
-            if (sTATION == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sTATION);
-        }
 
-        // POST: Stations/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "STATION_ID,STATION_NAME")] STATION sTATION)
-        {
-            if (ModelState.IsValid)
+            db.STATIONS.Add(sTATION);
+
+            try
             {
-                db.Entry(sTATION).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(sTATION);
+            catch (DbUpdateException)
+            {
+                if (STATIONExists(sTATION.STATION_ID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = sTATION.STATION_ID }, sTATION);
         }
 
-        // GET: Stations/Delete/5
-        public ActionResult Delete(decimal id)
+        // DELETE: api/Stations/5
+        [ResponseType(typeof(STATION))]
+        public IHttpActionResult DeleteSTATION(decimal id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             STATION sTATION = db.STATIONS.Find(id);
             if (sTATION == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(sTATION);
-        }
 
-        // POST: Stations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
-        {
-            STATION sTATION = db.STATIONS.Find(id);
             db.STATIONS.Remove(sTATION);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return Ok(sTATION);
         }
 
         protected override void Dispose(bool disposing)
@@ -122,6 +123,11 @@ namespace api.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool STATIONExists(decimal id)
+        {
+            return db.STATIONS.Count(e => e.STATION_ID == id) > 0;
         }
     }
 }

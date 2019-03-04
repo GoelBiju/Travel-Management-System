@@ -12,17 +12,17 @@ using api.Models;
 
 namespace api.Controllers
 {
-    public class TIMETABLEsController : ApiController
+    public class TimetablesController : ApiController
     {
         private Entities db = new Entities();
 
-        // GET: api/TIMETABLEs
+        // GET: api/Timetables
         public IQueryable<TIMETABLE> GetTIMETABLES()
         {
             return db.TIMETABLES;
         }
 
-        // GET: api/TIMETABLEs/5
+        // GET: api/Timetables/5
         [ResponseType(typeof(TIMETABLE))]
         public IHttpActionResult GetTIMETABLE(DateTime id)
         {
@@ -35,7 +35,7 @@ namespace api.Controllers
             return Ok(tIMETABLE);
         }
 
-        // PUT: api/TIMETABLEs/5
+        // PUT: api/Timetables/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTIMETABLE(DateTime id, TIMETABLE tIMETABLE)
         {
@@ -70,7 +70,7 @@ namespace api.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/TIMETABLEs
+        // POST: api/Timetables
         [ResponseType(typeof(TIMETABLE))]
         public IHttpActionResult PostTIMETABLE(TIMETABLE tIMETABLE)
         {
@@ -100,7 +100,7 @@ namespace api.Controllers
             return CreatedAtRoute("DefaultApi", new { id = tIMETABLE.DEPARTURE_TIME }, tIMETABLE);
         }
 
-        // DELETE: api/TIMETABLEs/5
+        // DELETE: api/Timetables/5
         [ResponseType(typeof(TIMETABLE))]
         public IHttpActionResult DeleteTIMETABLE(DateTime id)
         {

@@ -2,117 +2,118 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
 using api.Models;
 
 namespace api.Controllers
 {
-    public class EmployeesController : Controller
+    public class EmployeesController : ApiController
     {
         private Entities db = new Entities();
 
-        // GET: Employees
-        public ActionResult Index()
+        // GET: api/Employees
+        public IQueryable<EMPLOYEE> GetEMPLOYEES()
         {
-            return View(db.EMPLOYEES.ToList());
+            return db.EMPLOYEES;
         }
 
-        // GET: Employees/Details/5
-        public ActionResult Details(string id)
+        // GET: api/Employees/5
+        [ResponseType(typeof(EMPLOYEE))]
+        public IHttpActionResult GetEMPLOYEE(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
             if (eMPLOYEE == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(eMPLOYEE);
+
+            return Ok(eMPLOYEE);
         }
 
-        // GET: Employees/Create
-        public ActionResult Create()
+        // PUT: api/Employees/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutEMPLOYEE(string id, EMPLOYEE eMPLOYEE)
         {
-            return View();
-        }
-
-        // POST: Employees/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EMPLOYEE_ID,FIRST_NAME,LAST_NAME,JOB_ROLE,PASSWORD")] EMPLOYEE eMPLOYEE)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.EMPLOYEES.Add(eMPLOYEE);
+                return BadRequest(ModelState);
+            }
+
+            if (id != eMPLOYEE.EMPLOYEE_ID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(eMPLOYEE).State = EntityState.Modified;
+
+            try
+            {
                 db.SaveChanges();
-                return RedirectToAction("Index");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EMPLOYEEExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            return View(eMPLOYEE);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: Employees/Edit/5
-        public ActionResult Edit(string id)
+        // POST: api/Employees
+        [ResponseType(typeof(EMPLOYEE))]
+        public IHttpActionResult PostEMPLOYEE(EMPLOYEE eMPLOYEE)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
-            EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
-            if (eMPLOYEE == null)
-            {
-                return HttpNotFound();
-            }
-            return View(eMPLOYEE);
-        }
 
-        // POST: Employees/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EMPLOYEE_ID,FIRST_NAME,LAST_NAME,JOB_ROLE,PASSWORD")] EMPLOYEE eMPLOYEE)
-        {
-            if (ModelState.IsValid)
+            db.EMPLOYEES.Add(eMPLOYEE);
+
+            try
             {
-                db.Entry(eMPLOYEE).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(eMPLOYEE);
+            catch (DbUpdateException)
+            {
+                if (EMPLOYEEExists(eMPLOYEE.EMPLOYEE_ID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = eMPLOYEE.EMPLOYEE_ID }, eMPLOYEE);
         }
 
-        // GET: Employees/Delete/5
-        public ActionResult Delete(string id)
+        // DELETE: api/Employees/5
+        [ResponseType(typeof(EMPLOYEE))]
+        public IHttpActionResult DeleteEMPLOYEE(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
             if (eMPLOYEE == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(eMPLOYEE);
-        }
 
-        // POST: Employees/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
             db.EMPLOYEES.Remove(eMPLOYEE);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return Ok(eMPLOYEE);
         }
 
         protected override void Dispose(bool disposing)
@@ -122,6 +123,11 @@ namespace api.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool EMPLOYEEExists(string id)
+        {
+            return db.EMPLOYEES.Count(e => e.EMPLOYEE_ID == id) > 0;
         }
     }
 }

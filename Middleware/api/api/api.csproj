@@ -198,11 +198,10 @@
     <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
+    <Compile Include="Controllers\ShiftsController.cs" />
     <Compile Include="Controllers\StationsController.cs" />
-    <Compile Include="Controllers\TIMETABLEsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\TimetablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -318,31 +317,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Employees\Delete.cshtml" />
-    <Content Include="Views\Employees\Details.cshtml" />
-    <Content Include="Views\Employees\Edit.cshtml" />
-    <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\Coaches\Create.cshtml" />
-    <Content Include="Views\Coaches\Delete.cshtml" />
-    <Content Include="Views\Coaches\Details.cshtml" />
-    <Content Include="Views\Coaches\Edit.cshtml" />
-    <Content Include="Views\Coaches\Index.cshtml" />
-    <Content Include="Views\Customers\Create.cshtml" />
-    <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
-    <Content Include="Views\Customers\Edit.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\Stations\Create.cshtml" />
-    <Content Include="Views\Stations\Delete.cshtml" />
-    <Content Include="Views\Stations\Details.cshtml" />
-    <Content Include="Views\Stations\Edit.cshtml" />
-    <Content Include="Views\Stations\Index.cshtml" />
-    <Content Include="Views\Routes\Create.cshtml" />
-    <Content Include="Views\Routes\Delete.cshtml" />
-    <Content Include="Views\Routes\Details.cshtml" />
-    <Content Include="Views\Routes\Edit.cshtml" />
-    <Content Include="Views\Routes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

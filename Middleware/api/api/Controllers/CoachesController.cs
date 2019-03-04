@@ -2,117 +2,118 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
 using api.Models;
 
 namespace api.Controllers
 {
-    public class CoachesController : Controller
+    public class CoachesController : ApiController
     {
         private Entities db = new Entities();
 
-        // GET: Coaches
-        public ActionResult Index()
+        // GET: api/Coaches
+        public IQueryable<COACH> GetCOACHES()
         {
-            return View(db.COACHES.ToList());
+            return db.COACHES;
         }
 
-        // GET: Coaches/Details/5
-        public ActionResult Details(decimal id)
+        // GET: api/Coaches/5
+        [ResponseType(typeof(COACH))]
+        public IHttpActionResult GetCOACH(decimal id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             COACH cOACH = db.COACHES.Find(id);
             if (cOACH == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(cOACH);
+
+            return Ok(cOACH);
         }
 
-        // GET: Coaches/Create
-        public ActionResult Create()
+        // PUT: api/Coaches/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCOACH(decimal id, COACH cOACH)
         {
-            return View();
-        }
-
-        // POST: Coaches/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "COACH_ID,COACH_MAKE,COACH_MODEL,REGISTRATION_PLATE,CAPACITY")] COACH cOACH)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.COACHES.Add(cOACH);
+                return BadRequest(ModelState);
+            }
+
+            if (id != cOACH.COACH_ID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(cOACH).State = EntityState.Modified;
+
+            try
+            {
                 db.SaveChanges();
-                return RedirectToAction("Index");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!COACHExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            return View(cOACH);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: Coaches/Edit/5
-        public ActionResult Edit(decimal id)
+        // POST: api/Coaches
+        [ResponseType(typeof(COACH))]
+        public IHttpActionResult PostCOACH(COACH cOACH)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
-            COACH cOACH = db.COACHES.Find(id);
-            if (cOACH == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cOACH);
-        }
 
-        // POST: Coaches/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "COACH_ID,COACH_MAKE,COACH_MODEL,REGISTRATION_PLATE,CAPACITY")] COACH cOACH)
-        {
-            if (ModelState.IsValid)
+            db.COACHES.Add(cOACH);
+
+            try
             {
-                db.Entry(cOACH).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(cOACH);
+            catch (DbUpdateException)
+            {
+                if (COACHExists(cOACH.COACH_ID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = cOACH.COACH_ID }, cOACH);
         }
 
-        // GET: Coaches/Delete/5
-        public ActionResult Delete(decimal id)
+        // DELETE: api/Coaches/5
+        [ResponseType(typeof(COACH))]
+        public IHttpActionResult DeleteCOACH(decimal id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             COACH cOACH = db.COACHES.Find(id);
             if (cOACH == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(cOACH);
-        }
 
-        // POST: Coaches/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
-        {
-            COACH cOACH = db.COACHES.Find(id);
             db.COACHES.Remove(cOACH);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return Ok(cOACH);
         }
 
         protected override void Dispose(bool disposing)
@@ -122,6 +123,11 @@ namespace api.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool COACHExists(decimal id)
+        {
+            return db.COACHES.Count(e => e.COACH_ID == id) > 0;
         }
     }
 }

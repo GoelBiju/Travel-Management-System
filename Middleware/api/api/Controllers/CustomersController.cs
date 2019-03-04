@@ -2,117 +2,118 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
 using api.Models;
 
 namespace api.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : ApiController
     {
         private Entities db = new Entities();
 
-        // GET: Customers
-        public ActionResult Index()
+        // GET: api/Customers
+        public IQueryable<CUSTOMER> GetCUSTOMERS()
         {
-            return View(db.CUSTOMERS.ToList());
+            return db.CUSTOMERS;
         }
 
-        // GET: Customers/Details/5
-        public ActionResult Details(decimal id)
+        // GET: api/Customers/5
+        [ResponseType(typeof(CUSTOMER))]
+        public IHttpActionResult GetCUSTOMER(decimal id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
             if (cUSTOMER == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(cUSTOMER);
+
+            return Ok(cUSTOMER);
         }
 
-        // GET: Customers/Create
-        public ActionResult Create()
+        // PUT: api/Customers/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCUSTOMER(decimal id, CUSTOMER cUSTOMER)
         {
-            return View();
-        }
-
-        // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CUSTOMER_ID,FIRST_NAME,LAST_NAME,DATE_OF_BIRTH,ADDRESS_LINE_1,ADDRESS_LINE_2,POSTCODE,PHONE_NUMBER,EMAIL,PASSWORD")] CUSTOMER cUSTOMER)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.CUSTOMERS.Add(cUSTOMER);
+                return BadRequest(ModelState);
+            }
+
+            if (id != cUSTOMER.CUSTOMER_ID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(cUSTOMER).State = EntityState.Modified;
+
+            try
+            {
                 db.SaveChanges();
-                return RedirectToAction("Index");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CUSTOMERExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            return View(cUSTOMER);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: Customers/Edit/5
-        public ActionResult Edit(decimal id)
+        // POST: api/Customers
+        [ResponseType(typeof(CUSTOMER))]
+        public IHttpActionResult PostCUSTOMER(CUSTOMER cUSTOMER)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
-            CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
-            if (cUSTOMER == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cUSTOMER);
-        }
 
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CUSTOMER_ID,FIRST_NAME,LAST_NAME,DATE_OF_BIRTH,ADDRESS_LINE_1,ADDRESS_LINE_2,POSTCODE,PHONE_NUMBER,EMAIL,PASSWORD")] CUSTOMER cUSTOMER)
-        {
-            if (ModelState.IsValid)
+            db.CUSTOMERS.Add(cUSTOMER);
+
+            try
             {
-                db.Entry(cUSTOMER).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(cUSTOMER);
+            catch (DbUpdateException)
+            {
+                if (CUSTOMERExists(cUSTOMER.CUSTOMER_ID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = cUSTOMER.CUSTOMER_ID }, cUSTOMER);
         }
 
-        // GET: Customers/Delete/5
-        public ActionResult Delete(decimal id)
+        // DELETE: api/Customers/5
+        [ResponseType(typeof(CUSTOMER))]
+        public IHttpActionResult DeleteCUSTOMER(decimal id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
             if (cUSTOMER == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(cUSTOMER);
-        }
 
-        // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
-        {
-            CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
             db.CUSTOMERS.Remove(cUSTOMER);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return Ok(cUSTOMER);
         }
 
         protected override void Dispose(bool disposing)
@@ -122,6 +123,11 @@ namespace api.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool CUSTOMERExists(decimal id)
+        {
+            return db.CUSTOMERS.Count(e => e.CUSTOMER_ID == id) > 0;
         }
     }
 }

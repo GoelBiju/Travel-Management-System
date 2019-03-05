@@ -2,12 +2,15 @@ package com.example.customermobileapplication;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -29,6 +32,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     // Date picker dialog.
     private DatePickerDialog datePickerDialog;
+
+    // API url to create an account.
+    static final String API_URL = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/";
 
 
     /**
@@ -146,6 +152,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             if (password.equals(confirmPassword)) {
                 // Process the registration.
                 Toast.makeText(this, getResources().getString(R.string.implement), Toast.LENGTH_SHORT).show();
+
+                // Make a POST request to the Customers endpoint in the Web API.
+                // new CreateAccountTask().execute();
             } else {
                 Toast.makeText(this, getResources().getString(R.string.passwordsMustBeSame), Toast.LENGTH_SHORT).show();
             }
@@ -154,4 +163,32 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         }
     }
 
+
+    class CreateAccountTask extends AsyncTask<Void, Void, String> {
+
+        private Exception exception;
+
+
+        /**
+         *
+         * @param urls
+         * @return
+         */
+        protected String doInBackground(Void... urls) {
+
+            // Get all the field values which we will send to the API.
+            String firstName = editTextFirstName.getText().toString();
+            String lastName = editTextLastName.getText().toString();
+            String dateOfBirth = editTextDateOfBirth.getText().toString();
+            String postCode = editTextPostCode.getText().toString();
+            String addressLineOne = editTextAddressLineOne.getText().toString();
+            String addressLineTwo = editTextAddressLineTwo.getText().toString();
+            String phoneNumber = editTextPhoneNumber.getText().toString();
+            String emailAddress = editTextPostCode.getText().toString();
+            String password = editTextPassword.getText().toString();
+            String confirmPassword = editTextConfirmPassword.getText().toString();
+
+            return "";
+        }
+    }
 }

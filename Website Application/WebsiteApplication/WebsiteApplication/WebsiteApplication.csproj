@@ -61,6 +61,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -142,6 +144,45 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\COACH.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CUSTOMER.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EMPLOYEE.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EMPLOYEES_ARCHIVE.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRCS251E.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PRCS251E.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRCS251E.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRCS251E.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PRCS251E.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ROUTE.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SHIFT.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\STATION.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TIMETABLE.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -153,8 +194,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\PRCS251E.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PRCS251E.edmx</DependentUpon>
+      <LastGenOutput>PRCS251E.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PRCS251E.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PRCS251E.edmx</DependentUpon>
+      <LastGenOutput>PRCS251E.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\PRCS251E.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PRCS251E.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PRCS251E.edmx.diagram">
+      <DependentUpon>PRCS251E.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -183,7 +241,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -197,6 +254,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

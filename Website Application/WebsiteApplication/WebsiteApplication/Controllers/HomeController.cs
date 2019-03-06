@@ -26,5 +26,12 @@ namespace WebsiteApplication.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Login";
+
+            return View();
+        }
     }
 }

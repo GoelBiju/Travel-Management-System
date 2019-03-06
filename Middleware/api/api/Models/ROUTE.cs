@@ -11,7 +11,9 @@ namespace api.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class ROUTE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +23,20 @@ namespace api.Models
             this.TIMETABLES = new HashSet<TIMETABLE>();
         }
     
+        [DataMember(Name = "routeId")]
         public string ROUTE_ID { get; set; }
+
+        [DataMember(Name = "startDestination")]
         public string START_DESTINATION { get; set; }
+
+        [DataMember(Name = "endDestination")]
         public string END_DESTINATION { get; set; }
     
+        [DataMember(Name = "shifts")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFT> SHIFTS { get; set; }
+
+        [DataMember(Name = "timetable")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIMETABLE> TIMETABLES { get; set; }
     }

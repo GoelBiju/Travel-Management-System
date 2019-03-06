@@ -11,18 +11,39 @@ namespace api.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+
+    [DataContract]
     public partial class CUSTOMER
     {
+        [DataMember(Name = "customerId")]
         public decimal CUSTOMER_ID { get; set; }
+
+        [DataMember(Name = "firstName")]
         public string FIRST_NAME { get; set; }
+
+        [DataMember(Name = "lastName")]
         public string LAST_NAME { get; set; }
+
+        [DataMember(Name = "dateOfBirth")]
         public System.DateTime DATE_OF_BIRTH { get; set; }
+
+        [DataMember(Name = "addressLineOne")]
         public string ADDRESS_LINE_1 { get; set; }
+
+        [DataMember(Name = "addressLineTwo")]
         public string ADDRESS_LINE_2 { get; set; }
+
+        [DataMember(Name = "postCode")]
         public string POSTCODE { get; set; }
+
+        [DataMember(Name = "phoneNumber")]
         public string PHONE_NUMBER { get; set; }
+
+        [DataMember(Name = "emailAddress")]
         public string EMAIL { get; set; }
+
         public string PASSWORD { get; set; }
     }
 }

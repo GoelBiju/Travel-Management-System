@@ -11,16 +11,30 @@ namespace api.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class SHIFT
     {
+        [DataMember(Name = "shiftId")]
         public decimal SHIFT_ID { get; set; }
+
+        [DataMember(Name = "employeeId")]
         public string EMPLOYEE_ID { get; set; }
+
+        [DataMember(Name = "routeId")]
         public string ROUTE_ID { get; set; }
+
+        [DataMember(Name = "coachId")]
         public decimal COACH_ID { get; set; }
     
+        [DataMember(Name = "coach")]
         public virtual COACH COACH { get; set; }
+
+        [DataMember(Name = "employee")]
         public virtual EMPLOYEE EMPLOYEE { get; set; }
+
+        [DataMember(Name = "route")]
         public virtual ROUTE ROUTE { get; set; }
     }
 }

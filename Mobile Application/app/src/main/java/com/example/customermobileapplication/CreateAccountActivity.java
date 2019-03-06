@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -32,6 +33,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     // Date picker dialog.
     private DatePickerDialog datePickerDialog;
+
+    // Progress bar.
+    ProgressBar progressBar;
 
     // API url to create an account.
     static final String API_URL = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/";
@@ -76,6 +80,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         // Register button view.
         registerButton = findViewById(R.id.registerButton);
+
+        // Bind progress bar.
+        progressBar = findViewById(R.id.progressBar);
     }
 
 
@@ -171,6 +178,14 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         /**
          *
+         */
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+
+        /**
+         *
          * @param urls
          * @return
          */
@@ -188,6 +203,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             String password = editTextPassword.getText().toString();
             String confirmPassword = editTextConfirmPassword.getText().toString();
 
+
+            // Connect to the API and process the PUT request.
             return "";
         }
     }

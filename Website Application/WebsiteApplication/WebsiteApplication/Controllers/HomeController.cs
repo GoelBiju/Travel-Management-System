@@ -33,5 +33,12 @@ namespace WebsiteApplication.Controllers
 
             return View();
         }
+
+        public ActionResult UpdateEmployeeAccount()
+        {
+            ViewBag.Message = "Update Employee Account";
+
+            return View();
+        }
     }
 }

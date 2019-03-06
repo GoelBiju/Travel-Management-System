@@ -1,16 +1,17 @@
 package com.example.customermobileapplication.Model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Customer {
 
-    public Integer customerId;
+    public String customerId;
 
     public String firstName;
 
     public String lastName;
 
-    public LocalDateTime dateOfBirth;
+    public Date dateOfBirth;
 
     public String addressLineOne;
 
@@ -22,28 +23,12 @@ public class Customer {
 
     public String email;
 
-    public String password;
 
-
-    public Customer(Integer customerId, String firstName, String lastName, LocalDateTime dateOfBirth, String addressLineOne, String addressLineTwo, String postCode, String phoneNumber, String email, String password) {
-        this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.addressLineOne = addressLineOne;
-        this.addressLineTwo = addressLineTwo;
-        this.postCode = postCode;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.password = password;
-    }
-
-
-    public Integer getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
@@ -63,11 +48,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -109,13 +94,5 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

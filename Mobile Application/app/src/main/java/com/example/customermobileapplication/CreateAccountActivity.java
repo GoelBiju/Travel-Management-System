@@ -21,14 +21,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.customermobileapplication.Model.Customer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateAccountActivity extends Activity implements View.OnClickListener {
+
+    private ArrayList<Customer> customers;
 
     private EditText editTextFirstName;
     private EditText editTextLastName;
@@ -62,6 +69,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        //
+        customers = new ArrayList<>();
 
         // Bind the views with ids.
         bindViews();
@@ -190,7 +200,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, API_URL, null,
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, API_URL, null,
             new Response.Listener<JSONArray>()
             {
                 @Override
@@ -201,10 +211,32 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                     try {
                         for (int i = 0; i < response.length(); i++) {
                             // Current JSON object.
-                            JSONObject customer = response.getJSONObject(i);
+                            JSONObject jsonCustomer = response.getJSONObject(i);
 
-                            String id = customer.getString("customerId");
-                            String firstName = customer.getString("");
+                            // Create a new customer object.
+                            Customer newCustomer = new Customer();
+
+                            // Get the values from appropriate keys in the JSON data.
+                            newCustomer.setCustomerId(jsonCustomer.getString("customerId"));
+                            newCustomer.setFirstName(jsonCustomer.getString("firstName"));
+                            newCustomer.setLastName(jsonCustomer.getString("lastName"));
+
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                Date dob = dateFormat.parse(jsonCustomer.getString("dateOfBirth"));
+                                newCustomer.setDateOfBirth(dob);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            newCustomer.setAddressLineOne(jsonCustomer.getString("addressLineOne"));
+                            newCustomer.setAddressLineTwo(jsonCustomer.getString("addressLineTwo"));
+                            newCustomer.setPostCode(jsonCustomer.getString("postCode"));
+                            newCustomer.setPhoneNumber(jsonCustomer.getString("phoneNumber"));
+                            newCustomer.setEmail(jsonCustomer.getString("emailAddress"));
+
+                            //
+                            Log.d("Response", newCustomer.getDateOfBirth().toString());
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

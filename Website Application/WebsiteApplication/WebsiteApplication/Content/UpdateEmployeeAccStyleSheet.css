@@ -21,14 +21,14 @@ header {
     font-family: Arial;
 }
 
-#logout {
+#signout {
     color: #eb1414;
     font-weight: bold;
 }
 
-    #logout:hover {
-        color: #404040;
-    }
+#signout:hover {
+    color: #404040;
+}
 
 
 .updatefieldcontainer {
@@ -45,14 +45,15 @@ header {
     margin: 0;
     border-radius: 25px;
     border: 1px solid #8c8c8c;
-    padding: 20px;
-    width: 250px;
+    padding: 24px;
+    width: 400px;
     height: 10px;
     outline: 0;
 }
 
 label {
     color: #333333;
+    font-size: 16px;
 }
 
 
@@ -61,7 +62,7 @@ label {
     background-color: #FFFFFF;
     border-radius: 25px;
     border: 1px solid #8c8c8c;
-    width: 135px;
+    width: 130px;
     height: 50px;
     margin-top: center;
     color: #333333;

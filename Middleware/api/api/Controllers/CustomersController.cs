@@ -35,9 +35,9 @@ namespace api.Controllers
             return Ok(cUSTOMER);
         }
 
-        // PUT: api/Customers/5
+        // PUT: api/Customers/
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCUSTOMER(decimal id, CUSTOMER cUSTOMER)
+        public IHttpActionResult PutCUSTOMER(int id, CUSTOMER cUSTOMER)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +71,6 @@ namespace api.Controllers
         }
 
         // POST: api/Customers
-        [ResponseType(typeof(CUSTOMER))]
         public IHttpActionResult PostCUSTOMER(CUSTOMER cUSTOMER)
         {
             if (!ModelState.IsValid)
@@ -97,7 +96,8 @@ namespace api.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = cUSTOMER.CUSTOMER_ID }, cUSTOMER);
+            //return CreatedAtRoute("DefaultApi", new { id = cUSTOMER.CUSTOMER_ID }, cUSTOMER);
+            return Ok();
         }
 
         // DELETE: api/Customers/5

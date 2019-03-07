@@ -44,6 +44,7 @@ namespace api.Models
         [DataMember(Name = "emailAddress")]
         public string EMAIL { get; set; }
 
+        [DataMember(Name = "password")]
         public string PASSWORD { get; set; }
     }
 }

@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.customermobileapplication.Model.Customer;
 
@@ -32,6 +33,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateAccountActivity extends Activity implements View.OnClickListener {
 
@@ -162,17 +165,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
      */
     private void processRegistration() {
 
-        String firstName = editTextFirstName.getText().toString();
-        String lastName = editTextLastName.getText().toString();
-        String dateOfBirth = editTextDateOfBirth.getText().toString();
-        String postCode = editTextPostCode.getText().toString();
-        String addressLineOne = editTextAddressLineOne.getText().toString();
-        String addressLineTwo = editTextAddressLineTwo.getText().toString();
-        String phoneNumber = editTextPhoneNumber.getText().toString();
-        String emailAddress = editTextPostCode.getText().toString();
-        String password = editTextPassword.getText().toString();
-        String confirmPassword = editTextConfirmPassword.getText().toString();
-
 //        // Check that all values have been entered.
 //        if (!firstName.equals("") && !lastName.equals("") && !dateOfBirth.equals("") && !postCode.equals("")
 //                && !addressLineOne.equals("") && !phoneNumber.equals("") && !emailAddress.equals("")
@@ -200,47 +192,48 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, API_URL, null,
-            new Response.Listener<JSONArray>()
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, API_URL, null,
+            new Response.Listener<String>()
             {
                 @Override
-                public void onResponse(JSONArray response) {
-                    Log.d("Response", response.toString());
+                public void onResponse(String response) {
+                    Log.d("Response", response);
 
                     // Create Customer objects by processing the JSON request.
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            // Current JSON object.
-                            JSONObject jsonCustomer = response.getJSONObject(i);
+//                    try {
+//                        for (int i = 0; i < response.length(); i++) {
+//                            // Current JSON object.
+//                            JSONObject jsonCustomer = response.getJSONObject(i);
+//
+//                            // Create a new customer object.
+//                            Customer newCustomer = new Customer();
+//
+//                            // Get the values from appropriate keys in the JSON data.
+//                            newCustomer.setCustomerId(jsonCustomer.getString("customerId"));
+//                            newCustomer.setFirstName(jsonCustomer.getString("firstName"));
+//                            newCustomer.setLastName(jsonCustomer.getString("lastName"));
+//
+//                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                            try {
+//                                Date dob = dateFormat.parse(jsonCustomer.getString("dateOfBirth"));
+//                                newCustomer.setDateOfBirth(dob);
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            newCustomer.setAddressLineOne(jsonCustomer.getString("addressLineOne"));
+//                            newCustomer.setAddressLineTwo(jsonCustomer.getString("addressLineTwo"));
+//                            newCustomer.setPostCode(jsonCustomer.getString("postCode"));
+//                            newCustomer.setPhoneNumber(jsonCustomer.getString("phoneNumber"));
+//                            newCustomer.setEmail(jsonCustomer.getString("emailAddress"));
+//
+//                            //
+//                            Log.d("Response", newCustomer.getDateOfBirth().toString());
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
 
-                            // Create a new customer object.
-                            Customer newCustomer = new Customer();
-
-                            // Get the values from appropriate keys in the JSON data.
-                            newCustomer.setCustomerId(jsonCustomer.getString("customerId"));
-                            newCustomer.setFirstName(jsonCustomer.getString("firstName"));
-                            newCustomer.setLastName(jsonCustomer.getString("lastName"));
-
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                            try {
-                                Date dob = dateFormat.parse(jsonCustomer.getString("dateOfBirth"));
-                                newCustomer.setDateOfBirth(dob);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-
-                            newCustomer.setAddressLineOne(jsonCustomer.getString("addressLineOne"));
-                            newCustomer.setAddressLineTwo(jsonCustomer.getString("addressLineTwo"));
-                            newCustomer.setPostCode(jsonCustomer.getString("postCode"));
-                            newCustomer.setPhoneNumber(jsonCustomer.getString("phoneNumber"));
-                            newCustomer.setEmail(jsonCustomer.getString("emailAddress"));
-
-                            //
-                            Log.d("Response", newCustomer.getDateOfBirth().toString());
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
             },
 
@@ -251,10 +244,37 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                     Log.d("Error.Response", error.toString());
                 }
             }
-        );
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                String firstName = editTextFirstName.getText().toString();
+                String lastName = editTextLastName.getText().toString();
+                String dateOfBirth = editTextDateOfBirth.getText().toString();
+                String postCode = editTextPostCode.getText().toString();
+                String addressLineOne = editTextAddressLineOne.getText().toString();
+                String addressLineTwo = editTextAddressLineTwo.getText().toString();
+                String phoneNumber = editTextPhoneNumber.getText().toString();
+                String emailAddress = editTextPostCode.getText().toString();
+                String password = editTextPassword.getText().toString();
+
+                Map<String, String> params = new HashMap<>();
+                params.put("customerId", 3);
+                params.put("firstName", firstName);
+                params.put("lastName", lastName);
+                params.put("dateOfBirth", dateOfBirth);
+                params.put("postCode", postCode);
+                params.put("addressLineOne", addressLineOne);
+                params.put("addressLineTwo", addressLineTwo);
+                params.put("phoneNumber", phoneNumber);
+                params.put("emailAddress", emailAddress);
+                params.put("password", password);
+
+                return params;
+            }
+        };
 
         // Add to the request queue.
-        queue.add(jsonArrayRequest);
+        queue.add(stringRequest);
     }
 
 //    class CreateAccountTask extends AsyncTask<Void, Void, String> {

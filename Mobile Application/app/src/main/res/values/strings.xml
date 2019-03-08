@@ -21,6 +21,27 @@
     <string name="register">Register</string>
     <string name="fieldsEmpty">No field in the form can be left empty.</string>
     <string name="passwordsMustBeSame">Your password and password confirmation must match.</string>
+    <string name="title_activity_view_account_details">ViewAccountDetails</string>
+    <string name="postcodeLabel">Postcode:</string>
+    <string name="address_line_1">Address (Line 1):</string>
+    <string name="date_of_birth">Date of Birth:</string>
+    <string name="customer_id">Customer ID:</string>
+    <string name="last_name">Last Name:</string>
+    <string name="first_name">First Name:</string>
+    <string name="textview1">TextView</string>
+    <string name="textview2">TextView</string>
+    <string name="textview3">TextView</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="emailLabel">Email:</string>
+    <string name="passwordLabel">Password:</string>
+    <string name="address_line_2">Address (Line 2):</string>
+    <string name="textview4">TextView</string>
+    <string name="textview5">TextView</string>
+    <string name="textview6">TextView</string>
+    <string name="textview7">TextView</string>
+    <string name="textview8">TextView</string>
+    <string name="textview9">TextView</string>
+    <string name="textview10">TextView</string>
 
     <!-- Resources for CreateAccountActivity -->
 </resources>

@@ -22,6 +22,6 @@
 
     <include layout="@layout/content_view_account_details" />
 
-    
+
 
 </android.support.design.widget.CoordinatorLayout>

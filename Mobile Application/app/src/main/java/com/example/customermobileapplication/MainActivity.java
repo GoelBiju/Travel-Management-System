@@ -71,7 +71,5 @@ public class MainActivity extends AppCompatActivity {
     public void processLogin() {
 
         Toast.makeText(this, getResources().getString(R.string.implement), Toast.LENGTH_SHORT).show();
-
-
     }
 }

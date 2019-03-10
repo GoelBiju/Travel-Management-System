@@ -4,13 +4,15 @@
     <!-- Request to use the permission to communicate with the Web API. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Allow the use of cleartext traffic (usesCleartextTraffic) while HTTPS is not implemented. -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".ViewAccountDetails"
             android:label="@string/title_activity_view_account_details"

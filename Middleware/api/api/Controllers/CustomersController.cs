@@ -19,6 +19,7 @@ namespace api.Controllers
         // GET: api/Customers
         public IQueryable<CUSTOMER> GetCUSTOMERS()
         {
+            
             return db.CUSTOMERS;
         }
 
@@ -71,14 +72,23 @@ namespace api.Controllers
         }
 
         // POST: api/Customers
-        public IHttpActionResult PostCUSTOMER(CUSTOMER cUSTOMER)
+        // Used to CREATE a new customer and add them to our database.
+        public IHttpActionResult PostCUSTOMER([FromBody] CUSTOMER cUSTOMER)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.CUSTOMERS.Add(cUSTOMER);
+            // Check if the customer already exists under the email address provided, 
+            // if so return a Conflict HTTP response code.
+            if (CUSTOMERExists(cUSTOMER.EMAIL))
+            {
+                return Conflict();
+            } else
+            {
+                db.CUSTOMERS.Add(cUSTOMER);
+            }
 
             try
             {
@@ -86,18 +96,22 @@ namespace api.Controllers
             }
             catch (DbUpdateException)
             {
-                if (CUSTOMERExists(cUSTOMER.CUSTOMER_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                // A DbUpdateException will occur if the data does not match what the database expects
+                // i.e. constraints are violated, we can send back a bad request HTTP response.
+                //if (CUSTOMERExists(cUSTOMER.CUSTOMER_ID))
+                return BadRequest();
             }
 
-            //return CreatedAtRoute("DefaultApi", new { id = cUSTOMER.CUSTOMER_ID }, cUSTOMER);
-            return Ok();
+            // Find the added user by the email address provided by the client.
+            CUSTOMER addedCustomer = db.CUSTOMERS.SingleOrDefault(customer => customer.EMAIL == cUSTOMER.EMAIL);
+            if (addedCustomer == null)
+            {
+                //throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+                return NotFound();
+            }
+
+            // Return the added customer's ID and object.
+            return CreatedAtRoute("DefaultApi", new { id = addedCustomer.CUSTOMER_ID }, addedCustomer);
         }
 
         // DELETE: api/Customers/5
@@ -125,9 +139,26 @@ namespace api.Controllers
             base.Dispose(disposing);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool CUSTOMERExists(decimal id)
         {
             return db.CUSTOMERS.Count(e => e.CUSTOMER_ID == id) > 0;
+        }
+
+
+        /// <summary>
+        /// Find if a customer record already exists given an email address.
+        /// </summary>
+        /// <param name="emailAddress"></param>
+        /// <returns></returns>
+        private bool CUSTOMERExists(string emailAddress)
+        {
+            return db.CUSTOMERS.Count(e => e.EMAIL == emailAddress) > 0;
         }
     }
 }

@@ -1,45 +1,40 @@
 package com.example.customermobileapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-//import android.os.AsyncTask;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.customermobileapplication.Model.Customer;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.net.HttpURLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Locale;
+
 
 public class CreateAccountActivity extends Activity implements View.OnClickListener {
 
-    private ArrayList<Customer> customers;
-
+    // TODO: Validate fields which have constraints in database.
     private EditText editTextFirstName;
     private EditText editTextLastName;
     private EditText editTextDateOfBirth;
@@ -58,10 +53,14 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private DatePickerDialog datePickerDialog;
 
     // Progress bar.
-    ProgressBar progressBar;
+    ProgressDialog progressDialog;
 
-    // API url to create an account.
-    static final String API_URL = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/";
+    // API url to create an account for customers.
+    static final String CUSTOMERS_API_URL = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers";
+    //static final String CUSTOMERS_API_URL = "http://192.168.0.202/api/api/customers";
+
+    // Send the request.
+    private RequestQueue requestQueue;
 
 
     /**
@@ -73,9 +72,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        //
-        customers = new ArrayList<>();
-
         // Bind the views with ids.
         bindViews();
 
@@ -84,6 +80,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         // Prepare the DatePickerDialog to show calendar.
         prepareDatePickerDialog();
+
+        // Initialise the requestQueue.
+        requestQueue = Volley.newRequestQueue(this);
     }
 
 
@@ -107,8 +106,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         // Register button view.
         registerButton = findViewById(R.id.registerButton);
 
-        // Bind progress bar.
-        progressBar = findViewById(R.id.progressBar);
+        // Bind progress dialog (this is deprecated).
+        progressDialog = new ProgressDialog(this);
     }
 
 
@@ -131,9 +130,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                editTextDateOfBirth.setText(dayOfMonth + "/" + month + "/" + year);
+                editTextDateOfBirth.setText(day + "/" + (month + 1) + "/" + year);
                 datePickerDialog.dismiss();
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -165,154 +164,144 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
      */
     private void processRegistration() {
 
-//        // Check that all values have been entered.
-//        if (!firstName.equals("") && !lastName.equals("") && !dateOfBirth.equals("") && !postCode.equals("")
-//                && !addressLineOne.equals("") && !phoneNumber.equals("") && !emailAddress.equals("")
-//                && !password.equals("") && !confirmPassword.equals("")) {
-//
-//            // Ensure that the password and the password confirmation matches.
-//            if (password.equals(confirmPassword)) {
-//                // Process the registration.
-//                Toast.makeText(this, getResources().getString(R.string.implement), Toast.LENGTH_SHORT).show();
-//
-//                // Make a POST request to the Customers endpoint in the Web API.
-//                // new CreateAccountTask().execute();
-//            } else {
-//                Toast.makeText(this, getResources().getString(R.string.passwordsMustBeSame), Toast.LENGTH_SHORT).show();
-//            }
-//        } else {
-//            Toast.makeText(this, getResources().getString(R.string.fieldsEmpty), Toast.LENGTH_SHORT).show();
-//        }
+        String firstName = editTextFirstName.getText().toString();
+        String lastName = editTextLastName.getText().toString();
+        String dateOfBirth = editTextDateOfBirth.getText().toString();
+        String addressLineOne = editTextAddressLineOne.getText().toString();
+        String postCode = editTextPostCode.getText().toString();
+        String phoneNumber = editTextPhoneNumber.getText().toString();
+        String emailAddress = editTextEmailAddress.getText().toString();
+        String password = editTextPassword.getText().toString();
 
-        sendRequest();
+        // Check that all values have been entered.
+        if (!firstName.equals("") && !lastName.equals("") && !dateOfBirth.equals("") && !postCode.equals("")
+                && !addressLineOne.equals("") && !phoneNumber.equals("") && !emailAddress.equals("")
+                && !password.equals("") && !editTextConfirmPassword.getText().toString().equals("")) {
+
+            // Ensure that the password and the password confirmation matches.
+            if (password.equals(editTextConfirmPassword.getText().toString())) {
+                // Make a POST request to the Customers endpoint in the Web API
+                // in order to send the details to create a new customer record.
+                sendCustomerRegistration();
+            } else {
+                Toast.makeText(this, getResources().getString(R.string.passwordsMustBeSame), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.fieldsEmpty), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
-    private void sendRequest() {
+    /**
+     *
+     */
+    private void sendCustomerRegistration() {
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        //
+        String firstName = editTextFirstName.getText().toString();
+        String lastName = editTextLastName.getText().toString();
+        String dateOfBirth = editTextDateOfBirth.getText().toString();
+        String addressLineOne = editTextAddressLineOne.getText().toString();
+        String addressLineTwo = editTextAddressLineTwo.getText().toString();
+        String postCode = editTextPostCode.getText().toString();
+        String phoneNumber = editTextPhoneNumber.getText().toString();
+        final String emailAddress = editTextEmailAddress.getText().toString();
+        String password = editTextPassword.getText().toString();
 
-        JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, API_URL, null,
-            new Response.Listener<JSONArray>()
-            {
-                @Override
-                public void onResponse(JSONArray response) {
-                    Log.d("Response", response.toString());
+        // Create the JSONObject to send in the POST request body.
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put("firstName", firstName);
+            postData.put("lastName", lastName);
 
-                     //Create Customer objects by processing the JSON request.
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            // Current JSON object.
-                            JSONObject jsonCustomer = response.getJSONObject(i);
+            // Parse the date and put it in the correct format to send to the Web API.
+            try {
+                Date initDate = new SimpleDateFormat("dd/mm/yyyy", Locale.UK).parse(dateOfBirth);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.UK);
+                postData.put("dateOfBirth", formatter.format(initDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-                            // Create a new customer object.
-                            Customer newCustomer = new Customer();
+            postData.put("postCode", postCode);
+            postData.put("addressLineOne", addressLineOne);
+            postData.put("addressLineTwo", addressLineTwo);
+            postData.put("phoneNumber", phoneNumber);
+            postData.put("emailAddress", emailAddress);
+            postData.put("password", password);
 
-                            // Get the values from appropriate keys in the JSON data.
-                            newCustomer.setCustomerId(jsonCustomer.getString("customerId"));
-                            newCustomer.setFirstName(jsonCustomer.getString("firstName"));
-                            newCustomer.setLastName(jsonCustomer.getString("lastName"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("Response", postData.toString());
 
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                            try {
-                                Date dob = dateFormat.parse(jsonCustomer.getString("dateOfBirth"));
-                                newCustomer.setDateOfBirth(dob);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+        // Show progress dialog.
+        progressDialog.setMessage("Registering Account");
+        progressDialog.show();
 
-                            newCustomer.setAddressLineOne(jsonCustomer.getString("addressLineOne"));
-                            newCustomer.setAddressLineTwo(jsonCustomer.getString("addressLineTwo"));
-                            newCustomer.setPostCode(jsonCustomer.getString("postCode"));
-                            newCustomer.setPhoneNumber(jsonCustomer.getString("phoneNumber"));
-                            newCustomer.setEmail(jsonCustomer.getString("emailAddress"));
+        // Create the request.
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, CUSTOMERS_API_URL, postData,
+                new Response.Listener<JSONObject>() {
 
-                            //
-                            Log.d("Response", newCustomer.getDateOfBirth().toString());
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("Response", response.toString());
+
+                        try {
+                            Log.d("Response", "Created user with id:" + response.getInt("customerId"));
+                            //Toast.makeText(getApplicationContext(), "Your account has been successfully registered.", Toast.LENGTH_SHORT).show();
+
+                            // Show alert dialog with the registered information.
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CreateAccountActivity.this);
+                            alertDialogBuilder.setMessage("Your account has been registered under the email address: " + response.getString("emailAddress") +
+                                    "\n\nYou can now proceed to login with your email address and the password you registered with.")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // Return to the login screen.
+                                            Intent startIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(startIntent);
+                                        }
+                                    })
+                                    .setCancelable(false);
+                            AlertDialog alert = alertDialogBuilder.create();
+                            alert.setTitle("Create Account");
+
+                            // Hide the dialog box and show the alert.
+                            progressDialog.hide();
+                            alert.show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
 
-                }
-            },
+                }, new Response.ErrorListener() {
 
-            new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("Error.Response", error.toString());
-                }
-            }
-        );
-        //{
-//            @Override
-//            protected Map<String, String> getParams() {
-//                String firstName = editTextFirstName.getText().toString();
-//                String lastName = editTextLastName.getText().toString();
-//                String dateOfBirth = editTextDateOfBirth.getText().toString();
-//                String postCode = editTextPostCode.getText().toString();
-//                String addressLineOne = editTextAddressLineOne.getText().toString();
-//                String addressLineTwo = editTextAddressLineTwo.getText().toString();
-//                String phoneNumber = editTextPhoneNumber.getText().toString();
-//                String emailAddress = editTextPostCode.getText().toString();
-//                String password = editTextPassword.getText().toString();
-//
-//                Map<String, String> params = new HashMap<>();
-//                params.put("customerId", 3);
-//                params.put("firstName", firstName);
-//                params.put("lastName", lastName);
-//                params.put("dateOfBirth", dateOfBirth);
-//                params.put("postCode", postCode);
-//                params.put("addressLineOne", addressLineOne);
-//                params.put("addressLineTwo", addressLineTwo);
-//                params.put("phoneNumber", phoneNumber);
-//                params.put("emailAddress", emailAddress);
-//                params.put("password", password);
-//
-//                return params;
-//            }
-//        };
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", error.toString());
 
-        // Add to the request queue.
-        queue.add(stringRequest);
+                        progressDialog.hide();
+
+                        // Display the error to the user.
+                        // TODO: Place important toast messages in an alert dialog.
+                        switch (error.networkResponse.statusCode) {
+                            case HttpURLConnection.HTTP_BAD_REQUEST:
+                                Toast.makeText(getApplicationContext(), "The request was not made in the expected format.", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case HttpURLConnection.HTTP_CONFLICT:
+                                Toast.makeText(getApplicationContext(), "An account is already registered with this email address.", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case HttpURLConnection.HTTP_NOT_FOUND:
+                                Toast.makeText(getApplicationContext(), "There registered account record could not be found or there was error registering your details..", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+        });
+
+        // POST the JSON data.
+        requestQueue.add(jsonObjectRequest);
     }
-
-//    class CreateAccountTask extends AsyncTask<Void, Void, String> {
-//
-//        private Exception exception;
-//
-//
-//        /**
-//         *
-//         */
-//        protected void onPreExecute() {
-//            progressBar.setVisibility(View.VISIBLE);
-//        }
-//
-//
-//        /**
-//         *
-//         * @param urls
-//         * @return
-//         */
-//        protected String doInBackground(Void... urls) {
-//
-//            // Get all the field values which we will send to the API.
-//            String firstName = editTextFirstName.getText().toString();
-//            String lastName = editTextLastName.getText().toString();
-//            String dateOfBirth = editTextDateOfBirth.getText().toString();
-//            String postCode = editTextPostCode.getText().toString();
-//            String addressLineOne = editTextAddressLineOne.getText().toString();
-//            String addressLineTwo = editTextAddressLineTwo.getText().toString();
-//            String phoneNumber = editTextPhoneNumber.getText().toString();
-//            String emailAddress = editTextPostCode.getText().toString();
-//            String password = editTextPassword.getText().toString();
-//            String confirmPassword = editTextConfirmPassword.getText().toString();
-//
-//
-//            // Connect to the API and process the PUT request.
-//            return "";
-//        }
-//    }
 }

@@ -9,42 +9,56 @@
 
 namespace api.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Runtime.Serialization;
 
 
-    [DataContract]
+    //[DataContract]
     public partial class CUSTOMER
     {
-        [DataMember(Name = "customerId")]
+        //[DataMember(Name = "customerId")]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [JsonProperty("customerId")]
         public decimal CUSTOMER_ID { get; set; }
 
-        [DataMember(Name = "firstName")]
+        //[DataMember(Name = "firstName")]
+        [JsonProperty("firstName")]
         public string FIRST_NAME { get; set; }
 
-        [DataMember(Name = "lastName")]
+        //[DataMember(Name = "lastName")]
+        [JsonProperty("lastName")]
         public string LAST_NAME { get; set; }
 
-        [DataMember(Name = "dateOfBirth")]
+        //[DataMember(Name = "dateOfBirth")]
+        [JsonProperty("dateOfBirth")]
         public System.DateTime DATE_OF_BIRTH { get; set; }
 
-        [DataMember(Name = "addressLineOne")]
+        //[DataMember(Name = "addressLineOne")]
+        [JsonProperty("addressLineOne")]
         public string ADDRESS_LINE_1 { get; set; }
 
-        [DataMember(Name = "addressLineTwo")]
+        //[DataMember(Name = "addressLineTwo")]
+        [JsonProperty("addressLineTwo")]
         public string ADDRESS_LINE_2 { get; set; }
 
-        [DataMember(Name = "postCode")]
+        //[DataMember(Name = "postCode")]
+        [JsonProperty("postCode")]
         public string POSTCODE { get; set; }
 
-        [DataMember(Name = "phoneNumber")]
+        //[DataMember(Name = "phoneNumber")]
+        [JsonProperty("phoneNumber")]
         public string PHONE_NUMBER { get; set; }
 
-        [DataMember(Name = "emailAddress")]
+        //[DataMember(Name = "emailAddress")]
+        [JsonProperty("emailAddress")]
         public string EMAIL { get; set; }
 
-        [DataMember(Name = "password")]
+        [JsonProperty("password")]
         public string PASSWORD { get; set; }
     }
 }

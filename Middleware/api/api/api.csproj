@@ -297,6 +297,7 @@
     <Content Include="Models\PRCS251E.edmx.diagram">
       <DependentUpon>PRCS251E.edmx</DependentUpon>
     </Content>
+    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

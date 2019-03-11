@@ -46,5 +46,12 @@ namespace WebsiteApplication.Controllers
 
             return View();
         }
+
+        public ActionResult ViewCoaches()
+        {
+            ViewBag.Message = "View Coaches";
+
+            return View();
+        }
     }
 }

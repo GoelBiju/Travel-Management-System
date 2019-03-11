@@ -164,6 +164,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\SideMenuStyleSheet.css" />
+    <Content Include="Content\ViewCoachesStyleSheet.css" />
     <Content Include="Content\UpdateEmployeeAccStyleSheet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -204,6 +205,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\UpdateEmployeeAccount.cshtml" />
     <Content Include="Views\Home\ViewEmployeeAccount.cshtml" />
+    <Content Include="Views\Home\ViewCoaches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

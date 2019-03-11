@@ -13,25 +13,33 @@ namespace WebsiteApplication.Controllers
 {
     public class EmployeeController
     {
-        static async Task RunAsync(HttpClient client)
+
+        public List<employee> GetEmployees()
+        {
+            HttpClient client = new HttpClient();
+            Task response = await RunAsync(client);
+        }
+            
+            
+        
+            
+
+        public static async Task<List<employee>> RunAsync(HttpClient client)
         {
             client.BaseAddress = new Uri("http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var StatusCode = await GetAllEmployees(client);
+
         }
-        static async Task<HttpStatusCode> GetAllEmployees(HttpClient client)
+
+        private static async Task<HttpStatusCode> GetAllEmployees(HttpClient client, List<employee> returnData)
         {
             HttpResponseMessage response = await client.GetAsync("employees");
             if (response.IsSuccessStatusCode)
             {
                 var JsonString = await response.Content.ReadAsStringAsync();
-                var _Data = JsonConvert.DeserializeObject<List<employee>>(JsonString);
-                foreach (employee e in _Data)
-                {
-                    Console.WriteLine(e.GetFirstName());
-                }
+                returnData = JsonConvert.DeserializeObject<List<employee>>(JsonString);
             }
 
             return response.StatusCode;

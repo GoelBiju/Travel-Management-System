@@ -203,6 +203,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\UpdateEmployeeAccount.cshtml" />
+    <Content Include="Views\Home\ViewEmployeeAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

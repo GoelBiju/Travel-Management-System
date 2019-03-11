@@ -40,5 +40,11 @@ namespace WebsiteApplication.Controllers
 
             return View();
         }
+        public ActionResult ViewEmployeeAccount()
+        {
+            ViewBag.Message = "View Employee Accounts";
+
+            return View();
+        }
     }
 }

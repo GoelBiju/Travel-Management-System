@@ -26,9 +26,9 @@ header {
     font-weight: bold;
 }
 
-#signout:hover {
-    color: #404040;
-}
+    #signout:hover {
+        color: #404040;
+    }
 
 
 .updatefieldcontainer {
@@ -36,8 +36,8 @@ header {
     text-align: center;
     padding: 10px;
     position: relative;
-    width: 500px;
-    height: 430px;
+    width: 800px;
+    height: 600px;
 }
 
 #inputfields {

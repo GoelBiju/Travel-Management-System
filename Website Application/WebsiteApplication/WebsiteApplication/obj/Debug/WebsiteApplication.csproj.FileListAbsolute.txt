@@ -357,3 +357,5 @@ C:\Users\vcastellani\Documents\prcs252-computer-science-ip-group_e\Website Appli
 C:\Users\vcastellani\Documents\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\obj\Debug\WebsiteApplication.csproj.CopyComplete
 C:\Users\vcastellani\Documents\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\obj\Debug\WebsiteApplication.dll
 C:\Users\vcastellani\Documents\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\obj\Debug\WebsiteApplication.pdb
+C:\Users\vcastellani\Documents\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\System.Net.Http.Formatting.dll
+C:\Users\vcastellani\Documents\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\System.Net.Http.Formatting.xml

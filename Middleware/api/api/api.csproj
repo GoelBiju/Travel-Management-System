@@ -212,6 +212,8 @@
     <Compile Include="Models\CUSTOMER.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO\CustomerDTO.cs" />
+    <Compile Include="Models\DTO\CustomerLoginDetails.cs" />
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>

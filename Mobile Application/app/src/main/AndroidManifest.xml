@@ -4,7 +4,6 @@
     <!-- Request to use the permission to communicate with the Web API. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Allow the use of cleartext traffic (usesCleartextTraffic) while HTTPS is not implemented. -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,9 +13,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ViewAccountDetails"
             android:label="@string/title_activity_view_account_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CreateAccountActivity"
             android:label="@string/title_activity_create_account"

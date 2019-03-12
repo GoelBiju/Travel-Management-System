@@ -52,7 +52,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     // Date picker dialog.
     private DatePickerDialog datePickerDialog;
 
-    // Progress bar.
+    // Progress dialog.
     ProgressDialog progressDialog;
 
     // API url to create an account for customers.
@@ -286,6 +286,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                         // Display the error to the user.
                         // TODO: Place important toast messages in an alert dialog.
                         switch (error.networkResponse.statusCode) {
+                            case HttpURLConnection.HTTP_INTERNAL_ERROR:
+                                Toast.makeText(getApplicationContext(), "An internal server error occurred whilst processing your request.", Toast.LENGTH_SHORT).show();
+                                break;
+
                             case HttpURLConnection.HTTP_BAD_REQUEST:
                                 Toast.makeText(getApplicationContext(), "The request was not made in the expected format.", Toast.LENGTH_SHORT).show();
                                 break;

@@ -19,7 +19,7 @@ namespace api.Models.DTO
         public string LastName { get; set; }
 
         [JsonProperty("dateOfBirth")]
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [JsonProperty("addressLineOne")]
         public string AddressLineOne { get; set; }

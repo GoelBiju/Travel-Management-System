@@ -1,16 +1,16 @@
 ﻿using Newtonsoft.Json;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace api.Models.DTO
 {
-    public class CustomerLoginDetails
+    public class CustomerLoginDetailsDTO
     {
-        [JsonRequired]
         [JsonProperty("emailAddress")]
+        [Required]
         public string emailAddress { get; set; }
         
-        [JsonRequired]
         [JsonProperty("password")]
+        [Required]
         public string password { get; set; }
     }
 }

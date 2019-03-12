@@ -204,4 +204,3 @@ C:\Users\gbiju\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\ob
 C:\Users\gbiju\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csproj.CopyComplete
 C:\Users\gbiju\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.dll
 C:\Users\gbiju\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.pdb
-C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll

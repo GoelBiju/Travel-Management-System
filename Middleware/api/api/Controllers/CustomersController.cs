@@ -6,10 +6,12 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
 using api.Models.DTO;
+
 
 namespace api.Controllers
 {
@@ -22,23 +24,54 @@ namespace api.Controllers
         // GET: api/Customers
         //[HttpGet]
         [Route("")]
-        public IQueryable<CUSTOMER> GetCUSTOMERS()
+        public IQueryable<CustomerDTO> GetCUSTOMERS()
         {
-            return db.CUSTOMERS;
+            var customers = from c in db.CUSTOMERS
+                            select new CustomerDTO()
+                            {
+                                CustomerId = (int)c.CUSTOMER_ID,
+                                FirstName = c.FIRST_NAME,
+                                LastName = c.LAST_NAME,
+                                DateOfBirth = c.DATE_OF_BIRTH,
+                                AddressLineOne = c.ADDRESS_LINE_1,
+                                AddressLineTwo = c.ADDRESS_LINE_2,
+                                PostCode = c.POSTCODE,
+                                PhoneNumber = c.PHONE_NUMBER,
+                                EmailAddress = c.EMAIL
+                            };
+
+            return customers;
         }
+
 
         // GET: api/Customers/5
         [Route("{id:int}")]
-        [ResponseType(typeof(CUSTOMER))]
-        public IHttpActionResult GetCUSTOMER(decimal id)
+        [ResponseType(typeof(CustomerDTO))]
+        public async Task<IHttpActionResult> GetCUSTOMER(decimal id)
         {
-            CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
-            if (cUSTOMER == null)
+            //CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
+            //
+            var customer = await db.CUSTOMERS.Select(c =>
+                new CustomerDTO()
+                {
+                    CustomerId = (int)c.CUSTOMER_ID,
+                    FirstName = c.FIRST_NAME,
+                    LastName = c.LAST_NAME,
+                    DateOfBirth = c.DATE_OF_BIRTH,
+                    AddressLineOne = c.ADDRESS_LINE_1,
+                    AddressLineTwo = c.ADDRESS_LINE_2,
+                    PostCode = c.POSTCODE,
+                    PhoneNumber = c.PHONE_NUMBER,
+                    EmailAddress = c.EMAIL
+                }).SingleOrDefaultAsync(c => c.CustomerId == id);
+
+            // If the retrieved customer is null then return a 401 Not Found.
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return Ok(cUSTOMER);
+            return Ok(customer);
         }
 
 
@@ -128,7 +161,7 @@ namespace api.Controllers
         // Used to CREATE a new customer and add them to our database.
         [Route("Login")]
         [ResponseType(typeof(CustomerDTO))]
-        public IHttpActionResult PostCUSTOMERLogin([FromBody] CustomerLoginDetails loginDetails)
+        public IHttpActionResult PostCUSTOMERLogin([FromBody] CustomerLoginDetailsDTO loginDetails)
         {
             if (!ModelState.IsValid)
             {
@@ -155,14 +188,26 @@ namespace api.Controllers
                     // TODO: Get the password hash and salt and ensure that the attempted password matches.
                     //       Implement SHA256/SHA512 hasing with a password and salt which is stored in the database.
 
+
                     // TODO: Temporarily just checking that the passwords match for now; this needs to be replaced with 
                     //       hasing/security functionality.
                     if (loginDetails.password.Equals(dbCustomer.PASSWORD))
                     {
                         // Return the user details as with the Customer Data Transfer Object.
+                        CustomerDTO customerDetails = new CustomerDTO()
+                        {
+                            CustomerId = (int)dbCustomer.CUSTOMER_ID,
+                            FirstName = dbCustomer.FIRST_NAME,
+                            LastName = dbCustomer.LAST_NAME,
+                            DateOfBirth = dbCustomer.DATE_OF_BIRTH,
+                            AddressLineOne = dbCustomer.ADDRESS_LINE_1,
+                            AddressLineTwo = dbCustomer.ADDRESS_LINE_2,
+                            PostCode = dbCustomer.POSTCODE,
+                            PhoneNumber = dbCustomer.PHONE_NUMBER,
+                            EmailAddress = dbCustomer.EMAIL
+                        };
 
-                        return Ok(dbCustomer);
-
+                        return Ok(customerDetails);
                     } else
                     {
                         // Return a 403 Forbidden with an error message.

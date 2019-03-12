@@ -26,18 +26,22 @@ namespace api.Models
 
         //[DataMember(Name = "firstName")]
         [JsonProperty("firstName")]
+        [Required]
         public string FIRST_NAME { get; set; }
 
         //[DataMember(Name = "lastName")]
         [JsonProperty("lastName")]
+        [Required]
         public string LAST_NAME { get; set; }
 
         //[DataMember(Name = "dateOfBirth")]
         [JsonProperty("dateOfBirth")]
+        [Required]
         public System.DateTime DATE_OF_BIRTH { get; set; }
 
         //[DataMember(Name = "addressLineOne")]
         [JsonProperty("addressLineOne")]
+        [Required]
         public string ADDRESS_LINE_1 { get; set; }
 
         //[DataMember(Name = "addressLineTwo")]
@@ -46,17 +50,21 @@ namespace api.Models
 
         //[DataMember(Name = "postCode")]
         [JsonProperty("postCode")]
+        [Required]
         public string POSTCODE { get; set; }
 
         //[DataMember(Name = "phoneNumber")]
         [JsonProperty("phoneNumber")]
+        [Required]
         public string PHONE_NUMBER { get; set; }
 
         //[DataMember(Name = "emailAddress")]
         [JsonProperty("emailAddress")]
+        [Required]
         public string EMAIL { get; set; }
 
         [JsonProperty("password")]
+        [Required]
         public string PASSWORD { get; set; }
     }
 }

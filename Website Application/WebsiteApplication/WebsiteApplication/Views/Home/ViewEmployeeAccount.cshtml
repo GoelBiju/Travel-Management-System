@@ -82,8 +82,14 @@
                 <th>Role</th>
             </tr>
             @{ 
-                
-                foreach
+
+                List<WebsiteApplication.Models.employee> employees = new List<WebsiteApplication.Models.employee>();
+                WebsiteApplication.Controllers.EmployeeController employeeController = new WebsiteApplication.Controllers.EmployeeController();
+                employees = employeeController.GetEmployeesAsync();
+                foreach (WebsiteApplication.Models.employee in employees)
+                {
+                    <th>WebsiteApplication.Models.employee.</th>
+                }
             }
         </table>
     </div>

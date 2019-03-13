@@ -366,3 +366,8 @@ C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\We
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\Microsoft.AI.Web.xml
+C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\System.Net.Http.dll
+C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\System.Security.Cryptography.Algorithms.dll
+C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\System.Security.Cryptography.Encoding.dll
+C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\System.Security.Cryptography.Primitives.dll
+C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Website Application\WebsiteApplication\WebsiteApplication\bin\System.Security.Cryptography.X509Certificates.dll

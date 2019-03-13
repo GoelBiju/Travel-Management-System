@@ -60,5 +60,12 @@ namespace WebsiteApplication.Controllers
 
             return View();
         }
+
+        public ActionResult UpdateCoaches()
+        {
+            ViewBag.Message = "Update coaches";
+
+            return View();
+        }
     }
 }

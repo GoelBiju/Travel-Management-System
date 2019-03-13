@@ -11,9 +11,7 @@ namespace api.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class COACH
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,22 +20,13 @@ namespace api.Models
             this.SHIFTS = new HashSet<SHIFT>();
         }
     
-        [DataMember(Name = "coachId")]
         public decimal COACH_ID { get; set; }
-
-        [DataMember(Name = "coachMake")]
         public string COACH_MAKE { get; set; }
-
-        [DataMember(Name = "coachModel")]
         public string COACH_MODEL { get; set; }
-
-        [DataMember(Name = "registrationPlate")]
         public string REGISTRATION_PLATE { get; set; }
-
-        [DataMember(Name = "capacity")]
         public decimal CAPACITY { get; set; }
+        public string STATUS { get; set; }
     
-        [DataMember(Name = "shifts")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFT> SHIFTS { get; set; }
     }

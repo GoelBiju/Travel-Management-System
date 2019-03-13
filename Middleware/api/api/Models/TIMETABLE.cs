@@ -11,30 +11,16 @@ namespace api.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class TIMETABLE
     {
-        [DataMember(Name = "routeId")]
         public string ROUTE_ID { get; set; }
-
-        [DataMember(Name = "stationId")]
         public Nullable<decimal> STATION_ID { get; set; }
-
-        [DataMember(Name = "departureTime")]
         public System.DateTime DEPARTURE_TIME { get; set; }
-
-        [DataMember(Name = "arrivalTime")]
         public System.DateTime ARRIVAL_TIME { get; set; }
-
-        [DataMember(Name = "dayOfJourney")]
         public string DAY_OF_JOURNEY { get; set; }
     
-        [DataMember(Name = "route")]
         public virtual ROUTE ROUTE { get; set; }
-
-        [DataMember(Name = "station")]
         public virtual STATION STATION { get; set; }
     }
 }

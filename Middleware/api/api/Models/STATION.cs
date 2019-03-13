@@ -11,9 +11,7 @@ namespace api.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class STATION
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,13 +20,9 @@ namespace api.Models
             this.TIMETABLES = new HashSet<TIMETABLE>();
         }
     
-        [DataMember(Name = "stationId")]
         public decimal STATION_ID { get; set; }
-
-        [DataMember(Name = "stationName")]
         public string STATION_NAME { get; set; }
     
-        [DataMember(Name = "timetable")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIMETABLE> TIMETABLES { get; set; }
     }

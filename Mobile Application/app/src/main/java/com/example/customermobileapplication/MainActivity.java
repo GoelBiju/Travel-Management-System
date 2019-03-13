@@ -108,12 +108,16 @@ public class MainActivity extends AppCompatActivity {
      * This function will call the API to pass the username and password details.
      */
     public void processLogin() {
-        //Toast.makeText(this, getResources().getString(R.string.implement), Toast.LENGTH_SHORT).show();
 
-        // TODO: Validate input from the user.
+        // Emsure that the email address and the password are not empty..
+        if (!editTextEmailAddress.getText().toString().equals("") &&
+                !editTextEmailAddress.getText().toString().equals("")) {
 
-        // Send the login POST request to the Web API.
-        sendCustomerLogin();
+            // TODO: Validate the email address e.g. with regex to ensure that
+
+            // Send the login POST request to the Web API.
+            sendCustomerLogin();
+        }
     }
 
 

@@ -63,10 +63,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private RequestQueue requestQueue;
 
 
-    /**
-     *
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -203,9 +199,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         String dateOfBirth = editTextDateOfBirth.getText().toString();
         String addressLineOne = editTextAddressLineOne.getText().toString();
         String addressLineTwo = editTextAddressLineTwo.getText().toString();
-        String postCode = editTextPostCode.getText().toString();
+        String postCode = editTextPostCode.getText().toString().toUpperCase();
         String phoneNumber = editTextPhoneNumber.getText().toString();
-        final String emailAddress = editTextEmailAddress.getText().toString();
+        String emailAddress = editTextEmailAddress.getText().toString();
         String password = editTextPassword.getText().toString();
 
         // Create the JSONObject to send in the POST request body.

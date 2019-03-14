@@ -18,11 +18,11 @@ namespace api.Models
         public string FIRST_NAME { get; set; }
         public string LAST_NAME { get; set; }
         public System.DateTime DATE_OF_BIRTH { get; set; }
-        public string ADDRESS_LINE_1 { get; set; }
-        public string ADDRESS_LINE_2 { get; set; }
+        public string ADDRESS_LINE_ONE { get; set; }
+        public string ADDRESS_LINE_TWO { get; set; }
         public string POSTCODE { get; set; }
-        public string PHONE_NUMBER { get; set; }
-        public string EMAIL { get; set; }
-        public string PASSWORD { get; set; }
+        public string MOBILE_NUMBER { get; set; }
+        public string EMAIL_ADDRESS { get; set; }
+        public string CUSTOMER_PASSWORD { get; set; }
     }
 }

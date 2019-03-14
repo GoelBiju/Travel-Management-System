@@ -33,11 +33,11 @@ namespace api.Controllers
                                 FirstName = c.FIRST_NAME,
                                 LastName = c.LAST_NAME,
                                 DateOfBirth = c.DATE_OF_BIRTH,
-                                AddressLineOne = c.ADDRESS_LINE_1,
-                                AddressLineTwo = c.ADDRESS_LINE_2,
+                                AddressLineOne = c.ADDRESS_LINE_ONE,
+                                AddressLineTwo = c.ADDRESS_LINE_TWO,
                                 PostCode = c.POSTCODE,
-                                PhoneNumber = c.PHONE_NUMBER,
-                                EmailAddress = c.EMAIL
+                                PhoneNumber = c.MOBILE_NUMBER,
+                                EmailAddress = c.EMAIL_ADDRESS
                             };
 
             return customers;
@@ -58,11 +58,11 @@ namespace api.Controllers
                     FirstName = c.FIRST_NAME,
                     LastName = c.LAST_NAME,
                     DateOfBirth = c.DATE_OF_BIRTH,
-                    AddressLineOne = c.ADDRESS_LINE_1,
-                    AddressLineTwo = c.ADDRESS_LINE_2,
+                    AddressLineOne = c.ADDRESS_LINE_ONE,
+                    AddressLineTwo = c.ADDRESS_LINE_TWO,
                     PostCode = c.POSTCODE,
-                    PhoneNumber = c.PHONE_NUMBER,
-                    EmailAddress = c.EMAIL
+                    PhoneNumber = c.MOBILE_NUMBER,
+                    EmailAddress = c.EMAIL_ADDRESS
                 }).SingleOrDefaultAsync(c => c.CustomerId == id);
 
             // If the retrieved customer is null then return a 401 Not Found.
@@ -124,7 +124,7 @@ namespace api.Controllers
 
             // Check if the customer already exists under the email address provided, 
             // if so return a Conflict HTTP response code.
-            if (CustomerExists(cUSTOMER.EMAIL))
+            if (CustomerExists(cUSTOMER.EMAIL_ADDRESS))
             {
                 return Conflict();
             } 
@@ -145,7 +145,7 @@ namespace api.Controllers
             }
 
             // Find the added user by the email address provided by the client.
-            CUSTOMER addedCustomer = db.CUSTOMERS.SingleOrDefault(customer => customer.EMAIL == cUSTOMER.EMAIL);
+            CUSTOMER addedCustomer = db.CUSTOMERS.SingleOrDefault(customer => customer.EMAIL_ADDRESS == cUSTOMER.EMAIL_ADDRESS);
             if (addedCustomer == null)
             {
                 //throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -181,9 +181,9 @@ namespace api.Controllers
             if (CustomerExists(loginDetails.emailAddress))
             {
                 // Get the customer record from the database that matches the email address provided.
-                CUSTOMER dbCustomer = db.CUSTOMERS.SingleOrDefault(customer => customer.EMAIL == loginDetails.emailAddress);
+                CUSTOMER dbCustomer = db.CUSTOMERS.SingleOrDefault(customer => customer.EMAIL_ADDRESS == loginDetails.emailAddress);
 
-                if (dbCustomer != null && loginDetails.emailAddress.Equals(dbCustomer.EMAIL))
+                if (dbCustomer != null && loginDetails.emailAddress.Equals(dbCustomer.EMAIL_ADDRESS))
                 {
                     // TODO: Get the password hash and salt and ensure that the attempted password matches.
                     //       Implement SHA256/SHA512 hasing with a password and salt which is stored in the database.
@@ -191,7 +191,7 @@ namespace api.Controllers
 
                     // TODO: Temporarily just checking that the passwords match for now; this needs to be replaced with 
                     //       hasing/security functionality.
-                    if (loginDetails.password.Equals(dbCustomer.PASSWORD))
+                    if (loginDetails.password.Equals(dbCustomer.CUSTOMER_PASSWORD))
                     {
                         // Return the user details as with the Customer Data Transfer Object.
                         CustomerDTO customerDetails = new CustomerDTO()
@@ -200,11 +200,11 @@ namespace api.Controllers
                             FirstName = dbCustomer.FIRST_NAME,
                             LastName = dbCustomer.LAST_NAME,
                             DateOfBirth = dbCustomer.DATE_OF_BIRTH,
-                            AddressLineOne = dbCustomer.ADDRESS_LINE_1,
-                            AddressLineTwo = dbCustomer.ADDRESS_LINE_2,
+                            AddressLineOne = dbCustomer.ADDRESS_LINE_ONE,
+                            AddressLineTwo = dbCustomer.ADDRESS_LINE_TWO,
                             PostCode = dbCustomer.POSTCODE,
-                            PhoneNumber = dbCustomer.PHONE_NUMBER,
-                            EmailAddress = dbCustomer.EMAIL
+                            PhoneNumber = dbCustomer.MOBILE_NUMBER,
+                            EmailAddress = dbCustomer.EMAIL_ADDRESS
                         };
 
                         return Ok(customerDetails);
@@ -281,7 +281,7 @@ namespace api.Controllers
         /// <returns></returns>
         private bool CustomerExists(string emailAddress)
         {
-            return db.CUSTOMERS.Count(e => e.EMAIL == emailAddress) > 0;
+            return db.CUSTOMERS.Count(e => e.EMAIL_ADDRESS == emailAddress) > 0;
         }
     }
 }

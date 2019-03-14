@@ -24,12 +24,12 @@
           <Property Name="FIRST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
           <Property Name="LAST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
           <Property Name="DATE_OF_BIRTH" Type="date" Nullable="false" />
-          <Property Name="ADDRESS_LINE_1" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="ADDRESS_LINE_2" Type="varchar2" MaxLength="50" />
+          <Property Name="ADDRESS_LINE_ONE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="ADDRESS_LINE_TWO" Type="varchar2" MaxLength="50" />
           <Property Name="POSTCODE" Type="varchar2" MaxLength="8" Nullable="false" />
-          <Property Name="PHONE_NUMBER" Type="varchar2" MaxLength="12" />
-          <Property Name="EMAIL" Type="varchar2" MaxLength="62" Nullable="false" />
-          <Property Name="PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
+          <Property Name="MOBILE_NUMBER" Type="varchar2" MaxLength="12" />
+          <Property Name="EMAIL_ADDRESS" Type="varchar2" MaxLength="62" Nullable="false" />
+          <Property Name="CUSTOMER_PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
         </EntityType>
         <EntityType Name="EMPLOYEES">
           <Key>
@@ -210,12 +210,12 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
           <Property Name="FIRST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LAST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DATE_OF_BIRTH" Type="DateTime" Nullable="false" />
-          <Property Name="ADDRESS_LINE_1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ADDRESS_LINE_2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS_LINE_ONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADDRESS_LINE_TWO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="POSTCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PHONE_NUMBER" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="EMAIL" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PASSWORD" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MOBILE_NUMBER" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTOMER_PASSWORD" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
@@ -396,12 +396,12 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
                 <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
                 <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
                 <ScalarProperty Name="DATE_OF_BIRTH" ColumnName="DATE_OF_BIRTH" />
-                <ScalarProperty Name="ADDRESS_LINE_1" ColumnName="ADDRESS_LINE_1" />
-                <ScalarProperty Name="ADDRESS_LINE_2" ColumnName="ADDRESS_LINE_2" />
+                <ScalarProperty Name="ADDRESS_LINE_ONE" ColumnName="ADDRESS_LINE_ONE" />
+                <ScalarProperty Name="ADDRESS_LINE_TWO" ColumnName="ADDRESS_LINE_TWO" />
                 <ScalarProperty Name="POSTCODE" ColumnName="POSTCODE" />
-                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
-                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="MOBILE_NUMBER" ColumnName="MOBILE_NUMBER" />
+                <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
+                <ScalarProperty Name="CUSTOMER_PASSWORD" ColumnName="CUSTOMER_PASSWORD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

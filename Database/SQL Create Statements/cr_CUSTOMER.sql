@@ -5,7 +5,7 @@
         
         - customer_id;
         
-        - email;
+        - email_address;
         
         - customer_password;
         
@@ -13,23 +13,23 @@
         
         - last_name;
         
-        = date_of_birth;
+        - date_of_birth;
         
-        = address_line;
+        - address_line_one;
         
-        - city;
+        - address_line_two;
         
         - postcode;
         
-        - customer_phone_number;
+        - mobile_number;
 
         
 
-    Changes 0.2:
+    Changes 0.3:
         
         * Changed password attribute to customer_password
         
-        * Changed phone_number to customer_phone_number
+        * Changed phone_number to mobile_number
         
         * Renamed address_line_1 to address_line_one
         
@@ -75,18 +75,17 @@ CREATE TABLE customers(
             CHECK (REGEXP_LIKE(address_line_one, '^[A-Za-z0-9 -]+$')),
     
     address_line_two VARCHAR2(50)
-        CONSTRAINT customers_address_line_two_nn NOT NULL
         CONSTRAINT customers_address_line_two_chk 
             CHECK (REGEXP_LIKE(address_line_two, '^[A-Za-z0-9 -]+$')),
     
     postcode VARCHAR2(8) 
         CONSTRAINT customers_postcode_nn NOT NULL
         CONSTRAINT customers_postcode_chk
-            CHECK (REGEXP_LIKE(postcode, '^[A-Z0-9]+$')),
+            CHECK (REGEXP_LIKE(postcode, '^[A-Z0-9 ]+$')),
     
     mobile_number VARCHAR2(11)
-        CONSTRAINT customers_phone_number_nn NOT NULL
-        CONSTRAINT customers_phone_number_chk
+        CONSTRAINT customers_mobile_number_nn NOT NULL
+        CONSTRAINT customers_mobile_number_chk
             CHECK (REGEXP_LIKE(mobile_number, '^07[0-9]{9}$'))
 );
 

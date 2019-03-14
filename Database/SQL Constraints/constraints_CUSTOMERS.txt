@@ -1,9 +1,0 @@
-CONSTRAINT password_regexp
-CHECK (REGEXP_LIKE(password, '[a-zA-Z]\w{8,16}'));
-
-
-CONSTRAINT email_regexp
-CHECK (email LIKE '%_@__%.__%');
-
-CONSTRAINT postcode_regexp
-CHECK (REGEXP_LIKE(postcode, '[A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]?'));

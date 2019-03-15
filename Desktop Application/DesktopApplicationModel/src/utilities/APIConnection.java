@@ -17,6 +17,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
 
 /**
  *
@@ -24,7 +26,8 @@ import java.util.Arrays;
  */
 public class APIConnection {
     
- 
+ public static ObjectMapper mapper = new ObjectMapper().
+	configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
     
     public static Object[] GetData(String endPoint, Class tableClass)
     {
@@ -32,18 +35,8 @@ public class APIConnection {
         try 
         {
 		URL url = new URL("http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api" + "/" + endPoint);
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Accept", "application/json");
-
-		if (conn.getResponseCode() != 200) {
-			throw new RuntimeException("Failed : HTTP error code : "
-					+ conn.getResponseCode());
-		}
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-			(conn.getInputStream())));
-
+		
+		object = (Object[]) mapper.readValue(url, tableClass);
 	} 
         catch (IOException e)
         {

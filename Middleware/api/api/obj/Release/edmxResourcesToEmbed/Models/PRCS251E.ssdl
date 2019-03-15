@@ -9,6 +9,7 @@
     <Property Name="COACH_MODEL" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="REGISTRATION_PLATE" Type="varchar2" MaxLength="8" Nullable="false" />
     <Property Name="CAPACITY" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="STATUS" Type="varchar2" MaxLength="12" Nullable="false" />
   </EntityType>
   <EntityType Name="CUSTOMERS">
     <Key>
@@ -18,12 +19,12 @@
     <Property Name="FIRST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="LAST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="DATE_OF_BIRTH" Type="date" Nullable="false" />
-    <Property Name="ADDRESS_LINE_1" Type="varchar2" MaxLength="50" Nullable="false" />
-    <Property Name="ADDRESS_LINE_2" Type="varchar2" MaxLength="50" />
+    <Property Name="ADDRESS_LINE_ONE" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="ADDRESS_LINE_TWO" Type="varchar2" MaxLength="50" />
     <Property Name="POSTCODE" Type="varchar2" MaxLength="8" Nullable="false" />
-    <Property Name="PHONE_NUMBER" Type="varchar2" MaxLength="12" />
-    <Property Name="EMAIL" Type="varchar2" MaxLength="62" Nullable="false" />
-    <Property Name="PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
+    <Property Name="MOBILE_NUMBER" Type="varchar2" MaxLength="12" />
+    <Property Name="EMAIL_ADDRESS" Type="varchar2" MaxLength="62" Nullable="false" />
+    <Property Name="CUSTOMER_PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
   </EntityType>
   <EntityType Name="EMPLOYEES">
     <Key>

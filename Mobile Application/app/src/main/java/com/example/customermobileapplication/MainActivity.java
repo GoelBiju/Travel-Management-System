@@ -51,10 +51,6 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
 
 
-    /**
-     *
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,12 +107,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Emsure that the email address and the password are not empty..
         if (!editTextEmailAddress.getText().toString().equals("") &&
-                !editTextEmailAddress.getText().toString().equals("")) {
+                !editTextPassword.getText().toString().equals("")) {
 
-            // TODO: Validate the email address e.g. with regex to ensure that
+            // TODO: Validate the email address e.g. with regex to ensure that it conforms.
+
 
             // Send the login POST request to the Web API.
             sendCustomerLogin();
+        } else {
+            Toast.makeText(getApplicationContext(), "The email address and/or password cannot be empty.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -12,14 +12,16 @@ namespace WebsiteApplication.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            employee employee = new employee();
+            Employee employee = new Employee();
+            Console.WriteLine(employee.id);
+
+            ViewBag.Message(employee);
             return View();
         }
 
         // GET: Employee/Details/5
         public ActionResult Details(int id)
         {
-            employee employee = new employee();
             return View();
         }
 
@@ -58,7 +60,6 @@ namespace WebsiteApplication.Controllers
             try
             {
                 // TODO: Add update logic here
-                employee employee = new employee();
                 return RedirectToAction("Index");
             }
             catch

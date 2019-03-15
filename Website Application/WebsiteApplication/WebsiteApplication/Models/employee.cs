@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebsiteApplication.Models
 {
-    public class employee
+    public class Employee
     {
         public string id { get; set; }
         public string firstName { get; set; }
@@ -13,7 +13,7 @@ namespace WebsiteApplication.Models
         public string jobRole { get; set; }
         public string password { get; set; }
 
-        public void Employee()
+        public Employee()
         {
             id = "1";
             firstName = "Default";

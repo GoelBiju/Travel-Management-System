@@ -13,6 +13,16 @@ namespace WebsiteApplication.Models
         public string jobRole { get; set; }
         public string password { get; set; }
 
+        public void Employee()
+        {
+            id = "1";
+            firstName = "Default";
+            lastName = "Name";
+            jobRole = "Job";
+            password = "password1";
+
+        }
+
         public string GetFirstName()
         {
             return firstName;

@@ -2,38 +2,91 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Threading.Tasks;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
+using System.Web.Mvc;
 using WebsiteApplication.Models;
 
 namespace WebsiteApplication.Controllers
 {
-    public class EmployeeController
+    public class EmployeeController : Controller
     {
-        public static async Task RunAsync(HttpClient client)
+        // GET: Employee
+        public ActionResult Index()
         {
-            client.BaseAddress = new Uri("http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-
+            employee employee = new employee();
+            return View();
         }
 
-        public static async Task<HttpStatusCode> GetAllEmployees(HttpClient client, List<employee> employees)
+        // GET: Employee/Details/5
+        public ActionResult Details(int id)
         {
-            HttpResponseMessage response = await client.GetAsync("employees");
-            if (response.IsSuccessStatusCode)
-            {
-                var JsonString = await response.Content.ReadAsStringAsync();
-                employees = JsonConvert.DeserializeObject<List<employee>>(JsonString);
-                
-            }
-            return response.StatusCode;
+            employee employee = new employee();
+            return View();
+        }
 
-           
+        // GET: Employee/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Employee/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Employee/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: Employee/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                employee employee = new employee();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Employee/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Employee/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

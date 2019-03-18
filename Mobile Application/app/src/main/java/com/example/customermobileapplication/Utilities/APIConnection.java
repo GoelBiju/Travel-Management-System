@@ -10,8 +10,10 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,13 +43,14 @@ public class APIConnection {
      * @param resourceName
      * @return
      */
-    public APIResponse getSingleApiRequest(String resourceName) {
+    public void getSingleApiRequest(String resourceName, final VolleyCallback callback) {
 
         //
         final APIResponse getResponse = new APIResponse();
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET,
                 this.API_BASE_URL + resourceName, null,
+
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -62,10 +65,12 @@ public class APIConnection {
 
                         //
                         getResponse.addResponseItem(response);
-                    }
-                },
 
-                new Response.ErrorListener() {
+                        //
+                        callback.onSuccess(getResponse);
+                    }
+
+                }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -87,16 +92,79 @@ public class APIConnection {
                                 e.printStackTrace();
                             }
                         }
+
+                        //
+                        callback.onFailure(getResponse);
                     }
                 });
 
         //
         queueSingleton.addToRequestQueue(getRequest);
+    }
 
-        // TODO: Gson GET response object?
+
+    public void getManyApiRequest(String resourceName, final VolleyCallback callback) {
 
         //
-        return getResponse;
+        final APIResponse getResponse = new APIResponse();
+
+        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET,
+                this.API_BASE_URL + resourceName, null,
+
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        //
+                        getResponse.setRequestSuccessful(true);
+
+                        //
+                        getResponse.setResponseStatusCode(HttpURLConnection.HTTP_OK);
+
+                        //
+                        for (int i=0; i < response.length(); i++) {
+                            try {
+                                getResponse.addResponseItem(response.getJSONObject(i));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //
+                        callback.onSuccess(getResponse);
+                    }
+
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                //
+                getResponse.setRequestSuccessful(false);
+
+                //
+                getResponse.setResponseStatusCode(error.networkResponse.statusCode);
+
+                //
+                if (error.networkResponse.data != null) {
+                    JSONObject jsonErrorObject;
+                    try {
+                        jsonErrorObject = new JSONObject(new String(error.networkResponse.data));
+                        Log.d("Response", jsonErrorObject.toString());
+                        getResponse.addResponseItem(jsonErrorObject);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //
+                callback.onFailure(getResponse);
+            }
+        });
+
+        //
+        queueSingleton.addToRequestQueue(getRequest);
     }
 
 
@@ -114,6 +182,7 @@ public class APIConnection {
         // Create the JsonObjectRequest.
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST,
                 this.API_BASE_URL + resourceName, postData,
+
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -133,6 +202,7 @@ public class APIConnection {
                         callback.onSuccess(postResponse);
 
                     }
+
                 }, new Response.ErrorListener() {
 
             @Override
@@ -146,16 +216,15 @@ public class APIConnection {
                 postResponse.setResponseStatusCode(error.networkResponse.statusCode);
 
                 //
-                // Log.d("Response", error.networkResponse.data.toString());
-
-                JSONObject jsonErrorObject;
-                try {
-                    jsonErrorObject = new JSONObject(new String(error.networkResponse.data));
-                    Log.d("Response", jsonErrorObject.toString());
-                    postResponse.addResponseItem(jsonErrorObject);
-                    //Log.d("Response", postResponse.getResponse().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (error.networkResponse.data != null) {
+                    JSONObject jsonErrorObject;
+                    try {
+                        jsonErrorObject = new JSONObject(new String(error.networkResponse.data));
+                        Log.d("Response", jsonErrorObject.toString());
+                        postResponse.addResponseItem(jsonErrorObject);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 // Callback to onFailure.
@@ -165,12 +234,5 @@ public class APIConnection {
 
         // Add the requeqst to the request queue in the RequestQueueSingleton.
         queueSingleton.addToRequestQueue(postRequest);
-
-        // TODO: Process the Gson object (?)
-
-        //Log.d("New.Response", postResponse.getResponse().toString());
-
-        // Return the APIResponse object.
-        //return postResponse;
     }
 }

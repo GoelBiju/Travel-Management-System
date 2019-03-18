@@ -20,8 +20,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.customermobileapplication.Model.Customer;
 import com.example.customermobileapplication.Utilities.APIConnection;
 import com.example.customermobileapplication.Utilities.APIResponse;
+import com.example.customermobileapplication.Utilities.VolleyCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void sendCustomerLogin() {
 
-        //
+        // TODO: Map this POST data to a Customer object.
         String emailAddress = editTextEmailAddress.getText().toString();
         String password = editTextPassword.getText().toString();
 
@@ -146,67 +148,35 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("Response", postData.toString());
 
-        // Show progress dialog.
+        // TODO: Show progress dialog in login method.
         progressDialog.setMessage("Logging In...");
         progressDialog.show();
 
-        // Create the request.
-        APIResponse loginResponse = apiConnection.postSingleApiRequest("customers/login", postData);
-        Toast.makeText(getApplicationContext(),  "Status Code: " + Integer.toString(loginResponse.getResponseStatusCode())
-                + ", Message: " + loginResponse.getResponse() + ".", Toast.LENGTH_LONG).show();
 
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, CUSTOMERS_LOGIN_API_URL, postData,
-//                new Response.Listener<JSONObject>() {
-//
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        Log.d("Response", response.toString());
-//
-//                        try {
-//                            Log.d("Response", "Received account id:" + response.getInt("customerId"));
-//                            Toast.makeText(getApplicationContext(), "Successfully logged in as " + response.getString("emailAddress") + ".",
-//                                    Toast.LENGTH_SHORT).show();
-//
-//                            // Hide the dialog box.
-//                            progressDialog.hide();
-//
-//                            // TODO: Ensure we can map the JSONObject to the Customer class.
-//                            //       This should be performed in the APIConnection class.
-//                            // Start the intent for the main page and pass in the received user object.
-//                            Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
-//                            startActivity(startIntent);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.d("Error.Response", error.toString());
-//
-//                progressDialog.hide();
-//
-//                // Get the network response.
-//                NetworkResponse networkResponse = error.networkResponse;
-//
-//                if (networkResponse != null && networkResponse.data != null) {
-//                    String jsonError = null;
-//                    try {
-//                        jsonError = new JSONObject(new String(networkResponse.data)).toString();
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                    Toast.makeText(getApplicationContext(),  "Status Code: " + Integer.toString(networkResponse.statusCode)
-//                            + ", Message: " + jsonError + ".", Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "An error occurred but unable to get response status/message.", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//
-//        // POST the JSON data.
-//        requestQueue.add(jsonObjectRequest);
+        // Send a login request.
+        apiConnection.postSingleApiRequest("customers/login", postData, new VolleyCallback() {
+
+            @Override
+            public void onSuccess(APIResponse response) {
+
+                Log.d("Response", "Request was successful.");
+
+                progressDialog.hide();
+
+                Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(startIntent);
+            }
+
+            @Override
+            public void onFailure(APIResponse response) {
+
+                Log.d("Response", "Request was unsuccessful.");
+
+                progressDialog.hide();
+
+                Toast.makeText(getApplicationContext(),  "Status Code: " + Integer.toString(response.getResponseStatusCode())
+                        + ", Message: " + response.getResponse() + ".", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class APIResponse {
 
     // The resource that was called.
-    private String resourceName;
+    // private String resourceName;
 
     // If the request was completed without error.
     private boolean requestSuccessful;
@@ -22,19 +22,19 @@ public class APIResponse {
 
 
     public APIResponse() {
-        this.resourceName = "";
+        //this.resourceName = "";
         this.requestSuccessful = false;
         this.responseStatusCode = -1;
         this.responseList = new ArrayList<>();
     }
 
-    public String getResourceName() {
-        return resourceName;
-    }
+    //public String getResourceName() {
+    //    return resourceName;
+    //}
 
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
-    }
+    //public void setResourceName(String resourceName) {
+    //    this.resourceName = resourceName;
+    //}
 
     public boolean isRequestSuccessful() {
         return requestSuccessful;

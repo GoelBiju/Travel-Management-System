@@ -99,13 +99,14 @@ public class APIConnection {
         return getResponse;
     }
 
+
     /**
      *
      * @param resourceName
      * @param postData
      * @return
      */
-    public APIResponse postSingleApiRequest(String resourceName, JSONObject postData) {
+    public void postSingleApiRequest(String resourceName, JSONObject postData, final VolleyCallback callback) {
 
         // Initialise an APIResponse.
         final APIResponse postResponse = new APIResponse();
@@ -127,6 +128,10 @@ public class APIConnection {
 
                         // Store response in the APIResponse object.
                         postResponse.addResponseItem(response);
+
+                        // Callback function with the response.
+                        callback.onSuccess(postResponse);
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -141,7 +146,8 @@ public class APIConnection {
                 postResponse.setResponseStatusCode(error.networkResponse.statusCode);
 
                 //
-                Log.d("Response", error.networkResponse.data.toString());
+                // Log.d("Response", error.networkResponse.data.toString());
+
                 JSONObject jsonErrorObject;
                 try {
                     jsonErrorObject = new JSONObject(new String(error.networkResponse.data));
@@ -151,6 +157,9 @@ public class APIConnection {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                // Callback to onFailure.
+                callback.onFailure(postResponse);
             }
         });
 
@@ -159,9 +168,9 @@ public class APIConnection {
 
         // TODO: Process the Gson object (?)
 
-        Log.d("New.Response", postResponse.getResponse().toString());
+        //Log.d("New.Response", postResponse.getResponse().toString());
 
         // Return the APIResponse object.
-        return postResponse;
+        //return postResponse;
     }
 }

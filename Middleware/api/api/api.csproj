@@ -214,6 +214,7 @@
     </Compile>
     <Compile Include="Models\DTO\CustomerDTO.cs" />
     <Compile Include="Models\BindingModels\CustomerLoginBindingModel.cs" />
+    <Compile Include="Models\DTO\EmployeeDTO.cs" />
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>

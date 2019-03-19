@@ -6,33 +6,62 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [RoutePrefix("api/employees")]
     public class EmployeesController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Employees
-        public IQueryable<EMPLOYEE> GetEMPLOYEES()
+        [HttpGet]
+        [Route("")]
+        public IQueryable<EmployeeDTO> GetEMPLOYEES()
         {
-            return db.EMPLOYEES;
+            var employees = from e in db.EMPLOYEES
+                            select new EmployeeDTO()
+                            {
+                                EmployeeId = e.EMPLOYEE_ID,
+                                FirstName = e.FIRST_NAME,
+                                LastName = e.LAST_NAME,
+                                JobRole = e.JOB_ROLE,
+                                Shifts = e.SHIFTS
+                            };
+
+            return employees;
         }
 
         // GET: api/Employees/5
-        [ResponseType(typeof(EMPLOYEE))]
-        public IHttpActionResult GetEMPLOYEE(string id)
+        [HttpGet]
+        [Route("{id}", Name = "GetEmployeeDetailsById)")]
+        [ResponseType(typeof(EmployeeDTO))]
+        public async Task<IHttpActionResult> GetEMPLOYEE(string id)
         {
-            EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
-            if (eMPLOYEE == null)
+            //EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
+
+            var employee = await db.EMPLOYEES.Select(e =>
+                new EmployeeDTO()
+                {
+                    EmployeeId = e.EMPLOYEE_ID,
+                    FirstName = e.FIRST_NAME,
+                    LastName = e.LAST_NAME,
+                    JobRole = e.JOB_ROLE,
+                    Shifts = e.SHIFTS
+                }).SingleOrDefaultAsync(e => e.EmployeeId == id);
+
+            
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return Ok(eMPLOYEE);
+            return Ok(employee);
         }
 
         // PUT: api/Employees/5

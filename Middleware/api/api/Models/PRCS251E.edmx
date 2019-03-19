@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="COACHES">
           <Key>
             <PropertyRef Name="COACH_ID" />
@@ -186,7 +186,8 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             <End Role="TIMETABLES" EntitySet="TIMETABLES" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -199,23 +200,23 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
           <Property Name="COACH_MODEL" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="REGISTRATION_PLATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CAPACITY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STATUS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_COACH_ID_FK" FromRole="COACHES" ToRole="SHIFTS" />
-          <Property Name="STATUS" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CUSTOMER">
           <Key>
             <PropertyRef Name="CUSTOMER_ID" />
           </Key>
           <Property Name="CUSTOMER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTOMER_PASSWORD" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FIRST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LAST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DATE_OF_BIRTH" Type="DateTime" Nullable="false" />
           <Property Name="ADDRESS_LINE_ONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ADDRESS_LINE_TWO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="POSTCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MOBILE_NUMBER" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CUSTOMER_PASSWORD" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MOBILE_NUMBER" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
@@ -380,12 +381,12 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
           <EntitySetMapping Name="COACHES">
             <EntityTypeMapping TypeName="Model.COACH">
               <MappingFragment StoreEntitySet="COACHES">
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
                 <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
                 <ScalarProperty Name="COACH_MODEL" ColumnName="COACH_MODEL" />
                 <ScalarProperty Name="REGISTRATION_PLATE" ColumnName="REGISTRATION_PLATE" />
                 <ScalarProperty Name="CAPACITY" ColumnName="CAPACITY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -393,6 +394,8 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             <EntityTypeMapping TypeName="Model.CUSTOMER">
               <MappingFragment StoreEntitySet="CUSTOMERS">
                 <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
+                <ScalarProperty Name="CUSTOMER_PASSWORD" ColumnName="CUSTOMER_PASSWORD" />
                 <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
                 <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
                 <ScalarProperty Name="DATE_OF_BIRTH" ColumnName="DATE_OF_BIRTH" />
@@ -400,8 +403,6 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
                 <ScalarProperty Name="ADDRESS_LINE_TWO" ColumnName="ADDRESS_LINE_TWO" />
                 <ScalarProperty Name="POSTCODE" ColumnName="POSTCODE" />
                 <ScalarProperty Name="MOBILE_NUMBER" ColumnName="MOBILE_NUMBER" />
-                <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
-                <ScalarProperty Name="CUSTOMER_PASSWORD" ColumnName="CUSTOMER_PASSWORD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

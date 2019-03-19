@@ -292,6 +292,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="libman.json" />
     <EntityDeploy Include="Models\PRCS251E.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PRCS251E.Designer.cs</LastGenOutput>
@@ -299,7 +300,6 @@
     <Content Include="Models\PRCS251E.edmx.diagram">
       <DependentUpon>PRCS251E.edmx</DependentUpon>
     </Content>
-    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

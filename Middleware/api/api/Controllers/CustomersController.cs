@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -47,12 +45,12 @@ namespace api.Controllers
 
         // GET: api/Customers/5
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{id:int}", Name = "GetCustomerDetailsById")]
         [ResponseType(typeof(CustomerDTO))]
         public async Task<IHttpActionResult> GetCUSTOMER(decimal id)
         {
             //CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
-            //
+            // Select the CUSTOMER object from the database model and create a CustomerDTO object from it.
             var customer = await db.CUSTOMERS.Select(c =>
                 new CustomerDTO()
                 {
@@ -118,7 +116,7 @@ namespace api.Controllers
         // POST: api/Customers
         // Used to CREATE a new customer and add them to our database.
         [HttpPost]
-        [Route("", Name = "PostCUSTOMER")]
+        [Route("")]
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
@@ -174,8 +172,7 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            // Return the added customer's ID and object.
-            //return CreatedAtRoute("DefaultApi", new { id = addedCustomer.CUSTOMER_ID }, addedCustomer);
+            // Create a CustomerDTO object from the CUSTOMER object to send back in response.
             CustomerDTO customerDetails = new CustomerDTO()
             {
                 CustomerId = (int)addedCustomer.CUSTOMER_ID,
@@ -189,7 +186,7 @@ namespace api.Controllers
                 EmailAddress = addedCustomer.EMAIL_ADDRESS
             };
 
-            return CreatedAtRoute("PostCUSTOMER", new { id = customerDetails.CustomerId }, customerDetails);
+            return CreatedAtRoute("GetCustomerDetailsById", new { id = customerDetails.CustomerId }, customerDetails);
         }
 
 

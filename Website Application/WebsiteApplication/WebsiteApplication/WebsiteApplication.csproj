@@ -204,6 +204,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\LoginStyle.css" />
     <Content Include="Scripts\SideMenuDropdown.js" />
+    <Content Include="Scripts\UpdateCoachesHelp.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -4,12 +4,12 @@
     <EntitySetMapping Name="COACHES">
       <EntityTypeMapping TypeName="Model.COACH">
         <MappingFragment StoreEntitySet="COACHES">
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
           <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
           <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
           <ScalarProperty Name="COACH_MODEL" ColumnName="COACH_MODEL" />
           <ScalarProperty Name="REGISTRATION_PLATE" ColumnName="REGISTRATION_PLATE" />
           <ScalarProperty Name="CAPACITY" ColumnName="CAPACITY" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -17,6 +17,8 @@
       <EntityTypeMapping TypeName="Model.CUSTOMER">
         <MappingFragment StoreEntitySet="CUSTOMERS">
           <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+          <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
+          <ScalarProperty Name="CUSTOMER_PASSWORD" ColumnName="CUSTOMER_PASSWORD" />
           <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
           <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
           <ScalarProperty Name="DATE_OF_BIRTH" ColumnName="DATE_OF_BIRTH" />
@@ -24,8 +26,6 @@
           <ScalarProperty Name="ADDRESS_LINE_TWO" ColumnName="ADDRESS_LINE_TWO" />
           <ScalarProperty Name="POSTCODE" ColumnName="POSTCODE" />
           <ScalarProperty Name="MOBILE_NUMBER" ColumnName="MOBILE_NUMBER" />
-          <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
-          <ScalarProperty Name="CUSTOMER_PASSWORD" ColumnName="CUSTOMER_PASSWORD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

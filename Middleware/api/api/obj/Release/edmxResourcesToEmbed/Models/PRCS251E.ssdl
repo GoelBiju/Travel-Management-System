@@ -16,15 +16,15 @@
       <PropertyRef Name="CUSTOMER_ID" />
     </Key>
     <Property Name="CUSTOMER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EMAIL_ADDRESS" Type="varchar2" MaxLength="62" Nullable="false" />
+    <Property Name="CUSTOMER_PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
     <Property Name="FIRST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="LAST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="DATE_OF_BIRTH" Type="date" Nullable="false" />
     <Property Name="ADDRESS_LINE_ONE" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="ADDRESS_LINE_TWO" Type="varchar2" MaxLength="50" />
     <Property Name="POSTCODE" Type="varchar2" MaxLength="8" Nullable="false" />
-    <Property Name="MOBILE_NUMBER" Type="varchar2" MaxLength="12" />
-    <Property Name="EMAIL_ADDRESS" Type="varchar2" MaxLength="62" Nullable="false" />
-    <Property Name="CUSTOMER_PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
+    <Property Name="MOBILE_NUMBER" Type="varchar2" MaxLength="11" Nullable="false" />
   </EntityType>
   <EntityType Name="EMPLOYEES">
     <Key>

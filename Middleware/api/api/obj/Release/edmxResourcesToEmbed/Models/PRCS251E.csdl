@@ -9,23 +9,23 @@
     <Property Name="COACH_MODEL" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="REGISTRATION_PLATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CAPACITY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_COACH_ID_FK" FromRole="COACHES" ToRole="SHIFTS" />
-    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="CUSTOMER">
     <Key>
       <PropertyRef Name="CUSTOMER_ID" />
     </Key>
     <Property Name="CUSTOMER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CUSTOMER_PASSWORD" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="FIRST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="LAST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DATE_OF_BIRTH" Type="DateTime" Nullable="false" />
     <Property Name="ADDRESS_LINE_ONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ADDRESS_LINE_TWO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="POSTCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="MOBILE_NUMBER" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CUSTOMER_PASSWORD" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MOBILE_NUMBER" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="EMPLOYEE">
     <Key>

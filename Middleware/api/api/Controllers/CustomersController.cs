@@ -116,6 +116,7 @@ namespace api.Controllers
         // POST: api/Customers
         // Used to CREATE a new customer and add them to our database.
         [Route("")]
+        [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
             // Create customer object based on the registration details received.
@@ -132,7 +133,7 @@ namespace api.Controllers
                 POSTCODE = registrationDetails.postCode,
                 MOBILE_NUMBER = registrationDetails.mobileNumber
             };
-            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -143,7 +144,7 @@ namespace api.Controllers
             if (CustomerExists(customer.EMAIL_ADDRESS))
             {
                 return Conflict();
-            } 
+            }
 
             // Add the customer object to our database as a record.
             db.CUSTOMERS.Add(customer);
@@ -171,7 +172,21 @@ namespace api.Controllers
             }
 
             // Return the added customer's ID and object.
-            return CreatedAtRoute("DefaultApi", new { id = addedCustomer.CUSTOMER_ID }, addedCustomer);
+            //return CreatedAtRoute("DefaultApi", new { id = addedCustomer.CUSTOMER_ID }, addedCustomer);
+            CustomerDTO customerDetails = new CustomerDTO()
+            {
+                CustomerId = (int)addedCustomer.CUSTOMER_ID,
+                FirstName = addedCustomer.FIRST_NAME,
+                LastName = addedCustomer.LAST_NAME,
+                DateOfBirth = addedCustomer.DATE_OF_BIRTH,
+                AddressLineOne = addedCustomer.ADDRESS_LINE_ONE,
+                AddressLineTwo = addedCustomer.ADDRESS_LINE_TWO,
+                PostCode = addedCustomer.POSTCODE,
+                MobileNumber = addedCustomer.MOBILE_NUMBER,
+                EmailAddress = addedCustomer.EMAIL_ADDRESS
+            };
+
+            return CreatedAtRoute("DefaultApi", new { id = customerDetails.CustomerId }, customerDetails);
         }
 
 

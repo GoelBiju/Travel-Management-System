@@ -226,7 +226,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             postData.put("addressLineTwo", addressLineTwo);
             postData.put("mobileNumber", phoneNumber);
             postData.put("emailAddress", emailAddress);
-            postData.put("password", password);
+            postData.put("customerPassword", password);
 
         } catch (JSONException e) {
             e.printStackTrace();

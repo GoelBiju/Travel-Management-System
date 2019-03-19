@@ -30,8 +30,8 @@ namespace api.Models.DTO
         [JsonProperty("postCode")]
         public string PostCode { get; set; }
 
-        [JsonProperty("phoneNumber")]
-        public string PhoneNumber { get; set; }
+        [JsonProperty("mobileNumber")]
+        public string MobileNumber { get; set; }
 
         [JsonProperty("emailAddress")]
         public string EmailAddress { get; set; }

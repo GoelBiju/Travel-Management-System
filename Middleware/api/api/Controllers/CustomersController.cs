@@ -36,7 +36,7 @@ namespace api.Controllers
                                 AddressLineOne = c.ADDRESS_LINE_ONE,
                                 AddressLineTwo = c.ADDRESS_LINE_TWO,
                                 PostCode = c.POSTCODE,
-                                PhoneNumber = c.MOBILE_NUMBER,
+                                MobileNumber = c.MOBILE_NUMBER,
                                 EmailAddress = c.EMAIL_ADDRESS
                             };
 
@@ -61,7 +61,7 @@ namespace api.Controllers
                     AddressLineOne = c.ADDRESS_LINE_ONE,
                     AddressLineTwo = c.ADDRESS_LINE_TWO,
                     PostCode = c.POSTCODE,
-                    PhoneNumber = c.MOBILE_NUMBER,
+                    MobileNumber = c.MOBILE_NUMBER,
                     EmailAddress = c.EMAIL_ADDRESS
                 }).SingleOrDefaultAsync(c => c.CustomerId == id);
 
@@ -203,7 +203,7 @@ namespace api.Controllers
                             AddressLineOne = dbCustomer.ADDRESS_LINE_ONE,
                             AddressLineTwo = dbCustomer.ADDRESS_LINE_TWO,
                             PostCode = dbCustomer.POSTCODE,
-                            PhoneNumber = dbCustomer.MOBILE_NUMBER,
+                            MobileNumber = dbCustomer.MOBILE_NUMBER,
                             EmailAddress = dbCustomer.EMAIL_ADDRESS
                         };
 

@@ -23,7 +23,7 @@ namespace api.Controllers
         private Entities db = new Entities();
 
         // GET: api/Customers
-        //[HttpGet]
+        [HttpGet]
         [Route("")]
         public IQueryable<CustomerDTO> GetCUSTOMERS()
         {
@@ -46,6 +46,7 @@ namespace api.Controllers
 
 
         // GET: api/Customers/5
+        [HttpGet]
         [Route("{id:int}")]
         [ResponseType(typeof(CustomerDTO))]
         public async Task<IHttpActionResult> GetCUSTOMER(decimal id)
@@ -77,6 +78,7 @@ namespace api.Controllers
 
 
         // PUT: api/Customers/
+        [HttpPut]
         [Route("{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCUSTOMER(int id, CUSTOMER cUSTOMER)
@@ -115,7 +117,8 @@ namespace api.Controllers
 
         // POST: api/Customers
         // Used to CREATE a new customer and add them to our database.
-        [Route("")]
+        [HttpPost]
+        [Route("", Name = "PostCUSTOMER")]
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
@@ -186,12 +189,13 @@ namespace api.Controllers
                 EmailAddress = addedCustomer.EMAIL_ADDRESS
             };
 
-            return CreatedAtRoute("DefaultApi", new { id = customerDetails.CustomerId }, customerDetails);
+            return CreatedAtRoute("PostCUSTOMER", new { id = customerDetails.CustomerId }, customerDetails);
         }
 
 
         // POST: api/Customers/Login
         // Used to login a user to the customer application.
+        [HttpPost]
         [Route("Login")]
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMERLogin([FromBody] CustomerLoginBindingModel loginDetails)
@@ -270,6 +274,7 @@ namespace api.Controllers
 
 
         // DELETE: api/Customers/5
+        [HttpDelete]
         [Route("{id:int}")]
         [ResponseType(typeof(CUSTOMER))]
         public IHttpActionResult DeleteCUSTOMER(decimal id)

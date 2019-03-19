@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.BindingModels;
 using api.Models.DTO;
 
 
@@ -115,8 +116,23 @@ namespace api.Controllers
         // POST: api/Customers
         // Used to CREATE a new customer and add them to our database.
         [Route("")]
-        public IHttpActionResult PostCUSTOMER([FromBody] CUSTOMER cUSTOMER)
+        public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
+            // Create customer object based on the registration details received.
+            CUSTOMER customer = new CUSTOMER()
+            {
+                CUSTOMER_ID = 0,
+                EMAIL_ADDRESS = registrationDetails.emailAddress,
+                CUSTOMER_PASSWORD = registrationDetails.customerPassword,
+                FIRST_NAME = registrationDetails.firstName,
+                LAST_NAME = registrationDetails.lastName,
+                DATE_OF_BIRTH = registrationDetails.dateOfBirth,
+                ADDRESS_LINE_ONE = registrationDetails.addressLineOne,
+                ADDRESS_LINE_TWO = registrationDetails.addressLineTwo,
+                POSTCODE = registrationDetails.postCode,
+                MOBILE_NUMBER = registrationDetails.mobileNumber
+            };
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -124,13 +140,13 @@ namespace api.Controllers
 
             // Check if the customer already exists under the email address provided, 
             // if so return a Conflict HTTP response code.
-            if (CustomerExists(cUSTOMER.EMAIL_ADDRESS))
+            if (CustomerExists(customer.EMAIL_ADDRESS))
             {
                 return Conflict();
             } 
 
             // Add the customer object to our database as a record.
-            db.CUSTOMERS.Add(cUSTOMER);
+            db.CUSTOMERS.Add(customer);
 
             try
             {
@@ -145,7 +161,9 @@ namespace api.Controllers
             }
 
             // Find the added user by the email address provided by the client.
-            CUSTOMER addedCustomer = db.CUSTOMERS.SingleOrDefault(customer => customer.EMAIL_ADDRESS == cUSTOMER.EMAIL_ADDRESS);
+            // NOTE: Ensure that when passing in parameters to SingleOrDefault that the statement makes sense otherwise a UriHelper.Link
+            //       error may occur on the return.
+            CUSTOMER addedCustomer = db.CUSTOMERS.SingleOrDefault(dbCustomer => dbCustomer.EMAIL_ADDRESS == customer.EMAIL_ADDRESS);
             if (addedCustomer == null)
             {
                 //throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -157,11 +175,11 @@ namespace api.Controllers
         }
 
 
-        // POST: api/Customers
-        // Used to CREATE a new customer and add them to our database.
+        // POST: api/Customers/Login
+        // Used to login a user to the customer application.
         [Route("Login")]
         [ResponseType(typeof(CustomerDTO))]
-        public IHttpActionResult PostCUSTOMERLogin([FromBody] CustomerLoginDetailsDTO loginDetails)
+        public IHttpActionResult PostCUSTOMERLogin([FromBody] CustomerLoginBindingModel loginDetails)
         {
             if (!ModelState.IsValid)
             {

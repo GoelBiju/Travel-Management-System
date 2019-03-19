@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace api.Models.DTO
+namespace api.Models.BindingModels
 {
-    public class CustomerLoginDetailsDTO
+    public class CustomerLoginBindingModel
     {
         [JsonProperty("emailAddress")]
         [Required]

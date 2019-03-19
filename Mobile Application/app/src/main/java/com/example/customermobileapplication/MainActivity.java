@@ -165,6 +165,13 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(startIntent);
+
+                try {
+                    Toast.makeText(getApplicationContext(),  "Successfully logged in as: " +
+                            response.getSingleResponse().getString("emailAddress"), Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

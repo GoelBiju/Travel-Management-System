@@ -20,6 +20,8 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 
 import datamodel.Customer;
+import datamodel.Employee;
+import java.io.IOException;
 
 
 
@@ -32,22 +34,21 @@ public class APIConnection {
     public static ObjectMapper mapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
     
-//    public static Object[] GetData(String endPoint, Class tableClass)
-//    {
-//        Object[] object = null;
-//        try 
-//        {
-//		URL url = new URL("http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api" + "/" + endPoint);
-//		
-//		object = (Object[]) mapper.readValue(url, tableClass);
-//	} 
-//        catch (IOException e)
-//        {
-//              e.printStackTrace();
-//        }
-//        return object;
-//    }
-//    
+    public static Object[] GetData(String endPoint, Class tableClass)
+    {
+        Object[] object = null;
+        try 
+        {
+		String uri = ("http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endPoint);
+		URL url = new URL(uri);
+		object = (Object[]) mapper.readValue(url, tableClass);
+	} 
+        catch (Exception e)
+        {
+             e.printStackTrace();
+        }
+       return object;
+    }   
 //    public static Object getData(String tableName, Class tableClass, Integer id) {
 //        Object object = new Object();
 //        
@@ -97,6 +98,14 @@ public class APIConnection {
         
         Customer customer = (Customer) getCustomer();
         System.out.println("First Name: " + customer.firstName);
+        
+        Employee[] employees = (Employee[]) GetData("employees", Employee[].class);
+        
+        for (Employee e:employees)
+        {
+            System.out.println(e.getFirstName());
+            System.out.println(e.getLastName());
+        }
     }
     
 }

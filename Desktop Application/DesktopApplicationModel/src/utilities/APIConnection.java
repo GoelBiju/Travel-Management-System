@@ -20,6 +20,8 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import datamodel.*;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 
 
 
@@ -37,7 +39,7 @@ public class APIConnection {
         Object[] object = null;
         try 
         {
-		String uri = ("http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endPoint);
+		String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endPoint;
 		URL url = new URL(uri);
 		object = (Object[]) mapper.readValue(url, tableClass);
 	} 
@@ -46,7 +48,53 @@ public class APIConnection {
              e.printStackTrace();
         }
        return object;
-    }   
+    }
+    
+    public static Object getData(String tableName, Class tableClass, Integer id) {
+        Object object = new Object();
+        
+        try {
+            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + tableName + "/" + id;
+            URL url = new URL(uri);
+            
+            object = mapper.readValue(url, tableClass);
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        return object;
+    }
+    
+        public static Integer putData(String endpoint, Object obj) {
+        try {
+            String uri = "http://xserve.uopnet.plymouth.ac.uk/Modules/INTPROJ/PRCS251C/api/" + endpoint;
+            URL url = new URL(uri);
+            
+            String json = mapper.writeValueAsString(obj);
+            
+            System.out.println(json);
+            
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setDoOutput(true);
+            
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            
+            try (OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream())) {
+                output.write(json);
+                output.flush();
+            }
+            
+            return connection.getResponseCode();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        return 400;
+    }
     
     /**
      * Example showing how to retrieve a single Customer object as a test 

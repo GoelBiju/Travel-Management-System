@@ -22,6 +22,9 @@ import datamodel.*;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -66,14 +69,12 @@ public class APIConnection {
         return object;
     }
     
-        public static Integer putData(String endpoint, Object obj) {
+    public static Integer putData(String endpoint, Object obj) {
         try {
-            String uri = "http://xserve.uopnet.plymouth.ac.uk/Modules/INTPROJ/PRCS251C/api/" + endpoint;
+            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endpoint;
             URL url = new URL(uri);
             
             String json = mapper.writeValueAsString(obj);
-            
-            System.out.println(json);
             
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("PUT");
@@ -93,6 +94,22 @@ public class APIConnection {
             ex.printStackTrace();
         }
         
+        return 400;
+    }
+    
+    public static int DeleteData(String endPoint)
+    {
+        try {
+            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endPoint;
+            URL url = new URL(uri);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("DELETE");
+            
+            return connection.getResponseCode();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 400;
     }
     

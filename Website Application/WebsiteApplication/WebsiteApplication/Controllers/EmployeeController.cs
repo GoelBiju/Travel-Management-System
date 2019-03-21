@@ -15,6 +15,10 @@ namespace WebsiteApplication.Controllers
             Employee employee = new Employee();
             Console.WriteLine(employee.id);
 
+            var ID = Request.QueryString["EmployeeId"];
+
+            //retrieve data from the database
+
             ViewBag.Message(employee);
             return View();
         }
@@ -60,6 +64,14 @@ namespace WebsiteApplication.Controllers
             try
             {
                 // TODO: Add update logic here
+
+                var ID = Request["EmployeeID"];
+                var firstName = Request["FirstName"];
+                var lastName = Request["LastName"];
+                var jobRole = Request["JobRole"];
+
+                //update databse here
+
                 return RedirectToAction("Index");
             }
             catch

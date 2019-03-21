@@ -219,7 +219,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\UpdateEmployeeAccount.cshtml" />
+    <Content Include="Views\Shared\UpdateEmployeeAccount.cshtml" />
     <Content Include="Views\Home\ViewCoaches.cshtml" />
     <Content Include="Views\Home\AddCoach.cshtml" />
     <Content Include="Views\Home\UpdateCoaches.cshtml" />
@@ -227,6 +227,7 @@
     <Content Include="Views\Employee\ArchiveEmployee.cshtml" />
     <Content Include="Views\Coach\Index.cshtml" />
     <Content Include="Views\Coach\UpdateCoach.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

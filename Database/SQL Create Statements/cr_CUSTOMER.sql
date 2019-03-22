@@ -39,7 +39,7 @@
 
 CREATE TABLE customers(
     customer_id NUMBER 
-        CONSTRAINT customers_customer_id PRIMARY KEY,
+        CONSTRAINT customers_customer_id_pk PRIMARY KEY,
         
     email_address VARCHAR2(62)
         CONSTRAINT customers_email_address_un UNIQUE

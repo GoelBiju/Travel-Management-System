@@ -37,10 +37,24 @@ namespace api.Controllers
         }
 
         // GET: api/Shifts/5
-        [ResponseType(typeof(SHIFT))]
-        public IHttpActionResult GetSHIFT(decimal id)
+        [HttpGet]
+        [Route("{id:int}", Name = "GetShiftDetailsById")]
+        [ResponseType(typeof(ShiftDTO))]
+        public async Task<IHttpActionResult> GetSHIFT(decimal id)
         {
-            SHIFT sHIFT = db.SHIFTS.Find(id);
+            // Select a specific shift based on its id attribute.
+            //SHIFT sHIFT = db.SHIFTS.Find(id);
+
+            var shift = await db.SHIFTS.Select(s =>
+                new ShiftDTO()
+                {
+                    ShiftId = (int)s.SHIFT_ID,
+                    EmployeeId = s.EMPLOYEE_ID,
+                    RouteId = s.ROUTE_ID,
+                    CoachId = (int)s.COACH_ID
+                }).SingleOrDefault(s => s.ShiftId == id);
+
+
             if (sHIFT == null)
             {
                 return NotFound();
@@ -51,28 +65,28 @@ namespace api.Controllers
 
         // GET: Shifts by employee id.
         // Return shifts only on the day that the service supposed to run.
-        //[HttpGet]
-        //[Route("{id}", Name = "GetShiftsByEmployeeId")]
-        //[ResponseType(typeof(ShiftDTO))]
-        //public IHttpActionResult GetEmployeeShifts([FromUri] string employeeId)
-        //{
-        //    IList<ShiftDTO> employeeShifts = db.SHIFTS.Select(s =>
-        //        new ShiftDTO()
-        //        {
-        //            ShiftId = (int)s.SHIFT_ID,
-        //            EmployeeId = s.EMPLOYEE_ID,     
-        //            RouteId = s.ROUTE_ID,
-        //            CoachId = (int)s.COACH_ID
-        //        }).Where(s => s.EmployeeId == employeeId).ToList();
-                
+        [HttpGet]
+        [Route("employee/{employeeId}", Name = "GetShiftsByEmployeeId")]
+        [ResponseType(typeof(ShiftDTO))]
+        public IHttpActionResult GetEmployeeShifts([FromUri] string employeeId)
+        {
+            IList<ShiftDTO> employeeShifts = db.SHIFTS.Select(s =>
+                new ShiftDTO()
+                {
+                    ShiftId = (int)s.SHIFT_ID,
+                    EmployeeId = s.EMPLOYEE_ID,
+                    RouteId = s.ROUTE_ID,
+                    CoachId = (int)s.COACH_ID
+                }).Where(s => s.EmployeeId == employeeId).ToList();
 
-        //    if (employeeShifts.Count == 0)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return Ok(employeeShifts);
-        //}
+            if (employeeShifts.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(employeeShifts);
+        }
 
         // PUT: api/Shifts/5
         [ResponseType(typeof(void))]

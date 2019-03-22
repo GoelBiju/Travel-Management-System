@@ -30,8 +30,7 @@ namespace api.Controllers
                                 EmployeeId = e.EMPLOYEE_ID,
                                 FirstName = e.FIRST_NAME,
                                 LastName = e.LAST_NAME,
-                                JobRole = e.JOB_ROLE,
-                                Shifts = e.SHIFTS
+                                JobRole = e.JOB_ROLE
                             };
 
             return employees;
@@ -51,8 +50,7 @@ namespace api.Controllers
                     EmployeeId = e.EMPLOYEE_ID,
                     FirstName = e.FIRST_NAME,
                     LastName = e.LAST_NAME,
-                    JobRole = e.JOB_ROLE,
-                    Shifts = e.SHIFTS
+                    JobRole = e.JOB_ROLE
                 }).SingleOrDefaultAsync(e => e.EmployeeId == id);
 
             

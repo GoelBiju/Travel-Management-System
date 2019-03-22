@@ -19,8 +19,5 @@ namespace api.Models.DTO
 
         [JsonProperty("jobRole")]
         public string JobRole { get; set; }
-
-        [JsonProperty("shifts")]
-        public ICollection<SHIFT> Shifts { get; set; }
     }
 }

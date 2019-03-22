@@ -6,20 +6,34 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [RoutePrefix("api/shifts")]
     public class ShiftsController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Shifts
-        public IQueryable<SHIFT> GetSHIFTS()
+        [HttpGet]
+        [Route("")]
+        public IQueryable<ShiftDTO> GetSHIFTS()
         {
-            return db.SHIFTS;
+            var shifts = from s in db.SHIFTS
+                         select new ShiftDTO()
+                         {
+                             ShiftId = (int)s.SHIFT_ID,
+                             EmployeeId = s.EMPLOYEE_ID,
+                             RouteId = s.ROUTE_ID,
+                             CoachId = (int)s.COACH_ID
+                         };
+
+            return shifts;
         }
 
         // GET: api/Shifts/5
@@ -34,6 +48,31 @@ namespace api.Controllers
 
             return Ok(sHIFT);
         }
+
+        // GET: Shifts by employee id.
+        // Return shifts only on the day that the service supposed to run.
+        //[HttpGet]
+        //[Route("{id}", Name = "GetShiftsByEmployeeId")]
+        //[ResponseType(typeof(ShiftDTO))]
+        //public IHttpActionResult GetEmployeeShifts([FromUri] string employeeId)
+        //{
+        //    IList<ShiftDTO> employeeShifts = db.SHIFTS.Select(s =>
+        //        new ShiftDTO()
+        //        {
+        //            ShiftId = (int)s.SHIFT_ID,
+        //            EmployeeId = s.EMPLOYEE_ID,     
+        //            RouteId = s.ROUTE_ID,
+        //            CoachId = (int)s.COACH_ID
+        //        }).Where(s => s.EmployeeId == employeeId).ToList();
+                
+
+        //    if (employeeShifts.Count == 0)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(employeeShifts);
+        //}
 
         // PUT: api/Shifts/5
         [ResponseType(typeof(void))]

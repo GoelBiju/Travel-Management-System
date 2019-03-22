@@ -52,15 +52,15 @@ namespace api.Controllers
                     EmployeeId = s.EMPLOYEE_ID,
                     RouteId = s.ROUTE_ID,
                     CoachId = (int)s.COACH_ID
-                }).SingleOrDefault(s => s.ShiftId == id);
+                }).SingleOrDefaultAsync(s => s.ShiftId == id);
 
 
-            if (sHIFT == null)
+            if (shift == null)
             {
                 return NotFound();
             }
 
-            return Ok(sHIFT);
+            return Ok(shift);
         }
 
         // GET: Shifts by employee id.

@@ -5,10 +5,23 @@
  */
 package datamodel;
 
+import utilities.APIConnection;
+
 /**
  *
  * @author adbellas
  */
 public class StartJourney {
+    private APIConnection apiConnection;
+    private Employee employee;
+    
+    public StartJourney(){
+        this.apiConnection = new APIConnection();
+        this.employee = new Employee();
+    }
+    
+    public void setJourneyStarted(){
+        //apiConnection.putData();
+    }
     
 }

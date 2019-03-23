@@ -25,7 +25,7 @@ CREATE TABLE employees(
         CONSTRAINT employees_employee_password_chk 
             CHECK (REGEXP_LIKE(employee_password, '^[a-z0-9A-Z]{7,16}$')),
 
-    first_name VARCHAR2(35) 
+    first_name VARCHAR2(35)
         CONSTRAINT employees_first_name_nn NOT NULL
         CONSTRAINT employees_first_name_chk_alpha
             CHECK (REGEXP_LIKE(first_name, '^[A-Za-z-'']+$'))

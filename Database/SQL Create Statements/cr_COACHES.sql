@@ -1,21 +1,27 @@
-CREATE TABLE COACHES
-(
-    coach_id INT
-    CONSTRAINT coaches_coach_id PRIMARY KEY,
+/*
+    PRCS252 - Travel Management System - CREATE coaches
     
-    coach_make VARCHAR(35)
-    CONSTRAINT coaches_coach_make_notnull NOT NULL,
+*/
+
+
+CREATE TABLE coaches(
+
+    coach_id NUMBER
+        CONSTRAINT coaches_coach_id_pk PRIMARY KEY,
     
-    coach_model VARCHAR(35)
-    CONSTRAINT coaches_coach_model_notnull NOT NULL,
+    coach_make VARCHAR2(35)
+        CONSTRAINT coaches_coach_make_nn NOT NULL,
     
-    registration_plate VARCHAR(8)
-    CONSTRAINT coaches_registration_notnull NOT NULL,
-    CONSTRAINT coaches_registration_unique UNIQUE,
+    coach_model VARCHAR2(35)
+        CONSTRAINT coaches_coach_model_nn NOT NULL,
     
-    coach_capacity INT
-    CONSTRAINT coaches_coach_capacity_notnull NOT NULL,
+    registration_plate VARCHAR2(8)
+        CONSTRAINT coaches_registration_un UNIQUE
+        CONSTRAINT coaches_registration_nn NOT NULL,
     
-    active_status VARCHAR(12)
-    CONSTRAINT coaches_active_status_notnull NOT NULL
+    coach_capacity NUMBER
+        CONSTRAINT coaches_coach_capacity_nn NOT NULL,
+    
+    active_status VARCHAR2(12)
+        CONSTRAINT coaches_active_status_nn NOT NULL
 );

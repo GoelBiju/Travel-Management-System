@@ -3,9 +3,10 @@
     
     Attributes and relations:
     
-        - station_id
+        - station_id;
         
-        - station_name
+        - station_name;
+    
     
 */
 
@@ -14,6 +15,6 @@ CREATE TABLE stations(
     station_id NUMBER 
         CONSTRAINT stations_station_id_pk PRIMARY KEY,
   
-    station_name VARCHAR(100) 
-        CONSTRAINT stations_station_name NOT NULL 
+    station_name VARCHAR2(100) 
+        CONSTRAINT stations_station_name_nn NOT NULL 
 );

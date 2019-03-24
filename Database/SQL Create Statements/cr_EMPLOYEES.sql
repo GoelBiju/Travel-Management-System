@@ -17,12 +17,12 @@
 
 CREATE TABLE employees(
 
-    employee_id VARCHAR2(15) 
+    employee_id VARCHAR2(15)
         CONSTRAINT employees_employee_id_pk PRIMARY KEY,
         
-    employee_password VARCHAR2(16) 
+    employee_password VARCHAR2(16)
         CONSTRAINT employees_employee_password NOT NULL
-        CONSTRAINT employees_employee_password_chk 
+        CONSTRAINT employees_employee_password_chk
             CHECK (REGEXP_LIKE(employee_password, '^[a-z0-9A-Z]{7,16}$')),
 
     first_name VARCHAR2(35)

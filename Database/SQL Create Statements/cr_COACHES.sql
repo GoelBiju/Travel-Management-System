@@ -1,6 +1,20 @@
 /*
     PRCS252 - Travel Management System - CREATE coaches
     
+    Attributes and relations:
+        
+        - coach_id;
+        
+        - coach_make;
+        
+        - coach_model;
+        
+        - registration_plate;
+        
+        - coach_capacity;
+        
+        - is_active;
+    
 */
 
 
@@ -22,6 +36,8 @@ CREATE TABLE coaches(
     coach_capacity NUMBER
         CONSTRAINT coaches_coach_capacity_nn NOT NULL,
     
-    active_status VARCHAR2(12)
+    is_active NUMBER(1)
         CONSTRAINT coaches_active_status_nn NOT NULL
+        CONSTRAINT is_active_chk
+            CHECK (is_active IN (0, 1))
 );

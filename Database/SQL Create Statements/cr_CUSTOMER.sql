@@ -38,6 +38,7 @@
 
 
 CREATE TABLE customers(
+
     customer_id NUMBER 
         CONSTRAINT customers_customer_id_pk PRIMARY KEY,
         
@@ -78,7 +79,7 @@ CREATE TABLE customers(
         CONSTRAINT customers_address_line_two_chk 
             CHECK (REGEXP_LIKE(address_line_two, '^[A-Za-z0-9 -]+$')),
     
-    postcode VARCHAR2(8) 
+    postcode VARCHAR2(8)
         CONSTRAINT customers_postcode_nn NOT NULL
         CONSTRAINT customers_postcode_chk
             CHECK (REGEXP_LIKE(postcode, '^[A-Z0-9 ]+$')),

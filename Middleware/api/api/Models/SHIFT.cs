@@ -23,6 +23,5 @@ namespace api.Models
     
         public virtual COACH COACH { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
-        public virtual ROUTE ROUTE { get; set; }
     }
 }

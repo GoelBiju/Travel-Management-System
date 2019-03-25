@@ -37,7 +37,7 @@ namespace api.Controllers
 
         // PUT: api/Routes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutROUTE(string id, ROUTE rOUTE)
+        public IHttpActionResult PutROUTE(decimal id, ROUTE rOUTE)
         {
             if (!ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ROUTEExists(string id)
+        private bool ROUTEExists(decimal id)
         {
             return db.ROUTES.Count(e => e.ROUTE_ID == id) > 0;
         }

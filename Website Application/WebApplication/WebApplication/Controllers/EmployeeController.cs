@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using WebApplication.Models;
+using WebApplication.Utilities;
 using System.Web.Mvc;
 
 namespace WebApplication.Controllers
@@ -14,7 +21,16 @@ namespace WebApplication.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return View();
+            var _Data = new List<Employee>();
+            HttpClient client = new HttpClient();
+            APIConnection.RunAsync(client).Wait();
+            HttpResponseMessage response = client.GetAsync("employees").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var JsonString = response.Content.ReadAsStringAsync().Result;
+                _Data = JsonConvert.DeserializeObject<List<Employee>>(JsonString);
+            }
+                return View(_Data);
         }
 
         [HttpGet]

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>National Coach</title>
+    <meta charset="utf-8" />
+
+    <script type="text/javascript" src="~/Scripts/HelpFunctionScript.js"></script>
+</head>
+
+<body>
+    <div class="master"></div>
+    <center>
+        <div class="logincontainer">
+            <center>
+                <br />
+                <br />
+                <p id="loginlabel">Please enter your credentials to login</p>
+                <input type="username" id="inputfields" placeholder="Employee ID..." />
+                <p></p>
+                <br />
+                <input type="password" id="inputfields" placeholder="Password..." />
+                <p></p>
+                <br />
+                <button type="button" class="loginbutton loginbuttontransition">Login</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" onclick="HelpFunction()" class="helpbutton loginbuttontransition">Help</button>
+
+            </center>
+        </div>
+    </center>
+
+    <div class="bottom">NationalCoach 2019 ©</div>
+</body>
+
+@*Please don't remove, this is what styles it*@
+@section Scripts
+{
+    <link href="~/Content/LoginStyle.css" rel="stylesheet" />
+}
+
+
+
+</html>

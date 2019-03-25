@@ -306,6 +306,7 @@ C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csproj.CopyComplete
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.dll
 C:\Users\Will\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.pdb
+C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csproj.CoreCompileInputs.cache
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\ApplicationInsights.config
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\api.dll.config
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\api.dll
@@ -404,8 +405,6 @@ C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\Microsoft.AI.Web.xml
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csprojAssemblyReference.cache
-C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csproj.CoreCompileInputs.cache
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.csproj.CopyComplete
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.dll
 C:\Users\Goel\Desktop\prcs252-computer-science-ip-group_e\Middleware\api\api\obj\Debug\api.pdb

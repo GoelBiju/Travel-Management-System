@@ -161,6 +161,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\LoginStyle.css" />
+    <Content Include="Content\SideMenuStyleSheet.css" />
+    <Content Include="Content\UpdateEmployeeAccStyleSheet.css" />
+    <Content Include="Content\ViewCoachesStyleSheet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

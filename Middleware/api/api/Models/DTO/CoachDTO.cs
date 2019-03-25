@@ -20,10 +20,10 @@ namespace api.Models.DTO
         [JsonProperty("registrationPlate")]
         public string RegistratonPlate { get; set; }
 
-        [JsonProperty("capacity")]
-        public int capacity { get; set; }
+        [JsonProperty("coachCapacity")]
+        public int CoachCapacity { get; set; }
 
-        [JsonProperty("status")]
-        public string status { get; set; }
+        [JsonProperty("isActive")]
+        public string IsActive { get; set; }
     }
 }

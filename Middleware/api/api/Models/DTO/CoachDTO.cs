@@ -24,6 +24,6 @@ namespace api.Models.DTO
         public int CoachCapacity { get; set; }
 
         [JsonProperty("isActive")]
-        public string IsActive { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace api.Controllers
             return employees;
         }
 
-        // GET: api/Employees/5
+        // GET: api/Employees/D1234
         [HttpGet]
         [Route("{id}", Name = "GetEmployeeDetailsById)")]
         [ResponseType(typeof(EmployeeDTO))]

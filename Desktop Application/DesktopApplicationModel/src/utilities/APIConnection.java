@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,7 +38,7 @@ public class APIConnection {
     public static ObjectMapper mapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
     
-    public static Object[] GetData(String endPoint, Class tableClass)
+    public static Object[] getListData(String endPoint, Class tableClass)
     {
         Object[] object = null;
         try 
@@ -118,35 +119,39 @@ public class APIConnection {
      * and convert from JSON to a Java object.
      * @return Customer object mapped from json data in the database
      */
-    public static Object getCustomer() {
-        Object object = new Object();
-        
-        try {
-            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/11";
-            URL url = new URL(uri);
-        
-            object = mapper.readValue(url, Customer.class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        
-        
-        return object;
-    }
+//    public static Object getCustomer() {
+//        Object object = new Object();
+//        
+//        try {
+//            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/11";
+//            URL url = new URL(uri);
+//        
+//            object = mapper.readValue(url, Customer.class);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        
+//        
+//        return object;
+//    }
+    
     
     public static void main(String[] args) {
         System.out.println("APIConnection test.");
         
-        Customer customer = (Customer) getCustomer();
-        System.out.println("First Name: " + customer.firstName);
+        //Customer customer = (Customer) getCustomer();
         
-        Employee[] employees = (Employee[]) GetData("employees", Employee[].class);
+        //System.out.println("First Name: " + customer.firstName);
         
-        for (Employee e:employees)
-        {
-            System.out.println(e.getFirstName());
-            System.out.println(e.getLastName());
-        }
+        //Employee[] employees = (Employee[]) GetData("employees", Employee[].class);
+        
+        //for (Employee e:employees)
+        //{
+        //    System.out.println(e.getFirstName());
+        //    System.out.println(e.getLastName());
+        //}
+
+        
     }
     
 }

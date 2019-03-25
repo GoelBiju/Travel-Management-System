@@ -6,33 +6,63 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [RoutePrefix("api/coaches")]
     public class CoachesController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Coaches
-        public IQueryable<COACH> GetCOACHES()
+        [HttpGet]
+        [Route("")]
+        public IQueryable<CoachDTO> GetCOACHES()
         {
-            return db.COACHES;
+            var coaches = from c in db.COACHES
+                          select new CoachDTO()
+                          {
+                              CoachId = (int)c.COACH_ID,
+                              CoachMake = c.COACH_MAKE,
+                              CoachModel = c.COACH_MODEL,
+                              RegistratonPlate = c.REGISTRATION_PLATE,
+                              CoachCapacity = (int)c.COACH_CAPACITY,
+                              IsActive = Convert.ToBoolean(c.IS_ACTIVE)
+                          };
+
+            return coaches;
         }
 
         // GET: api/Coaches/5
-        [ResponseType(typeof(COACH))]
-        public IHttpActionResult GetCOACH(decimal id)
+        [HttpGet]
+        [Route("{id:int}", Name = "GetCoachesDetailsById")]
+        [ResponseType(typeof(CoachDTO))]
+        public async Task<IHttpActionResult> GetCOACH(decimal id)
         {
-            COACH cOACH = db.COACHES.Find(id);
-            if (cOACH == null)
+            //COACH cOACH = db.COACHES.Find(id);
+
+            var coach = await db.COACHES.Select(c =>
+                new CoachDTO()
+                {
+                    CoachId = (int)c.COACH_ID,
+                    CoachMake = c.COACH_MODEL,
+                    RegistratonPlate = c.REGISTRATION_PLATE,
+                    CoachCapacity = (int)c.COACH_CAPACITY,
+                    IsActive = Convert.ToBoolean(c.IS_ACTIVE)
+                }).SingleOrDefaultAsync(c => c.CoachId == id);
+
+
+            if (coach == null)
             {
                 return NotFound();
             }
 
-            return Ok(cOACH);
+            return Ok(coach);
         }
 
         // PUT: api/Coaches/5
@@ -90,7 +120,7 @@ namespace api.Controllers
                 if (COACHExists(cOACH.COACH_ID))
                 {
                     return Conflict();
-                }
+                }   
                 else
                 {
                     throw;

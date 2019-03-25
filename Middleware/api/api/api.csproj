@@ -219,6 +219,7 @@
     <Compile Include="Models\DTO\RouteDTO.cs" />
     <Compile Include="Models\DTO\ShiftDTO.cs" />
     <Compile Include="Models\BindingModels\CustomerRegistrationBindingModel.cs" />
+    <Compile Include="Models\DTO\StationDTO.cs" />
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>

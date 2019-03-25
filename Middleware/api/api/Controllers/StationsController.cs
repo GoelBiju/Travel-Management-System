@@ -9,20 +9,34 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.DTO;
+
 
 namespace api.Controllers
 {
+    [RoutePrefix("api/stations")]
     public class StationsController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Stations
-        public IQueryable<STATION> GetSTATIONS()
+        [HttpGet]
+        [Route("")]
+        public IQueryable<StationDTO> GetSTATIONS()
         {
-            return db.STATIONS;
+            var stations = from s in db.STATIONS
+                           select new StationDTO()
+                           {
+                               StationId = (int)s.STATION_ID,
+                               StationName = s.STATION_NAME
+                           };
+
+            return stations;
         }
 
         // GET: api/Stations/5
+        [HttpGet]
+        [Route("{id:int}", Name = "GetStationDetailsById")]
         [ResponseType(typeof(STATION))]
         public IHttpActionResult GetSTATION(decimal id)
         {

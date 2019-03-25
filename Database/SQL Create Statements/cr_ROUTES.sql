@@ -15,7 +15,7 @@
 
 CREATE TABLE routes(
 
-    route_id VARCHAR2(4) 
+    route_id NUMBER 
         CONSTRAINT routes_route_id_pk PRIMARY KEY,
 
     departure_station NUMBER

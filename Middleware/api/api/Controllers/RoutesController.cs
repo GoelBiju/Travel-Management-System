@@ -6,33 +6,58 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [RoutePrefix("api/routes")]
     public class RoutesController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Routes
-        public IQueryable<ROUTE> GetROUTES()
+        [HttpGet]
+        [Route("")]
+        public IQueryable<RouteDTO> GetROUTES()
         {
-            return db.ROUTES;
+            var routes = from r in db.ROUTES
+                         select new RouteDTO()
+                         {
+                             RouteId = (int)r.ROUTE_ID,
+                             DepartureStationId = (int)r.DEPARTURE_STATION,
+                             ArrivalStationId = (int)r.ARRIVAL_STATION
+                         };
+
+            return routes;
         }
 
         // GET: api/Routes/5
-        [ResponseType(typeof(ROUTE))]
-        public IHttpActionResult GetROUTE(string id)
+        [HttpGet]
+        [Route("{id:int}", Name = "GetRouteDetailsById")]
+        [ResponseType(typeof(RouteDTO))]
+        public async Task<IHttpActionResult> GetROUTE(int id)
         {
-            ROUTE rOUTE = db.ROUTES.Find(id);   
-            if (rOUTE == null)
+            //ROUTE rOUTE = db.ROUTES.Find(id);   
+
+            var route = await db.ROUTES.Select(r =>
+                new RouteDTO()
+                {
+                    RouteId = (int)r.ROUTE_ID,
+                    DepartureStationId = (int)r.DEPARTURE_STATION,
+                    ArrivalStationId = (int)r.ARRIVAL_STATION
+                }).SingleOrDefaultAsync(r => r.RouteId == id);
+
+
+            if (route == null)
             {
                 return NotFound();
             }
 
-            return Ok(rOUTE);
+            return Ok(route);
         }
 
         // PUT: api/Routes/5

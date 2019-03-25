@@ -19,5 +19,11 @@ namespace api.Models.DTO
 
         [JsonProperty("coachId")]
         public int CoachId { get; set; }
+
+        [JsonProperty("startDatetime")]
+        public DateTime startDatetime { get; set; }
+
+        [JsonProperty("endDatetime")]
+        public DateTime endDatetime { get; set; }
     }
 }

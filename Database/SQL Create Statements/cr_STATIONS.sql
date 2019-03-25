@@ -10,6 +10,7 @@
     
 */
 
+
 CREATE TABLE stations(
 
     station_id NUMBER 

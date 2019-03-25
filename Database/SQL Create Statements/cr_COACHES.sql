@@ -37,7 +37,7 @@ CREATE TABLE coaches(
         CONSTRAINT coaches_coach_capacity_nn NOT NULL,
     
     is_active NUMBER(1)
-        CONSTRAINT coaches_active_status_nn NOT NULL
+        CONSTRAINT coaches_is_active_nn NOT NULL
         CONSTRAINT is_active_chk
             CHECK (is_active IN (0, 1))
 );

@@ -18,6 +18,8 @@ namespace api.Models
         public string EMPLOYEE_ID { get; set; }
         public string ROUTE_ID { get; set; }
         public decimal COACH_ID { get; set; }
+        public System.DateTime START_DATETIME { get; set; }
+        public System.DateTime END_DATETIME { get; set; }
     
         public virtual COACH COACH { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }

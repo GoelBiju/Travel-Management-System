@@ -21,10 +21,10 @@ namespace api.Models
         }
     
         public string EMPLOYEE_ID { get; set; }
+        public string EMPLOYEE_PASSWORD { get; set; }
         public string FIRST_NAME { get; set; }
         public string LAST_NAME { get; set; }
         public string JOB_ROLE { get; set; }
-        public string PASSWORD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFT> SHIFTS { get; set; }

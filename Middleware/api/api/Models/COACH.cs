@@ -24,8 +24,8 @@ namespace api.Models
         public string COACH_MAKE { get; set; }
         public string COACH_MODEL { get; set; }
         public string REGISTRATION_PLATE { get; set; }
-        public decimal CAPACITY { get; set; }
-        public string STATUS { get; set; }
+        public decimal COACH_CAPACITY { get; set; }
+        public bool IS_ACTIVE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFT> SHIFTS { get; set; }

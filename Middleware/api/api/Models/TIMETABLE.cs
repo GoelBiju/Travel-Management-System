@@ -19,8 +19,5 @@ namespace api.Models
         public System.DateTime DEPARTURE_TIME { get; set; }
         public System.DateTime ARRIVAL_TIME { get; set; }
         public string DAY_OF_JOURNEY { get; set; }
-    
-        public virtual ROUTE ROUTE { get; set; }
-        public virtual STATION STATION { get; set; }
     }
 }

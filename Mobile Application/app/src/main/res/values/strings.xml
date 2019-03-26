@@ -54,6 +54,7 @@
     <string name="action_settings">Settings</string>
     <string name="day_of_travel">Day Of Travel</string>
     <string name="departure_time">Departure Time</string>
+    <string name="find_your_journey">Find Your Journey</string>
 
     <!-- Resources for CreateAccountActivity -->
 </resources>

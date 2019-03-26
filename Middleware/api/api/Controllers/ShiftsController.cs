@@ -68,7 +68,7 @@ namespace api.Controllers
         [HttpGet]
         [Route("employee/{employeeId}", Name = "GetShiftsByEmployeeId")]
         [ResponseType(typeof(ShiftDTO))]
-        public IHttpActionResult GetEmployeeShifts([FromUri] string employeeId)
+        public IHttpActionResult GetEmployeeShifts(string employeeId)
         {
             IList<ShiftDTO> employeeShifts = db.SHIFTS.Select(s =>
                 new ShiftDTO()
@@ -78,7 +78,6 @@ namespace api.Controllers
                     RouteId = s.ROUTE_ID,
                     CoachId = (int)s.COACH_ID
                 }).Where(s => s.EmployeeId == employeeId).ToList();
-
 
             if (employeeShifts.Count == 0)
             {

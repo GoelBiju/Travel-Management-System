@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
@@ -37,16 +38,24 @@ namespace api.Controllers
         // GET: api/Stations/5
         [HttpGet]
         [Route("{id:int}", Name = "GetStationDetailsById")]
-        [ResponseType(typeof(STATION))]
-        public IHttpActionResult GetSTATION(decimal id)
+        [ResponseType(typeof(StationDTO))]
+        public async Task<IHttpActionResult> GetSTATION(int id)
         {
-            STATION sTATION = db.STATIONS.Find(id);
-            if (sTATION == null)
+            //STATION sTATION = db.STATIONS.Find(id);
+            var station = await db.STATIONS.Select(s =>
+                new StationDTO()
+                {
+                    StationId = (int)s.STATION_ID,
+                    StationName = s.STATION_NAME
+                }).SingleOrDefaultAsync(s => s.StationId == id);
+
+
+            if (station == null)
             {
                 return NotFound();
             }
 
-            return Ok(sTATION);
+            return Ok(station);
         }
 
         // PUT: api/Stations/5

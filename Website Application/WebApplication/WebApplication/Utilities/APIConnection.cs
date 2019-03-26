@@ -13,7 +13,6 @@ namespace WebApplication.Utilities
 {
     public class APIConnection
     {
-        
         public static async Task RunAsync(HttpClient client)
         {
             client.BaseAddress = new Uri("http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/");

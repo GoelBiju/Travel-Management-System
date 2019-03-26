@@ -24,17 +24,30 @@ namespace WebApplication.Controllers
             var _Data = new List<Employee>();
             HttpClient client = new HttpClient();
             APIConnection.RunAsync(client).Wait();
+
             HttpResponseMessage response = client.GetAsync("employees").Result;
             if (response.IsSuccessStatusCode)
             {
                 var JsonString = response.Content.ReadAsStringAsync().Result;
                 _Data = JsonConvert.DeserializeObject<List<Employee>>(JsonString);
             }
-                return View(_Data);
+
+            return View(_Data);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Employee employee)
+        {
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public ActionResult GetById(int id)
+        public ActionResult Details(int id)
         {
             return View();
         }

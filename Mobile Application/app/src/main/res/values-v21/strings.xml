@@ -2,4 +2,9 @@
 <resources>
     <string name="day_of_travel">Day Of Travel</string>
     <string name="find_your_journey">Find Your Journey</string>
+    <string name="services">Services</string>
+    <string name="account">Account</string>
+    <string name="bookings">Bookings</string>
+    <string name="history">History</string>
+    <string name="where_from">Where From...</string>
 </resources>

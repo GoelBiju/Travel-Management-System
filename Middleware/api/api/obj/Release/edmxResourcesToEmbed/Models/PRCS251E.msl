@@ -8,8 +8,8 @@
           <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
           <ScalarProperty Name="COACH_MODEL" ColumnName="COACH_MODEL" />
           <ScalarProperty Name="REGISTRATION_PLATE" ColumnName="REGISTRATION_PLATE" />
-          <ScalarProperty Name="CAPACITY" ColumnName="CAPACITY" />
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="COACH_CAPACITY" ColumnName="COACH_CAPACITY" />
+          <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -33,10 +33,10 @@
       <EntityTypeMapping TypeName="Model.EMPLOYEE">
         <MappingFragment StoreEntitySet="EMPLOYEES">
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
+          <ScalarProperty Name="EMPLOYEE_PASSWORD" ColumnName="EMPLOYEE_PASSWORD" />
           <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
           <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
           <ScalarProperty Name="JOB_ROLE" ColumnName="JOB_ROLE" />
-          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -54,8 +54,8 @@
       <EntityTypeMapping TypeName="Model.ROUTE">
         <MappingFragment StoreEntitySet="ROUTES">
           <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
-          <ScalarProperty Name="START_DESTINATION" ColumnName="START_DESTINATION" />
-          <ScalarProperty Name="END_DESTINATION" ColumnName="END_DESTINATION" />
+          <ScalarProperty Name="DEPARTURE_STATION" ColumnName="DEPARTURE_STATION" />
+          <ScalarProperty Name="ARRIVAL_STATION" ColumnName="ARRIVAL_STATION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -66,6 +66,8 @@
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
           <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
           <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
+          <ScalarProperty Name="START_DATETIME" ColumnName="START_DATETIME" />
+          <ScalarProperty Name="END_DATETIME" ColumnName="END_DATETIME" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

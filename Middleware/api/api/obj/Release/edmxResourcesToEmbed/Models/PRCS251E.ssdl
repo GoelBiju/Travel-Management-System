@@ -8,8 +8,8 @@
     <Property Name="COACH_MAKE" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="COACH_MODEL" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="REGISTRATION_PLATE" Type="varchar2" MaxLength="8" Nullable="false" />
-    <Property Name="CAPACITY" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="STATUS" Type="varchar2" MaxLength="12" Nullable="false" />
+    <Property Name="COACH_CAPACITY" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IS_ACTIVE" Type="number" Precision="1" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="CUSTOMERS">
     <Key>
@@ -31,27 +31,27 @@
       <PropertyRef Name="EMPLOYEE_ID" />
     </Key>
     <Property Name="EMPLOYEE_ID" Type="varchar2" MaxLength="15" Nullable="false" />
+    <Property Name="EMPLOYEE_PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
     <Property Name="FIRST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="LAST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="JOB_ROLE" Type="varchar2" MaxLength="15" Nullable="false" />
-    <Property Name="PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
   </EntityType>
   <EntityType Name="EMPLOYEES_ARCHIVE">
     <Key>
       <PropertyRef Name="EMPLOYEE_ID" />
     </Key>
     <Property Name="EMPLOYEE_ID" Type="varchar2" MaxLength="15" Nullable="false" />
-    <Property Name="FIRST_NAME" Type="varchar2" MaxLength="112" Nullable="false" />
-    <Property Name="LAST_NAME" Type="varchar2" MaxLength="112" Nullable="false" />
-    <Property Name="JOB_ROLE" Type="varchar2" MaxLength="112" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
+    <Property Name="LAST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
+    <Property Name="JOB_ROLE" Type="varchar2" MaxLength="15" Nullable="false" />
   </EntityType>
   <EntityType Name="ROUTES">
     <Key>
       <PropertyRef Name="ROUTE_ID" />
     </Key>
-    <Property Name="ROUTE_ID" Type="varchar2" MaxLength="4" Nullable="false" />
-    <Property Name="START_DESTINATION" Type="varchar2" MaxLength="112" Nullable="false" />
-    <Property Name="END_DESTINATION" Type="varchar2" MaxLength="112" Nullable="false" />
+    <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DEPARTURE_STATION" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ARRIVAL_STATION" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="SHIFTS">
     <Key>
@@ -61,6 +61,8 @@
     <Property Name="EMPLOYEE_ID" Type="varchar2" MaxLength="112" Nullable="false" />
     <Property Name="ROUTE_ID" Type="varchar2" MaxLength="4" Nullable="false" />
     <Property Name="COACH_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="START_DATETIME" Type="date" Nullable="false" />
+    <Property Name="END_DATETIME" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="STATIONS">
     <Key>
@@ -107,42 +109,6 @@ warning 6002: The table/view 'PRCS251E.TIMETABLES' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="SHIFTS_ROUTE_ID_FK">
-    <End Role="ROUTES" Type="Self.ROUTES" Multiplicity="1" />
-    <End Role="SHIFTS" Type="Self.SHIFTS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ROUTES">
-        <PropertyRef Name="ROUTE_ID" />
-      </Principal>
-      <Dependent Role="SHIFTS">
-        <PropertyRef Name="ROUTE_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TIMETABLES_ROUTE_ID">
-    <End Role="ROUTES" Type="Self.ROUTES" Multiplicity="0..1" />
-    <End Role="TIMETABLES" Type="Self.TIMETABLES" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ROUTES">
-        <PropertyRef Name="ROUTE_ID" />
-      </Principal>
-      <Dependent Role="TIMETABLES">
-        <PropertyRef Name="ROUTE_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TIMETABLES_STATION_ID">
-    <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="0..1" />
-    <End Role="TIMETABLES" Type="Self.TIMETABLES" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="STATIONS">
-        <PropertyRef Name="STATION_ID" />
-      </Principal>
-      <Dependent Role="TIMETABLES">
-        <PropertyRef Name="STATION_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="COACHES" EntityType="Self.COACHES" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="PRCS251E" store:Type="Tables" />
@@ -167,18 +133,6 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
     <AssociationSet Name="SHIFTS_EMPLOYEE_ID_FK" Association="Self.SHIFTS_EMPLOYEE_ID_FK">
       <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
       <End Role="SHIFTS" EntitySet="SHIFTS" />
-    </AssociationSet>
-    <AssociationSet Name="SHIFTS_ROUTE_ID_FK" Association="Self.SHIFTS_ROUTE_ID_FK">
-      <End Role="ROUTES" EntitySet="ROUTES" />
-      <End Role="SHIFTS" EntitySet="SHIFTS" />
-    </AssociationSet>
-    <AssociationSet Name="TIMETABLES_ROUTE_ID" Association="Self.TIMETABLES_ROUTE_ID">
-      <End Role="ROUTES" EntitySet="ROUTES" />
-      <End Role="TIMETABLES" EntitySet="TIMETABLES" />
-    </AssociationSet>
-    <AssociationSet Name="TIMETABLES_STATION_ID" Association="Self.TIMETABLES_STATION_ID">
-      <End Role="STATIONS" EntitySet="STATIONS" />
-      <End Role="TIMETABLES" EntitySet="TIMETABLES" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

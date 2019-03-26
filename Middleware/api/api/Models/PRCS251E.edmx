@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="COACHES">
           <Key>
             <PropertyRef Name="COACH_ID" />
@@ -140,7 +140,8 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             <End Role="SHIFTS" EntitySet="SHIFTS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -190,6 +191,14 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
           <Property Name="FIRST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LAST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="JOB_ROLE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROUTE">
+          <Key>
+            <PropertyRef Name="ROUTE_ID" />
+          </Key>
+          <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DEPARTURE_STATION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ARRIVAL_STATION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="SHIFT">
           <Key>
@@ -247,11 +256,12 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="COACHES" EntityType="Self.COACH" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
           <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEE" />
           <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Self.EMPLOYEES_ARCHIVE" />
+          <EntitySet Name="ROUTES" EntityType="Self.ROUTE" />
           <EntitySet Name="SHIFTS" EntityType="Self.SHIFT" />
           <EntitySet Name="STATIONS" EntityType="Self.STATION" />
           <EntitySet Name="TIMETABLES" EntityType="Self.TIMETABLE" />
@@ -263,22 +273,13 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
             <End Role="SHIFTS" EntitySet="SHIFTS" />
           </AssociationSet>
-          <EntitySet Name="ROUTES" EntityType="Model.ROUTE" />
         </EntityContainer>
-        <EntityType Name="ROUTE">
-          <Key>
-            <PropertyRef Name="ROUTE_ID" />
-          </Key>
-          <Property Name="ROUTE_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="DEPARTURE_STATION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="ARRIVAL_STATION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="COACHES">
             <EntityTypeMapping TypeName="Model.COACH">
               <MappingFragment StoreEntitySet="COACHES">
@@ -328,6 +329,15 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ROUTES">
+            <EntityTypeMapping TypeName="Model.ROUTE">
+              <MappingFragment StoreEntitySet="ROUTES">
+                <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
+                <ScalarProperty Name="DEPARTURE_STATION" ColumnName="DEPARTURE_STATION" />
+                <ScalarProperty Name="ARRIVAL_STATION" ColumnName="ARRIVAL_STATION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SHIFTS">
             <EntityTypeMapping TypeName="Model.SHIFT">
               <MappingFragment StoreEntitySet="SHIFTS">
@@ -356,15 +366,6 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
                 <ScalarProperty Name="DEPARTURE_TIME" ColumnName="DEPARTURE_TIME" />
                 <ScalarProperty Name="ARRIVAL_TIME" ColumnName="ARRIVAL_TIME" />
                 <ScalarProperty Name="DAY_OF_JOURNEY" ColumnName="DAY_OF_JOURNEY" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ROUTES">
-            <EntityTypeMapping TypeName="Model.ROUTE">
-              <MappingFragment StoreEntitySet="ROUTES">
-                <ScalarProperty Name="ARRIVAL_STATION" ColumnName="ARRIVAL_STATION" />
-                <ScalarProperty Name="DEPARTURE_STATION" ColumnName="DEPARTURE_STATION" />
-                <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -30,7 +30,9 @@ namespace api.Controllers
                              ShiftId = (int)s.SHIFT_ID,
                              EmployeeId = s.EMPLOYEE_ID,
                              RouteId = s.ROUTE_ID,
-                             CoachId = (int)s.COACH_ID
+                             CoachId = (int)s.COACH_ID,
+                             StartDateTime = s.START_DATETIME,
+                             EndDateTime = s.END_DATETIME
                          };
 
             return shifts;
@@ -51,7 +53,9 @@ namespace api.Controllers
                     ShiftId = (int)s.SHIFT_ID,
                     EmployeeId = s.EMPLOYEE_ID,
                     RouteId = s.ROUTE_ID,
-                    CoachId = (int)s.COACH_ID
+                    CoachId = (int)s.COACH_ID,
+                    StartDateTime = s.START_DATETIME,
+                    EndDateTime = s.END_DATETIME
                 }).SingleOrDefaultAsync(s => s.ShiftId == id);
 
 
@@ -76,7 +80,9 @@ namespace api.Controllers
                     ShiftId = (int)s.SHIFT_ID,
                     EmployeeId = s.EMPLOYEE_ID,
                     RouteId = s.ROUTE_ID,
-                    CoachId = (int)s.COACH_ID
+                    CoachId = (int)s.COACH_ID,
+                    StartDateTime = s.START_DATETIME,
+                    EndDateTime = s.END_DATETIME
                 }).Where(s => s.EmployeeId == employeeId).ToList();
 
             if (employeeShifts.Count == 0)

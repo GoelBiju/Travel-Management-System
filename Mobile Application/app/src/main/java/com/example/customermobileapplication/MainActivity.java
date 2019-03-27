@@ -164,6 +164,15 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.hide();
 
                 Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
+
+                try{
+                    int customerId = Integer.parseInt(response.getSingleResponse().getString("customerId"));
+                    // Pass the customer Id to the Home page.
+                    startIntent.putExtra("customerId", customerId);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 startActivity(startIntent);
 
                 try {

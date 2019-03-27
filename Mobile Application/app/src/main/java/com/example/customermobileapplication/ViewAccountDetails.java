@@ -1,5 +1,6 @@
 package com.example.customermobileapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,14 +14,27 @@ import com.example.customermobileapplication.Utilities.APIResponse;
 import com.example.customermobileapplication.Utilities.VolleyCallback;
 
 import org.json.JSONException;
+import org.w3c.dom.Text;
 
 import java.net.HttpURLConnection;
 
 public class ViewAccountDetails extends AppCompatActivity {
 
     APIConnection apiConnection;
+    MainActivity login;
+
+    int customerId;
 
     private TextView firstNameInput;
+    private TextView lastNameInput;
+    private TextView customerIDInput;
+    private TextView dateOfBirthInput;
+    private TextView addressLine1Input;
+    private TextView addressLine2Input;
+    private TextView postCodeInput;
+    private TextView phoneNumberInput;
+    private TextView emailInput;
+    private TextView passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +46,64 @@ public class ViewAccountDetails extends AppCompatActivity {
         // initialise api
         apiConnection = new APIConnection(getApplicationContext(), getResources().getString(R.string.api_base_url));
 
+        //fields
+
         firstNameInput = findViewById(R.id.firstNameInput);
+
+        lastNameInput = findViewById(R.id.lastNameInput);
+
+        customerIDInput = findViewById(R.id.customerIDInput);
+
+        dateOfBirthInput = findViewById(R.id.dateOfBirthInput);
+
+        addressLine1Input = findViewById(R.id.addressLine1Input);
+
+        addressLine2Input = findViewById(R.id.addressLine2Input);
+
+        postCodeInput = findViewById(R.id.postcodeInput);
+
+        phoneNumberInput = findViewById(R.id.phoneNumberInput);
+
+        emailInput = findViewById(R.id.emailInput);
+
+        passwordInput = findViewById(R.id.passwordInput);
+
+        Intent getCustomerId = getIntent();
+
+        customerId = getCustomerId.getIntExtra("customerId", 0);
+
+
 
         getAccountInformation();
     }
 
     private void getAccountInformation() {
 
-        apiConnection.getSingleApiRequest("customers/11", new VolleyCallback() {
+        apiConnection.getSingleApiRequest("customers/" + this.customerId, new VolleyCallback() {
             @Override
             public void onSuccess(APIResponse response) {
                 try {
+
+                    //retrieve information
+
                     firstNameInput.setText(response.getSingleResponse().get("firstName").toString());
+
+                    lastNameInput.setText(response.getSingleResponse().get("lastName").toString());
+
+                    customerIDInput.setText(response.getSingleResponse().get("customerId").toString());
+
+                    dateOfBirthInput.setText(response.getSingleResponse().get("dateOfBirth").toString());
+
+                    addressLine1Input.setText(response.getSingleResponse().get("addressLineOne").toString());
+
+                    addressLine2Input.setText(response.getSingleResponse().get("addressLineTwo").toString());
+
+                    postCodeInput.setText(response.getSingleResponse().get("postCode").toString());
+
+                    phoneNumberInput.setText(response.getSingleResponse().get("mobileNumber").toString());
+
+                    emailInput.setText(response.getSingleResponse().get("emailAddress").toString());
+
                 } catch(JSONException e){
                     e.printStackTrace();
                 }

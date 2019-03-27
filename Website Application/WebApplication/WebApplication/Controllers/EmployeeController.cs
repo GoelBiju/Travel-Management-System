@@ -43,7 +43,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult CreateOrEdit()
         {
-            HttpResponseMessage response = 
+            //HttpResponseMessage response = 
             return View();
         }
 
@@ -86,14 +86,19 @@ namespace WebApplication.Controllers
             return View(_Data);
         }
 
-        [HttpPost]
+        [HttpDelete]
         public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                HttpResponseMessage response = GlobalVariables.WebApiClient.DeleteAsync("employees/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Details");
+                }
 
-                return RedirectToAction("Details");
+                return View();
+                
             }
             catch
             {

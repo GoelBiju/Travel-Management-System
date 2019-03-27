@@ -47,19 +47,34 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, FormCollection collection)
         {
             return View();
         }
 
+        public ActionResult Delete(string id)
+        {
+            var _Data = new Employee();
+            HttpClient client = new HttpClient();
+            APIConnection.RunAsync(client).Wait();
+
+            HttpResponseMessage response = client.GetAsync("employees" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var JsonString = response.Content.ReadAsStringAsync().Result;
+                _Data = JsonConvert.DeserializeObject<Employee>(JsonString);
+            }
+            return View(_Data);
+        }
+
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {

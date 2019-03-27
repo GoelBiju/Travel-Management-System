@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.BindingModels;
 using api.Models.DTO;
 
 namespace api.Controllers
@@ -125,6 +126,62 @@ namespace api.Controllers
             }
 
             return CreatedAtRoute("DefaultApi", new { id = eMPLOYEE.EMPLOYEE_ID }, eMPLOYEE);
+        }
+
+        //Login to web app for admin employees:
+        [HttpPost]
+        [Route("webLogin")]
+        [ResponseType(typeof(EmployeeDTO))]
+        public IHttpActionResult employeeLogin([FromBody] EmployeeLoginBindingModel loginCredentials)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (string.IsNullOrEmpty(loginCredentials.employeeID) || string.IsNullOrEmpty(loginCredentials.password))
+            {
+                HttpError errorNoInput = new HttpError("Please enter a valid Employee ID and Password.");
+                HttpResponseMessage responseNoInput = Request.CreateErrorResponse(HttpStatusCode.Forbidden, errorNoInput);
+
+                return ResponseMessage(responseNoInput);
+            }
+
+            if (EMPLOYEEExists(loginCredentials.employeeID))
+            {
+                EMPLOYEE employeeDb = db.EMPLOYEES.SingleOrDefault(employee => employee.EMPLOYEE_ID == loginCredentials.employeeID);
+
+                if (employeeDb != null && loginCredentials.employeeID == employeeDb.EMPLOYEE_ID)
+                {
+                    if (loginCredentials.password == employeeDb.EMPLOYEE_PASSWORD)
+                    {
+                        EmployeeDTO employeeDetails = new EmployeeDTO()
+                        {
+                            EmployeeId = employeeDb.EMPLOYEE_ID,
+                            FirstName = employeeDb.FIRST_NAME,
+                            LastName = employeeDb.LAST_NAME,
+                            JobRole = employeeDb.JOB_ROLE
+                        };
+
+                        //SUCCESS
+                        return Ok(employeeDetails);
+                    }
+                    else
+                    {
+                        //403 Forbidden
+                        HttpError forbiddenError = new HttpError("Incorrect email and or password.");
+                        HttpResponseMessage forbiddenResponse = Request.CreateErrorResponse(HttpStatusCode.Forbidden, forbiddenError);
+
+                        return Ok(forbiddenResponse);
+                    }
+                }
+            }
+            //Not found within database:
+
+            HttpError errorNotFound = new HttpError("Error finding account.");
+            HttpResponseMessage responseNotFound = Request.CreateErrorResponse(HttpStatusCode.NotFound, errorNotFound);
+
+            return ResponseMessage(responseNotFound);
         }
 
         // DELETE: api/Employees/5

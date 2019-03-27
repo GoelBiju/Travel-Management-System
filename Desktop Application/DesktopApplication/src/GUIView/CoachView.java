@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package GUIView;
+//import DesktopApplicationModel.datamodel.Coach;
+
 
 /**
  *
@@ -41,6 +43,17 @@ public class CoachView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         coachAmountLabel = new javax.swing.JLabel();
+        breakdownAlertBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        coachModelLabel = new javax.swing.JLabel();
+        regPlateLabel = new javax.swing.JLabel();
+        coachMakeLabel = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        coachStatusLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +116,44 @@ public class CoachView extends javax.swing.JFrame {
         coachAmountLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         coachAmountLabel.setText("N/A");
 
+        breakdownAlertBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        breakdownAlertBtn.setText("Coach Brokendown");
+        breakdownAlertBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                breakdownAlertBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Alert Breakdown");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Coach Details");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Model:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Make:");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Reg Plate:");
+
+        coachModelLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        coachModelLabel.setText("N/A");
+
+        regPlateLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        regPlateLabel.setText("N/A");
+
+        coachMakeLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        coachMakeLabel.setText("N/A");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Status:");
+
+        coachStatusLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        coachStatusLabel.setText("N/A");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,13 +181,32 @@ public class CoachView extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(availableLabel)
                                     .addComponent(inUseLabel)
-                                    .addComponent(brokendownLabel)))
+                                    .addComponent(brokendownLabel)
+                                    .addComponent(availableLabel)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(coachAmountLabel)))
+                                .addComponent(coachAmountLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel10))
+                                        .addGap(64, 64, 64)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(coachStatusLabel)
+                                            .addComponent(coachModelLabel)
+                                            .addComponent(coachMakeLabel)
+                                            .addComponent(regPlateLabel))))
+                                .addGap(246, 246, 246)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(breakdownAlertBtn))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -152,7 +222,34 @@ public class CoachView extends javax.swing.JFrame {
                     .addComponent(SignOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(breakdownAlertBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(coachStatusLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel9))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(coachMakeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(coachModelLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(regPlateLabel)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(coachAmountLabel))
@@ -161,14 +258,14 @@ public class CoachView extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(availableLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inUseLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inUseLabel)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(brokendownLabel))
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addGap(103, 103, 103))
         );
 
         pack();
@@ -193,6 +290,37 @@ public class CoachView extends javax.swing.JFrame {
         //Current journey button changes to journey page
     }//GEN-LAST:event_CurrentJourneyPgBtnActionPerformed
 
+    private void breakdownAlertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breakdownAlertBtnActionPerformed
+        //Get the coach reg plate
+        System.out.println("Coach breakdown alert sent ");
+        displayCoachDetails();
+    }//GEN-LAST:event_breakdownAlertBtnActionPerformed
+
+    private void displayCoachDetails(){
+        
+        int coachID;
+        String coachMake = "VW";
+        String coachModel = "Large car";
+        String regPlate = "AB12 CDE";
+        Boolean isActive = true;
+                
+        coachMakeLabel.setText(coachMake);
+        coachModelLabel.setText(coachModel);
+        regPlateLabel.setText(regPlate);
+        
+        if(isActive){
+            coachStatusLabel.setText("Active");
+        }
+        else{
+            coachStatusLabel.setText("Inactive");
+        }
+        //TO DO
+        /*Get the coach details via the coach id
+        display the coach details
+        when the breakdown button is pressed set isactive to false in db 
+        and on the labels
+        */
+    }
     /**
      * @param args the command line arguments
      */
@@ -225,10 +353,17 @@ public class CoachView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CoachView().setVisible(true);
+         //       displayCoachDetails();
+                        
             }
         });
         
+        //Coach coach = new Coach();
+       
     }
+   
+   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CoachesPgBtn;
@@ -237,13 +372,24 @@ public class CoachView extends javax.swing.JFrame {
     private javax.swing.JButton ShiftsPgBtn;
     private javax.swing.JButton SignOutBtn;
     private javax.swing.JLabel availableLabel;
+    private javax.swing.JButton breakdownAlertBtn;
     private javax.swing.JLabel brokendownLabel;
     private javax.swing.JLabel coachAmountLabel;
+    private javax.swing.JLabel coachMakeLabel;
+    private javax.swing.JLabel coachModelLabel;
+    private javax.swing.JLabel coachStatusLabel;
     private javax.swing.JLabel inUseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel regPlateLabel;
     // End of variables declaration//GEN-END:variables
 }

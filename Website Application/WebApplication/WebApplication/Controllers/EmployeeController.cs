@@ -18,57 +18,70 @@ namespace WebApplication.Controllers
         //https://www.tutorialsteacher.com/mvc/model-binding-in-asp.net-mvc
 
 
-        // GET: Employee
-        public ActionResult Index()
+        // GET: Employee/Index
+        public ActionResult Details()
         {
-            var _Data = new List<Employee>();
-            HttpClient client = new HttpClient();
-            APIConnection.RunAsync(client).Wait();
+            var _Data = new List<EmployeeViewModel>();
+            //HttpClient client = new HttpClient();
+            //APIConnection.RunAsync(client).Wait();
 
-            HttpResponseMessage response = client.GetAsync("employees").Result;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("employees").Result;
             if (response.IsSuccessStatusCode)
             {
                 var JsonString = response.Content.ReadAsStringAsync().Result;
-                _Data = JsonConvert.DeserializeObject<List<Employee>>(JsonString);
+                _Data = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(JsonString);
             }
 
             return View(_Data);
         }
 
-        public ActionResult Create()
+        public ActionResult CreateOrEdit(string id = "")
         {
-            return View();
+            return View(new EmployeeViewModel());
         }
 
         [HttpPost]
-        public ActionResult Create(Employee employee)
+        public ActionResult CreateOrEdit()
         {
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public ActionResult Details(string id)
-        {
+            HttpResponseMessage response = 
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Edit(string id, FormCollection collection)
-        {
-            return View();
-        }
+
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public ActionResult Create(EmployeeViewModel employee)
+        //{
+        //    return RedirectToAction("Details");
+        //}
+
+        //[HttpPost]
+        //public ActionResult Edit(string id, FormCollection collection)
+        //{
+        //    return View();
+        //}
 
         public ActionResult Delete(string id)
         {
-            var _Data = new Employee();
-            HttpClient client = new HttpClient();
-            APIConnection.RunAsync(client).Wait();
+            // TODO: Check id is not null.
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Details");
+            }
 
-            HttpResponseMessage response = client.GetAsync("employees" + id).Result;
+            var _Data = new EmployeeViewModel();
+            //HttpClient client = new HttpClient();
+            //APIConnection.RunAsync(client).Wait();
+
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("employees/" + id).Result;
             if (response.IsSuccessStatusCode)
             {
                 var JsonString = response.Content.ReadAsStringAsync().Result;
-                _Data = JsonConvert.DeserializeObject<Employee>(JsonString);
+                _Data = JsonConvert.DeserializeObject<EmployeeViewModel>(JsonString);
             }
             return View(_Data);
         }
@@ -80,7 +93,7 @@ namespace WebApplication.Controllers
             {
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             catch
             {

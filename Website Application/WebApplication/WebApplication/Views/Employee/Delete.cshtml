@@ -1,7 +1,7 @@
-﻿@model WebApplication.Models.Employee
+﻿@model WebApplication.Models.EmployeeViewModel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Employee";
 }
 
 <h2>Delete</h2>
@@ -34,15 +34,6 @@
         <dd>
             @Html.DisplayFor(model => model.JobRole)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
@@ -50,7 +41,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Details")
         </div>
     }
 </div>

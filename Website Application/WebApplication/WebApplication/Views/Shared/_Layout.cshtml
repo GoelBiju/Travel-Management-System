@@ -4,6 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <!--CSS and JS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/SideMenuStyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/SideMenuDropDown.js"></script>
+    <!--------->
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -15,5 +22,66 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <!--Side Navigation Menu -->
+    <div class="sideMenu">
+        <button class="dropdown-btn">
+            Empyloees
+            <i class="fa fa-caret-down"></i>
+        </button>
+
+        <div class="dropdown-container">
+            <a href="#">Create New Account</a>
+            <a href="#">Update Account</a>
+            <a href="#">Retrieve Account</a>
+            <a href="#">Archive Account</a>
+        </div>
+
+        <button class="dropdown-btn">
+            Coaches
+            <i class="fa fa-caret-down"></i>
+        </button>
+
+        <div class="dropdown-container">
+            <a href="#">Create New Record</a>
+            <a href="#">Update Coach </a>
+            <a href="#">View Current Stock</a>
+            <a href="#">Archive Coach </a>
+        </div>
+
+        <a href="#">Replacement Services</a>
+
+        <button class="dropdown-btn">
+            Timetables
+            <i class="fa fa-caret-down"></i>
+        </button>
+
+        <div class="dropdown-container">
+            <a href="#">Create New Timetable</a>
+            <a href="#">Update Timetable</a>
+            <a href="#">View Timetable</a>
+            <a href="#">Archive Timetable</a>
+        </div>
+
+        <button class="dropdown-btn">
+            Routes
+            <i class="fa fa-caret-down"></i>
+        </button>
+
+        <div class="dropdown-container">
+            <a href="#">Create New Route</a>
+            <a href="#">Update Route</a>
+            <a href="#">View Route</a>
+            <a href="#">Archive Route</a>
+        </div>
+
+        <a href="#">Help</a>
+
+        <a href="#" id="logout">Sign Out</a>
+    </div>
+    <!--End of Side Navigation Menu-->
+
+
+
 </body>
 </html>

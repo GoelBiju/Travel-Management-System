@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package GUIView;
-//import DesktopApplicationModel.datamodel.Coach;
+import DesktopApplicationModel.datamodel.Coach;
 
-
+  
 /**
  *
  * @author vcastellani
@@ -29,20 +29,12 @@ public class CoachView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        availableLabel = new javax.swing.JLabel();
-        inUseLabel = new javax.swing.JLabel();
         ShiftsPgBtn = new javax.swing.JButton();
-        brokendownLabel = new javax.swing.JLabel();
         PassengerPgBtn = new javax.swing.JButton();
         CurrentJourneyPgBtn = new javax.swing.JButton();
         CoachesPgBtn = new javax.swing.JButton();
         SignOutBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        coachAmountLabel = new javax.swing.JLabel();
         breakdownAlertBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -57,15 +49,6 @@ public class CoachView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Currently In Use:");
-
-        availableLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        availableLabel.setText("N/A");
-
-        inUseLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        inUseLabel.setText("N/A");
-
         ShiftsPgBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ShiftsPgBtn.setText("Shifts");
         ShiftsPgBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -73,9 +56,6 @@ public class CoachView extends javax.swing.JFrame {
                 ShiftsPgBtnActionPerformed(evt);
             }
         });
-
-        brokendownLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        brokendownLabel.setText("N/A");
 
         PassengerPgBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         PassengerPgBtn.setText("Passengers");
@@ -103,18 +83,6 @@ public class CoachView extends javax.swing.JFrame {
                 SignOutBtnActionPerformed(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Brokendown:");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Coaches Available: ");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Amount of Coaches:");
-
-        coachAmountLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        coachAmountLabel.setText("N/A");
 
         breakdownAlertBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         breakdownAlertBtn.setText("Coach Brokendown");
@@ -174,39 +142,23 @@ public class CoachView extends javax.swing.JFrame {
                         .addComponent(SignOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inUseLabel)
-                                    .addComponent(brokendownLabel)
-                                    .addComponent(availableLabel)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(coachAmountLabel))
+                            .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel10))
-                                        .addGap(64, 64, 64)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(coachStatusLabel)
-                                            .addComponent(coachModelLabel)
-                                            .addComponent(coachMakeLabel)
-                                            .addComponent(regPlateLabel))))
-                                .addGap(246, 246, 246)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(breakdownAlertBtn))))
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel10))
+                                .addGap(64, 64, 64)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(coachStatusLabel)
+                                    .addComponent(coachModelLabel)
+                                    .addComponent(coachMakeLabel)
+                                    .addComponent(regPlateLabel))))
+                        .addGap(246, 246, 246)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(breakdownAlertBtn))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -249,23 +201,7 @@ public class CoachView extends javax.swing.JFrame {
                                 .addComponent(coachModelLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(regPlateLabel)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(coachAmountLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(availableLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inUseLabel)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brokendownLabel))
-                .addGap(103, 103, 103))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
 
         pack();
@@ -299,11 +235,16 @@ public class CoachView extends javax.swing.JFrame {
     private void displayCoachDetails(){
         
         int coachID;
-        String coachMake = "VW";
-        String coachModel = "Large car";
-        String regPlate = "AB12 CDE";
-        Boolean isActive = true;
-                
+        String coachMake; // = "VW";
+        String coachModel; // = "Large car";
+        String regPlate; // = "AB12 CDE";
+        Boolean isActive; // = true;
+
+        //Get the coach id
+        coachID = Coach.getCoachId(1);
+        
+        
+        
         coachMakeLabel.setText(coachMake);
         coachModelLabel.setText(coachModel);
         regPlateLabel.setText(regPlate);
@@ -317,8 +258,8 @@ public class CoachView extends javax.swing.JFrame {
         //TO DO
         /*Get the coach details via the coach id
         display the coach details
-        when the breakdown button is pressed set isactive to false in db 
-        and on the labels
+        when the breakdown button is pressed set isactive to false in db and on the labels
+        by using the id to find what coach needs to be made in active
         */
     }
     /**
@@ -371,19 +312,11 @@ public class CoachView extends javax.swing.JFrame {
     private javax.swing.JButton PassengerPgBtn;
     private javax.swing.JButton ShiftsPgBtn;
     private javax.swing.JButton SignOutBtn;
-    private javax.swing.JLabel availableLabel;
     private javax.swing.JButton breakdownAlertBtn;
-    private javax.swing.JLabel brokendownLabel;
-    private javax.swing.JLabel coachAmountLabel;
     private javax.swing.JLabel coachMakeLabel;
     private javax.swing.JLabel coachModelLabel;
     private javax.swing.JLabel coachStatusLabel;
-    private javax.swing.JLabel inUseLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

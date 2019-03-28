@@ -18,7 +18,7 @@ namespace WebApplication.Controllers
         //https://www.tutorialsteacher.com/mvc/model-binding-in-asp.net-mvc
 
 
-        // GET: Employee/Index
+        // GET: Employee/Details
         public ActionResult Details()
         {
             var _Data = new List<EmployeeViewModel>();
@@ -41,10 +41,10 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateOrEdit()
+        public ActionResult CreateOrEdit(EmployeeViewModel employee)
         {
-            //HttpResponseMessage response = 
-            return View();
+            HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("employees", employee).Result;
+            return RedirectToAction("Details");
         }
 
 

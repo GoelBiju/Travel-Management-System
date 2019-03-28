@@ -99,15 +99,28 @@ namespace api.Controllers
         }
 
         // POST: api/Employees
-        [ResponseType(typeof(EMPLOYEE))]
-        public IHttpActionResult PostEMPLOYEE(EMPLOYEE eMPLOYEE)
+        [HttpPost]
+        [Route("")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostEMPLOYEE([FromBody] EmployeeCreationBindingModel employee)
         {
+            // Create EMPLOYEE object from the object we received.
+            EMPLOYEE addEmployee = new EMPLOYEE()
+            {
+                EMPLOYEE_ID = "",
+                FIRST_NAME = employee.FirstName,
+                LAST_NAME = employee.LastName,
+                JOB_ROLE = employee.JobRole,
+                EMPLOYEE_PASSWORD = employee.Password
+            };
+
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.EMPLOYEES.Add(eMPLOYEE);
+            db.EMPLOYEES.Add(addEmployee);
 
             try
             {
@@ -115,17 +128,24 @@ namespace api.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EMPLOYEEExists(eMPLOYEE.EMPLOYEE_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (EMPLOYEEExists(addEmployee.EMPLOYEE_ID))
+                //{
+                //    return Conflict();
+                //}
+                //else
+                //{
+                // throw;
+                //}
+
+                return BadRequest();
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = eMPLOYEE.EMPLOYEE_ID }, eMPLOYEE);
+            // TODO: Get the added employee information, this will require attributes e.g. email to uniquely identify 
+            //       other than the primary key.
+
+            //return CreatedAtRoute("DefaultApi", new { id = eMPLOYEE.EMPLOYEE_ID }, eMPLOYEE);
+            HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, employee);
+            return ResponseMessage(responseMessage);
         }
 
         //Login to web app for admin employees:

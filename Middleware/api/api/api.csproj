@@ -206,6 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BindingModels\EmployeeCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\EmployeeLoginBindingModel.cs" />
     <Compile Include="Models\COACH.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>

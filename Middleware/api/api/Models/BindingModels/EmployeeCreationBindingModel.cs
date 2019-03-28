@@ -1,26 +1,19 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication.Models
+namespace api.Models.BindingModels
 {
-    public class EmployeeViewModel
+    public class EmployeeCreationBindingModel
     {
-        [Display(Name = "Employee ID")]
-        public string EmployeeId { get; set; }
-
-        [Display(Name = "First Name")]
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
-        [JsonProperty("lastName")]
+        [JsonProperty("LastName")]
         public string LastName { get; set; }
 
-        [Display(Name = "Job Role")]
         [JsonProperty("jobRole")]
         public string JobRole { get; set; }
 

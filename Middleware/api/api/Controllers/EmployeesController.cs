@@ -214,6 +214,7 @@ namespace api.Controllers
                 return NotFound();
             }
 
+            // Remove 
             db.EMPLOYEES.Remove(eMPLOYEE);
             db.SaveChanges();
 

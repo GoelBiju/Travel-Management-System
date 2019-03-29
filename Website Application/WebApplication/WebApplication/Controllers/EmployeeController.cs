@@ -35,15 +35,20 @@ namespace WebApplication.Controllers
             return View(_Data);
         }
 
-        public ActionResult CreateOrEdit(string id = "")
+        public ActionResult Create(string id = "")
         {
             return View(new EmployeeViewModel());
         }
 
         [HttpPost]
-        public ActionResult CreateOrEdit(EmployeeViewModel employee)
+        public ActionResult Create(EmployeeViewModel employee)
         {
             HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("employees", employee).Result;
+            if (response.IsSuccessStatusCode)
+            {
+            }
+            TempData["SuccessMessage"] = "Created Successfully";
+
             return RedirectToAction("Details");
         }
 

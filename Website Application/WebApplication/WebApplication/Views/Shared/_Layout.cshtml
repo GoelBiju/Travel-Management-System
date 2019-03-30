@@ -8,7 +8,7 @@
     <!--CSS and JS-->
     <link rel="stylesheet" type="text/css" href="~/Content/SideMenuStyleSheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="~/Scripts/SideMenuDropDown.js"></script>
+    <script src="~/Scripts/SideMenuDropDown.js" type="text/javascript"></script>
     <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
     <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />
     <!--------->
@@ -17,7 +17,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container body-content">
+    <div id="main" class="container body-content">
         @RenderBody()
     </div>
 
@@ -27,12 +27,12 @@
     @RenderSection("scripts", required: false)
 
     <!--Side Navigation Menu -->
-    <div class="sideMenu">
+    @*<div class="sidenav">
+        <!-- Employees Options -->
         <button class="dropdown-btn">
-            Empyloees
+            Employees
             <i class="fa fa-caret-down"></i>
         </button>
-
         <div class="dropdown-container">
             <a href="#">Create New Account</a>
             <a href="#">Update Account</a>
@@ -40,11 +40,11 @@
             <a href="#">Archive Account</a>
         </div>
 
+        <!-- Coaches Options -->
         <button class="dropdown-btn">
             Coaches
             <i class="fa fa-caret-down"></i>
         </button>
-
         <div class="dropdown-container">
             <a href="#">Create New Record</a>
             <a href="#">Update Coach </a>
@@ -52,13 +52,14 @@
             <a href="#">Archive Coach </a>
         </div>
 
+        <!-- Replacement Services -->
         <a href="#">Replacement Services</a>
 
+        <!-- Journeys Options -->
         <button class="dropdown-btn">
             Timetables
             <i class="fa fa-caret-down"></i>
         </button>
-
         <div class="dropdown-container">
             <a href="#">Create New Timetable</a>
             <a href="#">Update Timetable</a>
@@ -66,11 +67,11 @@
             <a href="#">Archive Timetable</a>
         </div>
 
+        <!-- Routes Options -->
         <button class="dropdown-btn">
             Routes
             <i class="fa fa-caret-down"></i>
         </button>
-
         <div class="dropdown-container">
             <a href="#">Create New Route</a>
             <a href="#">Update Route</a>
@@ -81,10 +82,8 @@
         <a href="#">Help</a>
 
         <a href="#" id="logout">Sign Out</a>
-    </div>
-    <!--End of Side Navigation Menu-->
-
-
+    </div>*@
+    <!-- End of Side Navigation Menu -->
 
 </body>
 </html>

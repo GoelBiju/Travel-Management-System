@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using WebApplication.Models;
+using WebApplication.ViewModels;
 using WebApplication.Utilities;
 using System.Web.Mvc;
 
@@ -44,31 +44,34 @@ namespace WebApplication.Controllers
         public ActionResult Create(EmployeeViewModel employee)
         {
             HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("employees", employee).Result;
-            if (response.IsSuccessStatusCode)
-            {
-            }
-            TempData["SuccessMessage"] = "Created Successfully";
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    TempData["SuccessMessage"] = "Created Successfully";
+            //}
 
             return RedirectToAction("Details");
         }
 
+        public ActionResult Edit(string id = "")
+        {
+            EmployeeViewModel employeeData = null;
 
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+            if (string.IsNullOrEmpty(id))
+            {
+                // GET the employee details using the id.
 
-        //[HttpPost]
-        //public ActionResult Create(EmployeeViewModel employee)
-        //{
-        //    return RedirectToAction("Details");
-        //}
+            }
 
-        //[HttpPost]
-        //public ActionResult Edit(string id, FormCollection collection)
-        //{
-        //    return View();
-        //}
+            return View(employeeData);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EmployeeViewModel employee)
+        {
+            // HTTP PUT request with the updated employee object in the JSON request body.
+
+            return RedirectToAction("Details");
+        }
 
         public ActionResult Delete(string id)
         {

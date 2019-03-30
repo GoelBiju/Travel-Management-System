@@ -10,22 +10,18 @@ namespace WebApplication.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            // TODO: Check to ensure that the user is already logged in, if not then re-direct to login page (sessionStorage?).
+
+            //return View();
+            return RedirectToAction("Login");
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+        //public ActionResult About()
+        //{
+        //    ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        //    return View();
+        //}
 
         public ActionResult Login()
         {

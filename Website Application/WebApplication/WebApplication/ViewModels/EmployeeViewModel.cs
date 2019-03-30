@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication.Models
+namespace WebApplication.ViewModels
 {
     public class EmployeeViewModel
     {

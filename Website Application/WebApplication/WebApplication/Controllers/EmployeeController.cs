@@ -17,8 +17,8 @@ namespace WebApplication.Controllers
     {
         //https://www.tutorialsteacher.com/mvc/model-binding-in-asp.net-mvc
 
-
         // GET: Employee/Details
+        [HttpGet]
         public ActionResult Details()
         {
             var _Data = new List<EmployeeViewModel>();
@@ -35,6 +35,7 @@ namespace WebApplication.Controllers
             return View(_Data);
         }
 
+        [HttpGet]
         public ActionResult Create(string id = "")
         {
             return View(new EmployeeViewModel());
@@ -52,6 +53,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("Details");
         }
 
+        [HttpGet]
         public ActionResult Edit(string id = "")
         {
             EmployeeViewModel employeeData = null;
@@ -73,6 +75,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("Details");
         }
 
+        [HttpGet]
         public ActionResult Delete(string id)
         {
             // TODO: Check id is not null.
@@ -82,8 +85,6 @@ namespace WebApplication.Controllers
             }
 
             var _Data = new EmployeeViewModel();
-            //HttpClient client = new HttpClient();
-            //APIConnection.RunAsync(client).Wait();
 
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("employees/" + id).Result;
             if (response.IsSuccessStatusCode)
@@ -94,8 +95,8 @@ namespace WebApplication.Controllers
             return View(_Data);
         }
 
-        [HttpDelete]
-        public ActionResult Delete(string id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(string id)
         {
             try
             {

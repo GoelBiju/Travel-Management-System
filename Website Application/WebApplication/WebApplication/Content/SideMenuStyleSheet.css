@@ -57,3 +57,12 @@
         font-size: 18px;
     }
 }
+
+#logout {
+    color: #eb1414;
+    font-weight: bold;
+}
+
+ #logout:hover {
+    color: #404040;
+}

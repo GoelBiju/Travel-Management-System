@@ -150,7 +150,7 @@ namespace api.Controllers
 
         //Login to web app for admin employees:
         [HttpPost]
-        [Route("webLogin")]
+        [Route("login")]
         [ResponseType(typeof(EmployeeDTO))]
         public IHttpActionResult employeeLogin([FromBody] EmployeeLoginBindingModel loginCredentials)
         {
@@ -205,20 +205,22 @@ namespace api.Controllers
         }
 
         // DELETE: api/Employees/5
-        [ResponseType(typeof(EMPLOYEE))]
+        [HttpDelete]
+        [Route("{id}", Name = "DeleteEmployeeById")]
+        [ResponseType(typeof(void))]
         public IHttpActionResult DeleteEMPLOYEE(string id)
         {
-            EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
-            if (eMPLOYEE == null)
+            EMPLOYEE employee = db.EMPLOYEES.Find(id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            // Remove 
-            db.EMPLOYEES.Remove(eMPLOYEE);
+            // Remove the employee from the employees table but add them to the archive employees table.
+            db.EMPLOYEES.Remove(employee);
             db.SaveChanges();
 
-            return Ok(eMPLOYEE);
+            return Ok(employee);
         }
 
         protected override void Dispose(bool disposing)

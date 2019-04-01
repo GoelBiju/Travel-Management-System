@@ -10,7 +10,7 @@ namespace WebApplication.Models
     public class CoachViewModel
     {
         [Display(Name = "Coach ID")]
-        public int CoachId { get; set; }
+        public string CoachId { get; set; }
 
         [Display(Name = "Make")]
         [JsonProperty("coachMake")]

@@ -1,0 +1,65 @@
+﻿@model WebApplication.Models.CoachViewModel
+
+@{
+    ViewBag.Title = "Coach Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Coach Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachMake)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachMake)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationPlate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationPlate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachCapacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachCapacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -15,7 +15,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Coach/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
             return View();
         }

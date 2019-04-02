@@ -95,6 +95,7 @@ namespace WebApplication.Controllers
             return View(_Data);
         }
 
+        // POST: Employee/Delete/5
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(string id)
         {

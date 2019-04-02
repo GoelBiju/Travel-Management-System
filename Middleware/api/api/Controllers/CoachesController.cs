@@ -146,19 +146,24 @@ namespace api.Controllers
         }
 
         // DELETE: api/Coaches/5
-        [ResponseType(typeof(COACH))]
-        public IHttpActionResult DeleteCOACH(decimal id)
+        [HttpDelete]
+        [Route("{id:int}", Name = "DeleteCoachById")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteCOACH(int id)
         {
-            COACH cOACH = db.COACHES.Find(id);
-            if (cOACH == null)
+            COACH coach = db.COACHES.Find(id);
+            if (coach == null)
             {
                 return NotFound();
             }
 
-            db.COACHES.Remove(cOACH);
+            // Remove the coach from the coaches table.
+            db.COACHES.Remove(coach);
             db.SaveChanges();
 
-            return Ok(cOACH);
+            // TODO: Add the record into the COACHES_ARCHIVE.
+
+            return Ok(coach);
         }
 
         protected override void Dispose(bool disposing)

@@ -108,12 +108,13 @@ namespace WebApplication.Controllers
                 var JsonString = response.Content.ReadAsStringAsync().Result;
                 _Data = JsonConvert.DeserializeObject<CoachViewModel>(JsonString);
             }
+
             return View(_Data);
         }
 
         // POST: Coach/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {

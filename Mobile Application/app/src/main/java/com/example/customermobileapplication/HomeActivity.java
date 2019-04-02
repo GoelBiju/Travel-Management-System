@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
 
         setViewActions();
         prepareDatePickerDialog();
-
     }
 
 

@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
 
-    <!--CSS and JS-->
-    <link rel="stylesheet" type="text/css" href="~/Content/SideMenuStyleSheet.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="~/Scripts/SideMenuDropDown.js" type="text/javascript"></script>
-    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
-    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />
-    <!--------->
+    @Styles.Render("~/Content/SideMenuStyleSheet.css")
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+
+    @*<link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />*@
+    
 
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
 </head>
 <body>
     <div id="main" class="container body-content">
@@ -23,11 +22,11 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    @*<link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />*@
     @RenderSection("scripts", required: false)
 
     <!--Side Navigation Menu -->
-    @*<div class="sidenav">
+    <div class="sideMenu">
         <!-- Employees Options -->
         <button class="dropdown-btn">
             Employees
@@ -82,8 +81,11 @@
         <a href="#">Help</a>
 
         <a href="#" id="logout">Sign Out</a>
-    </div>*@
+    </div>
     <!-- End of Side Navigation Menu -->
+
+
+    @Scripts.Render("~/Scripts/SideMenuDropDown.js")
 
 </body>
 </html>

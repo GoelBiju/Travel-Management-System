@@ -92,20 +92,38 @@ namespace WebApplication.Controllers
         }
 
         // GET: Coach/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            if (string.IsNullOrEmpty(id.ToString()))
+            {
+                return RedirectToAction("Details");
+            }
+
+            var _Data = new CoachViewModel();
+
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("coaches/" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var JsonString = response.Content.ReadAsStringAsync().Result;
+                _Data = JsonConvert.DeserializeObject<CoachViewModel>(JsonString);
+            }
+            return View(_Data);
         }
 
         // POST: Coach/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                HttpResponseMessage response = GlobalVariables.WebApiClient.DeleteAsync("coaches/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Details");
+                }
 
-                return RedirectToAction("Index");
+                return View();
             }
             catch
             {

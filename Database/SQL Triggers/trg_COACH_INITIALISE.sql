@@ -1,0 +1,7 @@
+CREATE OR REPLACE TRIGGER TRG_COACH_INITIALISE
+BEFORE INSERT ON coaches FOR EACH ROW
+BEGIN
+    SELECT seq_coach_id.nextval
+    INTO :NEW.coach_id
+    FROM sys.dual;
+END;

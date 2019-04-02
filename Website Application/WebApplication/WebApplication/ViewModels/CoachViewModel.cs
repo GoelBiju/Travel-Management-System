@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication.Models
+namespace WebApplication.ViewModels
 {
     public class CoachViewModel
     {
         [Display(Name = "Coach ID")]
-        public string CoachId { get; set; }
+        public int CoachId { get; set; }
 
         [Display(Name = "Make")]
         [JsonProperty("coachMake")]

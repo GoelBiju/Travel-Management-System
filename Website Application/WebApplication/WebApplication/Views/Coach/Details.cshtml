@@ -1,13 +1,15 @@
-﻿@model WebApplication.Models.CoachViewModel
+﻿@model WebApplication.ViewModels.CoachViewModel
 
 @{
-    ViewBag.Title = "Coach Details";
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Coach Details</h2>
+<h2>Details</h2>
 
 <div>
+    <h4>Coach Details</h4>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CoachId)

@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using WebApplication.ViewModels;
 using WebApplication.Utilities;
 using System.Web.Mvc;
-using WebApplication.Models;
+
 
 namespace WebApplication.Controllers
 {
@@ -32,7 +32,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Coach/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int id) 
         {
 
             var _Data = new CoachViewModel();
@@ -43,7 +43,7 @@ namespace WebApplication.Controllers
                 var JsonString = response.Content.ReadAsStringAsync().Result;
                 _Data = JsonConvert.DeserializeObject<CoachViewModel>(JsonString);
             }
-            return View(_Data);
+            return View(_Data); 
 
         }
 

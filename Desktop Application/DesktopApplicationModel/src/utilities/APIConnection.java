@@ -19,11 +19,14 @@ import java.net.URL;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import datamodel.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -96,6 +99,55 @@ public class APIConnection {
         }
         
         return 400;
+    }
+    
+    public static HashMap<String, Object> PostData (String endpoint, Object obj)
+    {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            // URL for the API
+            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endpoint;
+            URL url = new URL(uri);
+            
+            // Build a JSON string to post
+            String json = mapper.writeValueAsString(obj); // <-- This only works if using Jackson to parse JSON
+            
+            System.out.println(json);
+            
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            //connection.setRequestProperty("Authorization", /* AUTH CONTENT */ "");
+            
+            try (OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream())) {
+                output.write(json);
+                output.flush();
+            }
+            
+            System.out.println(connection.getResponseMessage());
+            
+            response.put("responseCode", connection.getResponseCode());
+            
+            if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 300) {
+                response.put("responseMessage", new BufferedReader(new InputStreamReader((connection.getInputStream()))).readLine());
+            } else {
+                response.put("responseMessage", null);
+            }
+            
+            return response;
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        response.put("responseCode", 400);
+        response.put("responseMessage", null);
+        
+        return response;
+    
     }
     
     public static int DeleteData(String endPoint)

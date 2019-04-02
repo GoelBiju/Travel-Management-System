@@ -56,6 +56,10 @@
     .sideMenu a {
         font-size: 18px;
     }
+
+    /*.main {
+        margin-left: 500px;
+    }*/
 }
 
 #logout {
@@ -65,4 +69,8 @@
 
  #logout:hover {
     color: #404040;
+}
+
+.container{
+    margin-left: 350px !important;
 }

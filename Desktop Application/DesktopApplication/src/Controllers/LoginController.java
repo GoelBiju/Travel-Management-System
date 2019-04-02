@@ -24,5 +24,6 @@ public class LoginController {
     
     public void setLoginPanelView(LoginPanel loginPanel){
         this.loginPanel = loginPanel;
+        apiConnection.PostData("employees", loginModel);
     }
 }

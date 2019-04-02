@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.BindingModels;
 using api.Models.DTO;
 
 namespace api.Controllers
@@ -22,6 +23,7 @@ namespace api.Controllers
         // GET: api/Coaches
         [HttpGet]
         [Route("")]
+        [ResponseType(typeof(CoachDTO))]
         public IQueryable<CoachDTO> GetCOACHES()
         {
             var coaches = from c in db.COACHES
@@ -32,7 +34,7 @@ namespace api.Controllers
                               CoachModel = c.COACH_MODEL,
                               RegistratonPlate = c.REGISTRATION_PLATE,
                               CoachCapacity = (int)c.COACH_CAPACITY,
-                              IsActive = Convert.ToBoolean(c.IS_ACTIVE)
+                              IsActive = c.IS_ACTIVE
                           };
 
             return coaches;
@@ -67,14 +69,14 @@ namespace api.Controllers
 
         // PUT: api/Coaches/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCOACH(decimal id, COACH cOACH)
+        public IHttpActionResult PutCOACH(string id, COACH cOACH)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cOACH.COACH_ID)
+            if (id != cOACH.REGISTRATION_PLATE)
             {
                 return BadRequest();
             }
@@ -102,8 +104,20 @@ namespace api.Controllers
 
         // POST: api/Coaches
         [ResponseType(typeof(COACH))]
-        public IHttpActionResult PostCOACH(COACH cOACH)
+        [HttpPost]
+        [Route("")]
+        public IHttpActionResult PostCOACH(CoachCreationBindingModel coach)
         {
+            COACH cOACH = new COACH()
+            {
+                COACH_ID = 0,
+                COACH_MAKE = coach.CoachMake,
+                COACH_MODEL = coach.CoachModel,
+                REGISTRATION_PLATE = coach.RegistratonPlate,
+                COACH_CAPACITY = coach.CoachCapacity,
+                IS_ACTIVE = coach.IsActive
+            };
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -117,7 +131,7 @@ namespace api.Controllers
             }
             catch (DbUpdateException)
             {
-                if (COACHExists(cOACH.COACH_ID))
+                if (COACHExists(cOACH.REGISTRATION_PLATE))
                 {
                     return Conflict();
                 }   
@@ -127,7 +141,8 @@ namespace api.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = cOACH.COACH_ID }, cOACH);
+            HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, coach);
+            return ResponseMessage(responseMessage);
         }
 
         // DELETE: api/Coaches/5
@@ -155,9 +170,9 @@ namespace api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool COACHExists(decimal id)
+        private bool COACHExists(string reg)
         {
-            return db.COACHES.Count(e => e.COACH_ID == id) > 0;
+            return db.COACHES.Count(e => e.REGISTRATION_PLATE == reg) > 0;
         }
     }
 }

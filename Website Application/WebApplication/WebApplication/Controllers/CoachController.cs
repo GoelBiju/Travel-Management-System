@@ -2,7 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using WebApplication.ViewModels;
+using WebApplication.Utilities;
 using System.Web.Mvc;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -11,13 +19,32 @@ namespace WebApplication.Controllers
         // GET: Coach
         public ActionResult Index()
         {
-            return View();
+            var _Data = new List<CoachViewModel>();
+
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("coaches").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var JsonString = response.Content.ReadAsStringAsync().Result;
+                _Data = JsonConvert.DeserializeObject<List<CoachViewModel>>(JsonString);
+            }
+
+            return View(_Data);
         }
 
         // GET: Coach/Details/5
-        public ActionResult Details()
+        public ActionResult Details(string id)
         {
-            return View();
+
+            var _Data = new CoachViewModel();
+
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("coaches/" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var JsonString = response.Content.ReadAsStringAsync().Result;
+                _Data = JsonConvert.DeserializeObject<CoachViewModel>(JsonString);
+            }
+            return View(_Data);
+
         }
 
         // GET: Coach/Create
@@ -28,11 +55,11 @@ namespace WebApplication.Controllers
 
         // POST: Coach/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CoachViewModel coach)
         {
             try
             {
-                // TODO: Add insert logic here
+                HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("coaches", coach).Result;
 
                 return RedirectToAction("Index");
             }

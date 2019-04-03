@@ -13,15 +13,58 @@ import Controllers.CoachController;
  */
 public class CoachView extends javax.swing.JFrame {
 
-    /**
+    
+        int coachID;
+        String coachMake;
+        String coachModel;
+        String regPlate; 
+        boolean isActive;
+        
+        CoachController coachController = new CoachController();
+        Coach coach = new Coach();
+        
+     /**
      * Creates new form CoachPage
      */
     public CoachView() {
         initComponents();
         displayCoachDetails();
+    } 
+    
+    private void displayCoachDetails(){  
+        
+        coachController.getCoachData(coach);
+        
+        coachMake = coach.getCoachMake();
+        coachModel = coach.getCoachModel();
+        regPlate = coach.getRegPlate();
+        isActive = coach.isIsActive();
+        
+        coachMakeLabel.setText(coachMake);
+        coachModelLabel.setText(coachModel);
+        regPlateLabel.setText(regPlate);
+        
+        if(isActive){
+            coachStatusLabel.setText("Active");
+        }
+        else{
+            coachStatusLabel.setText("Inactive");
+        }
+        
+                //TO DO
+        /*Get the coach details via the coach id
+        display the coach details
+        when the breakdown button is pressed set isactive to false
+        in db and on the labels
+        by using the id to find what coach needs to be made in active
+        */
+              
+    }
+    
+    public void changeCoachStatus(){
         
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -231,39 +274,10 @@ public class CoachView extends javax.swing.JFrame {
     private void breakdownAlertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breakdownAlertBtnActionPerformed
         //Get the coach reg plate
         System.out.println("Coach breakdown alert sent ");
-        //displayCoachDetails();
+        changeCoachStatus();
     }//GEN-LAST:event_breakdownAlertBtnActionPerformed
 
-    private void displayCoachDetails(){
-       
-        
-        int coachID = Coach.getCoachId();
-        String coachMake = Coach.getCoachMake();
-        String coachModel;
-        String regPlate; 
-        Boolean isActive;
-        
-        //Get the coach id
-           
-        coachMakeLabel.setText(coachMake);
-        coachModelLabel.setText(coachModel);
-        regPlateLabel.setText(regPlate);
-        
-        if(isActive){
-            coachStatusLabel.setText("Active");
-        }
-        else{
-            coachStatusLabel.setText("Inactive");
-        }
-        
-        //TO DO
-        /*Get the coach details via the coach id
-        display the coach details
-        when the breakdown button is pressed set isactive to false
-        in db and on the labels
-        by using the id to find what coach needs to be made in active
-        */
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -291,18 +305,15 @@ public class CoachView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CoachView().setVisible(true);
-        //        displayCoachDetails();
-                        
+          
             }
         });
         
-        //Coach coach = new Coach();
-       
     }
    
    

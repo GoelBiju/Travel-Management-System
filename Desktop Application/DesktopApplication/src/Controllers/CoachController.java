@@ -15,7 +15,7 @@ import utilities.APIConnection;
  */
 public class CoachController {
     private CoachView coachview; //View
-    private Coach coachDatamodel;//Model 
+    private Coach coachDataModel;//Model 
     private APIConnection apiConnection;
     
     public CoachController(){
@@ -23,13 +23,12 @@ public class CoachController {
     }
     
     public void getCoachData (Coach coachDatamodel){
-        this.coachDatamodel = coachDatamodel;
-        apiConnection.getData("coaches", Coach.class, 1);
+        coachDataModel = apiConnection.getCoachData("1");
     }
     
     public void postCoachData(Coach coachDatamodel){
-        this.coachDatamodel = coachDatamodel;
-        apiConnection.putData("coaches", coachDatamodel);
+        this.coachDataModel = coachDataModel;
+        apiConnection.putData("coaches", coachDataModel);
     }
     
 }

@@ -14,11 +14,11 @@ import Controllers.CoachController;
 public class CoachView extends javax.swing.JFrame {
 
     
-        int coachID;
-        String coachMake;
-        String coachModel;
-        String regPlate; 
-        boolean isActive;
+//        int coachID;
+//        String coachMake;
+//        String coachModel;
+//        String regPlate; 
+//        boolean isActive;
         
         CoachController coachController = new CoachController();
         Coach coach = new Coach();
@@ -35,16 +35,16 @@ public class CoachView extends javax.swing.JFrame {
         
         coachController.getCoachData(coach);
         
-        coachMake = coach.getCoachMake();
-        coachModel = coach.getCoachModel();
-        regPlate = coach.getRegPlate();
-        isActive = coach.isIsActive();
+//        coachMake = coach.getCoachMake();
+//        coachModel = coach.getCoachModel();
+//        regPlate = coach.getRegPlate();
+//        isActive = coach.isIsActive();
         
-        coachMakeLabel.setText(coachMake);
-        coachModelLabel.setText(coachModel);
-        regPlateLabel.setText(regPlate);
+        coachMakeLabel.setText(coach.getCoachMake());
+        coachModelLabel.setText(coach.getCoachModel());
+        regPlateLabel.setText(coach.getRegPlate());
         
-        if(isActive){
+        if(coach.isIsActive()){
             coachStatusLabel.setText("Active");
         }
         else{
@@ -61,7 +61,9 @@ public class CoachView extends javax.swing.JFrame {
               
     }
     
-    public void changeCoachStatus(){
+    public void updateCoachStatus(){
+        //update the database by posting the inactive coach status back
+        coachController.postCoachData(coach);
         
     }
     
@@ -274,7 +276,7 @@ public class CoachView extends javax.swing.JFrame {
     private void breakdownAlertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breakdownAlertBtnActionPerformed
         //Get the coach reg plate
         System.out.println("Coach breakdown alert sent ");
-        changeCoachStatus();
+        updateCoachStatus();
     }//GEN-LAST:event_breakdownAlertBtnActionPerformed
 
 

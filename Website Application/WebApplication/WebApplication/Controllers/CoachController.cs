@@ -36,7 +36,7 @@ namespace WebApplication.Controllers
         {
             var _Data = new CoachViewModel();
 
-            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("coaches/" + id).Result;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("coaches/" + id.ToString()).Result;
             if (response.IsSuccessStatusCode)
             {
                 var JsonString = response.Content.ReadAsStringAsync().Result;
@@ -78,7 +78,7 @@ namespace WebApplication.Controllers
 
             CoachViewModel data = new CoachViewModel();
 
-            HttpResponseMessage message = GlobalVariables.WebApiClient.GetAsync("coaches/" + id).Result;
+            HttpResponseMessage message = GlobalVariables.WebApiClient.GetAsync("coaches/" + id.ToString()).Result;
 
             if (message.IsSuccessStatusCode)
             {

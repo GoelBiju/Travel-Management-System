@@ -1,4 +1,4 @@
-﻿@model WebApplication.Models.CoachViewModel
+﻿@model WebApplication.ViewModels.CoachViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -15,13 +15,6 @@
         <h4>CoachViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CoachId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CoachId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CoachId, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CoachMake, htmlAttributes: new { @class = "control-label col-md-2" })

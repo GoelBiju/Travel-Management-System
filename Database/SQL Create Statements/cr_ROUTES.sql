@@ -8,10 +8,8 @@
         - departure_station;
         
         - arrival_station;
-        
-        - 
-        
 */
+
 
 CREATE TABLE routes(
 

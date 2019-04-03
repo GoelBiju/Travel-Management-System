@@ -15,7 +15,7 @@ namespace api.Models.DTO
         public string EmployeeId { get; set; }
 
         [JsonProperty("routeId")]
-        public string RouteId { get; set; }
+        public int RouteId { get; set; }
 
         [JsonProperty("coachId")]
         public int CoachId { get; set; }

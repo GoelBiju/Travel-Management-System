@@ -29,7 +29,7 @@ namespace api.Controllers
                          {
                              ShiftId = (int)s.SHIFT_ID,
                              EmployeeId = s.EMPLOYEE_ID,
-                             RouteId = s.ROUTE_ID,
+                             RouteId = (int)s.ROUTE_ID,
                              CoachId = (int)s.COACH_ID,
                              StartDateTime = s.START_DATETIME,
                              EndDateTime = s.END_DATETIME
@@ -52,7 +52,7 @@ namespace api.Controllers
                 {
                     ShiftId = (int)s.SHIFT_ID,
                     EmployeeId = s.EMPLOYEE_ID,
-                    RouteId = s.ROUTE_ID,
+                    RouteId = (int)s.ROUTE_ID,
                     CoachId = (int)s.COACH_ID,
                     StartDateTime = s.START_DATETIME,
                     EndDateTime = s.END_DATETIME
@@ -79,7 +79,7 @@ namespace api.Controllers
                 {
                     ShiftId = (int)s.SHIFT_ID,
                     EmployeeId = s.EMPLOYEE_ID,
-                    RouteId = s.ROUTE_ID,
+                    RouteId = (int)s.ROUTE_ID,
                     CoachId = (int)s.COACH_ID,
                     StartDateTime = s.START_DATETIME,
                     EndDateTime = s.END_DATETIME

@@ -68,22 +68,12 @@ namespace api.Controllers
             return Ok(coach);
         }
 
-        // PUT: api/Coaches/
+        // PUT: api/Coaches/1
         [HttpPut]
-        [Route("")]
+        [Route("{id:int}")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCOACH([FromBody] CoachDTO coach)
+        public IHttpActionResult PutCOACH(int id, [FromBody] CoachDTO coach)
         {
-            //COACH updatedCoach = new COACH()
-            //{
-            //    COACH_ID = id,
-            //    COACH_CAPACITY = coach.CoachCapacity,
-            //    COACH_MAKE = coach.CoachMake,
-            //    COACH_MODEL = coach.CoachModel,
-            //    IS_ACTIVE = coach.IsActive,
-            //    REGISTRATION_PLATE = coach.RegistratonPlate
-            //};
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -91,13 +81,20 @@ namespace api.Controllers
 
             //db.Entry(updatedCoach).State = EntityState.Modified;
 
-            var coachRecord = db.COACHES.FirstOrDefault(c => c.COACH_ID == coach.CoachId);
+            if (coach.CoachId > 0)
+            {
+                // Get the current record with the matching coach id and update it's details.
+                var coachRecord = db.COACHES.FirstOrDefault(c => c.COACH_ID == coach.CoachId);
 
-            coachRecord.COACH_MAKE = coach.CoachMake;
-            coachRecord.COACH_MODEL = coach.CoachModel;
-            coachRecord.COACH_CAPACITY = coach.CoachCapacity;
-            coachRecord.REGISTRATION_PLATE = coach.RegistratonPlate;
-            coachRecord.IS_ACTIVE = coach.IsActive;
+                coachRecord.COACH_MAKE = coach.CoachMake;
+                coachRecord.COACH_MODEL = coach.CoachModel;
+                coachRecord.COACH_CAPACITY = coach.CoachCapacity;
+                coachRecord.REGISTRATION_PLATE = coach.RegistratonPlate;
+                coachRecord.IS_ACTIVE = coach.IsActive;
+            } else
+            {
+                return BadRequest();
+            }
 
             try
             {
@@ -115,6 +112,7 @@ namespace api.Controllers
                 }
             }
 
+            // Successfully updated and there is no content returned.
             return StatusCode(HttpStatusCode.NoContent);
         }
 

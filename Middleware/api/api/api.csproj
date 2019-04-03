@@ -202,7 +202,6 @@
     <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\ShiftsController.cs" />
     <Compile Include="Controllers\StationsController.cs" />
-    <Compile Include="Controllers\TimetablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,9 +253,6 @@
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\STATION.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TIMETABLE.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

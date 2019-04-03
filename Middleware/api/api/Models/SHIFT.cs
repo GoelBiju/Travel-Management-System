@@ -16,12 +16,13 @@ namespace api.Models
     {
         public decimal SHIFT_ID { get; set; }
         public string EMPLOYEE_ID { get; set; }
-        public string ROUTE_ID { get; set; }
+        public decimal ROUTE_ID { get; set; }
         public decimal COACH_ID { get; set; }
         public System.DateTime START_DATETIME { get; set; }
         public System.DateTime END_DATETIME { get; set; }
     
         public virtual COACH COACH { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual ROUTE ROUTE { get; set; }
     }
 }

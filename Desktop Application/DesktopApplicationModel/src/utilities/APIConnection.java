@@ -18,6 +18,7 @@ import java.net.URL;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.annotation.*;
 import datamodel.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,9 +38,13 @@ import java.util.logging.Logger;
  * @author Goel
  */
 public class APIConnection {
+    public static ObjectMapper mapper;
     
-    public static ObjectMapper mapper = new ObjectMapper()
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+    public void APIconnection(){
+            mapper = new ObjectMapper()
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+        }
+
     
     public static Object[] getListData(String endPoint, Class tableClass)
     {
@@ -57,7 +62,7 @@ public class APIConnection {
        return object;
     }
     
-    public static Object getData(String tableName, Class tableClass, Integer id) {
+    public static Object getData(String tableName, Class tableClass, String id) {
         Object object = new Object();
         
         try {
@@ -166,42 +171,48 @@ public class APIConnection {
         return 400;
     }
     
+    
+    public static Coach getCoachData (String id){
+        
+        Coach coach = (Coach) getData("coaches", Coach.class, id);
+        return coach;
+    }
+    
     /**
      * Example showing how to retrieve a single Customer object as a test 
      * and convert from JSON to a Java object.
      * @return Customer object mapped from json data in the database
      */
-//    public static Object getCustomer() {
-//        Object object = new Object();
-//        
-//        try {
-//            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/11";
-//            URL url = new URL(uri);
-//        
-//            object = mapper.readValue(url, Customer.class);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        
-//        
-//        return object;
-//    }
-    
+    public static Object getCustomer() {
+        Object object = new Object();
+        
+        try {
+           String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/12";
+            URL url = new URL(uri);
+        
+            object = mapper.readValue(url, Customer.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        
+        return object;
+    }
+//    
+//    
     
     public static void main(String[] args) {
         System.out.println("APIConnection test.");
         
-        //Customer customer = (Customer) getCustomer();
+       Customer customer = (Customer) getCustomer();
         
         //System.out.println("First Name: " + customer.firstName);
         
-        //Employee[] employees = (Employee[]) GetData("employees", Employee[].class);
+        //Employee employees = (Employee) getData("employees", Employee.class, "D5212");
         
-        //for (Employee e:employees)
-        //{
-        //    System.out.println(e.getFirstName());
-        //    System.out.println(e.getLastName());
-        //}
+        //System.out.println(employees.getFirstName());
+        //System.out.println(employees.getLastName());
+        
 
         
     }

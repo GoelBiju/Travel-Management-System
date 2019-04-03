@@ -78,7 +78,7 @@ namespace WebApplication.Controllers
 
             CoachViewModel data = new CoachViewModel();
 
-            HttpResponseMessage message = GlobalVariables.WebApiClient.GetAsync("coaches/" + id.ToString()).Result;
+            HttpResponseMessage message = GlobalVariables.WebApiClient.GetAsync("coaches/" + id).Result;
 
             if (message.IsSuccessStatusCode)
             {
@@ -91,11 +91,12 @@ namespace WebApplication.Controllers
 
         // POST: Coach/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(CoachViewModel updatedCoach)
         {
             try
             {
-                // TODO: Add update logic here
+                // TODO: Add update logic to send a PUT request with the updated coach information.
+                HttpResponseMessage message = GlobalVariables.WebApiClient.PutAsJsonAsync("coaches", updatedCoach).Result;
 
                 return RedirectToAction("Index");
             }

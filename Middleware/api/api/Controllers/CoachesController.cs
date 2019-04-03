@@ -68,21 +68,36 @@ namespace api.Controllers
             return Ok(coach);
         }
 
-        // PUT: api/Coaches/5
+        // PUT: api/Coaches/
+        [HttpPut]
+        [Route("")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCOACH(string id, COACH cOACH)
+        public IHttpActionResult PutCOACH([FromBody] CoachDTO coach)
         {
+            //COACH updatedCoach = new COACH()
+            //{
+            //    COACH_ID = id,
+            //    COACH_CAPACITY = coach.CoachCapacity,
+            //    COACH_MAKE = coach.CoachMake,
+            //    COACH_MODEL = coach.CoachModel,
+            //    IS_ACTIVE = coach.IsActive,
+            //    REGISTRATION_PLATE = coach.RegistratonPlate
+            //};
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cOACH.REGISTRATION_PLATE)
-            {
-                return BadRequest();
-            }
+            //db.Entry(updatedCoach).State = EntityState.Modified;
 
-            db.Entry(cOACH).State = EntityState.Modified;
+            var coachRecord = db.COACHES.FirstOrDefault(c => c.COACH_ID == coach.CoachId);
+
+            coachRecord.COACH_MAKE = coach.CoachMake;
+            coachRecord.COACH_MODEL = coach.CoachModel;
+            coachRecord.COACH_CAPACITY = coach.CoachCapacity;
+            coachRecord.REGISTRATION_PLATE = coach.RegistratonPlate;
+            coachRecord.IS_ACTIVE = coach.IsActive;
 
             try
             {
@@ -90,7 +105,7 @@ namespace api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!COACHExists(id))
+                if (!COACHExists(coach.RegistratonPlate))
                 {
                     return NotFound();
                 }
@@ -107,7 +122,7 @@ namespace api.Controllers
         [ResponseType(typeof(COACH))]
         [HttpPost]
         [Route("")]
-        public IHttpActionResult PostCOACH(CoachCreationBindingModel coach)
+        public IHttpActionResult PostCOACH(CoachBindingModel coach)
         {
             COACH cOACH = new COACH()
             {

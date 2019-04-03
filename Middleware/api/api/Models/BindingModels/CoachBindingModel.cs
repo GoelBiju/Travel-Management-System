@@ -6,7 +6,7 @@ using System.Web;
 
 namespace api.Models.BindingModels
 {
-    public class CoachCreationBindingModel
+    public class CoachBindingModel
     {
         [JsonProperty("coachMake")]
         [JsonRequired]

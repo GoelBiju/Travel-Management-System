@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="Model.TIMETABLE" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
         <AssociationConnector Association="Model.SHIFTS_COACH_ID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.SHIFTS_EMPLOYEE_ID_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.COACHES_ARCHIVE" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

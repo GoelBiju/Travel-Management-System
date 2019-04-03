@@ -11,6 +11,16 @@
     <Property Name="COACH_CAPACITY" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="IS_ACTIVE" Type="number" Precision="1" Scale="0" Nullable="false" />
   </EntityType>
+  <EntityType Name="COACHES_ARCHIVE">
+    <Key>
+      <PropertyRef Name="COACH_ID" />
+    </Key>
+    <Property Name="COACH_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COACH_MAKE" Type="varchar2" MaxLength="35" Nullable="false" />
+    <Property Name="COACH_MODEL" Type="varchar2" MaxLength="35" Nullable="false" />
+    <Property Name="REGISTRATION_PLATE" Type="varchar2" MaxLength="8" Nullable="false" />
+    <Property Name="COACH_CAPACITY" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
   <EntityType Name="CUSTOMERS">
     <Key>
       <PropertyRef Name="CUSTOMER_ID" />
@@ -111,6 +121,7 @@ warning 6002: The table/view 'PRCS251E.TIMETABLES' does not have a primary key d
   </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="COACHES" EntityType="Self.COACHES" Schema="PRCS251E" store:Type="Tables" />
+    <EntitySet Name="COACHES_ARCHIVE" EntityType="Self.COACHES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Self.EMPLOYEES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />

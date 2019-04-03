@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="COACHES">
           <Key>
             <PropertyRef Name="COACH_ID" />
@@ -15,6 +15,16 @@
           <Property Name="REGISTRATION_PLATE" Type="varchar2" MaxLength="8" Nullable="false" />
           <Property Name="COACH_CAPACITY" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="IS_ACTIVE" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COACHES_ARCHIVE">
+          <Key>
+            <PropertyRef Name="COACH_ID" />
+          </Key>
+          <Property Name="COACH_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COACH_MAKE" Type="varchar2" MaxLength="35" Nullable="false" />
+          <Property Name="COACH_MODEL" Type="varchar2" MaxLength="35" Nullable="false" />
+          <Property Name="REGISTRATION_PLATE" Type="varchar2" MaxLength="8" Nullable="false" />
+          <Property Name="COACH_CAPACITY" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="CUSTOMERS">
           <Key>
@@ -116,6 +126,7 @@ warning 6002: The table/view 'PRCS251E.TIMETABLES' does not have a primary key d
         </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="COACHES" EntityType="Self.COACHES" Schema="PRCS251E" store:Type="Tables" />
+          <EntitySet Name="COACHES_ARCHIVE" EntityType="Self.COACHES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Self.EMPLOYEES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
@@ -140,8 +151,7 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             <End Role="SHIFTS" EntitySet="SHIFTS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -273,7 +283,18 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
             <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
             <End Role="SHIFTS" EntitySet="SHIFTS" />
           </AssociationSet>
+          <EntitySet Name="COACHES_ARCHIVE" EntityType="Model.COACHES_ARCHIVE" />
         </EntityContainer>
+        <EntityType Name="COACHES_ARCHIVE">
+          <Key>
+            <PropertyRef Name="COACH_ID" />
+          </Key>
+          <Property Name="COACH_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="COACH_MAKE" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="COACH_MODEL" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="REGISTRATION_PLATE" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="COACH_CAPACITY" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -366,6 +387,17 @@ FROM "PRCS251E"."TIMETABLES" "TIMETABLES"</DefiningQuery>
                 <ScalarProperty Name="DEPARTURE_TIME" ColumnName="DEPARTURE_TIME" />
                 <ScalarProperty Name="ARRIVAL_TIME" ColumnName="ARRIVAL_TIME" />
                 <ScalarProperty Name="DAY_OF_JOURNEY" ColumnName="DAY_OF_JOURNEY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COACHES_ARCHIVE">
+            <EntityTypeMapping TypeName="Model.COACHES_ARCHIVE">
+              <MappingFragment StoreEntitySet="COACHES_ARCHIVE">
+                <ScalarProperty Name="COACH_CAPACITY" ColumnName="COACH_CAPACITY" />
+                <ScalarProperty Name="REGISTRATION_PLATE" ColumnName="REGISTRATION_PLATE" />
+                <ScalarProperty Name="COACH_MODEL" ColumnName="COACH_MODEL" />
+                <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
+                <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

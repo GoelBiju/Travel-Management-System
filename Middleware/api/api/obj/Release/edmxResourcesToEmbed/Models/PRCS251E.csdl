@@ -128,5 +128,16 @@
       <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
       <End Role="SHIFTS" EntitySet="SHIFTS" />
     </AssociationSet>
+    <EntitySet Name="COACHES_ARCHIVE" EntityType="Model.COACHES_ARCHIVE" />
   </EntityContainer>
+  <EntityType Name="COACHES_ARCHIVE">
+    <Key>
+      <PropertyRef Name="COACH_ID" />
+    </Key>
+    <Property Name="COACH_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="COACH_MAKE" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="COACH_MODEL" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="REGISTRATION_PLATE" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="COACH_CAPACITY" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+  </EntityType>
 </Schema>

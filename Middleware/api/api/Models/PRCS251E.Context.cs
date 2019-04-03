@@ -33,5 +33,6 @@ namespace api.Models
         public virtual DbSet<SHIFT> SHIFTS { get; set; }
         public virtual DbSet<STATION> STATIONS { get; set; }
         public virtual DbSet<TIMETABLE> TIMETABLES { get; set; }
+        public virtual DbSet<COACHES_ARCHIVE> COACHES_ARCHIVE { get; set; }
     }
 }

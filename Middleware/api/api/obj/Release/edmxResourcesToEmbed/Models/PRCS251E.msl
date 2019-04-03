@@ -90,5 +90,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="COACHES_ARCHIVE">
+      <EntityTypeMapping TypeName="Model.COACHES_ARCHIVE">
+        <MappingFragment StoreEntitySet="COACHES_ARCHIVE">
+          <ScalarProperty Name="COACH_CAPACITY" ColumnName="COACH_CAPACITY" />
+          <ScalarProperty Name="REGISTRATION_PLATE" ColumnName="REGISTRATION_PLATE" />
+          <ScalarProperty Name="COACH_MODEL" ColumnName="COACH_MODEL" />
+          <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
+          <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

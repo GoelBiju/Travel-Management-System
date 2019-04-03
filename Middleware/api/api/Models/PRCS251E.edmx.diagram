@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4e00fdd4d4644972978658bdbeb64e3a" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.COACH" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.COACH" Width="1.5" PointX="6.125" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.COACHES_ARCHIVE" Width="1.5" PointX="10.375" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CUSTOMER" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.EMPLOYEE" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EMPLOYEE" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.EMPLOYEES_ARCHIVE" Width="1.5" PointX="10.5" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ROUTE" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.SHIFT" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />

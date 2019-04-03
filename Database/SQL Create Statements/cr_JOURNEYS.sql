@@ -5,8 +5,14 @@
     
         - journey_id;
         
-        - 
+        - route_id;
         
+        - coach_id;
         
+        - employee_id;
+        
+        - start_time/date;
+        
+        - end_time/date;
 */
     

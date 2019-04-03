@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package GUIView;
-import DesktopApplicationModel.datamodel.Coach;
 
-  
+import datamodel.Coach;
+import Controllers.CoachController; 
 /**
  *
  * @author vcastellani
@@ -17,7 +17,9 @@ public class CoachView extends javax.swing.JFrame {
      * Creates new form CoachPage
      */
     public CoachView() {
-        initComponents();  
+        initComponents();
+        displayCoachDetails();
+        
     }
 
     /**
@@ -229,22 +231,20 @@ public class CoachView extends javax.swing.JFrame {
     private void breakdownAlertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breakdownAlertBtnActionPerformed
         //Get the coach reg plate
         System.out.println("Coach breakdown alert sent ");
-        displayCoachDetails();
+        //displayCoachDetails();
     }//GEN-LAST:event_breakdownAlertBtnActionPerformed
 
     private void displayCoachDetails(){
+       
         
-        int coachID;
-        String coachMake; // = "VW";
-        String coachModel; // = "Large car";
-        String regPlate; // = "AB12 CDE";
-        Boolean isActive; // = true;
-
+        int coachID = Coach.getCoachId();
+        String coachMake = Coach.getCoachMake();
+        String coachModel;
+        String regPlate; 
+        Boolean isActive;
+        
         //Get the coach id
-        coachID = Coach.getCoachId(1);
-        
-        
-        
+           
         coachMakeLabel.setText(coachMake);
         coachModelLabel.setText(coachModel);
         regPlateLabel.setText(regPlate);
@@ -255,10 +255,12 @@ public class CoachView extends javax.swing.JFrame {
         else{
             coachStatusLabel.setText("Inactive");
         }
+        
         //TO DO
         /*Get the coach details via the coach id
         display the coach details
-        when the breakdown button is pressed set isactive to false in db and on the labels
+        when the breakdown button is pressed set isactive to false
+        in db and on the labels
         by using the id to find what coach needs to be made in active
         */
     }
@@ -294,7 +296,7 @@ public class CoachView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CoachView().setVisible(true);
-         //       displayCoachDetails();
+        //        displayCoachDetails();
                         
             }
         });

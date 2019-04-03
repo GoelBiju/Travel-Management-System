@@ -52,13 +52,14 @@ namespace api.Controllers
                 new CoachDTO()
                 {
                     CoachId = (int)c.COACH_ID,
-                    CoachMake = c.COACH_MODEL,
+                    CoachMake = c.COACH_MAKE,
+                    CoachModel = c.COACH_MODEL,
                     RegistratonPlate = c.REGISTRATION_PLATE,
                     CoachCapacity = (int)c.COACH_CAPACITY,
-                    IsActive = Convert.ToBoolean(c.IS_ACTIVE)
+                    IsActive = c.IS_ACTIVE
                 }).SingleOrDefaultAsync(c => c.CoachId == id);
 
-
+            
             if (coach == null)
             {
                 return NotFound();

@@ -34,7 +34,6 @@ namespace WebApplication.Controllers
         // GET: Coach/Details/5
         public ActionResult Details(int id) 
         {
-
             var _Data = new CoachViewModel();
 
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("coaches/" + id).Result;
@@ -44,7 +43,6 @@ namespace WebApplication.Controllers
                 _Data = JsonConvert.DeserializeObject<CoachViewModel>(JsonString);
             }
             return View(_Data); 
-
         }
 
         // GET: Coach/Create
@@ -60,7 +58,6 @@ namespace WebApplication.Controllers
             try
             {
                 HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("coaches", coach).Result;
-
                 return RedirectToAction("Index");
             }
             catch
@@ -70,9 +67,26 @@ namespace WebApplication.Controllers
         }
 
         // GET: Coach/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            // Get the coach information from the API based on the coach ID.
+
+            CoachViewModel data = new CoachViewModel();
+
+            HttpResponseMessage message = GlobalVariables.WebApiClient.GetAsync("coaches/" + id.ToString()).Result;
+
+            if (message.IsSuccessStatusCode)
+            {
+                var JsonString = message.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<CoachViewModel>(JsonString);
+            }
+
+            return View(data);
         }
 
         // POST: Coach/Edit/5

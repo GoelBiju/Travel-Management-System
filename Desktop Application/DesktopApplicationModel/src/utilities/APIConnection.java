@@ -16,16 +16,13 @@ package utilities;
 
 import java.net.URL;
 
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import datamodel.*;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -38,15 +35,18 @@ import java.util.logging.Logger;
  * @author Goel
  */
 public class APIConnection {
-    public static ObjectMapper mapper;
     
-    public void APIconnection(){
-            mapper = new ObjectMapper()
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
-        }
-
+    private ObjectMapper mapper;
     
-    public static Object[] getListData(String endPoint, Class tableClass)
+    private final String apiBaseUrl = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/";
+    private final String apiBaseTestUrl = "http://localhost:60019/api/";
+        
+    public APIConnection() {
+        
+        mapper = new ObjectMapper();
+    }
+    
+    public Object[] getListData(String endPoint, Class tableClass)
     {
         Object[] object = null;
         try 
@@ -62,15 +62,16 @@ public class APIConnection {
        return object;
     }
     
-    public static Object getData(String tableName, Class tableClass, String id) {
+    public Object getData(String tableName, Class tableClass, String id) {
+        
         Object object = new Object();
         
         try {
-            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + tableName + "/" + id;
+            String uri = "http://localhost:60019/api/coaches/1";
+            System.out.println(uri);
             URL url = new URL(uri);
             
-            object = mapper.readValue(url, tableClass);
-            
+            object = this.mapper.readValue(url, Coach.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -78,7 +79,7 @@ public class APIConnection {
         return object;
     }
     
-    public static Integer putData(String endpoint, Object obj) {
+    public Integer putData(String endpoint, Object obj) {
         try {
             String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endpoint;
             URL url = new URL(uri);
@@ -106,7 +107,7 @@ public class APIConnection {
         return 400;
     }
     
-    public static HashMap<String, Object> PostData (String endpoint, Object obj)
+    public HashMap<String, Object> PostData (String endpoint, Object obj)
     {
         HashMap<String, Object> response = new HashMap<>();
         try {
@@ -155,7 +156,7 @@ public class APIConnection {
     
     }
     
-    public static int DeleteData(String endPoint)
+    public int DeleteData(String endPoint)
     {
         try {
             String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endPoint;
@@ -172,7 +173,7 @@ public class APIConnection {
     }
     
     
-    public static Coach getCoachData (String id){
+    public Coach getCoachData (String id){
         
         Coach coach = (Coach) getData("coaches", Coach.class, id);
         return coach;
@@ -183,39 +184,43 @@ public class APIConnection {
      * and convert from JSON to a Java object.
      * @return Customer object mapped from json data in the database
      */
-    public static Object getCustomer() {
-        Object object = new Object();
-        
-        try {
-           String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/12";
-            URL url = new URL(uri);
-        
-            object = mapper.readValue(url, Customer.class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        
-        
-        return object;
-    }
-//    
-//    
+//    public static Object getCustomer() {
+//        Object object = new Object();
+//        
+//        try {
+//           String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/customers/12";
+//           URL url = new URL(uri);
+//        
+//           object = mapper.readValue(url, Customer.class);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        
+//        
+//        return object;
+//    }
     
-    public static void main(String[] args) {
-        System.out.println("APIConnection test.");
-        
-       Customer customer = (Customer) getCustomer();
-        
-        //System.out.println("First Name: " + customer.firstName);
-        
-        //Employee employees = (Employee) getData("employees", Employee.class, "D5212");
-        
-        //System.out.println(employees.getFirstName());
-        //System.out.println(employees.getLastName());
-        
-
-        
-    }
-    
+//    public static void main(String[] args) {
+//        
+//        Object object = new Object();
+//        mapper = new ObjectMapper()
+//                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+//        
+//        try {
+//           String uri = "http://localhost:60019/api/coaches/1";
+//           URL url = new URL(uri);
+//        
+//           object = mapper.readValue(url, Coach.class);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        
+//        Coach coach = (Coach) object;
+//        System.out.println(coach.getCoachCapacity());
+//        
+//        //Employee employees = (Employee) getData("employees", Employee.class, "D5212");
+//        
+//        //System.out.println(employees.getFirstName());
+//        //System.out.println(employees.getLastName());  
+//    }
 }
-

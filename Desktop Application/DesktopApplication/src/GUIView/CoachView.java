@@ -42,7 +42,7 @@ public class CoachView extends javax.swing.JFrame {
         
         coachMakeLabel.setText(coach.getCoachMake());
         coachModelLabel.setText(coach.getCoachModel());
-        regPlateLabel.setText(coach.getRegPlate());
+        regPlateLabel.setText(coach.getRegistrationPlate());
         
         if(coach.isIsActive()){
             coachStatusLabel.setText("Active");

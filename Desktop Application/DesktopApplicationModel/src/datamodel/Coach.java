@@ -13,7 +13,7 @@ public class Coach {
     private int coachId;
     private String coachMake;
     private String coachModel;
-    private String regPlate;
+    private String registrationPlate;
     private int coachCapacity;
     private boolean isActive;
 
@@ -41,12 +41,12 @@ public class Coach {
         this.coachModel = coachModel;
     }
 
-    public String getRegPlate() {
-        return regPlate;
+    public String getRegistrationPlate() {
+        return registrationPlate;
     }
 
-    public void setRegPlate(String regPlate) {
-        this.regPlate = regPlate;
+    public void setRegistrationPlate(String regPlate) {
+        this.registrationPlate = regPlate;
     }
 
     public int getCoachCapacity() {
@@ -64,7 +64,4 @@ public class Coach {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
-    
-    
-    
 }

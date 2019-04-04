@@ -18,6 +18,8 @@ import java.net.URL;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.*;
 import datamodel.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -43,7 +45,8 @@ public class APIConnection {
         
     public APIConnection() {
         
-        mapper = new ObjectMapper();
+        mapper = new ObjectMapper()
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
     }
     
     public Object[] getListData(String endPoint, Class tableClass)
@@ -67,7 +70,7 @@ public class APIConnection {
         Object object = new Object();
         
         try {
-            String uri = "http://localhost:60019/api/coaches/1";
+            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/coaches/"+ id;
             System.out.println(uri);
             URL url = new URL(uri);
             
@@ -182,6 +185,7 @@ public class APIConnection {
     /**
      * Example showing how to retrieve a single Customer object as a test 
      * and convert from JSON to a Java object.
+     * @param args
      * @return Customer object mapped from json data in the database
      */
 //    public static Object getCustomer() {
@@ -200,27 +204,28 @@ public class APIConnection {
 //        return object;
 //    }
     
-//    public static void main(String[] args) {
-//        
-//        Object object = new Object();
-//        mapper = new ObjectMapper()
-//                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
-//        
-//        try {
-//           String uri = "http://localhost:60019/api/coaches/1";
-//           URL url = new URL(uri);
-//        
-//           object = mapper.readValue(url, Coach.class);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        
-//        Coach coach = (Coach) object;
-//        System.out.println(coach.getCoachCapacity());
-//        
-//        //Employee employees = (Employee) getData("employees", Employee.class, "D5212");
-//        
-//        //System.out.println(employees.getFirstName());
-//        //System.out.println(employees.getLastName());  
-//    }
+    public static void main(String[] args) {
+        
+        Object object = new Object();
+        
+        
+        try {
+           String uri = "http://localhost:60019/api/coaches/1";
+           URL url = new URL(uri);
+        
+           
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        Coach coach;
+        APIConnection conn = new APIConnection();
+        coach = (Coach) conn.getCoachData("1");
+        System.out.println(coach.getCoachCapacity());
+        
+        //Employee employees = (Employee) getData("employees", Employee.class, "D5212");
+        
+        //System.out.println(employees.getFirstName());
+        //System.out.println(employees.getLastName());  
+    }
 }

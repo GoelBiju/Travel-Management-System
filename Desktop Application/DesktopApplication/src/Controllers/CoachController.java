@@ -22,8 +22,9 @@ public class CoachController {
         apiConnection = new APIConnection();
     }
     
-    public void getCoachData (Coach coachDatamodel){
+    public Coach getCoachData (Coach coachDatamodel){
         coachDataModel = apiConnection.getCoachData("1");
+        return coachDataModel;
     }
     
     public void postCoachData(Coach dataModel){

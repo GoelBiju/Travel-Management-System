@@ -185,6 +185,7 @@ public class APIConnection {
         System.out.println("Returned Coach Registration Plate: " + coach.getRegistrationPlate());
         System.out.println("Returned Coach Capacity: " + coach.getCoachCapacity());
         System.out.println("Returned Coach Is Active: " + coach.isActive());
+        
         return coach;
     }
     

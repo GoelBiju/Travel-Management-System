@@ -34,16 +34,16 @@ public class CoachView extends javax.swing.JFrame {
     private void displayCoachDetails(){  
         
         // Get coach data.
-        coachController.getCoachData(coach);
+        this.coach = coachController.getCoachData(coach);
         
 //        coachMake = coach.getCoachMake();
 //        coachModel = coach.getCoachModel();
 //        regPlate = coach.getRegPlate();
 //        isActive = coach.isIsActive();
         
-        coachMakeLabel.setText(coach.getCoachMake());
-        coachModelLabel.setText(coach.getCoachModel());
-        regPlateLabel.setText(coach.getRegistrationPlate());
+        coachMakeLabel.setText(this.coach.getCoachMake());
+        coachModelLabel.setText(this.coach.getCoachModel());
+        regPlateLabel.setText(this.coach.getRegistrationPlate());
         
         if(coach.isActive()){
             coachStatusLabel.setText("Active");

@@ -26,9 +26,9 @@ public class CoachController {
         coachDataModel = apiConnection.getCoachData("1");
     }
     
-    public void postCoachData(Coach coachDatamodel){
-        this.coachDataModel = coachDataModel;
-        apiConnection.putData("coaches", coachDataModel);
+    public void postCoachData(Coach dataModel){
+        this.coachDataModel = dataModel;
+        apiConnection.putData("coaches", dataModel);
     }
     
 }

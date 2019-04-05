@@ -38,14 +38,14 @@ import java.util.logging.Logger;
  */
 public class APIConnection {
     
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
     
     private final String apiBaseUrl = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/";
     private final String apiBaseTestUrl = "http://localhost:60019/api/";
         
     public APIConnection() {
         
-        mapper = new ObjectMapper()
+        this.mapper = new ObjectMapper()
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
     }
     
@@ -179,6 +179,12 @@ public class APIConnection {
     public Coach getCoachData (String id){
         
         Coach coach = (Coach) getData("coaches", Coach.class, id);
+        System.out.println("Returned Coach ID: " + coach.getCoachId());
+        System.out.println("Returned Coach Make: " + coach.getCoachMake());
+        System.out.println("Returned Coach Model: " + coach.getCoachModel());
+        System.out.println("Returned Coach Registration Plate: " + coach.getRegistrationPlate());
+        System.out.println("Returned Coach Capacity: " + coach.getCoachCapacity());
+        System.out.println("Returned Coach Is Active: " + coach.isActive());
         return coach;
     }
     

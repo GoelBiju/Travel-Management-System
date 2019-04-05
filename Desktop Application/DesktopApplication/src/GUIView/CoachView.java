@@ -33,6 +33,7 @@ public class CoachView extends javax.swing.JFrame {
     
     private void displayCoachDetails(){  
         
+        // Get coach data.
         coachController.getCoachData(coach);
         
 //        coachMake = coach.getCoachMake();
@@ -44,7 +45,7 @@ public class CoachView extends javax.swing.JFrame {
         coachModelLabel.setText(coach.getCoachModel());
         regPlateLabel.setText(coach.getRegistrationPlate());
         
-        if(coach.isIsActive()){
+        if(coach.isActive()){
             coachStatusLabel.setText("Active");
         }
         else{

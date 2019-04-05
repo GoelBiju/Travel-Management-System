@@ -57,7 +57,7 @@ public class Coach {
         this.coachCapacity = coachCapacity;
     }
 
-    public boolean isIsActive() {
+    public boolean isActive() {
         return isActive;
     }
 

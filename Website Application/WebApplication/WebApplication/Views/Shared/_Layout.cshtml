@@ -33,10 +33,10 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a href="#">Create New Account</a>
-            <a href="#">Update Account</a>
-            <a href="#">Retrieve Account</a>
-            <a href="#">Archive Account</a>
+            <a>@Html.ActionLink("Create Employee", "Create", "Employee")</a>
+            <a>@Html.ActionLink("Update Employee", "Edit", "Employee")</a>
+            <a>@Html.ActionLink("View Employees", "Details", "Employee")</a>
+            <a>@Html.ActionLink("Archive Employee", "Delete", "Employee")</a>
         </div>
 
         <!-- Coaches Options -->
@@ -45,10 +45,10 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a href="#">Create New Record</a>
-            <a href="#">Update Coach </a>
-            <a href="#">View Current Stock</a>
-            <a href="#">Archive Coach </a>
+            <a>@Html.ActionLink("Add Coach", "Create", "Coach")</a>
+            <a>@Html.ActionLink("Update Coach", "Edit", "Coach")</a>
+            <a>@Html.ActionLink("View Coaches", "Details", "Coach")</a>
+            <a>@Html.ActionLink("Archive Coach", "Delete", "Coach")</a>
         </div>
 
         <!-- Replacement Services -->
@@ -80,7 +80,7 @@
 
         <a href="#">Help</a>
 
-        <a href="#" id="logout">Sign Out</a>
+        <a>@Html.ActionLink("Sign Out", "Login", "Home",null, new { id = "logout"}) </a>
     </div>
     <!-- End of Side Navigation Menu -->
 

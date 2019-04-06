@@ -13,6 +13,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="COACHES_ARCHIVE">
+      <EntityTypeMapping TypeName="Model.COACHES_ARCHIVE">
+        <MappingFragment StoreEntitySet="COACHES_ARCHIVE">
+          <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
+          <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
+          <ScalarProperty Name="COACH_MODEL" ColumnName="COACH_MODEL" />
+          <ScalarProperty Name="REGISTRATION_PLATE" ColumnName="REGISTRATION_PLATE" />
+          <ScalarProperty Name="COACH_CAPACITY" ColumnName="COACH_CAPACITY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CUSTOMERS">
       <EntityTypeMapping TypeName="Model.CUSTOMER">
         <MappingFragment StoreEntitySet="CUSTOMERS">
@@ -76,28 +87,6 @@
         <MappingFragment StoreEntitySet="STATIONS">
           <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
           <ScalarProperty Name="STATION_NAME" ColumnName="STATION_NAME" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TIMETABLES">
-      <EntityTypeMapping TypeName="Model.TIMETABLE">
-        <MappingFragment StoreEntitySet="TIMETABLES">
-          <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
-          <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
-          <ScalarProperty Name="DEPARTURE_TIME" ColumnName="DEPARTURE_TIME" />
-          <ScalarProperty Name="ARRIVAL_TIME" ColumnName="ARRIVAL_TIME" />
-          <ScalarProperty Name="DAY_OF_JOURNEY" ColumnName="DAY_OF_JOURNEY" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="COACHES_ARCHIVE">
-      <EntityTypeMapping TypeName="Model.COACHES_ARCHIVE">
-        <MappingFragment StoreEntitySet="COACHES_ARCHIVE">
-          <ScalarProperty Name="COACH_CAPACITY" ColumnName="COACH_CAPACITY" />
-          <ScalarProperty Name="REGISTRATION_PLATE" ColumnName="REGISTRATION_PLATE" />
-          <ScalarProperty Name="COACH_MODEL" ColumnName="COACH_MODEL" />
-          <ScalarProperty Name="COACH_MAKE" ColumnName="COACH_MAKE" />
-          <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

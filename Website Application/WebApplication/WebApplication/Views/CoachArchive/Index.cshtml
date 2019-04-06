@@ -2,14 +2,11 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Coaches</h2>
+<h2>Archived Coaches</h2>
 
-<p>
-    @*@Html.ActionLink("Create New", "Create")*@
-    <a href="@Url.Action("Create", "Coach")" class="btn btn-default"><i class-"fa fa-plus"></i>Create New</a>
-</p>
 <table class="table">
     <tr>
         <th>
@@ -27,13 +24,10 @@
         <th>
             @Html.DisplayNameFor(model => model.CoachCapacity)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.CoachId)
@@ -50,15 +44,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.CoachCapacity)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CoachId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CoachId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CoachId })
-        </td>
     </tr>
 }
 
 </table>
+

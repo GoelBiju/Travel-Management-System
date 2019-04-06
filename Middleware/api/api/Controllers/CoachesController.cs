@@ -173,9 +173,8 @@ namespace api.Controllers
 
             // Remove the coach from the coaches table.
             db.COACHES.Remove(coach);
+            // The coach is added to the coaches archive by the database.
             db.SaveChanges();
-
-            // TODO: Add the record into the COACHES_ARCHIVE.
 
             return Ok(coach);
         }

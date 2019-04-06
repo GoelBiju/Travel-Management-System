@@ -96,7 +96,7 @@ namespace WebApplication.Controllers
             try
             {
                 // TODO: Add update logic to send a PUT request with the updated coach information.
-                HttpResponseMessage message = GlobalVariables.WebApiClient.PutAsJsonAsync("coaches", updatedCoach).Result;
+                HttpResponseMessage message = GlobalVariables.WebApiClient.PutAsJsonAsync("coaches/" + updatedCoach.CoachId, updatedCoach).Result;
 
                 return RedirectToAction("Index");
             }
@@ -136,7 +136,7 @@ namespace WebApplication.Controllers
                 HttpResponseMessage response = GlobalVariables.WebApiClient.DeleteAsync("coaches/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Details");
+                    return RedirectToAction("Index");
                 }
 
                 return View();

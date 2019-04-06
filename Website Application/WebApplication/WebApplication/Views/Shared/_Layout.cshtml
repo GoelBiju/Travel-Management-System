@@ -45,10 +45,10 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a>@Html.ActionLink("Add Coach", "Create", "Coach")</a>
-            <a>@Html.ActionLink("Update Coach", "Edit", "Coach")</a>
-            <a>@Html.ActionLink("View Coaches", "Details", "Coach")</a>
-            <a>@Html.ActionLink("Archive Coach", "Delete", "Coach")</a>
+            @*<a>@Html.ActionLink("Add Coach", "Create", "Coach")</a>
+            <a>@Html.ActionLink("Update Coach", "Edit", "Coach")</a>*@
+            <a>@Html.ActionLink("View Coaches", "Index", "Coach")</a>
+            <a>@Html.ActionLink("View Archived", "Index", "CoachArchive")</a>
         </div>
 
         <!-- Replacement Services -->

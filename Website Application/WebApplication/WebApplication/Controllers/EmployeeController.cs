@@ -32,6 +32,31 @@ namespace WebApplication.Controllers
                 _Data = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(JsonString);
             }
 
+
+            return View(_Data);
+        }
+
+        public ActionResult Details(string searchString)
+        {
+            var _Data = new List<EmployeeViewModel>();
+
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("employees").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    var JsonString = response.Content.ReadAsStringAsync().Result;
+
+                    foreach (object obj in JsonString)
+                    {
+                        if (JsonString.Contains(searchString))
+                        {
+                            _Data = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(JsonString);
+                        }
+                    }                                                   
+                }
+            }
+            
             return View(_Data);
         }
 

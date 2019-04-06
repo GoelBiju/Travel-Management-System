@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>NationalCoach - Website Application</title>
 
     @Styles.Render("~/Content/SideMenuStyleSheet.css")
     @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
@@ -33,10 +33,10 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a>@Html.ActionLink("Create Employee", "Create", "Employee")</a>
-            <a>@Html.ActionLink("Update Employee", "Edit", "Employee")</a>
+            @*<a>@Html.ActionLink("Create Employee", "Create", "Employee")</a>
+            <a>@Html.ActionLink("Update Employee", "Edit", "Employee")</a>*@
             <a>@Html.ActionLink("View Employees", "Details", "Employee")</a>
-            <a>@Html.ActionLink("Archive Employee", "Delete", "Employee")</a>
+            <a>@Html.ActionLink("View Archived Employee", "Index", "EmployeeArchive")</a>
         </div>
 
         <!-- Coaches Options -->
@@ -60,10 +60,10 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a href="#">Create New Timetable</a>
-            <a href="#">Update Timetable</a>
-            <a href="#">View Timetable</a>
-            <a href="#">Archive Timetable</a>
+            <a href="#">Create New Journey</a>
+            <a href="#">Update Journey</a>
+            <a href="#">View Journey</a>
+            <a href="#">Archive Journey</a>
         </div>
 
         <!-- Routes Options -->
@@ -80,7 +80,7 @@
 
         <a href="#">Help</a>
 
-        <a>@Html.ActionLink("Sign Out", "Login", "Home",null, new { id = "logout"}) </a>
+        <a>@Html.ActionLink("Sign Out", "Login", "Home", null, new { id = "logout"}) </a>
     </div>
     <!-- End of Side Navigation Menu -->
 

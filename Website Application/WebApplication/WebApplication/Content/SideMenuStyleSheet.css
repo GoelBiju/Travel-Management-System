@@ -1,12 +1,12 @@
 ﻿.sideMenu {
     height: 100%;
-    float:left;
+    float: left;
     width: 250px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #a6a6a6;
+    background-color: #b3e6ff;
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -30,7 +30,7 @@
 }
 
 .active {
-    background-color: #cccccc;
+    background-color: #ccefff;
     color: #000000;
     text-decoration: underline;
     border-top: 1px solid #000000;
@@ -38,7 +38,7 @@
 
 .dropdown-container {
     display: none;
-    background-color: #cccccc;
+    background-color: #ccefff;
     padding-left: 8px;
 }
 

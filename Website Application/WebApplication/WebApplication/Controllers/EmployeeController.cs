@@ -53,7 +53,7 @@ namespace WebApplication.Controllers
                         {
                             _Data = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(JsonString);
                         }
-                    }                                                   
+                    }
                 }
             }
             

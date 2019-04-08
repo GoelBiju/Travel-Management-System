@@ -255,13 +255,79 @@ public class APIConnection {
     }
 
 
+    /**
+     *
+     * @param resourceName
+     * @param responseClass
+     * @param callback
+     */
+    public void getCustomJsonObject(String resourceName, Class responseClass, final CustomCallback callback) {
+
+        //
+        final APIResponse errorResponse = new APIResponse();
+
+        MyCustomRequest getCustomRequest = new MyCustomRequest(Request.Method.GET,
+                this.API_BASE_URL + resourceName, null, responseClass,
+                null,
+                new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object response) {
+
+                        //
+                        callback.onSuccess(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.d("Response", error.toString());
+
+                        //
+                        errorResponse.setRequestSuccessful(false);
+
+                        //
+                        errorResponse.setResponseStatusCode(error.networkResponse.statusCode);
+
+                        //
+                        if (error.networkResponse.data != null) {
+                            JSONObject jsonErrorObject;
+                            try {
+                                jsonErrorObject = new JSONObject(new String(error.networkResponse.data));
+                                errorResponse.addResponseItem(jsonErrorObject);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //
+                        callback.onFailure(errorResponse);
+                    }
+                });
+
+        //
+        getCustomRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        //
+        queueSingleton.addToRequestQueue(getCustomRequest);
+    }
+
+
+    /**
+     *
+     * @param resourceName
+     * @param requestPostObject
+     * @param responseClass
+     * @param callback
+     */
     public void postCustomJsonObject(String resourceName, Object requestPostObject,
                                      Class responseClass, final CustomCallback callback) {
 
         //
         final APIResponse errorResponse = new APIResponse();
 
-        MyCustomRequest getCustomRequest = new MyCustomRequest(Request.Method.POST,
+        MyCustomRequest postCustomRequest = new MyCustomRequest(Request.Method.POST,
                 this.API_BASE_URL + resourceName, requestPostObject, responseClass,
                 null,
                 new Response.Listener<Object>() {
@@ -302,10 +368,10 @@ public class APIConnection {
                 });
 
         //
-        getCustomRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+        postCustomRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         //
-        queueSingleton.addToRequestQueue(getCustomRequest);
+        queueSingleton.addToRequestQueue(postCustomRequest);
     }
 }

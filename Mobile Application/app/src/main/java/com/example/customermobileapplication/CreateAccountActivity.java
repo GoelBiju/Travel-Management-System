@@ -14,8 +14,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.customermobileapplication.BindingModels.CustomerRegistrationBindingModel;
+import com.example.customermobileapplication.Model.Customer;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
 import com.example.customermobileapplication.Utilities.API.APIResponse;
+import com.example.customermobileapplication.Utilities.API.CustomCallback;
 import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 
 import org.json.JSONObject;
@@ -38,7 +41,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private EditText editTextAddressLineOne;
     private EditText editTextAddressLineTwo;
     private EditText editTextPostCode;
-    private EditText editTextPhoneNumber;
+    private EditText editTextMobileNumber;
     private EditText editTextEmailAddress;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
@@ -90,7 +93,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         editTextAddressLineOne = findViewById(R.id.editTextAddressLineOne);
         editTextAddressLineTwo = findViewById(R.id.editTextAddressLineTwo);
         editTextPostCode = findViewById(R.id.editTextPostCode);
-        editTextPhoneNumber = findViewById(R.id.editTextPhone);
+        editTextMobileNumber = findViewById(R.id.editTextMobile);
         editTextEmailAddress = findViewById(R.id.editTextEmailAddress);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
@@ -161,7 +164,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         String dateOfBirth = editTextDateOfBirth.getText().toString();
         String addressLineOne = editTextAddressLineOne.getText().toString();
         String postCode = editTextPostCode.getText().toString();
-        String phoneNumber = editTextPhoneNumber.getText().toString();
+        String phoneNumber = editTextMobileNumber.getText().toString();
         String emailAddress = editTextEmailAddress.getText().toString();
         String password = editTextPassword.getText().toString();
 
@@ -196,104 +199,180 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         String addressLineOne = editTextAddressLineOne.getText().toString();
         String addressLineTwo = editTextAddressLineTwo.getText().toString();
         String postCode = editTextPostCode.getText().toString().toUpperCase();
-        String phoneNumber = editTextPhoneNumber.getText().toString();
+        String mobileNumber = editTextMobileNumber.getText().toString();
         String emailAddress = editTextEmailAddress.getText().toString();
         String password = editTextPassword.getText().toString();
 
         // Create the JSONObject to send in the POST request body.
-        JSONObject postData = new JSONObject();
-        try {
-            postData.put("firstName", firstName);
-            postData.put("lastName", lastName);
+//        JSONObject postData = new JSONObject();
+//        try {
+//            postData.put("firstName", firstName);
+//            postData.put("lastName", lastName);
+//
+//            // Parse the date and put it in the correct format to send to the Web API.
+//            try {
+//                Date initDate = new SimpleDateFormat("dd/mm/yyyy", Locale.UK).parse(dateOfBirth);
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.UK);
+//                postData.put("dateOfBirth", formatter.format(initDate));
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//
+//            postData.put("postCode", postCode);
+//            postData.put("addressLineOne", addressLineOne);
+//            postData.put("addressLineTwo", addressLineTwo);
+//            postData.put("mobileNumber", phoneNumber);
+//            postData.put("emailAddress", emailAddress);
+//            postData.put("customerPassword", password);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        Log.d("Response", postData.toString());
 
-            // Parse the date and put it in the correct format to send to the Web API.
-            try {
-                Date initDate = new SimpleDateFormat("dd/mm/yyyy", Locale.UK).parse(dateOfBirth);
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.UK);
-                postData.put("dateOfBirth", formatter.format(initDate));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            postData.put("postCode", postCode);
-            postData.put("addressLineOne", addressLineOne);
-            postData.put("addressLineTwo", addressLineTwo);
-            postData.put("mobileNumber", phoneNumber);
-            postData.put("emailAddress", emailAddress);
-            postData.put("customerPassword", password);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.d("Response", postData.toString());
-
+        // Create the customer registration binding model.
+        CustomerRegistrationBindingModel registrationBindingModel = new CustomerRegistrationBindingModel();
+        registrationBindingModel.setEmailAddress(emailAddress);
+        registrationBindingModel.setCustomerPassword(password);
+        registrationBindingModel.setFirstName(firstName);
+        registrationBindingModel.setLastName(lastName);
+        registrationBindingModel.setDateOfBirth(dateOfBirth);
+        registrationBindingModel.setAddressLineOne(addressLineOne);
+        registrationBindingModel.setAddressLineTwo(addressLineTwo);
+        registrationBindingModel.setPostCode(postCode);
+        registrationBindingModel.setMobileNumber(mobileNumber);
 
         // Show progress dialog.
         progressDialog.setMessage("Registering Account");
         progressDialog.show();
 
         // Send the create account request.
-        apiConnection.postSingleApiRequest("customers", postData, new VolleyCallback() {
+//        apiConnection.postSingleApiRequest("customers", postData, new VolleyCallback() {
+//
+//            @Override
+//            public void onSuccess(APIResponse response) {
+//                try {
+//                    Log.d("Response", "Created user with id:" + response.getSingleResponse().get("customerId"));
+//
+//                    // Show alert dialog with the registered information.
+//                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CreateAccountActivity.this);
+//                    alertDialogBuilder.setMessage("Your account has been registered under the email address: " +
+//                            response.getSingleResponse().get("emailAddress") +
+//                            "\n\nYou can now proceed to login with your email address and the password you registered with.")
+//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    // Return to the login screen.
+//                                    Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
+//                                    startActivity(startIntent);
+//                                }
+//                            })
+//                            .setCancelable(false);
+//
+//                    AlertDialog alert = alertDialogBuilder.create();
+//                    alert.setTitle("Create Account");
+//
+//                    // Hide the dialog box and show the alert.
+//                    progressDialog.hide();
+//                    alert.show();
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(APIResponse response) {
+//                Log.d("Error.Response", response.toString());
+//
+//                progressDialog.hide();
+//
+//                // Display the error to the user.
+//                // TODO: Place important toast messages in an alert dialog.
+//                switch (response.getResponseStatusCode()) {
+//                    case HttpURLConnection.HTTP_INTERNAL_ERROR:
+//                        Toast.makeText(getApplicationContext(), "An internal server error occurred whilst processing your request.", Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//                    case HttpURLConnection.HTTP_BAD_REQUEST:
+//                        Toast.makeText(getApplicationContext(), "The request was not made in the expected format.", Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//                    case HttpURLConnection.HTTP_CONFLICT:
+//                        Toast.makeText(getApplicationContext(), "An account is already registered with this email address.", Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//                    case HttpURLConnection.HTTP_NOT_FOUND:
+//                        Toast.makeText(getApplicationContext(), "There registered account record could not be found or there was error registering your details..", Toast.LENGTH_SHORT).show();
+//                        break;
+//                }
+//            }
+//        });
 
-            @Override
-            public void onSuccess(APIResponse response) {
-                try {
-                    Log.d("Response", "Created user with id:" + response.getSingleResponse().get("customerId"));
 
-                    // Show alert dialog with the registered information.
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CreateAccountActivity.this);
-                    alertDialogBuilder.setMessage("Your account has been registered under the email address: " +
-                            response.getSingleResponse().get("emailAddress") +
-                            "\n\nYou can now proceed to login with your email address and the password you registered with.")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        // Send a POST request with the registration object, we expect a customer object to be returned.
+        apiConnection.postCustomJsonObject("customers", registrationBindingModel,
+                Customer.class, new CustomCallback() {
+                    @Override
+                    public void onSuccess(Object responseObject) {
 
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Return to the login screen.
-                                    Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                                    startActivity(startIntent);
-                                }
-                            })
-                            .setCancelable(false);
+                        // Convert the object to a Customer.
+                        Customer createdCustomer = (Customer) responseObject;
 
-                    AlertDialog alert = alertDialogBuilder.create();
-                    alert.setTitle("Create Account");
+                        Log.d("Response", "Created user with id:" + createdCustomer.getCustomerId());
 
-                    // Hide the dialog box and show the alert.
-                    progressDialog.hide();
-                    alert.show();
+                        // Show alert dialog with the registered information.
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CreateAccountActivity.this);
+                        alertDialogBuilder.setMessage("Your account has been registered under the email address: " +
+                                createdCustomer.getEmailAddress() +
+                                "\n\nYou can now proceed to login with your email address and the password you registered with.")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Return to the login screen.
+                                        Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                                        startActivity(startIntent);
+                                    }
+                                })
+                                .setCancelable(false);
 
-            @Override
-            public void onFailure(APIResponse response) {
-                Log.d("Error.Response", response.toString());
+                        AlertDialog alert = alertDialogBuilder.create();
+                        alert.setTitle("Create Account");
 
-                progressDialog.hide();
+                        // Hide the dialog box and show the alert.
+                        progressDialog.hide();
+                        alert.show();
+                    }
 
-                // Display the error to the user.
-                // TODO: Place important toast messages in an alert dialog.
-                switch (response.getResponseStatusCode()) {
-                    case HttpURLConnection.HTTP_INTERNAL_ERROR:
-                        Toast.makeText(getApplicationContext(), "An internal server error occurred whilst processing your request.", Toast.LENGTH_SHORT).show();
-                        break;
+                    @Override
+                    public void onFailure(APIResponse errorResponse) {
 
-                    case HttpURLConnection.HTTP_BAD_REQUEST:
-                        Toast.makeText(getApplicationContext(), "The request was not made in the expected format.", Toast.LENGTH_SHORT).show();
-                        break;
+                        Log.d("Error.Response", errorResponse.toString());
 
-                    case HttpURLConnection.HTTP_CONFLICT:
-                        Toast.makeText(getApplicationContext(), "An account is already registered with this email address.", Toast.LENGTH_SHORT).show();
-                        break;
+                        progressDialog.hide();
 
-                    case HttpURLConnection.HTTP_NOT_FOUND:
-                        Toast.makeText(getApplicationContext(), "There registered account record could not be found or there was error registering your details..", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
+                        // Display the error to the user.
+                        // TODO: Place important toast messages in an alert dialog.
+                        switch (errorResponse.getResponseStatusCode()) {
+                            case HttpURLConnection.HTTP_INTERNAL_ERROR:
+                                Toast.makeText(getApplicationContext(), "An internal server error occurred whilst processing your request.", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case HttpURLConnection.HTTP_BAD_REQUEST:
+                                Toast.makeText(getApplicationContext(), "The request was not made in the expected format.", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case HttpURLConnection.HTTP_CONFLICT:
+                                Toast.makeText(getApplicationContext(), "An account is already registered with this email address.", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case HttpURLConnection.HTTP_NOT_FOUND:
+                                Toast.makeText(getApplicationContext(), "There registered account record could not be found or there was error registering your details..", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
     }
 }

@@ -18,7 +18,7 @@
     <string name="addresslineone">Address Line One</string>
     <string name="addresslinetwo">Address Line Two</string>
     <string name="postcode">Post Code</string>
-    <string name="phone">Phone Number</string>
+    <string name="mobile">Mobile Number</string>
     <string name="password_again">Confirm Password</string>
     <string name="dateofbirth">Date Of Birth</string>
     <string name="register">Register</string>

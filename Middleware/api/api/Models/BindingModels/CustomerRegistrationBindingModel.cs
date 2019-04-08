@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,30 +9,39 @@ namespace api.Models.BindingModels
 {
     public class CustomerRegistrationBindingModel
     {
-        [Required]
+        [JsonProperty("emailAddress")]
+        [JsonRequired]
         public string emailAddress { get; set; }
 
-        [Required]
+        [JsonProperty("customerPassword")]
+        [JsonRequired]
         public string customerPassword { get; set; }
 
-        [Required]
+        [JsonProperty("firstName")]
+        [JsonRequired]
         public string firstName { get; set; }
 
-        [Required]
+        [JsonProperty("lastName")]
+        [JsonRequired]
         public string lastName { get; set; }
 
-        [Required]
+        [JsonProperty("dateOfBirth")]
+        [JsonRequired]
         public DateTime dateOfBirth { get; set; }
 
-        [Required]
+        [JsonProperty("addressLineOne")]
+        [JsonRequired]
         public string addressLineOne { get; set; }
 
+        [JsonProperty("addressLineTwo")]
         public string addressLineTwo { get; set; }
 
-        [Required]
+        [JsonProperty("postCode")]
+        [JsonRequired]
         public string postCode { get; set; }
 
-        [Required]
+        [JsonProperty("mobileNumber")]
+        [JsonRequired]
         public string mobileNumber { get; set; }
     }
 }

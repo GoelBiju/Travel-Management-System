@@ -86,11 +86,11 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/editTextPhone"
+            android:id="@+id/editTextMobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="@string/phone"
+            android:hint="@string/mobile"
             android:inputType="phone" />
 
 

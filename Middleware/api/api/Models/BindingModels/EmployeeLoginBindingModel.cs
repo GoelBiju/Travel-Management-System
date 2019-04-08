@@ -11,12 +11,12 @@ namespace api.Models.BindingModels
     {
         //For employee ID entered:
         [JsonProperty("employeeID")]
-        [Required]
+        [JsonRequired]
         public string employeeID { get; set; }
 
         //For employee password entered:
         [JsonProperty("password")]
-        [Required]
+        [JsonRequired]
         public string password { get; set; }
     }
 }

@@ -6,11 +6,11 @@ namespace api.Models.BindingModels
     public class CustomerLoginBindingModel
     {
         [JsonProperty("emailAddress")]
-        [Required]
+        [JsonRequired]
         public string emailAddress { get; set; }
         
         [JsonProperty("password")]
-        [Required]
+        [JsonRequired]
         public string password { get; set; }
     }
 }

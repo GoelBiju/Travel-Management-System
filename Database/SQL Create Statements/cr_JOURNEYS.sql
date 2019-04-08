@@ -35,12 +35,6 @@ CREATE TABLE journeys(
     employee_id VARCHAR(15) NOT NULL
         CONSTRAINT employees_employee_id_fk REFERENCES employees(employee_id),
         
-    start_station NUMBER NOT NULL    
-        CONSTRAINT stations_start_station_id_fk REFERENCES stations(station_id),
-        
-    end_station NUMBER NOT NULL
-        CONSTRAINT stations_end_station_id_fk REFERENCES stations(station_id),
-        
     start_date_time DATE NOT NULL,
     
     end_date_time DATE NOT NULL

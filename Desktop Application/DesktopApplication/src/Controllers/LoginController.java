@@ -5,8 +5,10 @@
  */
 package Controllers;
 
-import GUIView.LoginPanel;
+import GUIView.CoachView;
+import GUIView.LoginScreen;
 import datamodel.Login;
+import java.util.HashMap;
 import utilities.APIConnection;
 
 /**
@@ -14,7 +16,7 @@ import utilities.APIConnection;
  * @author adbellas
  */
 public class LoginController {
-    private LoginPanel loginPanel; //View
+    private LoginScreen loginScreen; //View
     private APIConnection apiConnection;
     private Login loginModel; //Model
     
@@ -22,8 +24,23 @@ public class LoginController {
         apiConnection = new APIConnection();
     }
     
-    public void setLoginPanelView(LoginPanel loginPanel){
-        this.loginPanel = loginPanel;
-        apiConnection.PostData("employees", loginModel);
+    public boolean loginRequest(Login loginModel){
+        this.loginModel = loginModel;
+        
+        HashMap<String, Object> loginResponse = apiConnection.PostData("employees/login", loginModel);
+        Integer responseCode = (Integer) loginResponse.get("responseCode");
+        
+        if (responseCode >= 200 && responseCode < 300){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public void showCoachView(){
+        CoachView coachView = new CoachView();
+        coachView.setVisible(true);
+        
+        loginScreen.setVisible(false);
     }
 }

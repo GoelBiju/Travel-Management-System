@@ -2,26 +2,20 @@ package com.example.customermobileapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
-import com.example.customermobileapplication.Utilities.APIConnection;
-import com.example.customermobileapplication.Utilities.APIResponse;
-import com.example.customermobileapplication.Utilities.VolleyCallback;
+import com.example.customermobileapplication.Utilities.API.APIConnection;
+import com.example.customermobileapplication.Utilities.API.APIResponse;
+import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 
 import org.json.JSONException;
-import org.w3c.dom.Text;
-
-import java.net.HttpURLConnection;
 
 public class ViewAccountDetails extends AppCompatActivity {
 
     APIConnection apiConnection;
-    MainActivity login;
+    LoginActivity login;
 
     int customerId;
 

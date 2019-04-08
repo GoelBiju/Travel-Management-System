@@ -1,4 +1,4 @@
-package com.example.customermobileapplication.Utilities;
+package com.example.customermobileapplication.Utilities.API;
 
 // TODO: Create APIConnection for RESTful methods: GET, PUT, POST and DELETE.
 //       Use Volley library for now and allow a JSONObject to be mapped to the Customer model i.e. using Jackson or Gson.
@@ -7,11 +7,13 @@ package com.example.customermobileapplication.Utilities;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.customermobileapplication.Model.Customer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +24,8 @@ import java.net.HttpURLConnection;
 
 public class APIConnection {
 
+    //private DefaultRetryPolicy retryPolicy;
+
     private RequestQueueSingleton queueSingleton;
 
     private String API_BASE_URL;
@@ -29,11 +33,13 @@ public class APIConnection {
     // Pass in the application context by this.getApplicationContext().
     public APIConnection(Context context, String apiBaseUrl) {
 
+        //this.retryPolicy = new DefaultRetryPolicy(5000, 20, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
         // Initialise the request queue in the singleotn.
-        queueSingleton = RequestQueueSingleton.getInstance(context);
+        this.queueSingleton = RequestQueueSingleton.getInstance(context);
 
         // Set up the base URL.
-        API_BASE_URL = apiBaseUrl;
+        this.API_BASE_URL = apiBaseUrl;
     }
 
 
@@ -97,6 +103,10 @@ public class APIConnection {
                         callback.onFailure(getResponse);
                     }
                 });
+
+        // Set timeout and retry policy.
+        getRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         //
         queueSingleton.addToRequestQueue(getRequest);
@@ -162,6 +172,10 @@ public class APIConnection {
                 callback.onFailure(getResponse);
             }
         });
+
+        // Set timeout and retry policy.
+        getRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         //
         queueSingleton.addToRequestQueue(getRequest);
@@ -232,7 +246,66 @@ public class APIConnection {
             }
         });
 
+        // Set timeout and retry policy.
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         // Add the requeqst to the request queue in the RequestQueueSingleton.
         queueSingleton.addToRequestQueue(postRequest);
+    }
+
+
+    public void postCustomJsonObject(String resourceName, Object requestPostObject,
+                                     Class responseClass, final CustomCallback callback) {
+
+        //
+        final APIResponse errorResponse = new APIResponse();
+
+        MyCustomRequest getCustomRequest = new MyCustomRequest(Request.Method.POST,
+                this.API_BASE_URL + resourceName, requestPostObject, responseClass,
+                null,
+                new Response.Listener<Object>() {
+                    @Override
+                    public void onResponse(Object response) {
+
+                        // Return the object which the user can cast to correct response object.
+                        callback.onSuccess(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError response) {
+
+                        Log.d("Error.Response", response.toString());
+
+                        //
+                        errorResponse.setRequestSuccessful(false);
+
+                        //
+                        errorResponse.setResponseStatusCode(response.networkResponse.statusCode);
+
+                        //
+                        if (response.networkResponse.data != null) {
+                            JSONObject jsonErrorObject;
+                            try {
+                                jsonErrorObject = new JSONObject(new String(response.networkResponse.data));
+                                Log.d("Response", jsonErrorObject.toString());
+                                errorResponse.addResponseItem(jsonErrorObject);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //
+                        callback.onFailure(errorResponse);
+                    }
+                });
+
+        //
+        getCustomRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        //
+        queueSingleton.addToRequestQueue(getCustomRequest);
     }
 }

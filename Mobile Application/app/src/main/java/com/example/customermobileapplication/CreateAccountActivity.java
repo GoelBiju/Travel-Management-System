@@ -14,15 +14,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.customermobileapplication.Utilities.APIConnection;
-import com.example.customermobileapplication.Utilities.APIResponse;
-import com.example.customermobileapplication.Utilities.VolleyCallback;
+import com.example.customermobileapplication.Utilities.API.APIConnection;
+import com.example.customermobileapplication.Utilities.API.APIResponse;
+import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -256,7 +250,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // Return to the login screen.
-                                    Intent startIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
                                     startActivity(startIntent);
                                 }
                             })

@@ -3,9 +3,8 @@ package com.example.customermobileapplication;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,14 +13,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.example.customermobileapplication.Utilities.APIConnection;
-import com.example.customermobileapplication.Utilities.APIResponse;
+import com.example.customermobileapplication.Utilities.API.APIConnection;
 
-import org.w3c.dom.Text;
-
-import java.sql.Time;
 import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
@@ -38,6 +32,10 @@ public class HomeActivity extends AppCompatActivity {
     // Buttons.
     private Button viewAccountButton;
 
+    // SharedPreferences.
+    SharedPreferences pref;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +43,18 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Check if the customerId is present, if not go to login.
+        pref = getApplicationContext().getSharedPreferences("userDetails", MODE_PRIVATE);
+        if (pref.contains("customerId")) {
+            customerId = pref.getInt("customerId", 0);
+        } else {
+            Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(loginIntent);
+        }
+
         // Get the intent that was sent
-        Intent customerIdIntent = getIntent();
-        customerId = customerIdIntent.getIntExtra("customerId", 0);
+        //Intent customerIdIntent = getIntent();
+        //customerId = customerIdIntent.getIntExtra("customerId", 0);
 
         // Bind views.
         BindView();

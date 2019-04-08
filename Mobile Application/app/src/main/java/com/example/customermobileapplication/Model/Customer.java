@@ -1,34 +1,44 @@
 package com.example.customermobileapplication.Model;
 
-import java.time.LocalDateTime;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Customer {
 
-    public String customerId;
+    @SerializedName("customerId")
+    public int customerId;
 
+    @SerializedName("firstName")
     public String firstName;
 
+    @SerializedName("lastName")
     public String lastName;
 
+    @SerializedName("dateOfBirth")
     public Date dateOfBirth;
 
+    @SerializedName("addressLineOne")
     public String addressLineOne;
 
+    @SerializedName("addressLineTwo")
     public String addressLineTwo;
 
+    @SerializedName("postCode")
     public String postCode;
 
-    public String phoneNumber;
+    @SerializedName("mobileNumber")
+    public String mobileNumber;
 
-    public String email;
+    @SerializedName("emailAddress")
+    public String emailAddress;
 
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -80,19 +90,19 @@ public class Customer {
         this.postCode = postCode;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 }

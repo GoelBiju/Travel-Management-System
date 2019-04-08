@@ -1,4 +1,4 @@
-package com.example.customermobileapplication.Utilities;
+package com.example.customermobileapplication.Utilities.API;
 
 import org.json.JSONObject;
 

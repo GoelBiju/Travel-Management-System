@@ -4,7 +4,7 @@
     <!-- API Addresses -->
     <string name="api_base_url">"http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/"</string>
 
-    <!-- Resources for MainActivity -->
+    <!-- Resources for LoginActivity -->
     <string name="app_name">NationalCoach - Mobile Application</string>
     <string name="email">Email Address</string>
     <string name="password">Password</string>
@@ -45,7 +45,7 @@
     <string name="textview8">TextView</string>
     <string name="textview9">TextView</string>
     <string name="textview10">TextView</string>
-    <string name="title_activity_home">NationCoach - Home</string>
+    <string name="title_activity_home">NationalCoach</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -61,6 +61,7 @@
     <string name="history">History</string>
     <string name="where_to">Where To...</string>
     <string name="where_from">Where From...</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
 
     <!-- Resources for CreateAccountActivity -->
 </resources>

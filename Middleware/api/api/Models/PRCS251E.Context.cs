@@ -33,5 +33,6 @@ namespace api.Models
         public virtual DbSet<ROUTE> ROUTES { get; set; }
         public virtual DbSet<SHIFT> SHIFTS { get; set; }
         public virtual DbSet<STATION> STATIONS { get; set; }
+        public virtual DbSet<JOURNEY> JOURNEYS { get; set; }
     }
 }

@@ -28,7 +28,7 @@ public class ViewAccountDetails extends AppCompatActivity {
     private TextView postCodeInput;
     private TextView phoneNumberInput;
     private TextView emailInput;
-    private TextView passwordInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +59,6 @@ public class ViewAccountDetails extends AppCompatActivity {
         phoneNumberInput = findViewById(R.id.phoneNumberInput);
 
         emailInput = findViewById(R.id.emailInput);
-
-        passwordInput = findViewById(R.id.passwordInput);
 
         Intent getCustomerId = getIntent();
 

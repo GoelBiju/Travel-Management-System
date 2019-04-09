@@ -9,11 +9,7 @@
         
         - coach_id;
         
-        - employee_id;
-
-	- start_station
-	
-	- end_station        
+        - employee_id;       
 
         - start_time/date;
         

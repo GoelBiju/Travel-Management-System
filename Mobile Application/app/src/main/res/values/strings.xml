@@ -61,7 +61,7 @@
     <string name="history">History</string>
     <string name="where_to">Where To...</string>
     <string name="where_from">Where From...</string>
-    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_activity_navigation">NationalCoach - Home</string>
 
     <!-- Resources for CreateAccountActivity -->
 </resources>

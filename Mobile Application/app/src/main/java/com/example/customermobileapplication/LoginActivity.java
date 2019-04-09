@@ -205,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         progressDialog.hide();
 
-                        Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                        Intent startIntent = new Intent(getApplicationContext(), NavigationActivity.class);
 
                         // Place the customerId into SharedPreferences.
                         // Create the sharedpreferences to use in the app.
@@ -217,9 +217,11 @@ public class LoginActivity extends AppCompatActivity {
                         editor.apply();
 
                         startActivity(startIntent);
-
                         Toast.makeText(getApplicationContext(), "Logged in as: " + customerDetails.getEmailAddress(),
                                 Toast.LENGTH_LONG).show();
+
+                        // Finish this activity.
+                        finish();
                     }
 
                     public void onFailure(APIResponse errorResponse) {

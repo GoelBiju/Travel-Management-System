@@ -334,6 +334,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                                         // Return to the login screen.
                                         Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(startIntent);
+
+                                        // Finish this activity.
+                                        finish();
                                     }
                                 })
                                 .setCancelable(false);

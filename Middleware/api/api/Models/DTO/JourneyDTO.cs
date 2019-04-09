@@ -21,7 +21,7 @@ namespace api.Models.DTO
 
         
         [JsonProperty("employeeid")]
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
 
         
         [JsonProperty("startdatetime")]

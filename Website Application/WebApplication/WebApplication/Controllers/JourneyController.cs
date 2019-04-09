@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using WebApplication.ViewModels;
+using WebApplication.Utilities;
 using System.Web.Mvc;
 
 namespace WebApplication.Controllers
@@ -11,8 +18,15 @@ namespace WebApplication.Controllers
         // GET: Journey
         public ActionResult Index()
         {
+            var _Data = new List<JourneyViewModel>();
 
-            return View();
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("journeys").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var JsonString = response.Content.ReadAsStringAsync().Result;
+                _Data = JsonConvert.DeserializeObject<List<JourneyViewModel>>(JsonString);
+            }
+            return View(_Data);
         }
 
         // GET: Journey/Details/5

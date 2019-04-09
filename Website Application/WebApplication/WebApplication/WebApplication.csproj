@@ -164,7 +164,6 @@
     <Compile Include="ViewModels\CoachViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="APIActions\EmployeesAPI.cs" />
     <Compile Include="ViewModels\JourneyViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

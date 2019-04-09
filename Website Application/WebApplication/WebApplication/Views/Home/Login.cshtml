@@ -21,13 +21,13 @@
                 <br />
                 <br />
                 <p id="loginlabel">Please enter your credentials to login</p>
-                <input type="username" id="inputfields" placeholder="Employee ID..." />
+                <input type="username" id="inputfields" name="username" placeholder="Employee ID..." />
                 <p></p>
                 <br />
-                <input type="password" id="inputfields" placeholder="Password..." />
+                <input type="password" id="inputfields" name="password" placeholder="Password..." />
                 <p></p>
                 <br />
-                <button type="button" class="loginbutton loginbuttontransition">Login</button>
+                @Url.Action("Login", "Home")
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" onclick="HelpFunction()" class="helpbutton loginbuttontransition">Help</button>

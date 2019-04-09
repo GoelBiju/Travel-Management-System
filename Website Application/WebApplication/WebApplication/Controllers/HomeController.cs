@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -30,9 +32,27 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult ProcessLogin()
+        [HttpPost]
+        public ActionResult Login(EmployeeViewModel employee)
         {
-            
+            try
+            {
+                ViewData["username"] = employee.EmployeeId;
+                ViewData["password"] = employee.Password;
+
+                HttpResponseMessage message = GlobalVariables.WebApiClient.PostAsJsonAsync("employees/login", employee).Result;
+
+                if (message.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index", "Coach");
+                }
+
+                return View();
+            }
+            catch(Exception e)
+            {
+                return View();
+            }
         }
     }
 }

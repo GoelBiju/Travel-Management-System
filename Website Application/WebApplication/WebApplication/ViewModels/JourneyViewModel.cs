@@ -12,15 +12,15 @@ namespace WebApplication.ViewModels
         public int JourneyId { get; set; }
 
         [Display(Name = "Route ID")]
-        [JsonProprty("routeid")]
+        [JsonProperty("routeid")]
         public int RouteId { get; set; }
 
         [Display(Name = "Coach ID")]
-        [JsonProprty("coachid")]
+        [JsonProperty("coachid")]
         public int CoachId { get; set; }
 
         [Display(Name = "Employee ID")]
-        [JsonProprty("employeeid")]
+        [JsonProperty("employeeid")]
         public string EmployeeId { get; set; }
 
         [Display(Name = "Departure Time")]

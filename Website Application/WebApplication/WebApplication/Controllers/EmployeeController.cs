@@ -8,7 +8,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using WebApplication.ViewModels;
-using WebApplication.Utilities;
 using System.Web.Mvc;
 
 namespace WebApplication.Controllers

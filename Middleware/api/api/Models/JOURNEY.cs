@@ -18,8 +18,6 @@ namespace api.Models
         public decimal ROUTE_ID { get; set; }
         public decimal COACH_ID { get; set; }
         public string EMPLOYEE_ID { get; set; }
-        public decimal START_STATION { get; set; }
-        public decimal END_STATION { get; set; }
         public System.DateTime START_DATE_TIME { get; set; }
         public System.DateTime END_DATE_TIME { get; set; }
     

@@ -8,28 +8,33 @@ namespace api.Models.BindingModels
 {
     public class JourneyBindingModel
     {
-        [JsonProperty("coachId")]
+        [JsonProperty("journeyid")]
+        [JsonRequired]
+        public int JourneyId { get; set; }
+
+
+        [JsonProperty("routeid")]
+        [JsonRequired]
+        public int RouteId { get; set; }
+
+
+        [JsonProperty("coachid")]
         [JsonRequired]
         public int CoachId { get; set; }
 
-        [JsonProperty("coachMake")]
-        [JsonRequired]
-        public string CoachMake { get; set; }
 
-        [JsonProperty("coachModel")]
+        [JsonProperty("employeeid")]]
         [JsonRequired]
-        public string CoachModel { get; set; }
+        public int EmployeeId { get; set; }
 
-        [JsonProperty("registrationPlate")]
-        [JsonRequired]
-        public string RegistratonPlate { get; set; }
 
-        [JsonProperty("coachCapacity")]
+        [JsonProperty("startdatetime")]
         [JsonRequired]
-        public int CoachCapacity { get; set; }
+        public string DepartureTime { get; set; }
 
-        [JsonProperty("isActive")]
+
+        [JsonProperty("enddatetime")]
         [JsonRequired]
-        public bool IsActive { get; set; }
+        public string ArrivalTime { get; set; }
     }
 }

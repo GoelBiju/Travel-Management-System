@@ -13,7 +13,7 @@ namespace api.Models.DTO
 
         
         [JsonProperty("routeid")]
-        public int routeId { get; set; }
+        public int RouteId { get; set; }
 
         
         [JsonProperty("coachid")]

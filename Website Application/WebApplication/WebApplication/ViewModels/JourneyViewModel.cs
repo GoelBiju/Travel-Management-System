@@ -13,7 +13,7 @@ namespace WebApplication.ViewModels
 
         [Display(Name = "Route ID")]
         [JsonProprty("routeid")]
-        public int routeId { get; set; }
+        public int RouteId { get; set; }
 
         [Display(Name = "Coach ID")]
         [JsonProprty("coachid")]
@@ -21,7 +21,7 @@ namespace WebApplication.ViewModels
 
         [Display(Name = "Employee ID")]
         [JsonProprty("employeeid")]
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
 
         [Display(Name = "Departure Time")]
         [JsonProperty("startdatetime")]

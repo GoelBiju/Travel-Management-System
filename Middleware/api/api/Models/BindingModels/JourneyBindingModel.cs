@@ -23,7 +23,7 @@ namespace api.Models.BindingModels
         public int CoachId { get; set; }
 
 
-        [JsonProperty("employeeid")]]
+        [JsonProperty("employeeid")]
         [JsonRequired]
         public int EmployeeId { get; set; }
 

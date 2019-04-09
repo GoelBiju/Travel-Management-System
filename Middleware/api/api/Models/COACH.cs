@@ -17,8 +17,8 @@ namespace api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public COACH()
         {
-            this.SHIFTS = new HashSet<SHIFT>();
             this.JOURNEYS = new HashSet<JOURNEY>();
+            this.SHIFTS = new HashSet<SHIFT>();
         }
     
         public decimal COACH_ID { get; set; }
@@ -29,8 +29,8 @@ namespace api.Models
         public bool IS_ACTIVE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHIFT> SHIFTS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JOURNEY> JOURNEYS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SHIFT> SHIFTS { get; set; }
     }
 }

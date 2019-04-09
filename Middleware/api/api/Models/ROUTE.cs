@@ -17,19 +17,22 @@ namespace api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ROUTE()
         {
-            this.SHIFTS = new HashSet<SHIFT>();
             this.JOURNEYS = new HashSet<JOURNEY>();
+            this.SHIFTS = new HashSet<SHIFT>();
+            this.STATIONS = new HashSet<STATION>();
         }
     
         public decimal ROUTE_ID { get; set; }
         public Nullable<decimal> DEPARTURE_STATION { get; set; }
         public Nullable<decimal> ARRIVAL_STATION { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JOURNEY> JOURNEYS { get; set; }
         public virtual STATION STATION { get; set; }
         public virtual STATION STATION1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFT> SHIFTS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JOURNEY> JOURNEYS { get; set; }
+        public virtual ICollection<STATION> STATIONS { get; set; }
     }
 }

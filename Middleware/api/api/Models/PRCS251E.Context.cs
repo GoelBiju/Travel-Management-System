@@ -30,9 +30,10 @@ namespace api.Models
         public virtual DbSet<CUSTOMER> CUSTOMERS { get; set; }
         public virtual DbSet<EMPLOYEE> EMPLOYEES { get; set; }
         public virtual DbSet<EMPLOYEES_ARCHIVE> EMPLOYEES_ARCHIVE { get; set; }
+        public virtual DbSet<JOURNEY> JOURNEYS { get; set; }
         public virtual DbSet<ROUTE> ROUTES { get; set; }
+        public virtual DbSet<ROUTES_ARCHIVE> ROUTES_ARCHIVE { get; set; }
         public virtual DbSet<SHIFT> SHIFTS { get; set; }
         public virtual DbSet<STATION> STATIONS { get; set; }
-        public virtual DbSet<JOURNEY> JOURNEYS { get; set; }
     }
 }

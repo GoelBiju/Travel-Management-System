@@ -12,17 +12,13 @@ namespace api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class JOURNEY
+    public partial class ROUTES_ARCHIVE
     {
-        public decimal JOURNEY_ID { get; set; }
         public decimal ROUTE_ID { get; set; }
-        public decimal COACH_ID { get; set; }
-        public string EMPLOYEE_ID { get; set; }
-        public System.DateTime START_DATE_TIME { get; set; }
-        public System.DateTime END_DATE_TIME { get; set; }
+        public Nullable<decimal> DEPARTURE_STATION { get; set; }
+        public Nullable<decimal> ARRIVAL_STATION { get; set; }
     
-        public virtual COACH COACH { get; set; }
-        public virtual EMPLOYEE EMPLOYEE { get; set; }
-        public virtual ROUTE ROUTE { get; set; }
+        public virtual STATION STATION { get; set; }
+        public virtual STATION STATION1 { get; set; }
     }
 }

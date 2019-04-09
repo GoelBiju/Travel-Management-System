@@ -200,7 +200,6 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JourneysController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\ShiftsController.cs" />
     <Compile Include="Controllers\StationsController.cs" />
@@ -210,6 +209,7 @@
     <Compile Include="Models\BindingModels\CoachBindingModel.cs" />
     <Compile Include="Models\BindingModels\EmployeeCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\EmployeeLoginBindingModel.cs" />
+    <Compile Include="Models\BindingModels\JourneyBindingModel.cs" />
     <Compile Include="Models\COACH.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
@@ -223,6 +223,7 @@
     <Compile Include="Models\DTO\CustomerDTO.cs" />
     <Compile Include="Models\BindingModels\CustomerLoginBindingModel.cs" />
     <Compile Include="Models\DTO\EmployeeDTO.cs" />
+    <Compile Include="Models\DTO\JourneyDTO.cs" />
     <Compile Include="Models\DTO\RouteDTO.cs" />
     <Compile Include="Models\DTO\ShiftDTO.cs" />
     <Compile Include="Models\BindingModels\CustomerRegistrationBindingModel.cs" />

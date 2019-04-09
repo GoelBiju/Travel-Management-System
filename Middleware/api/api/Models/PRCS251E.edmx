@@ -68,8 +68,6 @@
           <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="COACH_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="EMPLOYEE_ID" Type="varchar2" MaxLength="15" Nullable="false" />
-          <Property Name="START_STATION" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="END_STATION" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="START_DATE_TIME" Type="date" Nullable="false" />
           <Property Name="END_DATE_TIME" Type="date" Nullable="false" />
         </EntityType>

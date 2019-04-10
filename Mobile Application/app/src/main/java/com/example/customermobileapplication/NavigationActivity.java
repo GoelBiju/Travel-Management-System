@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.customermobileapplication.Fragments.AccountFragment;
 import com.example.customermobileapplication.Fragments.HomeFragment;
 
 public class NavigationActivity extends AppCompatActivity
@@ -29,6 +30,7 @@ public class NavigationActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Re-direct to the login if the user details has not been saved.
         pref = getApplicationContext().getSharedPreferences("userDetails", MODE_PRIVATE);
         if (!pref.contains("customerId")) {
             //customerId = pref.getInt("customerId", 0);
@@ -38,6 +40,7 @@ public class NavigationActivity extends AppCompatActivity
             finish();
         }
 
+        // Automatically start on the home fragment.
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.screen_area, new HomeFragment());
         ft.commit();
@@ -98,17 +101,16 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
             fragment = new HomeFragment();
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_account) {
+            fragment = new AccountFragment();
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
 
         }
 
@@ -116,6 +118,7 @@ public class NavigationActivity extends AppCompatActivity
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction ft = fragmentManager.beginTransaction();
 
+            // Replace the frame layout with the fragment.
             ft.replace(R.id.screen_area, fragment);
             ft.commit();
         }

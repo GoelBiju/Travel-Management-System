@@ -34,7 +34,7 @@
     <string name="textview1">TextView</string>
     <string name="textview2">TextView</string>
     <string name="textview3">TextView</string>
-    <string name="phone_number">Phone Number:</string>
+    <string name="phone_number">Mobile Number:</string>
     <string name="emailLabel">Email:</string>
     <string name="passwordLabel">Password:</string>
     <string name="address_line_2">Address (Line 2):</string>
@@ -45,6 +45,7 @@
     <string name="textview8">TextView</string>
     <string name="textview9">TextView</string>
     <string name="textview10">TextView</string>
+    <string name="noText">None</string>
     <string name="title_activity_home">NationalCoach</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -62,6 +63,9 @@
     <string name="where_to">Where To...</string>
     <string name="where_from">Where From...</string>
     <string name="title_activity_navigation">NationalCoach - Home</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Resources for CreateAccountActivity -->
 </resources>

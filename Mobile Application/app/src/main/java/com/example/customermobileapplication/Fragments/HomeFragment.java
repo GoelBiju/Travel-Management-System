@@ -32,29 +32,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Cannot use findViewById directly, call view.findViewById/getView()? to use it.
-//        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                // No getApplicationContext() in fragment, instead use getActivity().
-//                Toast.makeText(getActivity(), "You are logged out.", Toast.LENGTH_SHORT).show();
-//
-//                // Clear the SharedPreferences.
-//                pref = getActivity().getSharedPreferences("userDetails", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = pref.edit();
-//                editor.clear();
-//                editor.apply();
-//
-//                // Return to login screen.
-//                Intent startIntent = new Intent(getActivity(), LoginActivity.class);
-//                startActivity(startIntent);
-//
-//                // Finish this fragment.
-//                getActivity().finish();
-//            }
-//        });
-
         view.findViewById(R.id.buttonViewBookings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

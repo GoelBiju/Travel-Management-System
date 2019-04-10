@@ -46,7 +46,7 @@ public class ViewAccountDetails extends AppCompatActivity {
 
         lastNameInput = findViewById(R.id.lastNameInput);
 
-        customerIDInput = findViewById(R.id.customerIDInput);
+        //customerIDInput = findViewById(R.id.customerIDInput);
 
         dateOfBirthInput = findViewById(R.id.dateOfBirthInput);
 

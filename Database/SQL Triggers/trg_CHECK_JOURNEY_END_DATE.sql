@@ -1,4 +1,4 @@
-create or replace TRIGGER check_journey_end_date
+create or replace TRIGGER trg_check_journey_end_date
 BEFORE INSERT OR UPDATE ON journeys
 FOR EACH ROW
 BEGIN

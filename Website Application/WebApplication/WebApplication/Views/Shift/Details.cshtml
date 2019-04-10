@@ -1,0 +1,67 @@
+﻿@model WebApplication.ViewModels.ShiftViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShiftViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShiftId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShiftId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RouteId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RouteId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartOfShift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartOfShift)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndOfShift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndOfShift)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShiftId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -27,6 +27,7 @@
 
     <!--Side Navigation Menu -->
     <div class="sideMenu">
+
         <!-- Employees Options -->
         <button class="dropdown-btn">
             Employees
@@ -37,6 +38,43 @@
             <a>@Html.ActionLink("Update Employee", "Edit", "Employee")</a>*@
             <a>@Html.ActionLink("View Employees", "Details", "Employee")</a>
             <a>@Html.ActionLink("View Archived Employee", "Index", "EmployeeArchive")</a>
+        </div>
+
+
+        <!-- Driver Shifts -->
+        <button class="dropdown-btn">
+            Driver Shifts
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="#">Create Shift</a>
+            <a href="#">Update Shift</a>
+            <a href="#">View Shift</a>
+            <a href="#">Archive Shift</a>
+        </div>
+
+        <!-- Routes Options -->
+        <button class="dropdown-btn">
+            Routes
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="#">Create New Route</a>
+            <a href="#">Update Route</a>
+            <a href="#">View Route</a>
+            <a href="#">Archive Route</a>
+        </div>
+
+        <!-- Journeys Options -->
+        <button class="dropdown-btn">
+            Timetables
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="#">Create New Journey</a>
+            <a href="#">Update Journey</a>
+            <a href="#">View Journey</a>
+            <a href="#">Archive Journey</a>
         </div>
 
         <!-- Coaches Options -->
@@ -54,33 +92,9 @@
         <!-- Replacement Services -->
         <a href="#">Replacement Services</a>
 
-        <!-- Journeys Options -->
-        <button class="dropdown-btn">
-            Timetables
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#">Create New Journey</a>
-            <a href="#">Update Journey</a>
-            <a href="#">View Journey</a>
-            <a href="#">Archive Journey</a>
-        </div>
-
-        <!-- Routes Options -->
-        <button class="dropdown-btn">
-            Routes
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#">Create New Route</a>
-            <a href="#">Update Route</a>
-            <a href="#">View Route</a>
-            <a href="#">Archive Route</a>
-        </div>
-
         <a href="#">Help</a>
 
-        <a>@Html.ActionLink("Sign Out", "Login", "Home", null, new { id = "logout"}) </a>
+        <a>@Html.ActionLink("Sign Out", "Login", "Home", null, new { id = "logout" }) </a>
     </div>
     <!-- End of Side Navigation Menu -->
 

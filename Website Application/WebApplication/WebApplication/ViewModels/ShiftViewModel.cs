@@ -15,25 +15,25 @@ namespace WebApplication.ViewModels
 
         [Display(Name = "Employee ID")]
         [JsonProperty("employeeid")]
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
 
         [Display(Name = "Route ID")]
         [JsonProperty("routeid")]
-        public int RouteId { get; set; }
+        public string RouteId { get; set; }
 
 
         [Display(Name = "Coach ID")]
         [JsonProperty("coachid")]
-        public int CoachId { get; set; }
+        public string CoachId { get; set; }
 
 
         [Display(Name = "Start of Shift")]
         [JsonProperty("startofshift")]
-        public int StartOfShift { get; set; }
+        public DateTime StartOfShift { get; set; }
 
         [Display(Name = "End of Shift")]
         [JsonProperty("endofshift")]
-        public int EndOfShift { get; set; }
+        public DateTime EndOfShift { get; set; }
 
     }
 }

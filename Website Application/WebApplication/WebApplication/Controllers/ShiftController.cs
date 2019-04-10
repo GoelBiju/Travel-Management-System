@@ -33,5 +33,25 @@ namespace WebApplication.Controllers
             return View(_Data);
         }
 
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            if (string.IsNullOrEmpty(id.ToString()))
+            {
+                return RedirectToAction("Details");
+            }
+
+            var _Data = new ShiftViewModel();
+
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("shifts/" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var JsonString = response.Content.ReadAsStringAsync().Result;
+                _Data = JsonConvert.DeserializeObject<ShiftViewModel>(JsonString);
+            }
+            return View(_Data);
+        }
+
+
     }
 }

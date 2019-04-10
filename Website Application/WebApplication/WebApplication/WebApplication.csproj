@@ -278,6 +278,7 @@
     <Content Include="Views\CoachArchive\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shift\Details.cshtml" />
+    <Content Include="Views\Shift\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

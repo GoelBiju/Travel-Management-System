@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.customermobileapplication.ConfirmBookingActivity;
 import com.example.customermobileapplication.LoginActivity;
 import com.example.customermobileapplication.R;
 
@@ -53,5 +54,13 @@ public class HomeFragment extends Fragment {
 //                getActivity().finish();
 //            }
 //        });
+
+        view.findViewById(R.id.buttonViewBookings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startIntent = new Intent(getActivity(), ConfirmBookingActivity.class);
+                startActivity(startIntent);
+            }
+        });
     }
 }

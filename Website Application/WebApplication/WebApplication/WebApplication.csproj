@@ -163,6 +163,7 @@
     <Compile Include="Controllers\CoachController.cs" />
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="ViewModels\CoachViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\JourneyViewModel.cs" />

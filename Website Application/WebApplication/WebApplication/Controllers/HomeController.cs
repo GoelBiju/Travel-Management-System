@@ -33,23 +33,25 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(EmployeeViewModel employee)
+        public ActionResult Login(EmployeeLoginViewModel employee)
         {
             try
             {
-                ViewData["username"] = employee.EmployeeId;
-                ViewData["password"] = employee.Password;
+                //ViewData["username"] = employee.EmployeeID;
+                //ViewData["password"] = employee.Password;
+                
 
                 HttpResponseMessage message = GlobalVariables.WebApiClient.PostAsJsonAsync("employees/login", employee).Result;
+                int status = (int) message.StatusCode;
 
-                if (message.IsSuccessStatusCode)
+                if (status >= 200 && status < 300)
                 {
                     return RedirectToAction("Index", "Coach");
                 }
 
                 return View();
             }
-            catch(Exception e)
+            catch
             {
                 return View();
             }

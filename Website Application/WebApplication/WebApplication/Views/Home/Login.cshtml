@@ -1,7 +1,4 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model WebApplication.ViewModels.EmployeeLoginViewModel
 
 <!DOCTYPE html>
 
@@ -16,24 +13,33 @@
 <body>
     <div class="master"></div>
     <center>
-        <div class="logincontainer">
-            <center>
-                <br />
-                <br />
-                <p id="loginlabel">Please enter your credentials to login</p>
-                <input type="username" id="inputfields" name="username" placeholder="Employee ID..." />
-                <p></p>
-                <br />
-                <input type="password" id="inputfields" name="password" placeholder="Password..." />
-                <p></p>
-                <br />
-                @Url.Action("Login", "Home")
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" onclick="HelpFunction()" class="helpbutton loginbuttontransition">Help</button>
+        @using (Html.BeginForm())
+        {
+            <div class="logincontainer">
+                <center>
+                    <br />
+                    <br />
+                    <p id="loginlabel">Please enter your credentials to login</p>
+                    @*<input type="username" id="inputfields" name="username" placeholder="Employee ID..." />
+                    @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "inputfields", placeholder = "Employee ID..." } })
+                    @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
 
-            </center>
-        </div>
+                    <p></p>
+                    <br />
+                    @*<input type="password" id="inputfields" name="password" placeholder="Password..." />*@
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "inputfields", placeholder = "Password...", type = "password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <p></p>
+                    <br />
+                    <button type="submit" value="Login" class="loginbutton loginbuttontransition">LogIn</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" onclick="HelpFunction()" class="helpbutton loginbuttontransition">Help</button>
+
+                </center>
+            </div>
+        }
     </center>
 
     @* <div class="bottom">NationalCoach 2019 ©</div>*@

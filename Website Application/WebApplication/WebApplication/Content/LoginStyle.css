@@ -13,7 +13,7 @@ div.logincontainer {
     font-family: Segoe UI Light;
 }
 
-#inputfields {
+.inputfields {
     border-radius: 25px;
     border: 1px solid #D3D3D3;
     padding: 20px;

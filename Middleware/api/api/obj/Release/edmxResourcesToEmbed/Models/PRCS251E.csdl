@@ -10,6 +10,7 @@
     <Property Name="REGISTRATION_PLATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="COACH_CAPACITY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="IS_ACTIVE" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="JOURNEYS" Relationship="Self.COACHES_COACH_ID_FK" FromRole="COACHES" ToRole="JOURNEYS" />
     <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_COACH_ID_FK" FromRole="COACHES" ToRole="SHIFTS" />
   </EntityType>
   <EntityType Name="COACHES_ARCHIVE">
@@ -46,6 +47,7 @@
     <Property Name="FIRST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="LAST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="JOB_ROLE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="JOURNEYS" Relationship="Self.EMPLOYEES_EMPLOYEE_ID_FK" FromRole="EMPLOYEES" ToRole="JOURNEYS" />
     <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_EMPLOYEE_ID_FK" FromRole="EMPLOYEES" ToRole="SHIFTS" />
   </EntityType>
   <EntityType Name="EMPLOYEES_ARCHIVE">
@@ -57,6 +59,20 @@
     <Property Name="LAST_NAME" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="JOB_ROLE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
+  <EntityType Name="JOURNEY">
+    <Key>
+      <PropertyRef Name="JOURNEY_ID" />
+    </Key>
+    <Property Name="JOURNEY_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COACH_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EMPLOYEE_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="START_DATE_TIME" Type="DateTime" Nullable="false" />
+    <Property Name="END_DATE_TIME" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="COACH" Relationship="Self.COACHES_COACH_ID_FK" FromRole="JOURNEYS" ToRole="COACHES" />
+    <NavigationProperty Name="EMPLOYEE" Relationship="Self.EMPLOYEES_EMPLOYEE_ID_FK" FromRole="JOURNEYS" ToRole="EMPLOYEES" />
+    <NavigationProperty Name="ROUTE" Relationship="Self.ROUTES_ROUTE_ID_FK" FromRole="JOURNEYS" ToRole="ROUTES" />
+  </EntityType>
   <EntityType Name="ROUTE">
     <Key>
       <PropertyRef Name="ROUTE_ID" />
@@ -64,9 +80,21 @@
     <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="DEPARTURE_STATION" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="ARRIVAL_STATION" Type="Decimal" Precision="38" Scale="0" />
+    <NavigationProperty Name="JOURNEYS" Relationship="Self.ROUTES_ROUTE_ID_FK" FromRole="ROUTES" ToRole="JOURNEYS" />
     <NavigationProperty Name="STATION" Relationship="Self.ROUTES_ARRIVAL_STATION_FK" FromRole="ROUTES" ToRole="STATIONS" />
     <NavigationProperty Name="STATION1" Relationship="Self.ROUTES_DEPARTURE_STATION_FK" FromRole="ROUTES" ToRole="STATIONS" />
     <NavigationProperty Name="SHIFTS" Relationship="Self.SHIFTS_ROUTE_ID_FK" FromRole="ROUTES" ToRole="SHIFTS" />
+    <NavigationProperty Name="STATIONS" Relationship="Self.ROUTE_STATIONS" FromRole="ROUTES" ToRole="STATIONS" />
+  </EntityType>
+  <EntityType Name="ROUTES_ARCHIVE">
+    <Key>
+      <PropertyRef Name="ROUTE_ID" />
+    </Key>
+    <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DEPARTURE_STATION" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ARRIVAL_STATION" Type="Decimal" Precision="38" Scale="0" />
+    <NavigationProperty Name="STATION" Relationship="Self.ROUTES_ARCHIVE_ARRIVAL_STATION_FK" FromRole="ROUTES_ARCHIVE" ToRole="STATIONS" />
+    <NavigationProperty Name="STATION1" Relationship="Self.ROUTES_ARCHIVE_DEPARTURE_STATION_FK" FromRole="ROUTES_ARCHIVE" ToRole="STATIONS" />
   </EntityType>
   <EntityType Name="SHIFT">
     <Key>
@@ -90,7 +118,22 @@
     <Property Name="STATION_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="ROUTES" Relationship="Self.ROUTES_ARRIVAL_STATION_FK" FromRole="STATIONS" ToRole="ROUTES" />
     <NavigationProperty Name="ROUTES1" Relationship="Self.ROUTES_DEPARTURE_STATION_FK" FromRole="STATIONS" ToRole="ROUTES" />
+    <NavigationProperty Name="ROUTES_ARCHIVE" Relationship="Self.ROUTES_ARCHIVE_ARRIVAL_STATION_FK" FromRole="STATIONS" ToRole="ROUTES_ARCHIVE" />
+    <NavigationProperty Name="ROUTES_ARCHIVE1" Relationship="Self.ROUTES_ARCHIVE_DEPARTURE_STATION_FK" FromRole="STATIONS" ToRole="ROUTES_ARCHIVE" />
+    <NavigationProperty Name="ROUTES2" Relationship="Self.ROUTE_STATIONS" FromRole="STATIONS" ToRole="ROUTES" />
   </EntityType>
+  <Association Name="COACHES_COACH_ID_FK">
+    <End Role="COACHES" Type="Self.COACH" Multiplicity="1" />
+    <End Role="JOURNEYS" Type="Self.JOURNEY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COACHES">
+        <PropertyRef Name="COACH_ID" />
+      </Principal>
+      <Dependent Role="JOURNEYS">
+        <PropertyRef Name="COACH_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="SHIFTS_COACH_ID_FK">
     <End Role="COACHES" Type="Self.COACH" Multiplicity="1" />
     <End Role="SHIFTS" Type="Self.SHIFT" Multiplicity="*" />
@@ -103,6 +146,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="EMPLOYEES_EMPLOYEE_ID_FK">
+    <End Role="EMPLOYEES" Type="Self.EMPLOYEE" Multiplicity="1" />
+    <End Role="JOURNEYS" Type="Self.JOURNEY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEES">
+        <PropertyRef Name="EMPLOYEE_ID" />
+      </Principal>
+      <Dependent Role="JOURNEYS">
+        <PropertyRef Name="EMPLOYEE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="SHIFTS_EMPLOYEE_ID_FK">
     <End Role="EMPLOYEES" Type="Self.EMPLOYEE" Multiplicity="1" />
     <End Role="SHIFTS" Type="Self.SHIFT" Multiplicity="*" />
@@ -112,6 +167,18 @@
       </Principal>
       <Dependent Role="SHIFTS">
         <PropertyRef Name="EMPLOYEE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROUTES_ROUTE_ID_FK">
+    <End Role="ROUTES" Type="Self.ROUTE" Multiplicity="1" />
+    <End Role="JOURNEYS" Type="Self.JOURNEY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROUTES">
+        <PropertyRef Name="ROUTE_ID" />
+      </Principal>
+      <Dependent Role="JOURNEYS">
+        <PropertyRef Name="ROUTE_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -151,22 +218,64 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ROUTES_ARCHIVE_ARRIVAL_STATION_FK">
+    <End Role="STATIONS" Type="Self.STATION" Multiplicity="0..1" />
+    <End Role="ROUTES_ARCHIVE" Type="Self.ROUTES_ARCHIVE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATIONS">
+        <PropertyRef Name="STATION_ID" />
+      </Principal>
+      <Dependent Role="ROUTES_ARCHIVE">
+        <PropertyRef Name="ARRIVAL_STATION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROUTES_ARCHIVE_DEPARTURE_STATION_FK">
+    <End Role="STATIONS" Type="Self.STATION" Multiplicity="0..1" />
+    <End Role="ROUTES_ARCHIVE" Type="Self.ROUTES_ARCHIVE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATIONS">
+        <PropertyRef Name="STATION_ID" />
+      </Principal>
+      <Dependent Role="ROUTES_ARCHIVE">
+        <PropertyRef Name="DEPARTURE_STATION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROUTE_STATIONS">
+    <End Role="ROUTES" Type="Self.ROUTE" Multiplicity="*" />
+    <End Role="STATIONS" Type="Self.STATION" Multiplicity="*" />
+  </Association>
   <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="COACHES" EntityType="Self.COACH" />
     <EntitySet Name="COACHES_ARCHIVE" EntityType="Self.COACHES_ARCHIVE" />
     <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
     <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEE" />
     <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Self.EMPLOYEES_ARCHIVE" />
+    <EntitySet Name="JOURNEYS" EntityType="Self.JOURNEY" />
     <EntitySet Name="ROUTES" EntityType="Self.ROUTE" />
+    <EntitySet Name="ROUTES_ARCHIVE" EntityType="Self.ROUTES_ARCHIVE" />
     <EntitySet Name="SHIFTS" EntityType="Self.SHIFT" />
     <EntitySet Name="STATIONS" EntityType="Self.STATION" />
+    <AssociationSet Name="COACHES_COACH_ID_FK" Association="Self.COACHES_COACH_ID_FK">
+      <End Role="COACHES" EntitySet="COACHES" />
+      <End Role="JOURNEYS" EntitySet="JOURNEYS" />
+    </AssociationSet>
     <AssociationSet Name="SHIFTS_COACH_ID_FK" Association="Self.SHIFTS_COACH_ID_FK">
       <End Role="COACHES" EntitySet="COACHES" />
       <End Role="SHIFTS" EntitySet="SHIFTS" />
     </AssociationSet>
+    <AssociationSet Name="EMPLOYEES_EMPLOYEE_ID_FK" Association="Self.EMPLOYEES_EMPLOYEE_ID_FK">
+      <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
+      <End Role="JOURNEYS" EntitySet="JOURNEYS" />
+    </AssociationSet>
     <AssociationSet Name="SHIFTS_EMPLOYEE_ID_FK" Association="Self.SHIFTS_EMPLOYEE_ID_FK">
       <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
       <End Role="SHIFTS" EntitySet="SHIFTS" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTES_ROUTE_ID_FK" Association="Self.ROUTES_ROUTE_ID_FK">
+      <End Role="ROUTES" EntitySet="ROUTES" />
+      <End Role="JOURNEYS" EntitySet="JOURNEYS" />
     </AssociationSet>
     <AssociationSet Name="ROUTES_ARRIVAL_STATION_FK" Association="Self.ROUTES_ARRIVAL_STATION_FK">
       <End Role="STATIONS" EntitySet="STATIONS" />
@@ -179,6 +288,18 @@
     <AssociationSet Name="SHIFTS_ROUTE_ID_FK" Association="Self.SHIFTS_ROUTE_ID_FK">
       <End Role="ROUTES" EntitySet="ROUTES" />
       <End Role="SHIFTS" EntitySet="SHIFTS" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTES_ARCHIVE_ARRIVAL_STATION_FK" Association="Self.ROUTES_ARCHIVE_ARRIVAL_STATION_FK">
+      <End Role="STATIONS" EntitySet="STATIONS" />
+      <End Role="ROUTES_ARCHIVE" EntitySet="ROUTES_ARCHIVE" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTES_ARCHIVE_DEPARTURE_STATION_FK" Association="Self.ROUTES_ARCHIVE_DEPARTURE_STATION_FK">
+      <End Role="STATIONS" EntitySet="STATIONS" />
+      <End Role="ROUTES_ARCHIVE" EntitySet="ROUTES_ARCHIVE" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTE_STATIONS" Association="Self.ROUTE_STATIONS">
+      <End Role="ROUTES" EntitySet="ROUTES" />
+      <End Role="STATIONS" EntitySet="STATIONS" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

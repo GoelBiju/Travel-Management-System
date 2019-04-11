@@ -55,7 +55,36 @@
     <Property Name="LAST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="JOB_ROLE" Type="varchar2" MaxLength="15" Nullable="false" />
   </EntityType>
+  <EntityType Name="JOURNEYS">
+    <Key>
+      <PropertyRef Name="JOURNEY_ID" />
+    </Key>
+    <Property Name="JOURNEY_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COACH_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EMPLOYEE_ID" Type="varchar2" MaxLength="15" Nullable="false" />
+    <Property Name="START_DATE_TIME" Type="date" Nullable="false" />
+    <Property Name="END_DATE_TIME" Type="date" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PRCS251E.ROUTE_STATIONS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ROUTE_STATIONS">
+    <Key>
+      <PropertyRef Name="ROUTE_ID" />
+      <PropertyRef Name="STATION_ID" />
+    </Key>
+    <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="STATION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
   <EntityType Name="ROUTES">
+    <Key>
+      <PropertyRef Name="ROUTE_ID" />
+    </Key>
+    <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DEPARTURE_STATION" Type="number" Precision="38" Scale="0" />
+    <Property Name="ARRIVAL_STATION" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="ROUTES_ARCHIVE">
     <Key>
       <PropertyRef Name="ROUTE_ID" />
     </Key>
@@ -81,6 +110,78 @@
     <Property Name="STATION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="STATION_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
   </EntityType>
+  <Association Name="COACHES_COACH_ID_FK">
+    <End Role="COACHES" Type="Self.COACHES" Multiplicity="1" />
+    <End Role="JOURNEYS" Type="Self.JOURNEYS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COACHES">
+        <PropertyRef Name="COACH_ID" />
+      </Principal>
+      <Dependent Role="JOURNEYS">
+        <PropertyRef Name="COACH_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EMPLOYEES_EMPLOYEE_ID_FK">
+    <End Role="EMPLOYEES" Type="Self.EMPLOYEES" Multiplicity="1" />
+    <End Role="JOURNEYS" Type="Self.JOURNEYS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEES">
+        <PropertyRef Name="EMPLOYEE_ID" />
+      </Principal>
+      <Dependent Role="JOURNEYS">
+        <PropertyRef Name="EMPLOYEE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROUTE_STATIONS_JOURNEY_ID_FK">
+    <End Role="ROUTES" Type="Self.ROUTES" Multiplicity="1" />
+    <End Role="ROUTE_STATIONS" Type="Self.ROUTE_STATIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROUTES">
+        <PropertyRef Name="ROUTE_ID" />
+      </Principal>
+      <Dependent Role="ROUTE_STATIONS">
+        <PropertyRef Name="ROUTE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROUTE_STATIONS_STATION_ID_FK">
+    <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="1" />
+    <End Role="ROUTE_STATIONS" Type="Self.ROUTE_STATIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATIONS">
+        <PropertyRef Name="STATION_ID" />
+      </Principal>
+      <Dependent Role="ROUTE_STATIONS">
+        <PropertyRef Name="STATION_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROUTES_ARCHIVE_ARRIVAL_STATION_FK">
+    <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="0..1" />
+    <End Role="ROUTES_ARCHIVE" Type="Self.ROUTES_ARCHIVE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATIONS">
+        <PropertyRef Name="STATION_ID" />
+      </Principal>
+      <Dependent Role="ROUTES_ARCHIVE">
+        <PropertyRef Name="ARRIVAL_STATION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROUTES_ARCHIVE_DEPARTURE_STATION_FK">
+    <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="0..1" />
+    <End Role="ROUTES_ARCHIVE" Type="Self.ROUTES_ARCHIVE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATIONS">
+        <PropertyRef Name="STATION_ID" />
+      </Principal>
+      <Dependent Role="ROUTES_ARCHIVE">
+        <PropertyRef Name="DEPARTURE_STATION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="ROUTES_ARRIVAL_STATION_FK">
     <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="0..1" />
     <End Role="ROUTES" Type="Self.ROUTES" Multiplicity="*" />
@@ -102,6 +203,18 @@
       </Principal>
       <Dependent Role="ROUTES">
         <PropertyRef Name="DEPARTURE_STATION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROUTES_ROUTE_ID_FK">
+    <End Role="ROUTES" Type="Self.ROUTES" Multiplicity="1" />
+    <End Role="JOURNEYS" Type="Self.JOURNEYS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROUTES">
+        <PropertyRef Name="ROUTE_ID" />
+      </Principal>
+      <Dependent Role="JOURNEYS">
+        <PropertyRef Name="ROUTE_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -147,9 +260,41 @@
     <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Self.EMPLOYEES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
+    <EntitySet Name="JOURNEYS" EntityType="Self.JOURNEYS" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="ROUTES" EntityType="Self.ROUTES" Schema="PRCS251E" store:Type="Tables" />
+    <EntitySet Name="ROUTES_ARCHIVE" EntityType="Self.ROUTES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="SHIFTS" EntityType="Self.SHIFTS" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="STATIONS" EntityType="Self.STATIONS" Schema="PRCS251E" store:Type="Tables" />
+    <EntitySet Name="ROUTE_STATIONS" EntityType="Self.ROUTE_STATIONS" store:Type="Tables" store:Schema="PRCS251E">
+      <DefiningQuery>SELECT 
+"ROUTE_STATIONS"."ROUTE_ID" AS "ROUTE_ID", 
+"ROUTE_STATIONS"."STATION_ID" AS "STATION_ID"
+FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="COACHES_COACH_ID_FK" Association="Self.COACHES_COACH_ID_FK">
+      <End Role="COACHES" EntitySet="COACHES" />
+      <End Role="JOURNEYS" EntitySet="JOURNEYS" />
+    </AssociationSet>
+    <AssociationSet Name="EMPLOYEES_EMPLOYEE_ID_FK" Association="Self.EMPLOYEES_EMPLOYEE_ID_FK">
+      <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
+      <End Role="JOURNEYS" EntitySet="JOURNEYS" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTE_STATIONS_JOURNEY_ID_FK" Association="Self.ROUTE_STATIONS_JOURNEY_ID_FK">
+      <End Role="ROUTES" EntitySet="ROUTES" />
+      <End Role="ROUTE_STATIONS" EntitySet="ROUTE_STATIONS" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTE_STATIONS_STATION_ID_FK" Association="Self.ROUTE_STATIONS_STATION_ID_FK">
+      <End Role="STATIONS" EntitySet="STATIONS" />
+      <End Role="ROUTE_STATIONS" EntitySet="ROUTE_STATIONS" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTES_ARCHIVE_ARRIVAL_STATION_FK" Association="Self.ROUTES_ARCHIVE_ARRIVAL_STATION_FK">
+      <End Role="STATIONS" EntitySet="STATIONS" />
+      <End Role="ROUTES_ARCHIVE" EntitySet="ROUTES_ARCHIVE" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTES_ARCHIVE_DEPARTURE_STATION_FK" Association="Self.ROUTES_ARCHIVE_DEPARTURE_STATION_FK">
+      <End Role="STATIONS" EntitySet="STATIONS" />
+      <End Role="ROUTES_ARCHIVE" EntitySet="ROUTES_ARCHIVE" />
+    </AssociationSet>
     <AssociationSet Name="ROUTES_ARRIVAL_STATION_FK" Association="Self.ROUTES_ARRIVAL_STATION_FK">
       <End Role="STATIONS" EntitySet="STATIONS" />
       <End Role="ROUTES" EntitySet="ROUTES" />
@@ -157,6 +302,10 @@
     <AssociationSet Name="ROUTES_DEPARTURE_STATION_FK" Association="Self.ROUTES_DEPARTURE_STATION_FK">
       <End Role="STATIONS" EntitySet="STATIONS" />
       <End Role="ROUTES" EntitySet="ROUTES" />
+    </AssociationSet>
+    <AssociationSet Name="ROUTES_ROUTE_ID_FK" Association="Self.ROUTES_ROUTE_ID_FK">
+      <End Role="ROUTES" EntitySet="ROUTES" />
+      <End Role="JOURNEYS" EntitySet="JOURNEYS" />
     </AssociationSet>
     <AssociationSet Name="SHIFTS_COACH_ID_FK" Association="Self.SHIFTS_COACH_ID_FK">
       <End Role="COACHES" EntitySet="COACHES" />

@@ -25,16 +25,16 @@ namespace api.Models.BindingModels
 
         [JsonProperty("employeeid")]
         [JsonRequired]
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
 
 
         [JsonProperty("startdatetime")]
         [JsonRequired]
-        public string DepartureTime { get; set; }
+        public DateTime DepartureTime { get; set; }
 
 
         [JsonProperty("enddatetime")]
         [JsonRequired]
-        public string ArrivalTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
     }
 }

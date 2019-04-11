@@ -61,9 +61,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="JOURNEYS">
+      <EntityTypeMapping TypeName="Model.JOURNEY">
+        <MappingFragment StoreEntitySet="JOURNEYS">
+          <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
+          <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
+          <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
+          <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
+          <ScalarProperty Name="START_DATE_TIME" ColumnName="START_DATE_TIME" />
+          <ScalarProperty Name="END_DATE_TIME" ColumnName="END_DATE_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ROUTES">
       <EntityTypeMapping TypeName="Model.ROUTE">
         <MappingFragment StoreEntitySet="ROUTES">
+          <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
+          <ScalarProperty Name="DEPARTURE_STATION" ColumnName="DEPARTURE_STATION" />
+          <ScalarProperty Name="ARRIVAL_STATION" ColumnName="ARRIVAL_STATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROUTES_ARCHIVE">
+      <EntityTypeMapping TypeName="Model.ROUTES_ARCHIVE">
+        <MappingFragment StoreEntitySet="ROUTES_ARCHIVE">
           <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
           <ScalarProperty Name="DEPARTURE_STATION" ColumnName="DEPARTURE_STATION" />
           <ScalarProperty Name="ARRIVAL_STATION" ColumnName="ARRIVAL_STATION" />
@@ -90,5 +111,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="ROUTE_STATIONS" TypeName="Model.ROUTE_STATIONS" StoreEntitySet="ROUTE_STATIONS">
+      <EndProperty Name="ROUTES">
+        <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
+      </EndProperty>
+      <EndProperty Name="STATIONS">
+        <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

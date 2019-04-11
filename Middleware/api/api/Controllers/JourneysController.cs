@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.BindingModels;
 using api.Models.DTO;
 
 namespace api.Controllers
@@ -84,8 +85,18 @@ namespace api.Controllers
 
         // POST: api/Journeys
         [ResponseType(typeof(JOURNEY))]
-        public IHttpActionResult PostJOURNEY(JOURNEY jOURNEY)
+        public IHttpActionResult PostJOURNEY(JourneyBindingModel journey)
         {
+            JOURNEY jOURNEY = new JOURNEY()
+            {
+                JOURNEY_ID = 0,
+                ROUTE_ID = journey.RouteId,
+                COACH_ID = journey.CoachId,
+                EMPLOYEE_ID = journey.EmployeeId,
+                START_DATE_TIME = journey.DepartureTime,
+                END_DATE_TIME = journey.ArrivalTime
+            };
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -109,7 +120,8 @@ namespace api.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = jOURNEY.JOURNEY_ID }, jOURNEY);
+            HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, journey);
+            return ResponseMessage(responseMessage);
         }
 
         // DELETE: api/Journeys/5

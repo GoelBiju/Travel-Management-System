@@ -1,0 +1,8 @@
+Customer login:
+---------------
+
+
+PayPal login for mobile testing:
+--------------------------------
+
+goel@email.com - testuser123

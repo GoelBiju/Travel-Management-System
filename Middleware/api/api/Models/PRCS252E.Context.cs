@@ -25,6 +25,7 @@ namespace api.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BOOKING> BOOKINGS { get; set; }
         public virtual DbSet<COACH> COACHES { get; set; }
         public virtual DbSet<COACHES_ARCHIVE> COACHES_ARCHIVE { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERS { get; set; }

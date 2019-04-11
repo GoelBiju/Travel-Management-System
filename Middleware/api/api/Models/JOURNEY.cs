@@ -14,6 +14,12 @@ namespace api.Models
     
     public partial class JOURNEY
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public JOURNEY()
+        {
+            this.BOOKINGS = new HashSet<BOOKING>();
+        }
+    
         public decimal JOURNEY_ID { get; set; }
         public decimal ROUTE_ID { get; set; }
         public decimal COACH_ID { get; set; }
@@ -21,6 +27,8 @@ namespace api.Models
         public System.DateTime START_DATE_TIME { get; set; }
         public System.DateTime END_DATE_TIME { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BOOKING> BOOKINGS { get; set; }
         public virtual COACH COACH { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual ROUTE ROUTE { get; set; }

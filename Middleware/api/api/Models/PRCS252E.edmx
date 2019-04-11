@@ -4,7 +4,21 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BOOKINGS">
+          <Key>
+            <PropertyRef Name="BOOKING_ID" />
+          </Key>
+          <Property Name="BOOKING_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="JOURNEY_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STARTING_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ENDING_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DATE_TIME" Type="date" Nullable="false" />
+          <Property Name="PRICE" Type="number" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="AMOUNT_OF_PEOPLE" Type="number" Precision="38" Scale="0" />
+          <Property Name="STATUS" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="COACHES">
           <Key>
             <PropertyRef Name="COACH_ID" />
@@ -115,6 +129,54 @@ warning 6002: The table/view 'PRCS251E.ROUTE_STATIONS' does not have a primary k
           <Property Name="STATION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STATION_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="BOOKINGS_CUSTOMER_ID_FK">
+          <End Role="CUSTOMERS" Type="Self.CUSTOMERS" Multiplicity="1" />
+          <End Role="BOOKINGS" Type="Self.BOOKINGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMERS">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="BOOKINGS">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKINGS_ENDING_STOP">
+          <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="1" />
+          <End Role="BOOKINGS" Type="Self.BOOKINGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATIONS">
+              <PropertyRef Name="STATION_ID" />
+            </Principal>
+            <Dependent Role="BOOKINGS">
+              <PropertyRef Name="ENDING_STOP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKINGS_JOURNEYS_ID_FK">
+          <End Role="JOURNEYS" Type="Self.JOURNEYS" Multiplicity="1" />
+          <End Role="BOOKINGS" Type="Self.BOOKINGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JOURNEYS">
+              <PropertyRef Name="JOURNEY_ID" />
+            </Principal>
+            <Dependent Role="BOOKINGS">
+              <PropertyRef Name="JOURNEY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKINGS_STARTING_STOP">
+          <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="1" />
+          <End Role="BOOKINGS" Type="Self.BOOKINGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATIONS">
+              <PropertyRef Name="STATION_ID" />
+            </Principal>
+            <Dependent Role="BOOKINGS">
+              <PropertyRef Name="STARTING_STOP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="COACHES_COACH_ID_FK">
           <End Role="COACHES" Type="Self.COACHES" Multiplicity="1" />
           <End Role="JOURNEYS" Type="Self.JOURNEYS" Multiplicity="*" />
@@ -260,6 +322,7 @@ warning 6002: The table/view 'PRCS251E.ROUTE_STATIONS' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="BOOKINGS" EntityType="Self.BOOKINGS" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="COACHES" EntityType="Self.COACHES" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="COACHES_ARCHIVE" EntityType="Self.COACHES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="PRCS251E" store:Type="Tables" />
@@ -276,6 +339,22 @@ warning 6002: The table/view 'PRCS251E.ROUTE_STATIONS' does not have a primary k
 "ROUTE_STATIONS"."STATION_ID" AS "STATION_ID"
 FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="BOOKINGS_CUSTOMER_ID_FK" Association="Self.BOOKINGS_CUSTOMER_ID_FK">
+            <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+            <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKINGS_ENDING_STOP" Association="Self.BOOKINGS_ENDING_STOP">
+            <End Role="STATIONS" EntitySet="STATIONS" />
+            <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKINGS_JOURNEYS_ID_FK" Association="Self.BOOKINGS_JOURNEYS_ID_FK">
+            <End Role="JOURNEYS" EntitySet="JOURNEYS" />
+            <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKINGS_STARTING_STOP" Association="Self.BOOKINGS_STARTING_STOP">
+            <End Role="STATIONS" EntitySet="STATIONS" />
+            <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+          </AssociationSet>
           <AssociationSet Name="COACHES_COACH_ID_FK" Association="Self.COACHES_COACH_ID_FK">
             <End Role="COACHES" EntitySet="COACHES" />
             <End Role="JOURNEYS" EntitySet="JOURNEYS" />
@@ -325,10 +404,29 @@ FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
             <End Role="SHIFTS" EntitySet="SHIFTS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BOOKING">
+          <Key>
+            <PropertyRef Name="BOOKING_ID" />
+          </Key>
+          <Property Name="BOOKING_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CUSTOMER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="JOURNEY_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STARTING_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ENDING_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DATE_TIME" Type="DateTime" Nullable="false" />
+          <Property Name="PRICE" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="AMOUNT_OF_PEOPLE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="STATUS" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.BOOKINGS_CUSTOMER_ID_FK" FromRole="BOOKINGS" ToRole="CUSTOMERS" />
+          <NavigationProperty Name="STATION" Relationship="Self.BOOKINGS_ENDING_STOP" FromRole="BOOKINGS" ToRole="STATIONS" />
+          <NavigationProperty Name="JOURNEY" Relationship="Self.BOOKINGS_JOURNEYS_ID_FK" FromRole="BOOKINGS" ToRole="JOURNEYS" />
+          <NavigationProperty Name="STATION1" Relationship="Self.BOOKINGS_STARTING_STOP" FromRole="BOOKINGS" ToRole="STATIONS" />
+        </EntityType>
         <EntityType Name="COACH">
           <Key>
             <PropertyRef Name="COACH_ID" />
@@ -366,6 +464,7 @@ FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
           <Property Name="ADDRESS_LINE_TWO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="POSTCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MOBILE_NUMBER" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BOOKINGS" Relationship="Self.BOOKINGS_CUSTOMER_ID_FK" FromRole="CUSTOMERS" ToRole="BOOKINGS" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
@@ -398,6 +497,7 @@ FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
           <Property Name="EMPLOYEE_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="START_DATE_TIME" Type="DateTime" Nullable="false" />
           <Property Name="END_DATE_TIME" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="BOOKINGS" Relationship="Self.BOOKINGS_JOURNEYS_ID_FK" FromRole="JOURNEYS" ToRole="BOOKINGS" />
           <NavigationProperty Name="COACH" Relationship="Self.COACHES_COACH_ID_FK" FromRole="JOURNEYS" ToRole="COACHES" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.EMPLOYEES_EMPLOYEE_ID_FK" FromRole="JOURNEYS" ToRole="EMPLOYEES" />
           <NavigationProperty Name="ROUTE" Relationship="Self.ROUTES_ROUTE_ID_FK" FromRole="JOURNEYS" ToRole="ROUTES" />
@@ -445,12 +545,62 @@ FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
           </Key>
           <Property Name="STATION_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STATION_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BOOKINGS" Relationship="Self.BOOKINGS_ENDING_STOP" FromRole="STATIONS" ToRole="BOOKINGS" />
+          <NavigationProperty Name="BOOKINGS1" Relationship="Self.BOOKINGS_STARTING_STOP" FromRole="STATIONS" ToRole="BOOKINGS" />
           <NavigationProperty Name="ROUTES" Relationship="Self.ROUTES_ARRIVAL_STATION_FK" FromRole="STATIONS" ToRole="ROUTES" />
           <NavigationProperty Name="ROUTES1" Relationship="Self.ROUTES_DEPARTURE_STATION_FK" FromRole="STATIONS" ToRole="ROUTES" />
           <NavigationProperty Name="ROUTES_ARCHIVE" Relationship="Self.ROUTES_ARCHIVE_ARRIVAL_STATION_FK" FromRole="STATIONS" ToRole="ROUTES_ARCHIVE" />
           <NavigationProperty Name="ROUTES_ARCHIVE1" Relationship="Self.ROUTES_ARCHIVE_DEPARTURE_STATION_FK" FromRole="STATIONS" ToRole="ROUTES_ARCHIVE" />
           <NavigationProperty Name="ROUTES2" Relationship="Self.ROUTE_STATIONS" FromRole="STATIONS" ToRole="ROUTES" />
         </EntityType>
+        <Association Name="BOOKINGS_CUSTOMER_ID_FK">
+          <End Role="CUSTOMERS" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="BOOKINGS" Type="Self.BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMERS">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="BOOKINGS">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKINGS_ENDING_STOP">
+          <End Role="STATIONS" Type="Self.STATION" Multiplicity="1" />
+          <End Role="BOOKINGS" Type="Self.BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATIONS">
+              <PropertyRef Name="STATION_ID" />
+            </Principal>
+            <Dependent Role="BOOKINGS">
+              <PropertyRef Name="ENDING_STOP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKINGS_JOURNEYS_ID_FK">
+          <End Role="JOURNEYS" Type="Self.JOURNEY" Multiplicity="1" />
+          <End Role="BOOKINGS" Type="Self.BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JOURNEYS">
+              <PropertyRef Name="JOURNEY_ID" />
+            </Principal>
+            <Dependent Role="BOOKINGS">
+              <PropertyRef Name="JOURNEY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKINGS_STARTING_STOP">
+          <End Role="STATIONS" Type="Self.STATION" Multiplicity="1" />
+          <End Role="BOOKINGS" Type="Self.BOOKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATIONS">
+              <PropertyRef Name="STATION_ID" />
+            </Principal>
+            <Dependent Role="BOOKINGS">
+              <PropertyRef Name="STARTING_STOP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="COACHES_COACH_ID_FK">
           <End Role="COACHES" Type="Self.COACH" Multiplicity="1" />
           <End Role="JOURNEYS" Type="Self.JOURNEY" Multiplicity="*" />
@@ -576,6 +726,7 @@ FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
           <End Role="STATIONS" Type="Self.STATION" Multiplicity="*" />
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BOOKINGS" EntityType="Self.BOOKING" />
           <EntitySet Name="COACHES" EntityType="Self.COACH" />
           <EntitySet Name="COACHES_ARCHIVE" EntityType="Self.COACHES_ARCHIVE" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
@@ -586,6 +737,22 @@ FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
           <EntitySet Name="ROUTES_ARCHIVE" EntityType="Self.ROUTES_ARCHIVE" />
           <EntitySet Name="SHIFTS" EntityType="Self.SHIFT" />
           <EntitySet Name="STATIONS" EntityType="Self.STATION" />
+          <AssociationSet Name="BOOKINGS_CUSTOMER_ID_FK" Association="Self.BOOKINGS_CUSTOMER_ID_FK">
+            <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+            <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKINGS_ENDING_STOP" Association="Self.BOOKINGS_ENDING_STOP">
+            <End Role="STATIONS" EntitySet="STATIONS" />
+            <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKINGS_JOURNEYS_ID_FK" Association="Self.BOOKINGS_JOURNEYS_ID_FK">
+            <End Role="JOURNEYS" EntitySet="JOURNEYS" />
+            <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKINGS_STARTING_STOP" Association="Self.BOOKINGS_STARTING_STOP">
+            <End Role="STATIONS" EntitySet="STATIONS" />
+            <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+          </AssociationSet>
           <AssociationSet Name="COACHES_COACH_ID_FK" Association="Self.COACHES_COACH_ID_FK">
             <End Role="COACHES" EntitySet="COACHES" />
             <End Role="JOURNEYS" EntitySet="JOURNEYS" />
@@ -637,6 +804,21 @@ FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="BOOKINGS">
+            <EntityTypeMapping TypeName="Model.BOOKING">
+              <MappingFragment StoreEntitySet="BOOKINGS">
+                <ScalarProperty Name="BOOKING_ID" ColumnName="BOOKING_ID" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
+                <ScalarProperty Name="STARTING_STOP" ColumnName="STARTING_STOP" />
+                <ScalarProperty Name="ENDING_STOP" ColumnName="ENDING_STOP" />
+                <ScalarProperty Name="DATE_TIME" ColumnName="DATE_TIME" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="AMOUNT_OF_PEOPLE" ColumnName="AMOUNT_OF_PEOPLE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="COACHES">
             <EntityTypeMapping TypeName="Model.COACH">
               <MappingFragment StoreEntitySet="COACHES">

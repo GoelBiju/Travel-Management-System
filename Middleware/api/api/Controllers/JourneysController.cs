@@ -27,6 +27,8 @@ namespace api.Controllers
                                RouteId = (int)j.ROUTE_ID,
                                CoachId = (int)j.COACH_ID,
                                EmployeeId = j.EMPLOYEE_ID,
+                               DepartureTime = j.START_DATE_TIME.ToString(),
+                               ArrivalTime = j.END_DATE_TIME.ToString()
 
                            };
             return journeys;

@@ -49,7 +49,7 @@ namespace WebApplication.Controllers
             {
                 try
                 {
-                    HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("coaches", journey).Result;
+                    HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("journeys", journey).Result;
                     return RedirectToAction("Index");
                 }
                 catch

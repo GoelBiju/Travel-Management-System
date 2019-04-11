@@ -27,10 +27,10 @@ namespace WebApplication.ViewModels
 
         [Display(Name = "Departure Time")]
         [JsonProperty("startdatetime")]
-        public string DepartureTime { get; set; }
+        public DateTime DepartureTime { get; set; }
 
         [Display(Name = "Arrival Time")]
         [JsonProperty("enddatetime")]
-        public string ArrivalTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
     }
 }

@@ -43,13 +43,19 @@ namespace WebApplication.Controllers
 
         // POST: Journey/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(JourneyViewModel journey)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                try
+                {
+                    HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("coaches", journey).Result;
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
             catch
             {

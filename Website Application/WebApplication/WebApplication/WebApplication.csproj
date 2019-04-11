@@ -280,6 +280,7 @@
     <Content Include="Views\Shift\Details.cshtml" />
     <Content Include="Views\Shift\Delete.cshtml" />
     <Content Include="Views\Journey\Index.cshtml" />
+    <Content Include="Views\Journey\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,11 +14,13 @@ using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [RoutePrefix("api/journeys")]
     public class JourneysController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Journeys
+        
         public IQueryable<JourneyDTO> GetJOURNEYS()
         {
             var journeys = from j in db.JOURNEYS

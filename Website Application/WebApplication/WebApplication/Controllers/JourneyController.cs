@@ -15,6 +15,7 @@ namespace WebApplication.Controllers
     public class JourneyController : Controller
     {
         // GET: Journey
+        [HttpGet]
         public ActionResult Index()
         {
             var _Data = new List<JourneyViewModel>();

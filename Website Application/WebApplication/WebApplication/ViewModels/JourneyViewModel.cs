@@ -10,6 +10,7 @@ namespace WebApplication.ViewModels
     public class JourneyViewModel
     {
         [Display(Name = "Journey ID")]
+        [JsonProperty("journeyid")]
         public int JourneyId { get; set; }
 
         [Display(Name = "Route ID")]

@@ -279,10 +279,10 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shift\Details.cshtml" />
     <Content Include="Views\Shift\Delete.cshtml" />
+    <Content Include="Views\Journey\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Journey\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

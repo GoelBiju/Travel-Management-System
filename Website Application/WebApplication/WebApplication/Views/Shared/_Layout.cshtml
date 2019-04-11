@@ -37,7 +37,7 @@
             @*<a>@Html.ActionLink("Create Employee", "Create", "Employee")</a>
             <a>@Html.ActionLink("Update Employee", "Edit", "Employee")</a>*@
             <a>@Html.ActionLink("View Employees", "Details", "Employee")</a>
-            <a>@Html.ActionLink("View Archived Employee", "Index", "EmployeeArchive")</a>
+            <a>@Html.ActionLink("View Archived Employees", "Index", "EmployeeArchive")</a>
         </div>
 
 
@@ -71,10 +71,10 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a href="#">Create New Journey</a>
-            <a href="#">Update Journey</a>
-            <a href="#">View Journey</a>
-            <a href="#">Archive Journey</a>
+            <a>@Html.ActionLink("Create New Journeys", "Create", "Journey")</a>
+            @*<a href="#">Update Journey</a>*@
+            <a>@Html.ActionLink("View Journeys", "Index", "Journey")</a>
+            @*<a href="#">Archive Journey</a>*@
         </div>
 
         <!-- Coaches Options -->

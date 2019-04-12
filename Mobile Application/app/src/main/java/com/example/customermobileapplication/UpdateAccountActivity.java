@@ -33,7 +33,7 @@ import java.util.Locale;
 
 
 
-public class UpdateAccountActivity extends Activity {
+public class UpdateAccountActivity extends Activity implements View.OnClickListener {
 
     APIConnection apiConnection;
 
@@ -47,6 +47,42 @@ public class UpdateAccountActivity extends Activity {
     private EditText password;
     private EditText passwordConfirmation;
 
+    private Button submitUpdatesButton;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_update_account);
+
+        apiConnection = new APIConnection(getApplicationContext(), getResources().getString(R.string.api_base_url));
+    }
+
+    @Override
+    public void onClick(View view){
+        SubmitChanges();
+    }
+
+
+    private void SubmitChanges(){
+        String newFirstName = firstName.getText().toString();
+        String newLastName = lastName.getText().toString();
+        String newaddressLineOne = addressLineOne.getText().toString();
+        String newPostCode = postCode.getText().toString();
+        String newMobileNumber = mobileNumber.getText().toString();
+        String newEmailAddress = emailAddress.getText().toString();
+        String newPassword = password.getText().toString();
+        String newPasswordConfirmation = passwordConfirmation.getText().toString();
+
+        if(!newPassword.equals(newPasswordConfirmation)){
+            Toast.makeText(this, getResources().getString(R.string.passwordsMustBeSame), Toast.LENGTH_SHORT).show();
+        }
+
+        apiConnection.postCustomJsonObject("customers", Customer.class, new CustomCallback());
+
+
+
+    }
 
 }
+
+

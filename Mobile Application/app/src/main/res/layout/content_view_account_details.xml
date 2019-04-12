@@ -163,7 +163,7 @@
         app:layout_constraintVertical_bias="0.184" />
 
     <TextView
-        android:id="@+id/firstNameLabel"
+        android:id="@+id/firstNameTB"
         android:layout_width="115dp"
         android:layout_height="27dp"
         android:layout_marginStart="8dp"

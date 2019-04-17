@@ -77,12 +77,8 @@ public class UpdateAccountActivity extends Activity implements View.OnClickListe
             Toast.makeText(this, getResources().getString(R.string.passwordsMustBeSame), Toast.LENGTH_SHORT).show();
         }
 
-        apiConnection.postCustomJsonObject("customers", Customer.class, new CustomCallback());
-
-
-
+        //apiConnection.postCustomJsonObject("customers", Customer.class, new CustomCallback());
     }
-
 }
 
 

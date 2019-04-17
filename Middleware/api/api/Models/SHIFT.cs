@@ -14,15 +14,22 @@ namespace api.Models
     
     public partial class SHIFT
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SHIFT()
+        {
+            this.JOURNEYS = new HashSet<JOURNEY>();
+            this.REPLACEMENTS = new HashSet<REPLACEMENT>();
+        }
+    
         public decimal SHIFT_ID { get; set; }
         public string EMPLOYEE_ID { get; set; }
-        public decimal ROUTE_ID { get; set; }
-        public decimal COACH_ID { get; set; }
         public System.DateTime START_DATETIME { get; set; }
         public System.DateTime END_DATETIME { get; set; }
     
-        public virtual COACH COACH { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
-        public virtual ROUTE ROUTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JOURNEY> JOURNEYS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REPLACEMENT> REPLACEMENTS { get; set; }
     }
 }

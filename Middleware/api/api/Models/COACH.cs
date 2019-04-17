@@ -18,7 +18,7 @@ namespace api.Models
         public COACH()
         {
             this.JOURNEYS = new HashSet<JOURNEY>();
-            this.SHIFTS = new HashSet<SHIFT>();
+            this.REPLACEMENTS = new HashSet<REPLACEMENT>();
         }
     
         public decimal COACH_ID { get; set; }
@@ -31,6 +31,6 @@ namespace api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JOURNEY> JOURNEYS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHIFT> SHIFTS { get; set; }
+        public virtual ICollection<REPLACEMENT> REPLACEMENTS { get; set; }
     }
 }

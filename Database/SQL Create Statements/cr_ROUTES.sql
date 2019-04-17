@@ -16,9 +16,9 @@ CREATE TABLE routes(
     route_id NUMBER 
         CONSTRAINT routes_route_id_pk PRIMARY KEY,
 
-    departure_station NUMBER
-        CONSTRAINT routes_departure_station_fk REFERENCES stations (station_id),
+    departure_station NUMBER NOT NULL
+        CONSTRAINT routes_departure_station_fk REFERENCES stops (stop_id),
 
-    arrival_station NUMBER
-        CONSTRAINT routes_arrival_station_fk REFERENCES stations (station_id)
+    arrival_station NUMBER NOT NULL
+        CONSTRAINT routes_arrival_station_fk REFERENCES stops (stop_id)
 );

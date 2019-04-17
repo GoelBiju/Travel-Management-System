@@ -17,31 +17,19 @@ namespace api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public STATION()
         {
-            this.BOOKINGS = new HashSet<BOOKING>();
-            this.BOOKINGS1 = new HashSet<BOOKING>();
-            this.ROUTES = new HashSet<ROUTE>();
-            this.ROUTES1 = new HashSet<ROUTE>();
             this.ROUTES_ARCHIVE = new HashSet<ROUTES_ARCHIVE>();
             this.ROUTES_ARCHIVE1 = new HashSet<ROUTES_ARCHIVE>();
-            this.ROUTES2 = new HashSet<ROUTE>();
+            this.ROUTE_STATIONS = new HashSet<ROUTE_STATIONS>();
         }
     
         public decimal STATION_ID { get; set; }
         public string STATION_NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BOOKING> BOOKINGS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BOOKING> BOOKINGS1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROUTE> ROUTES { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROUTE> ROUTES1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROUTES_ARCHIVE> ROUTES_ARCHIVE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROUTES_ARCHIVE> ROUTES_ARCHIVE1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROUTE> ROUTES2 { get; set; }
+        public virtual ICollection<ROUTE_STATIONS> ROUTE_STATIONS { get; set; }
     }
 }

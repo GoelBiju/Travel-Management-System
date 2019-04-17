@@ -18,19 +18,26 @@ namespace api.Models
         public JOURNEY()
         {
             this.BOOKINGS = new HashSet<BOOKING>();
+            this.REPLACEMENTS = new HashSet<REPLACEMENT>();
         }
     
         public decimal JOURNEY_ID { get; set; }
         public decimal ROUTE_ID { get; set; }
+        public decimal SHIFT_ID { get; set; }
         public decimal COACH_ID { get; set; }
-        public string EMPLOYEE_ID { get; set; }
-        public System.DateTime START_DATE_TIME { get; set; }
-        public System.DateTime END_DATE_TIME { get; set; }
+        public System.DateTime DEPARTURE_DATETIME { get; set; }
+        public System.DateTime ARRIVAL_DATETIME { get; set; }
+        public Nullable<decimal> CURRENT_STOP { get; set; }
+        public Nullable<System.DateTime> STOP_ARRIVAL_DATETIME { get; set; }
+        public Nullable<System.DateTime> STOP_DEPARTED_DATETIME { get; set; }
+        public string COACH_STATUS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BOOKING> BOOKINGS { get; set; }
         public virtual COACH COACH { get; set; }
-        public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual ROUTE ROUTE { get; set; }
+        public virtual SHIFT SHIFT { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REPLACEMENT> REPLACEMENTS { get; set; }
     }
 }

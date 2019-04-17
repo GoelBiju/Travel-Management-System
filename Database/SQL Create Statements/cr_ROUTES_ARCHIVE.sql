@@ -12,7 +12,7 @@
 
 CREATE TABLE routes_archive(
 
-    route_id NUMBER 
+    route_id NUMBER
         CONSTRAINT routes_archive_route_id_pk PRIMARY KEY,
 
     departure_station NUMBER

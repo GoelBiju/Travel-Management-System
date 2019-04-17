@@ -14,6 +14,7 @@ using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [Authorize]
     // Add RoutePrefix to specify the location of this resource.
     [RoutePrefix("api/customers")]
     public class CustomersController : ApiController
@@ -23,6 +24,7 @@ namespace api.Controllers
         // GET: api/Customers
         [HttpGet]
         [Route("")]
+        [Authorize(Roles = "Customer")]
         public IQueryable<CustomerDTO> GetCUSTOMERS()
         {
             var customers = from c in db.CUSTOMERS
@@ -44,7 +46,7 @@ namespace api.Controllers
 
 
         // GET: api/Customers/5
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Employee")]
         [Route("{id:int}", Name = "GetCustomerDetailsById")]
         [ResponseType(typeof(CustomerDTO))]
         public async Task<IHttpActionResult> GetCUSTOMER(decimal id)

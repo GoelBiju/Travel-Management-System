@@ -12,21 +12,12 @@ namespace api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ROUTE
+    public partial class ROUTE_STOPS
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ROUTE()
-        {
-            this.JOURNEYS = new HashSet<JOURNEY>();
-        }
-    
         public decimal ROUTE_ID { get; set; }
-        public decimal DEPARTURE_STATION { get; set; }
-        public decimal ARRIVAL_STATION { get; set; }
+        public decimal STOP_ID { get; set; }
+        public decimal POSITION_IN_ROUTE { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JOURNEY> JOURNEYS { get; set; }
         public virtual STOP STOP { get; set; }
-        public virtual STOP STOP1 { get; set; }
     }
 }

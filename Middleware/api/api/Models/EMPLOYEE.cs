@@ -17,7 +17,6 @@ namespace api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMPLOYEE()
         {
-            this.JOURNEYS = new HashSet<JOURNEY>();
             this.SHIFTS = new HashSet<SHIFT>();
         }
     
@@ -27,8 +26,6 @@ namespace api.Models
         public string LAST_NAME { get; set; }
         public string JOB_ROLE { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JOURNEY> JOURNEYS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SHIFT> SHIFTS { get; set; }
     }

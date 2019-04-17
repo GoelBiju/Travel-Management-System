@@ -4,6 +4,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -24,7 +25,7 @@ namespace api.Controllers
         // GET: api/Customers
         [HttpGet]
         [Route("")]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Employee")]
         public IQueryable<CustomerDTO> GetCUSTOMERS()
         {
             var customers = from c in db.CUSTOMERS
@@ -46,13 +47,14 @@ namespace api.Controllers
 
 
         // GET: api/Customers/5
-        [HttpGet, Authorize(Roles = "Employee")]
+        [HttpGet, Authorize(Roles = "Customer, Employee")]
         [Route("{id:int}", Name = "GetCustomerDetailsById")]
         [ResponseType(typeof(CustomerDTO))]
         public async Task<IHttpActionResult> GetCUSTOMER(decimal id)
         {
             //CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
             // Select the CUSTOMER object from the database model and create a CustomerDTO object from it.
+
             var customer = await db.CUSTOMERS.Select(c =>
                 new CustomerDTO()
                 {

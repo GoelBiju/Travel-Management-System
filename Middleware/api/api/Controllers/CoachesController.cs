@@ -15,12 +15,18 @@ using api.Models.DTO;
 
 namespace api.Controllers
 {
+    // Allow access to only employees.
+    [Authorize(Roles = "Employee")]
     [RoutePrefix("api/coaches")]
     public class CoachesController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Coaches
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(CoachDTO))]
@@ -40,7 +46,13 @@ namespace api.Controllers
             return coaches;
         }
 
+
         // GET: api/Coaches/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id:int}", Name = "GetCoachesDetailsById")]
         [ResponseType(typeof(CoachDTO))]
@@ -68,7 +80,14 @@ namespace api.Controllers
             return Ok(coach);
         }
 
+
         // PUT: api/Coaches/1
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="coach"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("{id:int}")]
         [ResponseType(typeof(void))]
@@ -116,7 +135,13 @@ namespace api.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
         // POST: api/Coaches
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="coach"></param>
+        /// <returns></returns>
         [ResponseType(typeof(COACH))]
         [HttpPost]
         [Route("")]
@@ -159,7 +184,13 @@ namespace api.Controllers
             return ResponseMessage(responseMessage);
         }
 
+
         // DELETE: api/Coaches/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id:int}", Name = "DeleteCoachById")]
         [ResponseType(typeof(void))]
@@ -188,6 +219,11 @@ namespace api.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
         private bool COACHExists(string reg)
         {
             return db.COACHES.Count(e => e.REGISTRATION_PLATE == reg) > 0;

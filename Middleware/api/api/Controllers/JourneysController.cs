@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
@@ -14,41 +15,63 @@ using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/journeys")]
     public class JourneysController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Journeys
-        
-        //public IQueryable<JourneyDTO> GetJOURNEYS()
-        //{
-        //    var journeys = from j in db.JOURNEYS
-        //                   select new JourneyDTO
-        //                   {
-        //                       JourneyId = (int)j.JOURNEY_ID,
-        //                       RouteId = (int)j.ROUTE_ID,
-        //                       CoachId = (int)j.COACH_ID,
-        //                       EmployeeId = j.EMPLOYEE_ID,
-        //                       DepartureTime = j.START_DATE_TIME.ToString(),
-        //                       ArrivalTime = j.END_DATE_TIME.ToString()
+        [HttpGet]
+        [Route("")]
+        public IQueryable<JourneyDTO> GetJOURNEYS()
+        {
+            var journeys = from j in db.JOURNEYS
+                           select new JourneyDTO
+                           {
+                               JourneyId = (int)j.JOURNEY_ID,
+                               RouteId = (int)j.ROUTE_ID,
+                               ShiftId = (int)j.SHIFT_ID,
+                               CoachId = (int)j.COACH_ID,
+                               DepartureDateTime = j.DEPARTURE_DATETIME,
+                               ArrivalDateTime = j.ARRIVAL_DATETIME,
+                               CurrentStop = (int)j.CURRENT_STOP,
+                               StopArrivalDateTime = (DateTime)j.STOP_ARRIVAL_DATETIME,
+                               StopDepartedDateTime = (DateTime)j.STOP_DEPARTED_DATETIME
+                           };
 
-        //                   };
-        //    return journeys;
-        //}
+            return journeys;
+        }
 
         //// GET: api/Journeys/5
-        //[ResponseType(typeof(JOURNEY))]
-        //public IHttpActionResult GetJOURNEY(decimal id)
-        //{
-        //    JOURNEY jOURNEY = db.JOURNEYS.Find(id);
-        //    if (jOURNEY == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpGet]
+        [Route("{id:int}")]
+        [ResponseType(typeof(JourneyDTO))]
+        public async Task<IHttpActionResult> GetJOURNEY(decimal id)
+        {
+            //JOURNEY jOURNEY = db.JOURNEYS.Find(id);
 
-        //    return Ok(jOURNEY);
-        //}
+            var journey = await db.JOURNEYS.Select(j =>
+                new JourneyDTO()
+                {
+                    JourneyId = (int)j.JOURNEY_ID,
+                    RouteId = (int)j.ROUTE_ID,
+                    ShiftId = (int)j.SHIFT_ID,
+                    CoachId = (int)j.COACH_ID,
+                    DepartureDateTime = j.DEPARTURE_DATETIME,
+                    ArrivalDateTime = j.ARRIVAL_DATETIME,
+                    CurrentStop = (int)j.CURRENT_STOP,
+                    StopArrivalDateTime = (DateTime)j.STOP_ARRIVAL_DATETIME,
+                    StopDepartedDateTime = (DateTime)j.STOP_DEPARTED_DATETIME
+                }).SingleOrDefaultAsync(j => j.JourneyId == id);
+
+            if (journey == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(journey);
+        }
 
         //// PUT: api/Journeys/5
         //[ResponseType(typeof(void))]
@@ -86,74 +109,80 @@ namespace api.Controllers
         //}
 
         //// POST: api/Journeys
-        //[ResponseType(typeof(JOURNEY))]
-        //public IHttpActionResult PostJOURNEY(JourneyBindingModel journey)
-        //{
-        //    JOURNEY jOURNEY = new JOURNEY()
-        //    {
-        //        JOURNEY_ID = 0,
-        //        ROUTE_ID = journey.RouteId,
-        //        COACH_ID = journey.CoachId,
-        //        EMPLOYEE_ID = journey.EmployeeId,
-        //        START_DATE_TIME = journey.DepartureTime,
-        //        END_DATE_TIME = journey.ArrivalTime
-        //    };
+        [HttpPost, Authorize(Roles = "Employee")]
+        [Route("")]
+        [ResponseType(typeof(JourneyDTO))]
+        public IHttpActionResult PostJOURNEY(JourneyBindingModel journey)
+        {
+            JOURNEY jOURNEY = new JOURNEY()
+            {
+                JOURNEY_ID = 0,
+                ROUTE_ID = journey.RouteId,
+                COACH_ID = journey.CoachId,
+                SHIFT_ID = journey.ShiftId,
+                DEPARTURE_DATETIME = journey.DepartureDateTime,
+                ARRIVAL_DATETIME = journey.ArrivalDateTime,
+                COACH_STATUS = "Scheduled"
+            };
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.JOURNEYS.Add(jOURNEY);
+            db.JOURNEYS.Add(jOURNEY);
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (JOURNEYExists(jOURNEY.JOURNEY_ID))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (JOURNEYExists(jOURNEY.JOURNEY_ID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, journey);
-        //    return ResponseMessage(responseMessage);
-        //}
+            //HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, journey);
+            //return ResponseMessage(responseMessage);
+            return Ok();
+        }
 
         //// DELETE: api/Journeys/5
-        //[ResponseType(typeof(JOURNEY))]
-        //public IHttpActionResult DeleteJOURNEY(decimal id)
-        //{
-        //    JOURNEY jOURNEY = db.JOURNEYS.Find(id);
-        //    if (jOURNEY == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpDelete, Authorize(Roles = "Employee")]
+        [Route("{id:int}")]
+        [ResponseType(typeof(JOURNEY))]
+        public IHttpActionResult DeleteJOURNEY(decimal id)
+        {
+            JOURNEY jOURNEY = db.JOURNEYS.Find(id);
+            if (jOURNEY == null)
+            {
+                return NotFound();
+            }
 
-        //    db.JOURNEYS.Remove(jOURNEY);
-        //    db.SaveChanges();
+            db.JOURNEYS.Remove(jOURNEY);
+            db.SaveChanges();
 
-        //    return Ok(jOURNEY);
-        //}
+            return Ok(jOURNEY);
+        }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-        //private bool JOURNEYExists(decimal id)
-        //{
-        //    return db.JOURNEYS.Count(e => e.JOURNEY_ID == id) > 0;
-        //}
+        private bool JOURNEYExists(decimal id)
+        {
+            return db.JOURNEYS.Count(e => e.JOURNEY_ID == id) > 0;
+        }
     }
 }

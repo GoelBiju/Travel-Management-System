@@ -14,84 +14,79 @@ using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [Authorize(Roles = "Employee")]
     [RoutePrefix("api/shifts")]
     public class ShiftsController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Shifts
-        //[HttpGet]
-        //[Route("")]
-        //public IQueryable<ShiftDTO> GetSHIFTS()
-        //{
-        //    var shifts = from s in db.SHIFTS
-        //                 select new ShiftDTO()
-        //                 {
-        //                     ShiftId = (int)s.SHIFT_ID,
-        //                     EmployeeId = s.EMPLOYEE_ID,
-        //                     RouteId = (int)s.ROUTE_ID,
-        //                     CoachId = (int)s.COACH_ID,
-        //                     StartDateTime = s.START_DATETIME,
-        //                     EndDateTime = s.END_DATETIME
-        //                 };
+        [HttpGet]
+        [Route("")]
+        public IQueryable<ShiftDTO> GetSHIFTS()
+        {
+            var shifts = from s in db.SHIFTS
+                         select new ShiftDTO()
+                         {
+                             ShiftId = (int)s.SHIFT_ID,
+                             EmployeeId = s.EMPLOYEE_ID,
+                             StartDateTime = s.START_DATETIME,
+                             EndDateTime = s.END_DATETIME
+                         };
 
-        //    return shifts;
-        //}
+            return shifts;
+        }
 
-        //// GET: api/Shifts/5
-        //[HttpGet]
-        //[Route("{id:int}", Name = "GetShiftDetailsById")]
-        //[ResponseType(typeof(ShiftDTO))]
-        //public async Task<IHttpActionResult> GetSHIFT(decimal id)
-        //{
-        //    // Select a specific shift based on its id attribute.
-        //    //SHIFT sHIFT = db.SHIFTS.Find(id);
+        // GET: api/Shifts/5
+        [HttpGet]
+        [Route("{id:int}", Name = "GetShiftDetailsById")]
+        [ResponseType(typeof(ShiftDTO))]
+        public async Task<IHttpActionResult> GetSHIFT(decimal id)
+        {
+            // Select a specific shift based on its id attribute.
+            //SHIFT sHIFT = db.SHIFTS.Find(id);
 
-        //    var shift = await db.SHIFTS.Select(s =>
-        //        new ShiftDTO()
-        //        {
-        //            ShiftId = (int)s.SHIFT_ID,
-        //            EmployeeId = s.EMPLOYEE_ID,
-        //            RouteId = (int)s.ROUTE_ID,
-        //            CoachId = (int)s.COACH_ID,
-        //            StartDateTime = s.START_DATETIME,
-        //            EndDateTime = s.END_DATETIME
-        //        }).SingleOrDefaultAsync(s => s.ShiftId == id);
+            var shift = await db.SHIFTS.Select(s =>
+                new ShiftDTO()
+                {
+                    ShiftId = (int)s.SHIFT_ID,
+                    EmployeeId = s.EMPLOYEE_ID,
+                    StartDateTime = s.START_DATETIME,
+                    EndDateTime = s.END_DATETIME
+                }).SingleOrDefaultAsync(s => s.ShiftId == id);
 
 
-        //    if (shift == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (shift == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(shift);
-        //}
+            return Ok(shift);
+        }
 
-        //// GET: Shifts by employee id.
-        //// Return shifts only on the day that the service supposed to run.
-        //[HttpGet]
-        //[Route("employee/{employeeId}", Name = "GetShiftsByEmployeeId")]
-        //[ResponseType(typeof(ShiftDTO))]
-        //public IHttpActionResult GetEmployeeShifts(string employeeId)
-        //{
-        //    IList<ShiftDTO> employeeShifts = db.SHIFTS.Select(s =>
-        //        new ShiftDTO()
-        //        {
-        //            ShiftId = (int)s.SHIFT_ID,
-        //            EmployeeId = s.EMPLOYEE_ID,
-        //            RouteId = (int)s.ROUTE_ID,
-        //            CoachId = (int)s.COACH_ID,
-        //            StartDateTime = s.START_DATETIME,
-        //            EndDateTime = s.END_DATETIME
-        //        }).Where(s => s.EmployeeId == employeeId).ToList();
+        // GET: Shifts by employee id.
+        // Return shifts only on the day that the service supposed to run.
+        [HttpGet]
+        [Route("employee/{employeeId}", Name = "GetShiftsByEmployeeId")]
+        [ResponseType(typeof(ShiftDTO))]
+        public IHttpActionResult GetEmployeeShifts(string employeeId)
+        {
+            IList<ShiftDTO> employeeShifts = db.SHIFTS.Select(s =>
+                new ShiftDTO()
+                {
+                    ShiftId = (int)s.SHIFT_ID,
+                    EmployeeId = s.EMPLOYEE_ID,
+                    StartDateTime = s.START_DATETIME,
+                    EndDateTime = s.END_DATETIME
+                }).Where(s => s.EmployeeId == employeeId).ToList();
 
-        //    if (employeeShifts.Count == 0)
-        //    {
-        //        return NotFound();
-        //    }
+            if (employeeShifts.Count == 0)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(employeeShifts);
-        //}
+            return Ok(employeeShifts);
+        }
 
         //// PUT: api/Shifts/5
         //[ResponseType(typeof(void))]
@@ -128,64 +123,66 @@ namespace api.Controllers
         //    return StatusCode(HttpStatusCode.NoContent);
         //}
 
-        //// POST: api/Shifts
-        //[ResponseType(typeof(SHIFT))]
-        //public IHttpActionResult PostSHIFT(SHIFT sHIFT)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // POST: api/Shifts
+        [HttpPost]
+        [Route("")]
+        [ResponseType(typeof(SHIFT))]
+        public IHttpActionResult PostSHIFT(SHIFT sHIFT)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.SHIFTS.Add(sHIFT);
+            db.SHIFTS.Add(sHIFT);
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (SHIFTExists(sHIFT.SHIFT_ID))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (SHIFTExists(sHIFT.SHIFT_ID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return CreatedAtRoute("DefaultApi", new { id = sHIFT.SHIFT_ID }, sHIFT);
-        //}
+            return CreatedAtRoute("DefaultApi", new { id = sHIFT.SHIFT_ID }, sHIFT);
+        }
 
-        //// DELETE: api/Shifts/5
-        //[ResponseType(typeof(SHIFT))]
-        //public IHttpActionResult DeleteSHIFT(decimal id)
-        //{
-        //    SHIFT sHIFT = db.SHIFTS.Find(id);
-        //    if (sHIFT == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // DELETE: api/Shifts/5
+        [ResponseType(typeof(SHIFT))]
+        public IHttpActionResult DeleteSHIFT(decimal id)
+        {
+            SHIFT sHIFT = db.SHIFTS.Find(id);
+            if (sHIFT == null)
+            {
+                return NotFound();
+            }
 
-        //    db.SHIFTS.Remove(sHIFT);
-        //    db.SaveChanges();
+            db.SHIFTS.Remove(sHIFT);
+            db.SaveChanges();
 
-        //    return Ok(sHIFT);
-        //}
+            return Ok(sHIFT);
+        }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-        //private bool SHIFTExists(decimal id)
-        //{
-        //    return db.SHIFTS.Count(e => e.SHIFT_ID == id) > 0;
-        //}
+        private bool SHIFTExists(decimal id)
+        {
+            return db.SHIFTS.Count(e => e.SHIFT_ID == id) > 0;
+        }
     }
 }

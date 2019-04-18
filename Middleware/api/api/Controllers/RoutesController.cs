@@ -14,6 +14,7 @@ using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/routes")]
     public class RoutesController : ApiController
     {
@@ -22,6 +23,7 @@ namespace api.Controllers
         // GET: api/Routes
         [HttpGet]
         [Route("")]
+        [ResponseType(typeof(RouteDTO))]
         public IQueryable<RouteDTO> GetROUTES()
         {
             var routes = from r in db.ROUTES
@@ -61,41 +63,43 @@ namespace api.Controllers
         }
 
         // PUT: api/Routes/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutROUTE(decimal id, ROUTE rOUTE)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutROUTE(decimal id, ROUTE rOUTE)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != rOUTE.ROUTE_ID)
-            {
-                return BadRequest();
-            }
+        //    if (id != rOUTE.ROUTE_ID)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(rOUTE).State = EntityState.Modified;
+        //    db.Entry(rOUTE).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ROUTEExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ROUTEExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/Routes
+        [HttpPost, Authorize(Roles = "Employees")]
+        [Route("")]
         [ResponseType(typeof(ROUTE))]
         public IHttpActionResult PostROUTE(ROUTE rOUTE)
         {
@@ -126,6 +130,8 @@ namespace api.Controllers
         }
 
         // DELETE: api/Routes/5
+        [HttpDelete, Authorize(Roles = "Employee")]
+        [Route("{id:int}")]
         [ResponseType(typeof(ROUTE))]
         public IHttpActionResult DeleteROUTE(string id)
         {

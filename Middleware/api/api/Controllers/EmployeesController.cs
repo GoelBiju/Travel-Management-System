@@ -15,6 +15,7 @@ using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [Authorize(Roles = "Employee")]
     [RoutePrefix("api/employees")]
     public class EmployeesController : ApiController
     {
@@ -149,6 +150,7 @@ namespace api.Controllers
         }
 
         //Login to web app for admin employees:
+        [AllowAnonymous]
         [HttpPost]
         [Route("login")]
         [ResponseType(typeof(EmployeeDTO))]

@@ -21,10 +21,10 @@ namespace api.Models.DTO
         public int CoachId { get; set; }
         
         [JsonProperty("departureDateTime")]
-        public string DepartureDateTime { get; set; }
+        public DateTime DepartureDateTime { get; set; }
 
         [JsonProperty("arrivalDateTime")]
-        public string ArrivalDateTime { get; set; }
+        public DateTime ArrivalDateTime { get; set; }
 
         [JsonProperty("currentStop")]
         public int CurrentStop { get; set; }

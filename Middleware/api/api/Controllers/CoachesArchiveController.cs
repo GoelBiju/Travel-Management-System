@@ -13,13 +13,18 @@ using api.Models.DTO;
 
 namespace api.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/archive/coaches")]
     public class CoachesArchiveController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/CoachesArchive
-        [HttpGet]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Authorize(Roles = "Employee")]
         [Route("")]
         [ResponseType(typeof(CoachDTO))]
         public IQueryable<CoachDTO> GetCOACHES_ARCHIVE()

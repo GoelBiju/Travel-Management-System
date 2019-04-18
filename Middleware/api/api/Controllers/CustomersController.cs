@@ -80,7 +80,8 @@ namespace api.Controllers
 
 
         // PUT: api/Customers/
-        [HttpPut]
+        // TODO: Employees can access this as well as they also have customer role attached.
+        [HttpPut, Authorize(Roles = "Customer")]
         [Route("{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCUSTOMER(int id, CUSTOMER cUSTOMER)
@@ -119,7 +120,7 @@ namespace api.Controllers
 
         // POST: api/Customers
         // Used to CREATE a new customer and add them to our database.
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Customer")]
         [Route("")]
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
@@ -196,6 +197,7 @@ namespace api.Controllers
 
         // POST: api/Customers/Login
         // Used to login a user to the customer application.
+        [AllowAnonymous]
         [HttpPost]
         [Route("Login")]
         [ResponseType(typeof(CustomerDTO))]
@@ -275,7 +277,7 @@ namespace api.Controllers
 
 
         // DELETE: api/Customers/5
-        [HttpDelete]
+        [HttpDelete, Authorize(Roles = "Employee")]
         [Route("{id:int}")]
         [ResponseType(typeof(CUSTOMER))]
         public IHttpActionResult DeleteCUSTOMER(decimal id)

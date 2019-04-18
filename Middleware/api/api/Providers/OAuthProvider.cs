@@ -64,7 +64,6 @@ namespace api.Providers
                             var claims = new List<Claim>()
                             {
                                 new Claim(ClaimTypes.Sid, Convert.ToString(employee.EMPLOYEE_ID)),
-                                new Claim(ClaimTypes.Role, "Customer"),
                                 new Claim(ClaimTypes.Role, "Employee")
                             };
 

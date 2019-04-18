@@ -192,6 +192,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RequireHttpsAttribute.cs" />
     <Compile Include="Models\BOOKING.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
@@ -204,6 +205,9 @@
     <Compile Include="Models\CUSTOMER.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO\BookingDTO.cs" />
+    <Compile Include="Models\DTO\ReplacementDTO.cs" />
+    <Compile Include="Models\DTO\StopDTO.cs" />
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>

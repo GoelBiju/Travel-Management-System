@@ -8,27 +8,34 @@ namespace api.Models.DTO
 {
     public class JourneyDTO
     {
-        [JsonProperty("journeyid")]
+        [JsonProperty("journeyId")]
         public int JourneyId { get; set; }
 
-        
-        [JsonProperty("routeid")]
+        [JsonProperty("routeId")]
         public int RouteId { get; set; }
 
+        [JsonProperty("shiftId")]
+        public int ShiftId { get; set; }
         
-        [JsonProperty("coachid")]
+        [JsonProperty("coachId")]
         public int CoachId { get; set; }
-
         
-        [JsonProperty("employeeid")]
-        public string EmployeeId { get; set; }
+        [JsonProperty("departureDateTime")]
+        public string DepartureDateTime { get; set; }
 
-        
-        [JsonProperty("startdatetime")]
-        public string DepartureTime { get; set; }
+        [JsonProperty("arrivalDateTime")]
+        public string ArrivalDateTime { get; set; }
 
-        
-        [JsonProperty("enddatetime")]
-        public string ArrivalTime { get; set; }
+        [JsonProperty("currentStop")]
+        public int CurrentStop { get; set; }
+
+        [JsonProperty("stopArrivalDateTime")]
+        public DateTime StopArrivalDateTime { get; set; }
+
+        [JsonProperty("stopDepartedDateTime")]
+        public DateTime StopDepartedDateTime { get; set; }
+
+        [JsonProperty("coachStatus")]
+        public string CoachStatus { get; set; }
     }
 }

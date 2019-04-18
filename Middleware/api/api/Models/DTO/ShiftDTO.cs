@@ -14,12 +14,6 @@ namespace api.Models.DTO
         [JsonProperty("employeeId")]
         public string EmployeeId { get; set; }
 
-        [JsonProperty("routeId")]
-        public int RouteId { get; set; }
-
-        [JsonProperty("coachId")]
-        public int CoachId { get; set; }
-
         [JsonProperty("startDateTime")]
         public DateTime StartDateTime { get; set; }
 

@@ -39,12 +39,13 @@ namespace WebApplication.Controllers
             {
                 //ViewData["username"] = employee.EmployeeID;
                 //ViewData["password"] = employee.Password;
-                
 
-                HttpResponseMessage message = GlobalVariables.WebApiClient.PostAsJsonAsync("employees/login", employee).Result;
-                int status = (int) message.StatusCode;
+                //HttpResponseMessage message = GlobalVariables.WebApiClient.PostAsJsonAsync("employees/login", employee).Result;
+                bool loginSuccess = GlobalVariables.WebLogin(employee.EmployeeID, employee.Password);
+                //int status = (int) message.StatusCode;
 
-                if (status >= 200 && status < 300)
+                //if (status >= 200 && status < 300)
+                if (loginSuccess)
                 {
                     return RedirectToAction("Index", "Coach");
                 }
@@ -55,6 +56,13 @@ namespace WebApplication.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult SignOut()
+        {
+            GlobalVariables.ResetHeaders();
+            return RedirectToAction("Login", "Home");
         }
     }
 }

@@ -37,8 +37,9 @@ namespace api.Controllers
                                DepartureDateTime = j.DEPARTURE_DATETIME,
                                ArrivalDateTime = j.ARRIVAL_DATETIME,
                                CurrentStop = (int)j.CURRENT_STOP,
-                               StopArrivalDateTime = (DateTime)j.STOP_ARRIVAL_DATETIME,
-                               StopDepartedDateTime = (DateTime)j.STOP_DEPARTED_DATETIME
+                               StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
+                               StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
+                               CoachStatus = j.COACH_STATUS
                            };
 
             return journeys;
@@ -62,8 +63,9 @@ namespace api.Controllers
                     DepartureDateTime = j.DEPARTURE_DATETIME,
                     ArrivalDateTime = j.ARRIVAL_DATETIME,
                     CurrentStop = (int)j.CURRENT_STOP,
-                    StopArrivalDateTime = (DateTime)j.STOP_ARRIVAL_DATETIME,
-                    StopDepartedDateTime = (DateTime)j.STOP_DEPARTED_DATETIME
+                    StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
+                    StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
+                    CoachStatus = j.COACH_STATUS
                 }).SingleOrDefaultAsync(j => j.JourneyId == id);
 
             if (journey == null)

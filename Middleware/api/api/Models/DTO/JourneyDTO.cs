@@ -27,13 +27,13 @@ namespace api.Models.DTO
         public DateTime ArrivalDateTime { get; set; }
 
         [JsonProperty("currentStop")]
-        public int CurrentStop { get; set; }
+        public int? CurrentStop { get; set; }
 
         [JsonProperty("stopArrivalDateTime")]
-        public DateTime StopArrivalDateTime { get; set; }
+        public DateTime? StopArrivalDateTime { get; set; }
 
         [JsonProperty("stopDepartedDateTime")]
-        public DateTime StopDepartedDateTime { get; set; }
+        public DateTime? StopDepartedDateTime { get; set; }
 
         [JsonProperty("coachStatus")]
         public string CoachStatus { get; set; }

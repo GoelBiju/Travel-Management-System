@@ -1,4 +1,9 @@
-create or replace TRIGGER trg_route_initialise
+/*
+    CREATE TRIGGER routes initialise
+    
+*/
+
+CREATE OR REPLACE TRIGGER trg_route_initialise
 BEFORE INSERT ON routes FOR EACH ROW
 BEGIN
     SELECT seq_route_id.nextval

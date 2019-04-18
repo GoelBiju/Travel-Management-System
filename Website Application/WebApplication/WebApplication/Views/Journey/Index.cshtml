@@ -21,13 +21,13 @@
             @Html.DisplayNameFor(model => model.CoachId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeId)
+            @Html.DisplayNameFor(model => model.ShiftId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DepartureTime)
+            @Html.DisplayNameFor(model => model.DepartureDateTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ArrivalTime)
+            @Html.DisplayNameFor(model => model.ArrivalDateTime)
         </th>
         <th></th>
     </tr>
@@ -44,13 +44,13 @@
             @Html.DisplayFor(modelItem => item.CoachId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EmployeeId)
+            @Html.DisplayFor(modelItem => item.ShiftId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DepartureTime)
+            @Html.DisplayFor(modelItem => item.DepartureDateTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ArrivalTime)
+            @Html.DisplayFor(modelItem => item.ArrivalDateTime)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

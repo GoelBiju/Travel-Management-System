@@ -20,14 +20,14 @@ namespace WebApplication.Controllers
         [HttpGet]
         public ActionResult Details()
         {
-            var data = new List<RoutesModel>();
+            var data = new List<RoutesViewModel>();
 
 
             HttpResponseMessage responseMessage = GlobalVariables.WebApiClient.GetAsync("routes").Result;
             if (responseMessage.IsSuccessStatusCode)
             {
                 var JsonString = responseMessage.Content.ReadAsStringAsync().Result;
-                data = JsonConvert.DeserializeObject<List<RoutesModel>>(JsonString);
+                data = JsonConvert.DeserializeObject<List<RoutesViewModel>>(JsonString);
             }
 
 

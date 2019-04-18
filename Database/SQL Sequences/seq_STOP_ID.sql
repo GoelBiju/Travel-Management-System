@@ -1,4 +1,4 @@
-CREATE SEQUENCE seq_route_id
+CREATE SEQUENCE seq_stop_id
     START WITH 1
     INCREMENT BY 1
     NOCYCLE

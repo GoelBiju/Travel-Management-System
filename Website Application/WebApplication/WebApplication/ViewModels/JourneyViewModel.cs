@@ -21,9 +21,9 @@ namespace WebApplication.ViewModels
         [JsonProperty("coachId")]
         public int CoachId { get; set; }
 
-        [Display(Name = "Employee ID")]
-        [JsonProperty("employeeId")]
-        public string EmployeeId { get; set; }
+        [Display(Name = "Shift No.")]
+        [JsonProperty("shiftId")]
+        public int ShiftId { get; set; }
 
         [Display(Name = "Departure Time")]
         [JsonProperty("startDateTime")]

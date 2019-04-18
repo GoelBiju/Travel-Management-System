@@ -24,10 +24,11 @@ namespace api.Controllers
         // GET: api/Journeys
         [HttpGet]
         [Route("")]
+        [ResponseType(typeof(JourneyDTO))]
         public IQueryable<JourneyDTO> GetJOURNEYS()
         {
             var journeys = from j in db.JOURNEYS
-                           select new JourneyDTO
+                           select new JourneyDTO()
                            {
                                JourneyId = (int)j.JOURNEY_ID,
                                RouteId = (int)j.ROUTE_ID,

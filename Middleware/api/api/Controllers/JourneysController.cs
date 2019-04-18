@@ -115,7 +115,7 @@ namespace api.Controllers
         [HttpPost, Authorize(Roles = "Employee")]
         [Route("")]
         [ResponseType(typeof(JourneyDTO))]
-        public IHttpActionResult PostJOURNEY(JourneyBindingModel journey)
+        public IHttpActionResult PostJOURNEY([FromBody] JourneyBindingModel journey)
         {
             JOURNEY jOURNEY = new JOURNEY()
             {
@@ -141,19 +141,21 @@ namespace api.Controllers
             }
             catch (DbUpdateException)
             {
-                if (JOURNEYExists(jOURNEY.JOURNEY_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (JOURNEYExists(jOURNEY.JOURNEY_ID))
+                //{
+                //    return Conflict();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
+
+                return BadRequest();
             }
 
-            //HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, journey);
-            //return ResponseMessage(responseMessage);
-            return Ok();
+            HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, journey);
+            return ResponseMessage(responseMessage);
+            //return Ok();
         }
 
         //// DELETE: api/Journeys/5

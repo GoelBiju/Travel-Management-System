@@ -37,31 +37,19 @@
             @*<a>@Html.ActionLink("Create Employee", "Create", "Employee")</a>
             <a>@Html.ActionLink("Update Employee", "Edit", "Employee")</a>*@
             <a>@Html.ActionLink("View Employees", "Details", "Employee")</a>
-            <a>@Html.ActionLink("View Archived Employees", "Index", "EmployeeArchive")</a>
+            @*<a>@Html.ActionLink("View Archived Employees", "Index", "EmployeeArchive")</a>*@
         </div>
 
 
-        <!-- Driver Shifts -->
+        <!-- Driver Shifts Options -->
         <button class="dropdown-btn">
             Driver Shifts
             <i class="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-container">          
-            @*<a href="#">Create a Shift</a>*@
-            <a>@Html.ActionLink("View Shift", "Details", "Shift")</a>
-            @*<a href="#">Archive Shift</a>*@
-        </div>
-
-        <!-- Routes Options -->
-        <button class="dropdown-btn">
-            Routes
-            <i class="fa fa-caret-down"></i>
-        </button>
         <div class="dropdown-container">
-            <a href="#">Create New Route</a>
-            <a href="#">Update Route</a>
-            <a href="#">View Route</a>
-            <a href="#">Archive Route</a>
+            @*<a href="#">Create a Shift</a>*@
+            <a>@Html.ActionLink("View Shifts", "Details", "Shift")</a>
+            @*<a href="#">Archive Shift</a>*@
         </div>
 
         <!-- Journeys Options -->
@@ -70,10 +58,31 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a>@Html.ActionLink("Create New Journeys", "Create", "Journey")</a>
-            @*<a href="#">Update Journey</a>*@
             <a>@Html.ActionLink("View Journeys", "Index", "Journey")</a>
+            <a>@Html.ActionLink("Create New Journeys", "Create", "Journey")</a>
             @*<a href="#">Archive Journey</a>*@
+        </div>
+
+        <!-- Routes Options -->
+        <button class="dropdown-btn">
+            Routes
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            @*<a href="#">Create New Route</a>
+            <a href="#">Update Route</a>*@
+            @*<a href="#">View Route</a>*@
+            <a>@Html.ActionLink("View Routes", "Details", "Routes")</a>
+            @*<a href="#">Archive Route</a>*@
+        </div>
+
+        <!-- Stops Options -->
+        <button class="dropdown-btn">
+            Stops
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a>@Html.ActionLink("View Stops", "Index", "Stop")</a>
         </div>
 
         <!-- Coaches Options -->
@@ -85,7 +94,7 @@
             @*<a>@Html.ActionLink("Add Coach", "Create", "Coach")</a>
             <a>@Html.ActionLink("Update Coach", "Edit", "Coach")</a>*@
             <a>@Html.ActionLink("View Coaches", "Index", "Coach")</a>
-            <a>@Html.ActionLink("View Archived", "Index", "CoachArchive")</a>
+            @*<a>@Html.ActionLink("View Archived", "Index", "CoachArchive")</a>*@
         </div>
 
         <!-- Replacement Services -->

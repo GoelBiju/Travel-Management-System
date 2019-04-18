@@ -1,54 +1,52 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using WebApplication.ViewModels;
+using System.Web;
 using System.Web.Mvc;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
-    public class JourneyController : Controller
+    public class StopController : Controller
     {
-        // GET: Journey
+        // GET: Stop
         public ActionResult Index()
         {
-            var _Data = new List<JourneyViewModel>();
+            var _Data = new List<StopViewModel>();
 
-            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("journeys").Result;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("stops").Result;
             if (response.IsSuccessStatusCode)
             {
                 var JsonString = response.Content.ReadAsStringAsync().Result;
-                _Data = JsonConvert.DeserializeObject<List<JourneyViewModel>>(JsonString);
+                _Data = JsonConvert.DeserializeObject<List<StopViewModel>>(JsonString);
             }
+
             return View(_Data);
         }
-
-        // GET: Journey/Details/5
+        
+        // GET: Stop/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Journey/Create
+        // GET: Stop/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Journey/Create
+        // POST: Stop/Create
         [HttpPost]
-        public ActionResult Create(JourneyViewModel journey)
+        public ActionResult Create(StopViewModel stop)
         {
             try
             {
                 try
                 {
-                    HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("journeys", journey).Result;
+                    HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("stops", stop).Result;
                     return RedirectToAction("Index");
                 }
                 catch
@@ -62,13 +60,13 @@ namespace WebApplication.Controllers
             }
         }
 
-        // GET: Journey/Edit/5
+        // GET: Stop/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Journey/Edit/5
+        // POST: Stop/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -84,13 +82,13 @@ namespace WebApplication.Controllers
             }
         }
 
-        // GET: Journey/Delete/5
+        // GET: Stop/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Journey/Delete/5
+        // POST: Stop/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

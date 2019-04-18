@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication.ViewModels.StopViewModel>
+
+@{
+    ViewBag.Title = "Stops";
+}
+
+<h2>All Stops</h2>
+
+<p>
+    @Html.ActionLink("Create New Stop", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StopId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StopName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StopPostcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StopLatitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StopLongitude)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopPostcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopLatitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopLongitude)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

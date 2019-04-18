@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<WebApplication.ViewModels.CoachViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Coach";
 }
 
-<h2>Coaches</h2>
+<h2>All Coaches</h2>
 
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
-    <a href="@Url.Action("Create", "Coach")" class="btn btn-default"><i class-"fa fa-plus"></i>Create New</a>
+    <a href="@Url.Action("Create", "Coach")" class="btn btn-default"><i class-"fa fa-plus"></i>Add New Coach</a>
 </p>
 <table class="table">
     <tr>

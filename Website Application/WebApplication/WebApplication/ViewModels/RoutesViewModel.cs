@@ -9,16 +9,16 @@ namespace WebApplication.ViewModels
 {
     public class RoutesViewModel
     {
-        [Display(Name = "route id")]
+        [Display(Name = "Route No.")]
         [JsonProperty("routeId")]
         public int routeId { get; set; }
 
-        [Display(Name = "departure station")]
-        [JsonProperty("departureStation")]
+        [Display(Name = "Departure Station No.")]
+        [JsonProperty("departureStationId")]
         public int departureStation { get; set; }
 
-        [Display(Name = "arrival station")]
-        [JsonProperty("arrivalStation")]
+        [Display(Name = "Arrival Station No.")]
+        [JsonProperty("arrivalStationId")]
         public int arrivalStation { get; set; }
 
     }

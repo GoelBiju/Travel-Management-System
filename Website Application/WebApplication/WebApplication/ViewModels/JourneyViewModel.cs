@@ -17,20 +17,39 @@ namespace WebApplication.ViewModels
         [JsonProperty("routeId")]
         public int RouteId { get; set; }
 
-        [Display(Name = "Coach No.")]
-        [JsonProperty("coachId")]
-        public int CoachId { get; set; }
-
         [Display(Name = "Shift No.")]
         [JsonProperty("shiftId")]
         public int ShiftId { get; set; }
 
+        [Display(Name = "Coach No.")]
+        [JsonProperty("coachId")]
+        public int CoachId { get; set; }
+
         [Display(Name = "Departure Time")]
-        [JsonProperty("startDateTime")]
+        [JsonProperty("departureDateTime")]
         public DateTime DepartureDateTime { get; set; }
 
         [Display(Name = "Arrival Time")]
-        [JsonProperty("endDateTime")]
+        [JsonProperty("arrivalDateTime")]
         public DateTime ArrivalDateTime { get; set; }
+
+        [Display(Name = "Current Stop")]
+        [JsonProperty("currentStop")]
+        [DisplayFormat(NullDisplayText = "In-active")]
+        public int? CurrentStop { get; set; }
+
+        [Display(Name = "Current Stop - Arrival")]
+        [JsonProperty("stopArrivalDateTime")]
+        [DisplayFormat(NullDisplayText = "In-active")]
+        public DateTime? StopArrivalDateTime { get; set; }
+
+        [Display(Name = "Current Stop - Departure")]
+        [JsonProperty("stopDepartedDateTime")]
+        [DisplayFormat(NullDisplayText = "In-active")]
+        public DateTime? StopDepartedDateTime { get; set; }
+
+        [Display(Name = "Coach Status")]
+        [JsonProperty("coachStatus")]
+        public string CoachStatus { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace WebApplication.Controllers
                 //if (status >= 200 && status < 300)
                 if (loginSuccess)
                 {
-                    return RedirectToAction("Index", "Coach");
+                    return RedirectToAction("Details", "Employee");
                 }
 
                 return View();

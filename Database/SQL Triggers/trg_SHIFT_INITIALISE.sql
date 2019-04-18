@@ -1,4 +1,8 @@
-create or replace TRIGGER trg_shift_initialise
+/*
+    CREATE TRIGGER shift initialise
+*/
+
+CREATE OR REPLACE TRIGGER trg_shift_initialise
 BEFORE INSERT ON shifts FOR EACH ROW
 BEGIN
     SELECT seq_shift_id.nextval

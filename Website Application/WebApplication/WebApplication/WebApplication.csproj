@@ -288,6 +288,7 @@
     <Content Include="Views\Journey\Index.cshtml" />
     <Content Include="Views\Journey\Create.cshtml" />
     <Content Include="Views\Routes\Details.cshtml" />
+    <Content Include="Views\Shift\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

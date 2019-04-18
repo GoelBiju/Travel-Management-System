@@ -9,28 +9,28 @@ namespace WebApplication.ViewModels
 {
     public class JourneyViewModel
     {
-        [Display(Name = "Journey ID")]
-        [JsonProperty("journeyid")]
+        [Display(Name = "Journey No.")]
+        [JsonProperty("journeyId")]
         public int JourneyId { get; set; }
 
-        [Display(Name = "Route ID")]
-        [JsonProperty("routeid")]
+        [Display(Name = "Route No.")]
+        [JsonProperty("routeId")]
         public int RouteId { get; set; }
 
-        [Display(Name = "Coach ID")]
-        [JsonProperty("coachid")]
+        [Display(Name = "Coach No.")]
+        [JsonProperty("coachId")]
         public int CoachId { get; set; }
 
         [Display(Name = "Employee ID")]
-        [JsonProperty("employeeid")]
+        [JsonProperty("employeeId")]
         public string EmployeeId { get; set; }
 
         [Display(Name = "Departure Time")]
-        [JsonProperty("startdatetime")]
-        public DateTime DepartureTime { get; set; }
+        [JsonProperty("startDateTime")]
+        public DateTime DepartureDateTime { get; set; }
 
         [Display(Name = "Arrival Time")]
-        [JsonProperty("enddatetime")]
-        public DateTime ArrivalTime { get; set; }
+        [JsonProperty("endDateTime")]
+        public DateTime ArrivalDateTime { get; set; }
     }
 }

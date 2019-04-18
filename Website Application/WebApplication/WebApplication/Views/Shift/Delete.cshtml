@@ -29,35 +29,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RouteId)
+            @Html.DisplayNameFor(model => model.StartDateTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RouteId)
+            @Html.DisplayFor(model => model.StartDateTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CoachId)
+            @Html.DisplayNameFor(model => model.EndDateTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CoachId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartOfShift)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StartOfShift)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndOfShift)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndOfShift)
+            @Html.DisplayFor(model => model.EndDateTime)
         </dd>
 
     </dl>
@@ -67,7 +51,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Details")
+            @Html.ActionLink("Back to Shifts", "Details")
         </div>
     }
 </div>

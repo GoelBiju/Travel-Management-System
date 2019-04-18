@@ -9,31 +9,23 @@ namespace WebApplication.ViewModels
 {
     public class ShiftViewModel
     {
-        
-        [Display(Name = "Shift ID")]
+        [Display(Name = "Shift No.")]
+        [JsonProperty("shiftId")]
         public int ShiftId { get; set; }
 
-        [Display(Name = "Employee ID")]
-        [JsonProperty("employeeid")]
+        [Display(Name = "Employee No.")]
+        [JsonProperty("employeeId")]
         public string EmployeeId { get; set; }
-
-        [Display(Name = "Route ID")]
-        [JsonProperty("routeid")]
-        public string RouteId { get; set; }
-
-
-        [Display(Name = "Coach ID")]
-        [JsonProperty("coachid")]
-        public string CoachId { get; set; }
-
-
+    
         [Display(Name = "Start of Shift")]
-        [JsonProperty("startofshift")]
-        public DateTime StartOfShift { get; set; }
+        [JsonProperty("startDateTime")]
+        [DataType(DataType.DateTime)]
+        public DateTime StartDateTime { get; set; }
 
         [Display(Name = "End of Shift")]
-        [JsonProperty("endofshift")]
-        public DateTime EndOfShift { get; set; }
+        [JsonProperty("endDateTime")]
+        [DataType(DataType.DateTime)]
+        public DateTime EndDateTime { get; set; }
 
     }
 }

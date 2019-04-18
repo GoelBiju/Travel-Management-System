@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.BindingModels;
 using api.Models.DTO;
 
 namespace api.Controllers
@@ -126,15 +127,23 @@ namespace api.Controllers
         // POST: api/Shifts
         [HttpPost]
         [Route("")]
-        [ResponseType(typeof(SHIFT))]
-        public IHttpActionResult PostSHIFT(SHIFT sHIFT)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostSHIFT([FromBody] ShiftCreationBindingModel shift)
         {
+            SHIFT addShift = new SHIFT()
+            {
+                SHIFT_ID = 0,
+                EMPLOYEE_ID = shift.EmployeeId,
+                START_DATETIME = shift.StartDateTime,
+                END_DATETIME = shift.EndDateTime
+            };
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.SHIFTS.Add(sHIFT);
+            db.SHIFTS.Add(addShift);
 
             try
             {
@@ -142,17 +151,21 @@ namespace api.Controllers
             }
             catch (DbUpdateException)
             {
-                if (SHIFTExists(sHIFT.SHIFT_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (SHIFTExists(sHIFT.SHIFT_ID))
+                //{
+                //    return Conflict();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
+
+                return BadRequest();
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = sHIFT.SHIFT_ID }, sHIFT);
+            //return CreatedAtRoute("DefaultApi", new { id = sHIFT.SHIFT_ID }, sHIFT);
+            HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, shift);
+            return ResponseMessage(responseMessage);
         }
 
         // DELETE: api/Shifts/5

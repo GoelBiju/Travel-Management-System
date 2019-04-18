@@ -37,18 +37,24 @@ namespace WebApplication
 
             request.Content = new FormUrlEncodedContent(keyValues);
 
-            var response = tempClient.SendAsync(request).Result;
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var jsonString = response.Content.ReadAsStringAsync().Result;
-                JObject jsonResponse = JObject.Parse(jsonString);
-                string accessToken = (string)jsonResponse["access_token"];
+                var response = tempClient.SendAsync(request).Result;
 
-                // Store the bearer token in the global http client.
-                WebApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = response.Content.ReadAsStringAsync().Result;
+                    JObject jsonResponse = JObject.Parse(jsonString);
+                    string accessToken = (string)jsonResponse["access_token"];
 
-                return true;
+                    // Store the bearer token in the global http client.
+                    WebApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                    return true;
+                }
+            } catch
+            {
+                return false;
             }
 
             return false;

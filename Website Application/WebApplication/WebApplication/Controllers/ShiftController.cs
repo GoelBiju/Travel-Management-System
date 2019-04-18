@@ -33,6 +33,25 @@ namespace WebApplication.Controllers
             return View(_Data);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(ShiftViewModel shift)
+        {
+            try
+            {
+                HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("shifts", shift).Result;
+                return RedirectToAction("Details");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         [HttpGet]
         public ActionResult Delete(int id)
         {

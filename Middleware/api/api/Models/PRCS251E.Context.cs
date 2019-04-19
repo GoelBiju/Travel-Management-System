@@ -18,6 +18,7 @@ namespace api.Models
         public Entities()
             : base("name=Entities")
         {
+            this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

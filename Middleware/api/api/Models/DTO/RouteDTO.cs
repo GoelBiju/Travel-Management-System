@@ -14,7 +14,13 @@ namespace api.Models.DTO
         [JsonProperty("departureStationId")]
         public int DepartureStationId { get; set; }
 
+        [JsonProperty("departureStation")]
+        public string DepartureStation { get; set; }
+
         [JsonProperty("arrivalStationId")]
         public int ArrivalStationId { get; set; }
+
+        [JsonProperty("arrivalStation")]
+        public string ArrivalStation { get; set; }
     }
 }

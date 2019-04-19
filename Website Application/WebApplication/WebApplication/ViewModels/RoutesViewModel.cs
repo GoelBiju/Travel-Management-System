@@ -13,13 +13,14 @@ namespace WebApplication.ViewModels
         [JsonProperty("routeId")]
         public int routeId { get; set; }
 
-        [Display(Name = "Departure Station No.")]
-        [JsonProperty("departureStationId")]
-        public int departureStation { get; set; }
+        [Display(Name = "Departure Station")]
+        [JsonProperty("departureStation")]
+        public string departureStation { get; set; }
 
-        [Display(Name = "Arrival Station No.")]
-        [JsonProperty("arrivalStationId")]
-        public int arrivalStation { get; set; }
+
+        [Display(Name = "Arrival Station")]
+        [JsonProperty("arrivalStation")]
+        public string arrivalStation { get; set; }
 
     }
 }

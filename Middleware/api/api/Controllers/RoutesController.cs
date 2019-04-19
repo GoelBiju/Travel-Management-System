@@ -31,7 +31,9 @@ namespace api.Controllers
                          {
                              RouteId = (int)r.ROUTE_ID,
                              DepartureStationId = (int)r.DEPARTURE_STATION,
-                             ArrivalStationId = (int)r.ARRIVAL_STATION
+                             DepartureStation = r.STOP.STOP_NAME,
+                             ArrivalStationId = (int)r.ARRIVAL_STATION,
+                             ArrivalStation = r.STOP1.STOP_NAME
                          };
 
             return routes;
@@ -50,7 +52,9 @@ namespace api.Controllers
                 {
                     RouteId = (int)r.ROUTE_ID,
                     DepartureStationId = (int)r.DEPARTURE_STATION,
-                    ArrivalStationId = (int)r.ARRIVAL_STATION
+                    DepartureStation = r.STOP.STOP_NAME,
+                    ArrivalStationId = (int)r.ARRIVAL_STATION,
+                    ArrivalStation = r.STOP1.STOP_NAME
                 }).SingleOrDefaultAsync(r => r.RouteId == id);
 
 

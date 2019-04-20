@@ -21,6 +21,8 @@ CREATE TABLE route_stops(
         CONSTRAINT route_stops_stop_id_fk REFERENCES stops (stop_id),
         
     position_in_route NUMBER
-        CONSTRAINT position_in_route_nn NOT NULL
+        CONSTRAINT position_in_route_nn NOT NULL,
+        
+    CONSTRAINT route_stop_pk PRIMARY KEY (route_id, stop_id)
 );
         

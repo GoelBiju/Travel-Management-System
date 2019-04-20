@@ -197,7 +197,10 @@
     <Compile Include="Controllers\EmployeesArchiveController.cs" />
     <Compile Include="Controllers\ReplacementsController.cs" />
     <Compile Include="Controllers\RoutesArchiveController.cs" />
+    <Compile Include="Controllers\RouteStopsController.cs" />
     <Compile Include="Controllers\StopsController.cs" />
+    <Compile Include="Models\BindingModels\RouteCreationBindingModel.cs" />
+    <Compile Include="Models\BindingModels\RouteStopCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\ShiftCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\StopCreationBindingModel.cs" />
     <Compile Include="Models\BOOKING.cs">
@@ -214,6 +217,7 @@
     </Compile>
     <Compile Include="Models\DTO\BookingDTO.cs" />
     <Compile Include="Models\DTO\ReplacementDTO.cs" />
+    <Compile Include="Models\DTO\RouteStopDTO.cs" />
     <Compile Include="Models\DTO\StopDTO.cs" />
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>

@@ -252,9 +252,6 @@
     <Compile Include="Models\ROUTES_ARCHIVE.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ROUTE_STATIONS.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ROUTE_STOPS.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>

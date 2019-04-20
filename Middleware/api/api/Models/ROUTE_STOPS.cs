@@ -18,6 +18,7 @@ namespace api.Models
         public decimal STOP_ID { get; set; }
         public decimal POSITION_IN_ROUTE { get; set; }
     
+        public virtual ROUTE ROUTE { get; set; }
         public virtual STOP STOP { get; set; }
     }
 }

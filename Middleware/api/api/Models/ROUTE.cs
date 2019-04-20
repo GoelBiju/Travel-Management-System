@@ -18,6 +18,7 @@ namespace api.Models
         public ROUTE()
         {
             this.JOURNEYS = new HashSet<JOURNEY>();
+            this.ROUTE_STOPS = new HashSet<ROUTE_STOPS>();
         }
     
         public decimal ROUTE_ID { get; set; }
@@ -26,6 +27,8 @@ namespace api.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JOURNEY> JOURNEYS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ROUTE_STOPS> ROUTE_STOPS { get; set; }
         public virtual STOP STOP { get; set; }
         public virtual STOP STOP1 { get; set; }
     }

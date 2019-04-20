@@ -104,23 +104,10 @@
           <Property Name="COMPLETED_DATETIME" Type="date" />
           <Property Name="STATUS" Type="varchar2" MaxLength="20" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'PRCS251E.ROUTE_STATIONS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ROUTE_STATIONS">
-          <Key>
-            <PropertyRef Name="ROUTE_ID" />
-            <PropertyRef Name="STATION_ID" />
-          </Key>
-          <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="STATION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'PRCS251E.ROUTE_STOPS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ROUTE_STOPS">
           <Key>
             <PropertyRef Name="ROUTE_ID" />
             <PropertyRef Name="STOP_ID" />
-            <PropertyRef Name="POSITION_IN_ROUTE" />
           </Key>
           <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STOP_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
@@ -289,15 +276,15 @@ warning 6002: The table/view 'PRCS251E.ROUTE_STOPS' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ROUTE_STATIONS_STATION_ID_FK">
-          <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="1" />
-          <End Role="ROUTE_STATIONS" Type="Self.ROUTE_STATIONS" Multiplicity="*" />
+        <Association Name="ROUTE_STOPS_ROUTE_ID_FK">
+          <End Role="ROUTES" Type="Self.ROUTES" Multiplicity="1" />
+          <End Role="ROUTE_STOPS" Type="Self.ROUTE_STOPS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="STATIONS">
-              <PropertyRef Name="STATION_ID" />
+            <Principal Role="ROUTES">
+              <PropertyRef Name="ROUTE_ID" />
             </Principal>
-            <Dependent Role="ROUTE_STATIONS">
-              <PropertyRef Name="STATION_ID" />
+            <Dependent Role="ROUTE_STOPS">
+              <PropertyRef Name="ROUTE_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -382,24 +369,12 @@ warning 6002: The table/view 'PRCS251E.ROUTE_STOPS' does not have a primary key 
           <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Self.EMPLOYEES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="JOURNEYS" EntityType="Self.JOURNEYS" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="REPLACEMENTS" EntityType="Self.REPLACEMENTS" Schema="PRCS251E" store:Type="Tables" />
+          <EntitySet Name="ROUTE_STOPS" EntityType="Self.ROUTE_STOPS" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="ROUTES" EntityType="Self.ROUTES" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="ROUTES_ARCHIVE" EntityType="Self.ROUTES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="SHIFTS" EntityType="Self.SHIFTS" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="STATIONS" EntityType="Self.STATIONS" Schema="PRCS251E" store:Type="Tables" />
           <EntitySet Name="STOPS" EntityType="Self.STOPS" Schema="PRCS251E" store:Type="Tables" />
-          <EntitySet Name="ROUTE_STATIONS" EntityType="Self.ROUTE_STATIONS" store:Type="Tables" store:Schema="PRCS251E">
-            <DefiningQuery>SELECT 
-"ROUTE_STATIONS"."ROUTE_ID" AS "ROUTE_ID", 
-"ROUTE_STATIONS"."STATION_ID" AS "STATION_ID"
-FROM "PRCS251E"."ROUTE_STATIONS" "ROUTE_STATIONS"</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ROUTE_STOPS" EntityType="Self.ROUTE_STOPS" store:Type="Tables" store:Schema="PRCS251E">
-            <DefiningQuery>SELECT 
-"ROUTE_STOPS"."ROUTE_ID" AS "ROUTE_ID", 
-"ROUTE_STOPS"."STOP_ID" AS "STOP_ID", 
-"ROUTE_STOPS"."POSITION_IN_ROUTE" AS "POSITION_IN_ROUTE"
-FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="BOOKINGS_ARRIVAL_STOP" Association="Self.BOOKINGS_ARRIVAL_STOP">
             <End Role="STOPS" EntitySet="STOPS" />
             <End Role="BOOKINGS" EntitySet="BOOKINGS" />
@@ -440,9 +415,9 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
             <End Role="SHIFTS" EntitySet="SHIFTS" />
             <End Role="REPLACEMENTS" EntitySet="REPLACEMENTS" />
           </AssociationSet>
-          <AssociationSet Name="ROUTE_STATIONS_STATION_ID_FK" Association="Self.ROUTE_STATIONS_STATION_ID_FK">
-            <End Role="STATIONS" EntitySet="STATIONS" />
-            <End Role="ROUTE_STATIONS" EntitySet="ROUTE_STATIONS" />
+          <AssociationSet Name="ROUTE_STOPS_ROUTE_ID_FK" Association="Self.ROUTE_STOPS_ROUTE_ID_FK">
+            <End Role="ROUTES" EntitySet="ROUTES" />
+            <End Role="ROUTE_STOPS" EntitySet="ROUTE_STOPS" />
           </AssociationSet>
           <AssociationSet Name="ROUTE_STOPS_STOP_ID_FK" Association="Self.ROUTE_STOPS_STOP_ID_FK">
             <End Role="STOPS" EntitySet="STOPS" />
@@ -589,6 +564,17 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
           <NavigationProperty Name="JOURNEY" Relationship="Self.REPLACEMENTS_JOURNEY_ID_FK" FromRole="REPLACEMENTS" ToRole="JOURNEYS" />
           <NavigationProperty Name="SHIFT" Relationship="Self.REPLACEMENTS_SHIFT_ID_FK" FromRole="REPLACEMENTS" ToRole="SHIFTS" />
         </EntityType>
+        <EntityType Name="ROUTE_STOPS">
+          <Key>
+            <PropertyRef Name="ROUTE_ID" />
+            <PropertyRef Name="STOP_ID" />
+          </Key>
+          <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STOP_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="POSITION_IN_ROUTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ROUTE" Relationship="Self.ROUTE_STOPS_ROUTE_ID_FK" FromRole="ROUTE_STOPS" ToRole="ROUTES" />
+          <NavigationProperty Name="STOP" Relationship="Self.ROUTE_STOPS_STOP_ID_FK" FromRole="ROUTE_STOPS" ToRole="STOPS" />
+        </EntityType>
         <EntityType Name="ROUTE">
           <Key>
             <PropertyRef Name="ROUTE_ID" />
@@ -597,6 +583,7 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
           <Property Name="DEPARTURE_STATION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ARRIVAL_STATION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="JOURNEYS" Relationship="Self.JOURNEYS_ROUTE_ID_FK" FromRole="ROUTES" ToRole="JOURNEYS" />
+          <NavigationProperty Name="ROUTE_STOPS" Relationship="Self.ROUTE_STOPS_ROUTE_ID_FK" FromRole="ROUTES" ToRole="ROUTE_STOPS" />
           <NavigationProperty Name="STOP" Relationship="Self.ROUTES_ARRIVAL_STATION_FK" FromRole="ROUTES" ToRole="STOPS" />
           <NavigationProperty Name="STOP1" Relationship="Self.ROUTES_DEPARTURE_STATION_FK" FromRole="ROUTES" ToRole="STOPS" />
         </EntityType>
@@ -630,7 +617,6 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
           <Property Name="STATION_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="ROUTES_ARCHIVE" Relationship="Self.ROUTES_ARCHIVE_ARRIVAL_STATION_FK" FromRole="STATIONS" ToRole="ROUTES_ARCHIVE" />
           <NavigationProperty Name="ROUTES_ARCHIVE1" Relationship="Self.ROUTES_ARCHIVE_DEPARTURE_STATION_FK" FromRole="STATIONS" ToRole="ROUTES_ARCHIVE" />
-          <NavigationProperty Name="ROUTE_STATIONS" Relationship="Self.ROUTE_STATIONS_STATION_ID_FK" FromRole="STATIONS" ToRole="ROUTE_STATIONS" />
         </EntityType>
         <EntityType Name="STOP">
           <Key>
@@ -644,29 +630,9 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
           <Property Name="STOP_LONGITUDE" Type="Decimal" Precision="9" Scale="6" />
           <NavigationProperty Name="BOOKINGS" Relationship="Self.BOOKINGS_ARRIVAL_STOP" FromRole="STOPS" ToRole="BOOKINGS" />
           <NavigationProperty Name="BOOKINGS1" Relationship="Self.BOOKINGS_DEPARTING_STOP" FromRole="STOPS" ToRole="BOOKINGS" />
+          <NavigationProperty Name="ROUTE_STOPS" Relationship="Self.ROUTE_STOPS_STOP_ID_FK" FromRole="STOPS" ToRole="ROUTE_STOPS" />
           <NavigationProperty Name="ROUTES" Relationship="Self.ROUTES_ARRIVAL_STATION_FK" FromRole="STOPS" ToRole="ROUTES" />
           <NavigationProperty Name="ROUTES1" Relationship="Self.ROUTES_DEPARTURE_STATION_FK" FromRole="STOPS" ToRole="ROUTES" />
-          <NavigationProperty Name="ROUTE_STOPS" Relationship="Self.ROUTE_STOPS_STOP_ID_FK" FromRole="STOPS" ToRole="ROUTE_STOPS" />
-        </EntityType>
-        <EntityType Name="ROUTE_STATIONS">
-          <Key>
-            <PropertyRef Name="ROUTE_ID" />
-            <PropertyRef Name="STATION_ID" />
-          </Key>
-          <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="STATION_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <NavigationProperty Name="STATION" Relationship="Self.ROUTE_STATIONS_STATION_ID_FK" FromRole="ROUTE_STATIONS" ToRole="STATIONS" />
-        </EntityType>
-        <EntityType Name="ROUTE_STOPS">
-          <Key>
-            <PropertyRef Name="ROUTE_ID" />
-            <PropertyRef Name="STOP_ID" />
-            <PropertyRef Name="POSITION_IN_ROUTE" />
-          </Key>
-          <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="STOP_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="POSITION_IN_ROUTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <NavigationProperty Name="STOP" Relationship="Self.ROUTE_STOPS_STOP_ID_FK" FromRole="ROUTE_STOPS" ToRole="STOPS" />
         </EntityType>
         <Association Name="BOOKINGS_ARRIVAL_STOP">
           <End Role="STOPS" Type="Self.STOP" Multiplicity="1" />
@@ -800,6 +766,30 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ROUTE_STOPS_ROUTE_ID_FK">
+          <End Role="ROUTES" Type="Self.ROUTE" Multiplicity="1" />
+          <End Role="ROUTE_STOPS" Type="Self.ROUTE_STOPS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROUTES">
+              <PropertyRef Name="ROUTE_ID" />
+            </Principal>
+            <Dependent Role="ROUTE_STOPS">
+              <PropertyRef Name="ROUTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ROUTE_STOPS_STOP_ID_FK">
+          <End Role="STOPS" Type="Self.STOP" Multiplicity="1" />
+          <End Role="ROUTE_STOPS" Type="Self.ROUTE_STOPS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STOPS">
+              <PropertyRef Name="STOP_ID" />
+            </Principal>
+            <Dependent Role="ROUTE_STOPS">
+              <PropertyRef Name="STOP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ROUTES_ARRIVAL_STATION_FK">
           <End Role="STOPS" Type="Self.STOP" Multiplicity="1" />
           <End Role="ROUTES" Type="Self.ROUTE" Multiplicity="*" />
@@ -848,30 +838,6 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ROUTE_STATIONS_STATION_ID_FK">
-          <End Role="STATIONS" Type="Self.STATION" Multiplicity="1" />
-          <End Role="ROUTE_STATIONS" Type="Self.ROUTE_STATIONS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATIONS">
-              <PropertyRef Name="STATION_ID" />
-            </Principal>
-            <Dependent Role="ROUTE_STATIONS">
-              <PropertyRef Name="STATION_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ROUTE_STOPS_STOP_ID_FK">
-          <End Role="STOPS" Type="Self.STOP" Multiplicity="1" />
-          <End Role="ROUTE_STOPS" Type="Self.ROUTE_STOPS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STOPS">
-              <PropertyRef Name="STOP_ID" />
-            </Principal>
-            <Dependent Role="ROUTE_STOPS">
-              <PropertyRef Name="STOP_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BOOKINGS" EntityType="Self.BOOKING" />
           <EntitySet Name="COACHES" EntityType="Self.COACH" />
@@ -881,13 +847,12 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
           <EntitySet Name="EMPLOYEES_ARCHIVE" EntityType="Self.EMPLOYEES_ARCHIVE" />
           <EntitySet Name="JOURNEYS" EntityType="Self.JOURNEY" />
           <EntitySet Name="REPLACEMENTS" EntityType="Self.REPLACEMENT" />
+          <EntitySet Name="ROUTE_STOPS" EntityType="Self.ROUTE_STOPS" />
           <EntitySet Name="ROUTES" EntityType="Self.ROUTE" />
           <EntitySet Name="ROUTES_ARCHIVE" EntityType="Self.ROUTES_ARCHIVE" />
           <EntitySet Name="SHIFTS" EntityType="Self.SHIFT" />
           <EntitySet Name="STATIONS" EntityType="Self.STATION" />
           <EntitySet Name="STOPS" EntityType="Self.STOP" />
-          <EntitySet Name="ROUTE_STATIONS" EntityType="Self.ROUTE_STATIONS" />
-          <EntitySet Name="ROUTE_STOPS" EntityType="Self.ROUTE_STOPS" />
           <AssociationSet Name="BOOKINGS_ARRIVAL_STOP" Association="Self.BOOKINGS_ARRIVAL_STOP">
             <End Role="STOPS" EntitySet="STOPS" />
             <End Role="BOOKINGS" EntitySet="BOOKINGS" />
@@ -932,6 +897,14 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
             <End Role="SHIFTS" EntitySet="SHIFTS" />
             <End Role="REPLACEMENTS" EntitySet="REPLACEMENTS" />
           </AssociationSet>
+          <AssociationSet Name="ROUTE_STOPS_ROUTE_ID_FK" Association="Self.ROUTE_STOPS_ROUTE_ID_FK">
+            <End Role="ROUTES" EntitySet="ROUTES" />
+            <End Role="ROUTE_STOPS" EntitySet="ROUTE_STOPS" />
+          </AssociationSet>
+          <AssociationSet Name="ROUTE_STOPS_STOP_ID_FK" Association="Self.ROUTE_STOPS_STOP_ID_FK">
+            <End Role="STOPS" EntitySet="STOPS" />
+            <End Role="ROUTE_STOPS" EntitySet="ROUTE_STOPS" />
+          </AssociationSet>
           <AssociationSet Name="ROUTES_ARRIVAL_STATION_FK" Association="Self.ROUTES_ARRIVAL_STATION_FK">
             <End Role="STOPS" EntitySet="STOPS" />
             <End Role="ROUTES" EntitySet="ROUTES" />
@@ -947,14 +920,6 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
           <AssociationSet Name="ROUTES_ARCHIVE_DEPARTURE_STATION_FK" Association="Self.ROUTES_ARCHIVE_DEPARTURE_STATION_FK">
             <End Role="STATIONS" EntitySet="STATIONS" />
             <End Role="ROUTES_ARCHIVE" EntitySet="ROUTES_ARCHIVE" />
-          </AssociationSet>
-          <AssociationSet Name="ROUTE_STATIONS_STATION_ID_FK" Association="Self.ROUTE_STATIONS_STATION_ID_FK">
-            <End Role="STATIONS" EntitySet="STATIONS" />
-            <End Role="ROUTE_STATIONS" EntitySet="ROUTE_STATIONS" />
-          </AssociationSet>
-          <AssociationSet Name="ROUTE_STOPS_STOP_ID_FK" Association="Self.ROUTE_STOPS_STOP_ID_FK">
-            <End Role="STOPS" EntitySet="STOPS" />
-            <End Role="ROUTE_STOPS" EntitySet="ROUTE_STOPS" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1070,6 +1035,15 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ROUTE_STOPS">
+            <EntityTypeMapping TypeName="Model.ROUTE_STOPS">
+              <MappingFragment StoreEntitySet="ROUTE_STOPS">
+                <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
+                <ScalarProperty Name="STOP_ID" ColumnName="STOP_ID" />
+                <ScalarProperty Name="POSITION_IN_ROUTE" ColumnName="POSITION_IN_ROUTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ROUTES">
             <EntityTypeMapping TypeName="Model.ROUTE">
               <MappingFragment StoreEntitySet="ROUTES">
@@ -1115,23 +1089,6 @@ FROM "PRCS251E"."ROUTE_STOPS" "ROUTE_STOPS"</DefiningQuery>
                 <ScalarProperty Name="STOP_POSTCODE" ColumnName="STOP_POSTCODE" />
                 <ScalarProperty Name="STOP_LATITUDE" ColumnName="STOP_LATITUDE" />
                 <ScalarProperty Name="STOP_LONGITUDE" ColumnName="STOP_LONGITUDE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ROUTE_STATIONS">
-            <EntityTypeMapping TypeName="Model.ROUTE_STATIONS">
-              <MappingFragment StoreEntitySet="ROUTE_STATIONS">
-                <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
-                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ROUTE_STOPS">
-            <EntityTypeMapping TypeName="Model.ROUTE_STOPS">
-              <MappingFragment StoreEntitySet="ROUTE_STOPS">
-                <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
-                <ScalarProperty Name="STOP_ID" ColumnName="STOP_ID" />
-                <ScalarProperty Name="POSITION_IN_ROUTE" ColumnName="POSITION_IN_ROUTE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

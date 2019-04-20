@@ -15,7 +15,7 @@ using api.Models.DTO;
 namespace api.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/routestops/")]
+    [RoutePrefix("api/routestops")]
     public class RouteStopsController : ApiController
     {
         private Entities db = new Entities();
@@ -30,24 +30,28 @@ namespace api.Controllers
         [HttpGet]
         [Route("{routeId:int}", Name = "GetRouteStopsByRouteId")]
         [ResponseType(typeof(RouteStopDTO))]
-        public async Task<IQueryable<RouteStopDTO>> GetROUTE_STOPS(int routeId)
+        public async Task<IHttpActionResult> GetROUTE_STOPS(int routeId)
         {
             //ROUTE_STOPS rOUTE_STOPS = await db.ROUTE_STOPS.FindAsync(id);
 
             var stops = await db.ROUTE_STOPS
+                .Include(s => s.ROUTE)
                 .Include(s => s.STOP)
-                .Select(s => new RouteStopDTO()
+                .Where(s => s.ROUTE_ID == routeId)
+                .Select(s =>
+                new RouteStopDTO()
                 {
                     StopId = (int)s.STOP_ID,
-                    StopName = s.STOP.STOP_NAME
-                }).Where(s => s. == routeId)
+                    StopName = s.STOP.STOP_NAME,
+                    PositionInRoute = (int)s.POSITION_IN_ROUTE
+                }).ToListAsync();
 
-            if (rOUTE_STOPS == null)
+            if (stops.Count == 0)
             {
                 return NotFound();
             }
 
-            return Ok(rOUTE_STOPS);
+            return Ok(stops);
         }
 
         // PUT: api/RouteStops/5
@@ -86,34 +90,36 @@ namespace api.Controllers
         //}
 
         // POST: api/RouteStops
-        //[ResponseType(typeof(ROUTE_STOPS))]
-        //public async Task<IHttpActionResult> PostROUTE_STOPS(ROUTE_STOPS rOUTE_STOPS)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [HttpPost, Authorize(Roles = "Employee")]
+        [Route("")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PostROUTE_STOPS(ROUTE_STOPS rOUTE_STOPS)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.ROUTE_STOPS.Add(rOUTE_STOPS);
+            db.ROUTE_STOPS.Add(rOUTE_STOPS);
 
-        //    try
-        //    {
-        //        await db.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (ROUTE_STOPSExists(rOUTE_STOPS.ROUTE_ID))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (ROUTE_STOPSExists(rOUTE_STOPS.ROUTE_ID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return CreatedAtRoute("DefaultApi", new { id = rOUTE_STOPS.ROUTE_ID }, rOUTE_STOPS);
-        //}
+            return CreatedAtRoute("DefaultApi", new { id = rOUTE_STOPS.ROUTE_ID }, rOUTE_STOPS);
+        }
 
         // DELETE: api/RouteStops/5
         //[ResponseType(typeof(ROUTE_STOPS))]

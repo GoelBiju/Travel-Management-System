@@ -19,9 +19,9 @@ namespace api.Models
         {
             this.BOOKINGS = new HashSet<BOOKING>();
             this.BOOKINGS1 = new HashSet<BOOKING>();
+            this.ROUTE_STOPS = new HashSet<ROUTE_STOPS>();
             this.ROUTES = new HashSet<ROUTE>();
             this.ROUTES1 = new HashSet<ROUTE>();
-            this.ROUTE_STOPS = new HashSet<ROUTE_STOPS>();
         }
     
         public decimal STOP_ID { get; set; }
@@ -36,10 +36,10 @@ namespace api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BOOKING> BOOKINGS1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ROUTE_STOPS> ROUTE_STOPS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROUTE> ROUTES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROUTE> ROUTES1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROUTE_STOPS> ROUTE_STOPS { get; set; }
     }
 }

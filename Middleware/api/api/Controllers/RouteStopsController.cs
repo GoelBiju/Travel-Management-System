@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.BindingModels;
 using api.Models.DTO;
 
 namespace api.Controllers
@@ -34,6 +35,8 @@ namespace api.Controllers
         {
             //ROUTE_STOPS rOUTE_STOPS = await db.ROUTE_STOPS.FindAsync(id);
 
+            // Retrieve all stops for a specific route based on the route id. 
+            // Stop names are also retrieved.
             var stops = await db.ROUTE_STOPS
                 .Include(s => s.ROUTE)
                 .Include(s => s.STOP)
@@ -43,6 +46,9 @@ namespace api.Controllers
                 {
                     StopId = (int)s.STOP_ID,
                     StopName = s.STOP.STOP_NAME,
+                    StopPostcode = s.STOP.STOP_POSTCODE,
+                    StopLatitude = s.STOP.STOP_LATITUDE,
+                    StopLongitude = s.STOP.STOP_LONGITUDE,
                     PositionInRoute = (int)s.POSITION_IN_ROUTE
                 }).ToListAsync();
 
@@ -93,14 +99,21 @@ namespace api.Controllers
         [HttpPost, Authorize(Roles = "Employee")]
         [Route("")]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PostROUTE_STOPS(ROUTE_STOPS rOUTE_STOPS)
+        public async Task<IHttpActionResult> PostROUTE_STOPS(RouteStopCreationBindingModel routeStop)
         {
+            ROUTE_STOPS addRouteStop = new ROUTE_STOPS()
+            {
+                ROUTE_ID = routeStop.RouteId,
+                STOP_ID = routeStop.StopId,
+                POSITION_IN_ROUTE = routeStop.PositionInRoute
+            };
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.ROUTE_STOPS.Add(rOUTE_STOPS);
+            db.ROUTE_STOPS.Add(addRouteStop);
 
             try
             {
@@ -108,7 +121,7 @@ namespace api.Controllers
             }
             catch (DbUpdateException)
             {
-                if (ROUTE_STOPSExists(rOUTE_STOPS.ROUTE_ID))
+                if (ROUTE_STOPSExists(addRouteStop.ROUTE_ID, addRouteStop.STOP_ID))
                 {
                     return Conflict();
                 }
@@ -118,7 +131,7 @@ namespace api.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = rOUTE_STOPS.ROUTE_ID }, rOUTE_STOPS);
+            return CreatedAtRoute("DefaultApi", new { id = addRouteStop.ROUTE_ID }, addRouteStop);
         }
 
         // DELETE: api/RouteStops/5
@@ -146,9 +159,9 @@ namespace api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ROUTE_STOPSExists(decimal id)
+        private bool ROUTE_STOPSExists(decimal routeId, decimal stopId)
         {
-            return db.ROUTE_STOPS.Count(e => e.ROUTE_ID == id) > 0;
+            return db.ROUTE_STOPS.Count(e => e.ROUTE_ID == routeId && e.STOP_ID == stopId) > 0;
         }
     }
 }

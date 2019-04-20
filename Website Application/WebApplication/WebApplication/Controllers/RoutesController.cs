@@ -22,14 +22,12 @@ namespace WebApplication.Controllers
         {
             var data = new List<RoutesViewModel>();
 
-
             HttpResponseMessage responseMessage = GlobalVariables.WebApiClient.GetAsync("routes").Result;
             if (responseMessage.IsSuccessStatusCode)
             {
                 var JsonString = responseMessage.Content.ReadAsStringAsync().Result;
                 data = JsonConvert.DeserializeObject<List<RoutesViewModel>>(JsonString);
             }
-
 
             return View(data);
         }

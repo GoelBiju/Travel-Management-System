@@ -160,6 +160,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JourneyController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
+    <Compile Include="Controllers\RouteStopsController.cs" />
     <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="Controllers\StopController.cs" />
     <Compile Include="Global.asax.cs">
@@ -172,6 +173,7 @@
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\JourneyViewModel.cs" />
+    <Compile Include="ViewModels\RouteStopViewModel.cs" />
     <Compile Include="ViewModels\RoutesViewModel.cs" />
     <Compile Include="ViewModels\ShiftViewModel.cs" />
     <Compile Include="ViewModels\StopViewModel.cs" />
@@ -293,6 +295,7 @@
     <Content Include="Views\Shift\Create.cshtml" />
     <Content Include="Views\Stop\Index.cshtml" />
     <Content Include="Views\Stop\Create.cshtml" />
+    <Content Include="Views\RouteStops\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

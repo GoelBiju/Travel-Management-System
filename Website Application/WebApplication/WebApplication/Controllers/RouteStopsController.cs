@@ -33,64 +33,84 @@ namespace WebApplication.Controllers
         }
 
         // GET: RouteStops/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: RouteStops/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        //[HttpPost]
+        //public ActionResult Create(FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: RouteStops/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: RouteStops/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: RouteStops/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id, int stopId)
         {
-            return View();
+            if (id == null)
+            {
+                return RedirectToAction("Details", "RouteStops");
+            }
+
+            var data = new RouteStopViewModel();
+
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("routestops/" + id + "/" + stopId).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = response.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<RouteStopViewModel>(jsonString);
+            }
+
+            ViewBag.RouteId = id;
+
+            return View(data);
         }
 
         // POST: RouteStops/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(RouteStopViewModel deleteRouteStop)
         {
             try
             {
-                // TODO: Add delete logic here
+                HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("routestops/Delete", deleteRouteStop).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Details/" + deleteRouteStop.RouteId);
+                }
 
-                return RedirectToAction("Index");
+                return View();
             }
             catch
             {

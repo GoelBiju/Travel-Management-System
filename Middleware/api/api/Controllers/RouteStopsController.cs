@@ -44,6 +44,7 @@ namespace api.Controllers
                 .Select(s =>
                 new RouteStopDTO()
                 {
+                    RouteId = (int)s.ROUTE_ID,
                     StopId = (int)s.STOP_ID,
                     StopName = s.STOP.STOP_NAME,
                     StopPostcode = s.STOP.STOP_POSTCODE,
@@ -58,6 +59,32 @@ namespace api.Controllers
             }
 
             return Ok(stops);
+        }
+
+        [HttpGet]
+        [Route("{routeId:int}/{stopId:int}")]
+        [ResponseType(typeof(RouteStopDTO))]
+        public async Task<IHttpActionResult> GetRouteStop(int routeId, int stopId)
+        {
+            var stop = await db.ROUTE_STOPS
+                .Include(s => s.ROUTE)
+                .Include(s => s.STOP)
+                .Where(s => s.ROUTE_ID == routeId && s.STOP_ID == stopId)
+                .Select(s =>
+                new RouteStopDTO()
+                {
+                    RouteId = (int)s.ROUTE_ID,
+                    StopId = (int)s.STOP_ID,
+                    StopName = s.STOP.STOP_NAME,
+                    PositionInRoute = (int)s.POSITION_IN_ROUTE
+                }).FirstOrDefaultAsync();
+
+            if (stop == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(stop);
         }
 
         // PUT: api/RouteStops/5
@@ -135,20 +162,24 @@ namespace api.Controllers
         }
 
         // DELETE: api/RouteStops/5
-        //[ResponseType(typeof(ROUTE_STOPS))]
-        //public async Task<IHttpActionResult> DeleteROUTE_STOPS(decimal id)
-        //{
-        //    ROUTE_STOPS rOUTE_STOPS = await db.ROUTE_STOPS.FindAsync(id);
-        //    if (rOUTE_STOPS == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost]
+        [Route("Delete")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> DeleteROUTE_STOPS([FromBody] RouteStopsDeletionBindingModel deleteRouteStop)
+        {
+            ROUTE_STOPS routeStop = await db.ROUTE_STOPS.SingleOrDefaultAsync(r => r.ROUTE_ID == deleteRouteStop.RouteId 
+            && r.STOP_ID == deleteRouteStop.StopId && r.POSITION_IN_ROUTE == deleteRouteStop.PositionInRoute);
 
-        //    db.ROUTE_STOPS.Remove(rOUTE_STOPS);
-        //    await db.SaveChangesAsync();
+            if (routeStop == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(rOUTE_STOPS);
-        //}
+            db.ROUTE_STOPS.Remove(routeStop);
+            await db.SaveChangesAsync();
+
+            return Ok(routeStop);
+        }
 
         protected override void Dispose(bool disposing)
         {

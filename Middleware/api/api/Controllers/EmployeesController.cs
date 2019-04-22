@@ -218,7 +218,8 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            // Remove the employee from the employees table but add them to the archive employees table.
+            // Remove the employee from the employees table but add them
+            // to the archive employees table.
             db.EMPLOYEES.Remove(employee);
             db.SaveChanges();
 

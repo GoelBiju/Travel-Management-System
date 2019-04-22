@@ -9,6 +9,12 @@ namespace WebApplication.ViewModels
 {
     public class RouteStopViewModel
     {
+        [JsonProperty("routeId")]
+        public int RouteId { get; set; }
+
+        [JsonProperty("stopId")]
+        public int StopId { get; set; }
+
         [Display(Name = "Stop Name")]
         [JsonProperty("stopName")]
         public string StopName { get; set; }

@@ -296,6 +296,7 @@
     <Content Include="Views\Stop\Index.cshtml" />
     <Content Include="Views\Stop\Create.cshtml" />
     <Content Include="Views\RouteStops\Details.cshtml" />
+    <Content Include="Views\RouteStops\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

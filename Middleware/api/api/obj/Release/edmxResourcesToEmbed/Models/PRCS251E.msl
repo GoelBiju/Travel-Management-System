@@ -1,6 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="BOOKINGS">
+      <EntityTypeMapping TypeName="Model.BOOKING">
+        <MappingFragment StoreEntitySet="BOOKINGS">
+          <ScalarProperty Name="BOOKING_REFERENCE" ColumnName="BOOKING_REFERENCE" />
+          <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+          <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
+          <ScalarProperty Name="DEPARTING_STOP" ColumnName="DEPARTING_STOP" />
+          <ScalarProperty Name="ARRIVAL_STOP" ColumnName="ARRIVAL_STOP" />
+          <ScalarProperty Name="BOOKED_DATETIME" ColumnName="BOOKED_DATETIME" />
+          <ScalarProperty Name="PASSENGERS_SENIOR" ColumnName="PASSENGERS_SENIOR" />
+          <ScalarProperty Name="PASSENGERS_ADULT" ColumnName="PASSENGERS_ADULT" />
+          <ScalarProperty Name="PASSENGERS_TEENAGER" ColumnName="PASSENGERS_TEENAGER" />
+          <ScalarProperty Name="PASSENGERS_INFANT" ColumnName="PASSENGERS_INFANT" />
+          <ScalarProperty Name="TICKET_PRICE" ColumnName="TICKET_PRICE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="COACHES">
       <EntityTypeMapping TypeName="Model.COACH">
         <MappingFragment StoreEntitySet="COACHES">
@@ -66,10 +84,36 @@
         <MappingFragment StoreEntitySet="JOURNEYS">
           <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
           <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
+          <ScalarProperty Name="SHIFT_ID" ColumnName="SHIFT_ID" />
           <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
-          <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
-          <ScalarProperty Name="START_DATE_TIME" ColumnName="START_DATE_TIME" />
-          <ScalarProperty Name="END_DATE_TIME" ColumnName="END_DATE_TIME" />
+          <ScalarProperty Name="DEPARTURE_DATETIME" ColumnName="DEPARTURE_DATETIME" />
+          <ScalarProperty Name="ARRIVAL_DATETIME" ColumnName="ARRIVAL_DATETIME" />
+          <ScalarProperty Name="CURRENT_STOP" ColumnName="CURRENT_STOP" />
+          <ScalarProperty Name="STOP_ARRIVAL_DATETIME" ColumnName="STOP_ARRIVAL_DATETIME" />
+          <ScalarProperty Name="STOP_DEPARTED_DATETIME" ColumnName="STOP_DEPARTED_DATETIME" />
+          <ScalarProperty Name="COACH_STATUS" ColumnName="COACH_STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REPLACEMENTS">
+      <EntityTypeMapping TypeName="Model.REPLACEMENT">
+        <MappingFragment StoreEntitySet="REPLACEMENTS">
+          <ScalarProperty Name="REPLACEMENT_ID" ColumnName="REPLACEMENT_ID" />
+          <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
+          <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
+          <ScalarProperty Name="SHIFT_ID" ColumnName="SHIFT_ID" />
+          <ScalarProperty Name="REQUESTED_DATETIME" ColumnName="REQUESTED_DATETIME" />
+          <ScalarProperty Name="COMPLETED_DATETIME" ColumnName="COMPLETED_DATETIME" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROUTE_STOPS">
+      <EntityTypeMapping TypeName="Model.ROUTE_STOPS">
+        <MappingFragment StoreEntitySet="ROUTE_STOPS">
+          <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
+          <ScalarProperty Name="STOP_ID" ColumnName="STOP_ID" />
+          <ScalarProperty Name="POSITION_IN_ROUTE" ColumnName="POSITION_IN_ROUTE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -96,8 +140,6 @@
         <MappingFragment StoreEntitySet="SHIFTS">
           <ScalarProperty Name="SHIFT_ID" ColumnName="SHIFT_ID" />
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
-          <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
-          <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
           <ScalarProperty Name="START_DATETIME" ColumnName="START_DATETIME" />
           <ScalarProperty Name="END_DATETIME" ColumnName="END_DATETIME" />
         </MappingFragment>
@@ -111,13 +153,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="ROUTE_STATIONS" TypeName="Model.ROUTE_STATIONS" StoreEntitySet="ROUTE_STATIONS">
-      <EndProperty Name="ROUTES">
-        <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
-      </EndProperty>
-      <EndProperty Name="STATIONS">
-        <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="STOPS">
+      <EntityTypeMapping TypeName="Model.STOP">
+        <MappingFragment StoreEntitySet="STOPS">
+          <ScalarProperty Name="STOP_ID" ColumnName="STOP_ID" />
+          <ScalarProperty Name="STOP_NAME" ColumnName="STOP_NAME" />
+          <ScalarProperty Name="IS_STATION" ColumnName="IS_STATION" />
+          <ScalarProperty Name="STOP_POSTCODE" ColumnName="STOP_POSTCODE" />
+          <ScalarProperty Name="STOP_LATITUDE" ColumnName="STOP_LATITUDE" />
+          <ScalarProperty Name="STOP_LONGITUDE" ColumnName="STOP_LONGITUDE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

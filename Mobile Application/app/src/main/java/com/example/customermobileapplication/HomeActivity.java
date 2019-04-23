@@ -7,34 +7,35 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.customermobileapplication.Model.Customer;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
+import com.example.customermobileapplication.Utilities.API.APIResponse;
+import com.example.customermobileapplication.Utilities.API.CustomCallback;
+import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 
+import java.net.HttpURLConnection;
 import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private int customerId;
-
     private EditText editTextDate;
     private EditText editTextTime;
     private TextView requestText;
-    private APIConnection apiConnection;
+
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
 
     // Buttons.
     private Button viewAccountButton;
-
-    // SharedPreferences.
-    SharedPreferences pref;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +44,6 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Check if the customerId is present, if not go to login.
-        pref = getApplicationContext().getSharedPreferences("userDetails", MODE_PRIVATE);
-        if (pref.contains("customerId")) {
-            customerId = pref.getInt("customerId", 0);
-        } else {
-            Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(loginIntent);
-        }
-
-        // Get the intent that was sent
-        //Intent customerIdIntent = getIntent();
-        //customerId = customerIdIntent.getIntExtra("customerId", 0);
-
         // Bind views.
         BindView();
 
@@ -63,7 +51,6 @@ public class HomeActivity extends AppCompatActivity {
         prepareDatePickerDialog();
         prepareTimePickerDialog();
     }
-
 
     private void BindView(){
         this.viewAccountButton = findViewById(R.id.buttonViewAccount);
@@ -74,15 +61,15 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setViewActions() {
 
-        viewAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent viewAccountDetailsIntent = new Intent(getApplicationContext(), ViewAccountDetails.class);
-                viewAccountDetailsIntent.putExtra("customerId", customerId);
+//        viewAccountButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent viewAccountDetailsIntent = new Intent(getApplicationContext(), ViewAccountDetails.class);
+//                //viewAccountDetailsIntent.putExtra("customerId", customerId);
+//                startActivity(viewAccountDetailsIntent);
+//            }
+//        });
 
-                startActivity(viewAccountDetailsIntent);
-            }
-        });
         editTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

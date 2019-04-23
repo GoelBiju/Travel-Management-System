@@ -84,6 +84,9 @@ public class AccountFragment extends Fragment {
                 editor.clear();
                 editor.apply();
 
+                // Clear the apiConnection access token.
+                apiConnection.clearPreferences();
+
                 // Return to login screen.
                 Intent startIntent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(startIntent);
@@ -103,9 +106,9 @@ public class AccountFragment extends Fragment {
      */
     private void getAccountInformation() {
 
-        int customerId = pref.getInt("customerId", -1);
+        int customerId = pref.getInt("customerId", 0);
 
-        if (customerId != -1) {
+        if (customerId > 0) {
 
             apiConnection.getCustomJsonObject("customers/" + customerId, Customer.class,
                     new CustomCallback() {

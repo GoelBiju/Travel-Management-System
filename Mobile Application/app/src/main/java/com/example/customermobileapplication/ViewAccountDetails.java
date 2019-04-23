@@ -15,7 +15,6 @@ import org.json.JSONException;
 public class ViewAccountDetails extends AppCompatActivity {
 
     APIConnection apiConnection;
-    LoginActivity login;
 
     int customerId;
 
@@ -61,10 +60,7 @@ public class ViewAccountDetails extends AppCompatActivity {
         emailInput = findViewById(R.id.emailInput);
 
         Intent getCustomerId = getIntent();
-
         customerId = getCustomerId.getIntExtra("customerId", 0);
-
-
 
         getAccountInformation();
     }

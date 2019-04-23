@@ -5,21 +5,29 @@ package com.example.customermobileapplication.Utilities.API;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.customermobileapplication.Model.Customer;
+import com.example.customermobileapplication.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class APIConnection {
@@ -30,18 +38,128 @@ public class APIConnection {
 
     private String API_BASE_URL;
 
+    private Map<String, String> headers;
+
+    private SharedPreferences pref;
+
     // Pass in the application context by this.getApplicationContext().
     public APIConnection(Context context, String apiBaseUrl) {
 
-        //this.retryPolicy = new DefaultRetryPolicy(5000, 20, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-
-        // Initialise the request queue in the singleotn.
+        // Initialise the request queue in the singleton.
         this.queueSingleton = RequestQueueSingleton.getInstance(context);
 
         // Set up the base URL.
         this.API_BASE_URL = apiBaseUrl;
+
+        //
+        this.headers = new HashMap<>();
+
+        //
+        this.pref = context.getSharedPreferences("api", Context.MODE_PRIVATE);
+
+        //
+        loadPreferences();
     }
 
+    public void loadPreferences() {
+        // Find stored access tokens and use them.
+        if (pref.contains("accessToken")) {
+            setAccessToken(this.pref.getString("accessToken", ""));
+        }
+    }
+
+    public void setAccessToken(String accessToken) {
+        headers.put("Authorization", "Bearer " + accessToken);
+
+        // Save access token in preferences.
+        SharedPreferences.Editor editor = this.pref.edit();
+        editor.clear();
+        editor.putString("accessToken", accessToken);
+        editor.apply();
+    }
+
+    public void clearPreferences() {
+        SharedPreferences.Editor editor = this.pref.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    public void processLogin(String resourceName, final String emailAddress, final String password,
+                             final VolleyCallback callback) {
+
+        final APIResponse loginResponse = new APIResponse();
+
+        StringRequest loginRequest = new StringRequest(Request.Method.POST, resourceName,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("Response", response.toString());
+
+                        //
+                        loginResponse.setRequestSuccessful(true);
+
+                        //
+                        loginResponse.setResponseStatusCode(HttpURLConnection.HTTP_OK);
+
+                        // Convert the string response to a json object.
+                        try {
+                            JSONObject responseObject = new JSONObject(response);
+                            loginResponse.addResponseItem(responseObject);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        callback.onSuccess(loginResponse);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error.Response", error.toString());
+
+                //
+                loginResponse.setRequestSuccessful(false);
+
+                //
+                loginResponse.setResponseStatusCode(error.networkResponse.statusCode);
+
+                //
+                if (error.networkResponse.data != null) {
+                    JSONObject jsonErrorObject;
+                    try {
+                        jsonErrorObject = new JSONObject(new String(error.networkResponse.data));
+                        Log.d("Response", jsonErrorObject.toString());
+                        loginResponse.addResponseItem(jsonErrorObject);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                callback.onFailure(loginResponse);
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", emailAddress.trim());
+                params.put("password", password.trim());
+                params.put("grant_type", "password");
+                params.put("login_type", "customer");
+                return params;
+            }
+        };
+
+        // Set timeout and retry policy.
+        loginRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        //
+        queueSingleton.addToRequestQueue(loginRequest);
+    }
 
     /**
      * This is a convencience method used to perform a GET request using Volley
@@ -268,7 +386,7 @@ public class APIConnection {
 
         MyCustomRequest getCustomRequest = new MyCustomRequest(Request.Method.GET,
                 this.API_BASE_URL + resourceName, null, responseClass,
-                null,
+                this.headers,
                 new Response.Listener<Object>() {
                     @Override
                     public void onResponse(Object response) {
@@ -306,7 +424,7 @@ public class APIConnection {
                 });
 
         //
-        getCustomRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+        getCustomRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 1,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         //
@@ -329,7 +447,7 @@ public class APIConnection {
 
         MyCustomRequest postCustomRequest = new MyCustomRequest(Request.Method.POST,
                 this.API_BASE_URL + resourceName, requestPostObject, responseClass,
-                null,
+                this.headers,
                 new Response.Listener<Object>() {
                     @Override
                     public void onResponse(Object response) {

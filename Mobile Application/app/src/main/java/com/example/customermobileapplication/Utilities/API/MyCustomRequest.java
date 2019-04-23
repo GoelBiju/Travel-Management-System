@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MyCustomRequest extends Request {
@@ -30,6 +31,7 @@ public class MyCustomRequest extends Request {
         super(method, url, errorListener);
         // Use the GsonBuilder to state the specific datetime from the API which we will receive.
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+
         this.listener = listener;
         this.requestBodyObject = requestBodyObject;
         this.headers = headers;

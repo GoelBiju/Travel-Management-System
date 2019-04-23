@@ -4,28 +4,38 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="055d86e1d8a6499f8d26feaec1fd70b9" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.COACH" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.COACHES_ARCHIVE" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CUSTOMER" Width="1.5" PointX="7.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.EMPLOYEE" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.EMPLOYEES_ARCHIVE" Width="1.5" PointX="9.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.JOURNEY" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ROUTE" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ROUTES_ARCHIVE" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SHIFT" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.STATION" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+      <Diagram DiagramId="bbf6fb0fd29c40ec9a3b08bae4d40085" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.BOOKING" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.COACH" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.COACHES_ARCHIVE" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CUSTOMER" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EMPLOYEE" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EMPLOYEES_ARCHIVE" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JOURNEY" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.REPLACEMENT" Width="1.5" PointX="7.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROUTE_STOPS" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROUTE" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROUTES_ARCHIVE" Width="1.5" PointX="5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SHIFT" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.STATION" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.STOP" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="Model.BOOKINGS_ARRIVAL_STOP" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.BOOKINGS_CUSTOMER_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.BOOKINGS_DEPARTING_STOP" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.BOOKINGS_JOURNEYS_ID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.COACHES_COACH_ID_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.SHIFTS_COACH_ID_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.EMPLOYEES_EMPLOYEE_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.REPLACEMENTS_COACH_ID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.SHIFTS_EMPLOYEE_ID_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.ROUTES_ROUTE_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.JOURNEYS_ROUTE_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.JOURNEYS_SHIFT_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.REPLACEMENTS_JOURNEY_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.REPLACEMENTS_SHIFT_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ROUTE_STOPS_ROUTE_ID_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ROUTE_STOPS_STOP_ID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.ROUTES_ARRIVAL_STATION_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.ROUTES_DEPARTURE_STATION_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.SHIFTS_ROUTE_ID_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.ROUTES_ARCHIVE_ARRIVAL_STATION_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.ROUTES_ARCHIVE_DEPARTURE_STATION_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.ROUTE_STATIONS" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

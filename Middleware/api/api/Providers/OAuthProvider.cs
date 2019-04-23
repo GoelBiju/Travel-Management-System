@@ -47,7 +47,7 @@ namespace api.Providers
 
                             ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);
 
-                            var properties = CreateProperties(customer.EMAIL_ADDRESS);
+                            var properties = CreateProperties(customer.CUSTOMER_ID.ToString());
                             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
                             context.Validated(ticket);
                         }
@@ -115,11 +115,11 @@ namespace api.Providers
         #endregion
 
         #region[CreateProperties]
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(string identification)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                {"userName", userName }
+                {"identification", identification }
             };
             return new AuthenticationProperties(data);
         }

@@ -7,7 +7,9 @@
         
         - email_address;
         
-        - customer_password;
+        - customer_hashed_password;
+        
+        - password_salt;
         
         - first_name;
         
@@ -48,10 +50,13 @@ CREATE TABLE customers(
         CONSTRAINT customers_email_address_chk
             CHECK (REGEXP_LIKE(email_address, '^\w+(\.\w+)*@\w+(\.\w+)+$')),
     
-    customer_password VARCHAR2(16) 
-        CONSTRAINT customers_customer_password_nn NOT NULL
-        CONSTRAINT customers_customer_password_chk
-            CHECK (REGEXP_LIKE(customer_password, '^[a-z0-9A-Z]{7,16}$')),
+    customer_hashed_password VARCHAR2(100) 
+        CONSTRAINT customers_customer_hashed_password_nn NOT NULL,
+--        CONSTRAINT customers_customer_password_chk
+--            CHECK (REGEXP_LIKE(customer_password, '^[a-z0-9A-Z]{7,16}$')),
+
+    password_salt VARCHAR2(100)
+        CONSTRAINT customers_password_salt_nn NOT NULL,
     
     first_name VARCHAR2(35) 
         CONSTRAINT customers_first_name_nn NOT NULL

@@ -5,7 +5,9 @@
     
         - employee_id;
         
-        - employee_password;
+        - employee_hashed_password;
+        
+        - password_salt
         
         - first_name;
         
@@ -20,10 +22,13 @@ CREATE TABLE employees(
     employee_id VARCHAR2(15)
         CONSTRAINT employees_employee_id_pk PRIMARY KEY,
         
-    employee_password VARCHAR2(16)
-        CONSTRAINT employees_employee_password NOT NULL
-        CONSTRAINT employees_employee_password_chk
-            CHECK (REGEXP_LIKE(employee_password, '^[a-z0-9A-Z]{7,16}$')),
+    employee_hashed_password VARCHAR2(100)
+        CONSTRAINT employees_employee_password_nn NOT NULL,
+--        CONSTRAINT employees_employee_password_chk
+--            CHECK (REGEXP_LIKE(employee_password, '^[a-z0-9A-Z]{7,16}$')),
+            
+    password_salt VARCHAR2(100)
+        CONSTRAINT employees_password_salt_nn NOT NULL,
 
     first_name VARCHAR2(35)
         CONSTRAINT employees_first_name_nn NOT NULL

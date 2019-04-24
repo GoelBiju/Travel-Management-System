@@ -34,4 +34,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     // PayPal SDK
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
+    // Recycler View
+    implementation 'com.android.support:recyclerview-v7:28+'
+    implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
 }

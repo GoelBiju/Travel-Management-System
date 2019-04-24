@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Web.Http.Description;
 using api.Models;
 using api.Models.BindingModels;
 using api.Models.DTO;
-
+using api.Utilities;
 
 namespace api.Controllers
 {
@@ -125,7 +126,23 @@ namespace api.Controllers
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
-            // Create customer object based on the registration details received.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Check if the customer already exists under the email address provided, 
+            // if so return a Conflict HTTP response code.
+            if (CustomerExists(registrationDetails.emailAddress))
+            {
+                return Conflict();
+            }
+
+            // Generate the password hash and salt to store for the customer record.
+            string generatedSalt = Security.CreateSalt(32);
+            string hashedPassword = Security.GenerateSHA256Hash(registrationDetails.customerPassword, generatedSalt);
+
+            // Create customer object based on the details received and processed.
             CUSTOMER customer = new CUSTOMER()
             {
                 CUSTOMER_ID = 0,
@@ -139,18 +156,6 @@ namespace api.Controllers
                 POSTCODE = registrationDetails.postCode,
                 MOBILE_NUMBER = registrationDetails.mobileNumber
             };
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // Check if the customer already exists under the email address provided, 
-            // if so return a Conflict HTTP response code.
-            if (CustomerExists(customer.EMAIL_ADDRESS))
-            {
-                return Conflict();
-            }
 
             // Add the customer object to our database as a record.
             db.CUSTOMERS.Add(customer);

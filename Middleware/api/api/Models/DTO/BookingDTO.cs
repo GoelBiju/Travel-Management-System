@@ -14,6 +14,9 @@ namespace api.Models.DTO
         [JsonProperty("customerId")]
         public int CustomerId { get; set; }
 
+        [JsonProperty("journeyId")]
+        public int JourneyId { get; set; }
+
         [JsonProperty("departingStop")]
         public int DepartingStop { get; set; }
 
@@ -32,8 +35,8 @@ namespace api.Models.DTO
         [JsonProperty("passengersInfant")]
         public int PassengersInfant { get; set; }
 
-        [JsonProperty("ticketPrice")]
-        public int TicketPrice { get; set; }
+        [JsonProperty("amountPaid")]
+        public int AmountPaid { get; set; }
 
         [JsonProperty("status")]
         public int Status { get; set; }

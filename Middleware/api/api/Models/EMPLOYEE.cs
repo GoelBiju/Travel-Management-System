@@ -21,7 +21,8 @@ namespace api.Models
         }
     
         public string EMPLOYEE_ID { get; set; }
-        public string EMPLOYEE_PASSWORD { get; set; }
+        public string EMPLOYEE_HASHED_PASSWORD { get; set; }
+        public string PASSWORD_SALT { get; set; }
         public string FIRST_NAME { get; set; }
         public string LAST_NAME { get; set; }
         public string JOB_ROLE { get; set; }

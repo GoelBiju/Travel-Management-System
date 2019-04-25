@@ -121,7 +121,8 @@ namespace api.Controllers
 
         // POST: api/Customers
         // Used to CREATE a new customer and add them to our database.
-        [HttpPost, Authorize(Roles = "Customer")]
+        [AllowAnonymous]
+        [HttpPost]
         [Route("")]
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
@@ -147,7 +148,8 @@ namespace api.Controllers
             {
                 CUSTOMER_ID = 0,
                 EMAIL_ADDRESS = registrationDetails.emailAddress,
-                CUSTOMER_PASSWORD = registrationDetails.customerPassword,
+                CUSTOMER_HASHED_PASSWORD = hashedPassword,
+                PASSWORD_SALT = generatedSalt,
                 FIRST_NAME = registrationDetails.firstName,
                 LAST_NAME = registrationDetails.lastName,
                 DATE_OF_BIRTH = registrationDetails.dateOfBirth,
@@ -230,13 +232,11 @@ namespace api.Controllers
 
                 if (dbCustomer != null && loginDetails.emailAddress.Equals(dbCustomer.EMAIL_ADDRESS))
                 {
-                    // TODO: Get the password hash and salt and ensure that the attempted password matches.
-                    //       Implement SHA256/SHA512 hasing with a password and salt which is stored in the database.
+                    // Get the stored salt for the customer and the attempted password.
+                    string attemptedPasswordHash = Security.GenerateSHA256Hash(loginDetails.password, dbCustomer.PASSWORD_SALT);
 
-
-                    // TODO: Temporarily just checking that the passwords match for now; this needs to be replaced with 
-                    //       hasing/security functionality.
-                    if (loginDetails.password.Equals(dbCustomer.CUSTOMER_PASSWORD))
+                    // If the password hash matches that stored in the database then the user is authenticated.
+                    if (dbCustomer.CUSTOMER_HASHED_PASSWORD.Equals(attemptedPasswordHash))
                     {
                         // Return the user details as with the Customer Data Transfer Object.
                         CustomerDTO customerDetails = new CustomerDTO()

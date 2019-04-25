@@ -15,9 +15,15 @@
         
         - booked_datetime;
         
-        - 
+        - passengers_senior;
         
-        - price;
+        - passengers_adult;
+        
+        - passengers_teenager;
+        
+        - passengers_infant;
+        
+        - amount_paid;
         
         - status;
 */
@@ -25,8 +31,6 @@
 
 CREATE TABLE bookings(
     
-    -- NOTE: booking_reference should be similar to an e-ticket reference code. 
-    --       This could be a VARCHAR2 with an alphanumeric value.
     booking_reference NUMBER NOT NULL
         CONSTRAINT bookings_booking_reference_pk PRIMARY KEY,
         
@@ -59,8 +63,8 @@ CREATE TABLE bookings(
     passengers_infant NUMBER
         CONSTRAINT bookings_passengers_infant_nn NOT NULL,
         
-    ticket_price NUMBER(6, 2)
-        CONSTRAINT bookings_ticket_price_nn NOT NULL,
+    amount_paid NUMBER(6, 2)
+        CONSTRAINT bookings_amount_paid_nn NOT NULL,
     
     status VARCHAR2(10) 
         cONSTRAINT bookings_status_nn NOT NULL

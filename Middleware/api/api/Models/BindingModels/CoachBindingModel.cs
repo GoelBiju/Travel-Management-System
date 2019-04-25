@@ -24,8 +24,8 @@ namespace api.Models.BindingModels
         [JsonRequired]
         public int CoachCapacity { get; set; }
 
-        [JsonProperty("isActive")]
+        [JsonProperty("isAvailable")]
         [JsonRequired]
-        public bool IsActive { get; set; }
+        public bool IsAvailable { get; set; }
     }
 }

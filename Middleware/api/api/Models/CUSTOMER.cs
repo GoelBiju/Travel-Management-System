@@ -18,11 +18,13 @@ namespace api.Models
         public CUSTOMER()
         {
             this.BOOKINGS = new HashSet<BOOKING>();
+            this.BOOKINGS_HISTORY = new HashSet<BOOKINGS_HISTORY>();
         }
     
         public decimal CUSTOMER_ID { get; set; }
         public string EMAIL_ADDRESS { get; set; }
-        public string CUSTOMER_PASSWORD { get; set; }
+        public string CUSTOMER_HASHED_PASSWORD { get; set; }
+        public string PASSWORD_SALT { get; set; }
         public string FIRST_NAME { get; set; }
         public string LAST_NAME { get; set; }
         public System.DateTime DATE_OF_BIRTH { get; set; }
@@ -33,5 +35,7 @@ namespace api.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BOOKING> BOOKINGS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BOOKINGS_HISTORY> BOOKINGS_HISTORY { get; set; }
     }
 }

@@ -12,6 +12,8 @@ using api.Models;
 
 namespace api.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/bookings")]
     public class BookingsController : ApiController
     {
         private Entities db = new Entities();

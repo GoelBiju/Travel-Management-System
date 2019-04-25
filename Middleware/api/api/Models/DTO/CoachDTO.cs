@@ -23,7 +23,7 @@ namespace api.Models.DTO
         [JsonProperty("coachCapacity")]
         public int CoachCapacity { get; set; }
 
-        [JsonProperty("isActive")]
-        public bool IsActive { get; set; }
+        [JsonProperty("isAvailable")]
+        public bool IsAvailable { get; set; }
     }
 }

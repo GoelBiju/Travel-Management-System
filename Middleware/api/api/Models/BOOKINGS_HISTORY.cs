@@ -12,7 +12,7 @@ namespace api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BOOKING
+    public partial class BOOKINGS_HISTORY
     {
         public decimal BOOKING_REFERENCE { get; set; }
         public decimal CUSTOMER_ID { get; set; }
@@ -25,11 +25,9 @@ namespace api.Models
         public decimal PASSENGERS_TEENAGER { get; set; }
         public decimal PASSENGERS_INFANT { get; set; }
         public decimal AMOUNT_PAID { get; set; }
-        public string STATUS { get; set; }
+        public decimal AMOUNT_OF_PEOPLE { get; set; }
+        public bool STATUS { get; set; }
     
-        public virtual STOP STOP { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual STOP STOP1 { get; set; }
-        public virtual JOURNEY JOURNEY { get; set; }
     }
 }

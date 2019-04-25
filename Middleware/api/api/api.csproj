@@ -207,6 +207,9 @@
     <Compile Include="Models\BOOKING.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BOOKINGS_HISTORY.cs">
+      <DependentUpon>PRCS251E.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\COACH.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
@@ -259,9 +262,6 @@
     <Compile Include="Models\SHIFT.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\STATION.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\STOP.cs">
       <DependentUpon>PRCS251E.tt</DependentUpon>
     </Compile>
@@ -305,7 +305,6 @@
     <Compile Include="Controllers\JourneysController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\ShiftsController.cs" />
-    <Compile Include="Controllers\StationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

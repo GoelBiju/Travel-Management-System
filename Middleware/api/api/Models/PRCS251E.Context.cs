@@ -26,6 +26,7 @@ namespace api.Models
         }
     
         public virtual DbSet<BOOKING> BOOKINGS { get; set; }
+        public virtual DbSet<BOOKINGS_HISTORY> BOOKINGS_HISTORY { get; set; }
         public virtual DbSet<COACH> COACHES { get; set; }
         public virtual DbSet<COACHES_ARCHIVE> COACHES_ARCHIVE { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERS { get; set; }
@@ -37,7 +38,6 @@ namespace api.Models
         public virtual DbSet<ROUTE> ROUTES { get; set; }
         public virtual DbSet<ROUTES_ARCHIVE> ROUTES_ARCHIVE { get; set; }
         public virtual DbSet<SHIFT> SHIFTS { get; set; }
-        public virtual DbSet<STATION> STATIONS { get; set; }
         public virtual DbSet<STOP> STOPS { get; set; }
     }
 }

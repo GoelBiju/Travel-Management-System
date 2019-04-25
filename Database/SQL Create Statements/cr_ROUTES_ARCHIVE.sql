@@ -16,8 +16,8 @@ CREATE TABLE routes_archive(
         CONSTRAINT routes_archive_route_id_pk PRIMARY KEY,
 
     departure_station NUMBER
-        CONSTRAINT routes_archive_departure_station_fk REFERENCES stations (station_id),
+        CONSTRAINT routes_archive_departure_station_fk REFERENCES stops (stop_id),
 
     arrival_station NUMBER
-        CONSTRAINT routes_archive_arrival_station_fk REFERENCES stations (station_id)
+        CONSTRAINT routes_archive_arrival_station_fk REFERENCES stops (stop_id)
 );

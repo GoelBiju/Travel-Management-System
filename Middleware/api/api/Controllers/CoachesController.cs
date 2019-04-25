@@ -40,7 +40,7 @@ namespace api.Controllers
                               CoachModel = c.COACH_MODEL,
                               RegistratonPlate = c.REGISTRATION_PLATE,
                               CoachCapacity = (int)c.COACH_CAPACITY,
-                              IsActive = c.IS_ACTIVE
+                              IsAvailable = c.IS_AVAILABLE
                           };
 
             return coaches;
@@ -68,7 +68,7 @@ namespace api.Controllers
                     CoachModel = c.COACH_MODEL,
                     RegistratonPlate = c.REGISTRATION_PLATE,
                     CoachCapacity = (int)c.COACH_CAPACITY,
-                    IsActive = c.IS_ACTIVE
+                    IsAvailable = c.IS_AVAILABLE
                 }).SingleOrDefaultAsync(c => c.CoachId == id);
 
             
@@ -109,7 +109,7 @@ namespace api.Controllers
                 coachRecord.COACH_MODEL = coach.CoachModel;
                 coachRecord.COACH_CAPACITY = coach.CoachCapacity;
                 coachRecord.REGISTRATION_PLATE = coach.RegistratonPlate;
-                coachRecord.IS_ACTIVE = coach.IsActive;
+                coachRecord.IS_AVAILABLE = coach.IsAvailable;
             } else
             {
                 return BadRequest();
@@ -154,7 +154,7 @@ namespace api.Controllers
                 COACH_MODEL = coach.CoachModel,
                 REGISTRATION_PLATE = coach.RegistratonPlate,
                 COACH_CAPACITY = coach.CoachCapacity,
-                IS_ACTIVE = coach.IsActive
+                IS_AVAILABLE = coach.IsAvailable
             };
 
             if (!ModelState.IsValid)

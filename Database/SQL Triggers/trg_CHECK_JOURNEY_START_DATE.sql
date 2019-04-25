@@ -6,7 +6,7 @@ FOR EACH ROW
 
 BEGIN
   
-	IF( :new.start_date_time < sysdate)
+	IF( :new.departure_datetime < sysdate)
   
 	THEN
     

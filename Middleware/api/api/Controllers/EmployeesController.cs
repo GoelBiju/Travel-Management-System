@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using api.Models;
 using api.Models.BindingModels;
 using api.Models.DTO;
+using api.Utilities;
 
 namespace api.Controllers
 {
@@ -86,7 +87,7 @@ namespace api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EMPLOYEEExists(id))
+                if (!EmployeeExists(id))
                 {
                     return NotFound();
                 }
@@ -105,6 +106,15 @@ namespace api.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PostEMPLOYEE([FromBody] EmployeeCreationBindingModel employee)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //
+            string generatedSalt = Security.CreateSalt(32);
+            string hashedPassword = Security.GenerateSHA256Hash(employee.Password, generatedSalt);
+
             // Create EMPLOYEE object from the object we received.
             EMPLOYEE addEmployee = new EMPLOYEE()
             {
@@ -112,14 +122,10 @@ namespace api.Controllers
                 FIRST_NAME = employee.FirstName,
                 LAST_NAME = employee.LastName,
                 JOB_ROLE = employee.JobRole,
-                EMPLOYEE_PASSWORD = employee.Password
+                EMPLOYEE_HASHED_PASSWORD = employee.Password,
+                PASSWORD_SALT = generatedSalt
             };
 
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             db.EMPLOYEES.Add(addEmployee);
 
@@ -161,7 +167,7 @@ namespace api.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (string.IsNullOrEmpty(loginCredentials.employeeID) || string.IsNullOrEmpty(loginCredentials.password))
+            if (string.IsNullOrEmpty(loginCredentials.EmployeeId) || string.IsNullOrEmpty(loginCredentials.Password))
             {
                 HttpError errorNoInput = new HttpError("Please enter a valid Employee ID and Password.");
                 HttpResponseMessage responseNoInput = Request.CreateErrorResponse(HttpStatusCode.Forbidden, errorNoInput);
@@ -169,13 +175,15 @@ namespace api.Controllers
                 return ResponseMessage(responseNoInput);
             }
 
-            if (EMPLOYEEExists(loginCredentials.employeeID))
+            if (EmployeeExists(loginCredentials.EmployeeId))
             {
-                EMPLOYEE employeeDb = db.EMPLOYEES.SingleOrDefault(employee => employee.EMPLOYEE_ID == loginCredentials.employeeID);
+                EMPLOYEE employeeDb = db.EMPLOYEES.SingleOrDefault(employee => employee.EMPLOYEE_ID == loginCredentials.EmployeeId);
 
-                if (employeeDb != null && loginCredentials.employeeID == employeeDb.EMPLOYEE_ID)
+                if (employeeDb != null && loginCredentials.EmployeeId == employeeDb.EMPLOYEE_ID)
                 {
-                    if (loginCredentials.password == employeeDb.EMPLOYEE_PASSWORD)
+                    string attemptedPasswordHash = Security.GenerateSHA256Hash(loginCredentials.Password, employeeDb.PASSWORD_SALT);
+
+                    if (employeeDb.EMPLOYEE_HASHED_PASSWORD.Equals(attemptedPasswordHash))
                     {
                         EmployeeDTO employeeDetails = new EmployeeDTO()
                         {
@@ -235,7 +243,7 @@ namespace api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EMPLOYEEExists(string id)
+        private bool EmployeeExists(string id)
         {
             return db.EMPLOYEES.Count(e => e.EMPLOYEE_ID == id) > 0;
         }

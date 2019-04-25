@@ -26,7 +26,7 @@ namespace api.Models
         public string COACH_MODEL { get; set; }
         public string REGISTRATION_PLATE { get; set; }
         public decimal COACH_CAPACITY { get; set; }
-        public bool IS_ACTIVE { get; set; }
+        public bool IS_AVAILABLE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JOURNEY> JOURNEYS { get; set; }

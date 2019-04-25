@@ -18,7 +18,7 @@ namespace api.Models
         public Nullable<decimal> DEPARTURE_STATION { get; set; }
         public Nullable<decimal> ARRIVAL_STATION { get; set; }
     
-        public virtual STATION STATION { get; set; }
-        public virtual STATION STATION1 { get; set; }
+        public virtual STOP STOP { get; set; }
+        public virtual STOP STOP1 { get; set; }
     }
 }

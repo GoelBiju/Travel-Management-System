@@ -13,7 +13,7 @@
         
         - coach_capacity;
         
-        - is_active;
+        - is_available;
     
 */
 
@@ -36,9 +36,8 @@ CREATE TABLE coaches(
     coach_capacity NUMBER
         CONSTRAINT coaches_coach_capacity_nn NOT NULL,
     
-    -- TODO: Use of active? Possibly rename to be currently in use or being repaired?
-    is_active NUMBER(1)
-        CONSTRAINT coaches_is_active_nn NOT NULL
-        CONSTRAINT is_active_chk
-            CHECK (is_active IN (0, 1))
+    is_available NUMBER(1)
+        CONSTRAINT coaches_is_available_nn NOT NULL
+        CONSTRAINT is_available_chk
+            CHECK (is_available IN (0, 1))
 );

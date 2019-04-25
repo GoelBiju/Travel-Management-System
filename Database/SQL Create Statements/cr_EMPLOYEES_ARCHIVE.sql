@@ -15,7 +15,7 @@
 
 CREATE TABLE employees_archive(
 
-    employee_id VARCHAR2(15), 
+    employee_id VARCHAR2(15)
         CONSTRAINT employees_archive_employee_id_pk PRIMARY KEY,
     
     first_name VARCHAR2(35)

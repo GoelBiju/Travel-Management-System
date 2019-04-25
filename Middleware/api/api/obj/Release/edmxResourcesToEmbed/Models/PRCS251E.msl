@@ -14,7 +14,26 @@
           <ScalarProperty Name="PASSENGERS_ADULT" ColumnName="PASSENGERS_ADULT" />
           <ScalarProperty Name="PASSENGERS_TEENAGER" ColumnName="PASSENGERS_TEENAGER" />
           <ScalarProperty Name="PASSENGERS_INFANT" ColumnName="PASSENGERS_INFANT" />
-          <ScalarProperty Name="TICKET_PRICE" ColumnName="TICKET_PRICE" />
+          <ScalarProperty Name="AMOUNT_PAID" ColumnName="AMOUNT_PAID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BOOKINGS_HISTORY">
+      <EntityTypeMapping TypeName="Model.BOOKINGS_HISTORY">
+        <MappingFragment StoreEntitySet="BOOKINGS_HISTORY">
+          <ScalarProperty Name="BOOKING_REFERENCE" ColumnName="BOOKING_REFERENCE" />
+          <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+          <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
+          <ScalarProperty Name="DEPARTING_STOP" ColumnName="DEPARTING_STOP" />
+          <ScalarProperty Name="ARRIVAL_STOP" ColumnName="ARRIVAL_STOP" />
+          <ScalarProperty Name="BOOKED_DATETIME" ColumnName="BOOKED_DATETIME" />
+          <ScalarProperty Name="PASSENGERS_SENIOR" ColumnName="PASSENGERS_SENIOR" />
+          <ScalarProperty Name="PASSENGERS_ADULT" ColumnName="PASSENGERS_ADULT" />
+          <ScalarProperty Name="PASSENGERS_TEENAGER" ColumnName="PASSENGERS_TEENAGER" />
+          <ScalarProperty Name="PASSENGERS_INFANT" ColumnName="PASSENGERS_INFANT" />
+          <ScalarProperty Name="AMOUNT_PAID" ColumnName="AMOUNT_PAID" />
+          <ScalarProperty Name="AMOUNT_OF_PEOPLE" ColumnName="AMOUNT_OF_PEOPLE" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -27,7 +46,7 @@
           <ScalarProperty Name="COACH_MODEL" ColumnName="COACH_MODEL" />
           <ScalarProperty Name="REGISTRATION_PLATE" ColumnName="REGISTRATION_PLATE" />
           <ScalarProperty Name="COACH_CAPACITY" ColumnName="COACH_CAPACITY" />
-          <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+          <ScalarProperty Name="IS_AVAILABLE" ColumnName="IS_AVAILABLE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -47,7 +66,8 @@
         <MappingFragment StoreEntitySet="CUSTOMERS">
           <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
           <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
-          <ScalarProperty Name="CUSTOMER_PASSWORD" ColumnName="CUSTOMER_PASSWORD" />
+          <ScalarProperty Name="CUSTOMER_HASHED_PASSWORD" ColumnName="CUSTOMER_HASHED_PASSWORD" />
+          <ScalarProperty Name="PASSWORD_SALT" ColumnName="PASSWORD_SALT" />
           <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
           <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
           <ScalarProperty Name="DATE_OF_BIRTH" ColumnName="DATE_OF_BIRTH" />
@@ -62,7 +82,8 @@
       <EntityTypeMapping TypeName="Model.EMPLOYEE">
         <MappingFragment StoreEntitySet="EMPLOYEES">
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
-          <ScalarProperty Name="EMPLOYEE_PASSWORD" ColumnName="EMPLOYEE_PASSWORD" />
+          <ScalarProperty Name="EMPLOYEE_HASHED_PASSWORD" ColumnName="EMPLOYEE_HASHED_PASSWORD" />
+          <ScalarProperty Name="PASSWORD_SALT" ColumnName="PASSWORD_SALT" />
           <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
           <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
           <ScalarProperty Name="JOB_ROLE" ColumnName="JOB_ROLE" />
@@ -142,14 +163,6 @@
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
           <ScalarProperty Name="START_DATETIME" ColumnName="START_DATETIME" />
           <ScalarProperty Name="END_DATETIME" ColumnName="END_DATETIME" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="STATIONS">
-      <EntityTypeMapping TypeName="Model.STATION">
-        <MappingFragment StoreEntitySet="STATIONS">
-          <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
-          <ScalarProperty Name="STATION_NAME" ColumnName="STATION_NAME" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

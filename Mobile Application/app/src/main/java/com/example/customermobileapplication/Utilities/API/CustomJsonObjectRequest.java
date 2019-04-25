@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyCustomRequest extends Request {
+public class CustomJsonObjectRequest extends Request {
 
     private Response.Listener listener;
 
@@ -25,7 +25,7 @@ public class MyCustomRequest extends Request {
 
     private Class responseClass;
 
-    public MyCustomRequest(int method, String url, Object requestBodyObject, Class responseClass,
+    public CustomJsonObjectRequest(int method, String url, Object requestBodyObject, Class responseClass,
                            Map<String, String> headers, Response.Listener listener,
                            Response.ErrorListener errorListener) {
         super(method, url, errorListener);

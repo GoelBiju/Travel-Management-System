@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void processLogin() {
 
-        // Emsure that the email address and the password are not empty..
+        // Ensure that the email address and the password are not empty..
         if (!editTextEmailAddress.getText().toString().equals("") &&
                 !editTextPassword.getText().toString().equals("")) {
 

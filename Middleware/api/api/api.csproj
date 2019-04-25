@@ -320,7 +320,6 @@
     <Compile Include="Models\DTO\RouteDTO.cs" />
     <Compile Include="Models\DTO\ShiftDTO.cs" />
     <Compile Include="Models\BindingModels\CustomerRegistrationBindingModel.cs" />
-    <Compile Include="Models\DTO\StationDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\EmployeeService.cs" />

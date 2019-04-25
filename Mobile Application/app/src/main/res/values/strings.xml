@@ -69,4 +69,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Resources for CreateAccountActivity -->
+
+    <!-- Home Fragment -->
+    <string name="departure_spinner_prompt">Choose Departure Stop</string>
+    <string name="arrival_spinner_prompt">Choose Arrival Stop</string>
 </resources>

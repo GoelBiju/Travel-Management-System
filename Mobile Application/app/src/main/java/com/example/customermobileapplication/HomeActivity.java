@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void BindView(){
-        this.viewAccountButton = findViewById(R.id.buttonViewAccount);
+        //this.viewAccountButton = findViewById(R.id.buttonViewAccount);
         this.editTextDate = findViewById(R.id.editTextDate);
         this.editTextTime = findViewById(R.id.editTextTime);
     }

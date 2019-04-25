@@ -14,8 +14,26 @@
     <Property Name="PASSENGERS_ADULT" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_TEENAGER" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_INFANT" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="TICKET_PRICE" Type="number" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="AMOUNT_PAID" Type="number" Precision="6" Scale="2" Nullable="false" />
     <Property Name="STATUS" Type="varchar2" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BOOKINGS_HISTORY">
+    <Key>
+      <PropertyRef Name="BOOKING_REFERENCE" />
+    </Key>
+    <Property Name="BOOKING_REFERENCE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CUSTOMER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="JOURNEY_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DEPARTING_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ARRIVAL_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="BOOKED_DATETIME" Type="date" Nullable="false" />
+    <Property Name="PASSENGERS_SENIOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PASSENGERS_ADULT" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PASSENGERS_TEENAGER" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PASSENGERS_INFANT" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="AMOUNT_PAID" Type="number" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="AMOUNT_OF_PEOPLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="STATUS" Type="number" Precision="1" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="COACHES">
     <Key>
@@ -26,7 +44,7 @@
     <Property Name="COACH_MODEL" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="REGISTRATION_PLATE" Type="varchar2" MaxLength="8" Nullable="false" />
     <Property Name="COACH_CAPACITY" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IS_ACTIVE" Type="number" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="IS_AVAILABLE" Type="number" Precision="1" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="COACHES_ARCHIVE">
     <Key>
@@ -44,7 +62,8 @@
     </Key>
     <Property Name="CUSTOMER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="EMAIL_ADDRESS" Type="varchar2" MaxLength="62" Nullable="false" />
-    <Property Name="CUSTOMER_PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
+    <Property Name="CUSTOMER_HASHED_PASSWORD" Type="varchar2" MaxLength="100" Nullable="false" />
+    <Property Name="PASSWORD_SALT" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="FIRST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="LAST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="DATE_OF_BIRTH" Type="date" Nullable="false" />
@@ -58,7 +77,8 @@
       <PropertyRef Name="EMPLOYEE_ID" />
     </Key>
     <Property Name="EMPLOYEE_ID" Type="varchar2" MaxLength="15" Nullable="false" />
-    <Property Name="EMPLOYEE_PASSWORD" Type="varchar2" MaxLength="16" Nullable="false" />
+    <Property Name="EMPLOYEE_HASHED_PASSWORD" Type="varchar2" MaxLength="100" Nullable="false" />
+    <Property Name="PASSWORD_SALT" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="FIRST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="LAST_NAME" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="JOB_ROLE" Type="varchar2" MaxLength="15" Nullable="false" />
@@ -133,13 +153,6 @@
     <Property Name="START_DATETIME" Type="date" Nullable="false" />
     <Property Name="END_DATETIME" Type="date" Nullable="false" />
   </EntityType>
-  <EntityType Name="STATIONS">
-    <Key>
-      <PropertyRef Name="STATION_ID" />
-    </Key>
-    <Property Name="STATION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="STATION_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
-  </EntityType>
   <EntityType Name="STOPS">
     <Key>
       <PropertyRef Name="STOP_ID" />
@@ -184,6 +197,18 @@
       </Principal>
       <Dependent Role="BOOKINGS">
         <PropertyRef Name="DEPARTING_STOP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BOOKINGS_HISTORY_CUSTOMER_ID_FK">
+    <End Role="CUSTOMERS" Type="Self.CUSTOMERS" Multiplicity="1" />
+    <End Role="BOOKINGS_HISTORY" Type="Self.BOOKINGS_HISTORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMERS">
+        <PropertyRef Name="CUSTOMER_ID" />
+      </Principal>
+      <Dependent Role="BOOKINGS_HISTORY">
+        <PropertyRef Name="CUSTOMER_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -296,11 +321,11 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ROUTES_ARCHIVE_ARRIVAL_STATION_FK">
-    <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="0..1" />
+    <End Role="STOPS" Type="Self.STOPS" Multiplicity="0..1" />
     <End Role="ROUTES_ARCHIVE" Type="Self.ROUTES_ARCHIVE" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="STATIONS">
-        <PropertyRef Name="STATION_ID" />
+      <Principal Role="STOPS">
+        <PropertyRef Name="STOP_ID" />
       </Principal>
       <Dependent Role="ROUTES_ARCHIVE">
         <PropertyRef Name="ARRIVAL_STATION" />
@@ -308,11 +333,11 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ROUTES_ARCHIVE_DEPARTURE_STATION_FK">
-    <End Role="STATIONS" Type="Self.STATIONS" Multiplicity="0..1" />
+    <End Role="STOPS" Type="Self.STOPS" Multiplicity="0..1" />
     <End Role="ROUTES_ARCHIVE" Type="Self.ROUTES_ARCHIVE" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="STATIONS">
-        <PropertyRef Name="STATION_ID" />
+      <Principal Role="STOPS">
+        <PropertyRef Name="STOP_ID" />
       </Principal>
       <Dependent Role="ROUTES_ARCHIVE">
         <PropertyRef Name="DEPARTURE_STATION" />
@@ -357,6 +382,7 @@
   </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="BOOKINGS" EntityType="Self.BOOKINGS" Schema="PRCS251E" store:Type="Tables" />
+    <EntitySet Name="BOOKINGS_HISTORY" EntityType="Self.BOOKINGS_HISTORY" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="COACHES" EntityType="Self.COACHES" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="COACHES_ARCHIVE" EntityType="Self.COACHES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="PRCS251E" store:Type="Tables" />
@@ -368,7 +394,6 @@
     <EntitySet Name="ROUTES" EntityType="Self.ROUTES" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="ROUTES_ARCHIVE" EntityType="Self.ROUTES_ARCHIVE" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="SHIFTS" EntityType="Self.SHIFTS" Schema="PRCS251E" store:Type="Tables" />
-    <EntitySet Name="STATIONS" EntityType="Self.STATIONS" Schema="PRCS251E" store:Type="Tables" />
     <EntitySet Name="STOPS" EntityType="Self.STOPS" Schema="PRCS251E" store:Type="Tables" />
     <AssociationSet Name="BOOKINGS_ARRIVAL_STOP" Association="Self.BOOKINGS_ARRIVAL_STOP">
       <End Role="STOPS" EntitySet="STOPS" />
@@ -381,6 +406,10 @@
     <AssociationSet Name="BOOKINGS_DEPARTING_STOP" Association="Self.BOOKINGS_DEPARTING_STOP">
       <End Role="STOPS" EntitySet="STOPS" />
       <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+    </AssociationSet>
+    <AssociationSet Name="BOOKINGS_HISTORY_CUSTOMER_ID_FK" Association="Self.BOOKINGS_HISTORY_CUSTOMER_ID_FK">
+      <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+      <End Role="BOOKINGS_HISTORY" EntitySet="BOOKINGS_HISTORY" />
     </AssociationSet>
     <AssociationSet Name="BOOKINGS_JOURNEYS_ID_FK" Association="Self.BOOKINGS_JOURNEYS_ID_FK">
       <End Role="JOURNEYS" EntitySet="JOURNEYS" />
@@ -419,11 +448,11 @@
       <End Role="ROUTE_STOPS" EntitySet="ROUTE_STOPS" />
     </AssociationSet>
     <AssociationSet Name="ROUTES_ARCHIVE_ARRIVAL_STATION_FK" Association="Self.ROUTES_ARCHIVE_ARRIVAL_STATION_FK">
-      <End Role="STATIONS" EntitySet="STATIONS" />
+      <End Role="STOPS" EntitySet="STOPS" />
       <End Role="ROUTES_ARCHIVE" EntitySet="ROUTES_ARCHIVE" />
     </AssociationSet>
     <AssociationSet Name="ROUTES_ARCHIVE_DEPARTURE_STATION_FK" Association="Self.ROUTES_ARCHIVE_DEPARTURE_STATION_FK">
-      <End Role="STATIONS" EntitySet="STATIONS" />
+      <End Role="STOPS" EntitySet="STOPS" />
       <End Role="ROUTES_ARCHIVE" EntitySet="ROUTES_ARCHIVE" />
     </AssociationSet>
     <AssociationSet Name="ROUTES_ARRIVAL_STATION_FK" Association="Self.ROUTES_ARRIVAL_STATION_FK">

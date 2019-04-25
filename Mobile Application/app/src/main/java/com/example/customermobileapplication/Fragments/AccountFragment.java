@@ -110,7 +110,7 @@ public class AccountFragment extends Fragment {
 
         if (customerId > 0) {
 
-            apiConnection.getCustomJsonObject("customers/" + customerId, Customer.class,
+            apiConnection.getCustomJsonObject("customers/" + customerId, Customer.class ,
                     new CustomCallback() {
                         @Override
                         public void onSuccess(Object responseObject) {

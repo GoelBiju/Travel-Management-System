@@ -50,8 +50,19 @@ public class NavigationActivity extends AppCompatActivity
 
         // Perform an apiTest to ensure that the current access token is valid.
         // TODO: If not the user should be re-directed to the login page on all requests.
-        apiTest(customerId);
+        if (customerId > 0) {
+            Log.d("Response", "Customer Id present.");
+            apiTest(customerId);
+            setupAppNavigation();
+        } else {
+            Log.d("Response", "Customer Id not present, re-directing to start screen.");
+            Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(startIntent);
+            finish();
+        }
+    }
 
+    private void setupAppNavigation() {
         // Automatically start on the home fragment.
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.screen_area, new HomeFragment());
@@ -85,13 +96,14 @@ public class NavigationActivity extends AppCompatActivity
             public void onFailure(APIResponse errorResponse) {
                 Log.d("Response", "Request was unsuccessful.");
 
+                Log.d("Response", String.valueOf(errorResponse.getResponseStatusCode()));
                 if (errorResponse.getResponseStatusCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
                     // Re-direct to the login activity.
+                    Toast.makeText(getApplicationContext(),  "Please login again to access your services.", Toast.LENGTH_LONG).show();
+                    Log.d("Response", "Finishing and re-directing to login.");
+
                     Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(startIntent);
-
-                    if (customerId > 0)
-                        Toast.makeText(getApplicationContext(),  "Please login again to access your services.", Toast.LENGTH_LONG).show();
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(),  "Status Code: " + Integer.toString(errorResponse.getResponseStatusCode())

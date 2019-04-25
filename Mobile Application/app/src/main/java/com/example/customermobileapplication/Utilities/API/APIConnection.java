@@ -63,7 +63,7 @@ public class APIConnection {
 
     public void loadPreferences() {
         // Find stored access tokens and use them.
-        if (pref.contains("accessToken")) {
+        if (this.pref.contains("accessToken")) {
             setAccessToken(this.pref.getString("accessToken", ""));
         }
     }
@@ -73,7 +73,6 @@ public class APIConnection {
 
         // Save access token in preferences.
         SharedPreferences.Editor editor = this.pref.edit();
-        editor.clear();
         editor.putString("accessToken", accessToken);
         editor.apply();
     }
@@ -220,7 +219,12 @@ public class APIConnection {
                         //
                         callback.onFailure(getResponse);
                     }
-                });
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return headers != null ? headers : super.getHeaders();
+            }
+        };
 
         // Set timeout and retry policy.
         getRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
@@ -289,7 +293,12 @@ public class APIConnection {
                 //
                 callback.onFailure(getResponse);
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return headers != null ? headers : super.getHeaders();
+            }
+        };
 
         // Set timeout and retry policy.
         getRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
@@ -362,7 +371,12 @@ public class APIConnection {
                 // Callback to onFailure.
                 callback.onFailure(postResponse);
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return headers != null ? headers : super.getHeaders();
+            }
+        };
 
         // Set timeout and retry policy.
         postRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
@@ -384,7 +398,7 @@ public class APIConnection {
         //
         final APIResponse errorResponse = new APIResponse();
 
-        MyCustomRequest getCustomRequest = new MyCustomRequest(Request.Method.GET,
+        CustomJsonObjectRequest getCustomRequest = new CustomJsonObjectRequest(Request.Method.GET,
                 this.API_BASE_URL + resourceName, null, responseClass,
                 this.headers,
                 new Response.Listener<Object>() {
@@ -421,7 +435,13 @@ public class APIConnection {
                         //
                         callback.onFailure(errorResponse);
                     }
-                });
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return headers != null ? headers : super.getHeaders();
+            }
+        };
 
         //
         getCustomRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 1,
@@ -430,6 +450,9 @@ public class APIConnection {
         //
         queueSingleton.addToRequestQueue(getCustomRequest);
     }
+
+
+
 
 
     /**
@@ -445,7 +468,7 @@ public class APIConnection {
         //
         final APIResponse errorResponse = new APIResponse();
 
-        MyCustomRequest postCustomRequest = new MyCustomRequest(Request.Method.POST,
+        CustomJsonObjectRequest postCustomRequest = new CustomJsonObjectRequest(Request.Method.POST,
                 this.API_BASE_URL + resourceName, requestPostObject, responseClass,
                 this.headers,
                 new Response.Listener<Object>() {

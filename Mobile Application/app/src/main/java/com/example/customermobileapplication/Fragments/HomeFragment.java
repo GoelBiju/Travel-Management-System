@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.customermobileapplication.Adapter.StopSpinAdapter;
 import com.example.customermobileapplication.ConfirmBookingActivity;
+import com.example.customermobileapplication.JourneySearchActivity;
 import com.example.customermobileapplication.Model.Stop;
 import com.example.customermobileapplication.R;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
@@ -47,6 +50,8 @@ public class HomeFragment extends Fragment {
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
 
+    private Button findJourneysButton;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,6 +76,9 @@ public class HomeFragment extends Fragment {
         editTextTime = view.findViewById(R.id.editTextTime);
 
         //
+        findJourneysButton = view.findViewById(R.id.buttonFindJourneys);
+
+        //
         editTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +97,15 @@ public class HomeFragment extends Fragment {
         prepareTimePickerDialog();
 
         //
+        findJourneysButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startIntent = new Intent(getActivity(), JourneySearchActivity.class);
+                startActivity(startIntent);
+            }
+        });
+
+        //
         view.findViewById(R.id.buttonViewBookings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +116,14 @@ public class HomeFragment extends Fragment {
 
 
         // Load stops into the departure and arrival spinners.
+        loadSpinnerOptions();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Update the home fragment with latest information.
         loadSpinnerOptions();
     }
 
@@ -138,19 +163,32 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSuccess(APIResponse response) {
 
+                Log.d("Response", "Stops received successfully.");
+
                 // Convert JSONArray response to stops[].
                 ArrayList<Stop> stops = new ArrayList<>();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 
+//                Stop newStop = new Stop();
+//                newStop.setStopName("Test");
+//                stops.add(newStop);
+
                 for (JSONObject jsonObject : response.getResponse()) {
                     // Convert each JSONObject to stop object.
                     Stop stop = gson.fromJson(jsonObject.toString(), Stop.class);
+                    Log.d("Response", "Added stop: " + stop.stopName);
                     stops.add(stop);
                 }
 
                 //
                 departureAdapter = new StopSpinAdapter(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, stops);
                 arrivalAdapter = new StopSpinAdapter(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, stops);
+
+                // Set the adapters.
+                spinnerDepartureStop.setAdapter(departureAdapter);
+                spinnerArrivalStop.setAdapter(arrivalAdapter);
+
+                Log.d("Response", "Set adapter.");
             }
 
             @Override

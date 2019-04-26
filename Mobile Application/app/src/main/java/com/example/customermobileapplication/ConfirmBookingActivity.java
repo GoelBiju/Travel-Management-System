@@ -47,6 +47,8 @@ public class ConfirmBookingActivity extends AppCompatActivity {
         buttonPayNow = (Button)findViewById(R.id.buttonPayNow);
         editTextAmount = (EditText)findViewById(R.id.editAmount);
 
+
+        // Handle booking event.
         buttonPayNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +65,6 @@ public class ConfirmBookingActivity extends AppCompatActivity {
     }
 
     private void processPayment() {
-
         amount = editTextAmount.getText().toString();
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), "GBP",
                 "Payment for your booking.", PayPalPayment.PAYMENT_INTENT_SALE);

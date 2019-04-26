@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PaymentDetailsActivity"></activity>
+        <activity android:name=".JourneySearchActivity"></activity>
+        <activity android:name=".PaymentDetailsActivity" />
         <activity android:name=".ConfirmBookingActivity" />
         <activity
             android:name=".NavigationActivity"

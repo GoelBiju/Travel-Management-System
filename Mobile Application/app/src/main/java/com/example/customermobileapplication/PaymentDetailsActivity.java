@@ -12,6 +12,7 @@ import org.w3c.dom.Text;
 
 public class PaymentDetailsActivity extends AppCompatActivity {
 
+    // Transaction information.
     TextView textId, textAmount, textStatus;
 
     @Override

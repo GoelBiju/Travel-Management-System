@@ -1,5 +1,6 @@
 package com.example.customermobileapplication.Utilities.API;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,6 +15,11 @@ public class Helpers {
     public static String API_DATETIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
     public static String GENERIC_DATETIME_PATTERN = "dd/MM/yyyy - hh:mm";
     public static String DATE_ONLY_PATTERN = "dd/MM/yyyy";
+
+    public static String formatDateTime(Date inputDate) {
+        DateFormat dateFormat = new SimpleDateFormat(GENERIC_DATETIME_PATTERN, Locale.UK);
+        return dateFormat.format(inputDate);
+    }
 
     public static String formatAPIDateTime(String dateTime) {
         return formatDateTime(dateTime, API_DATETIME_PATTERN, GENERIC_DATETIME_PATTERN);

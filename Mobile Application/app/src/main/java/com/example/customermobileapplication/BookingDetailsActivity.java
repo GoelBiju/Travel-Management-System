@@ -10,7 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
-public class PaymentDetailsActivity extends AppCompatActivity {
+public class BookingDetailsActivity extends AppCompatActivity {
 
     // Transaction information.
     TextView textId, textAmount, textStatus;
@@ -41,11 +41,10 @@ public class PaymentDetailsActivity extends AppCompatActivity {
             textId.setText(response.getString("id"));
             textStatus.setText(response.getString("state"));
             textAmount.setText("£" + paymentAmount);
-            
+
             Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

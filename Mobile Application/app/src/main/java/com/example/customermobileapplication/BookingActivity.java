@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.example.customermobileapplication.Utilities.API.Config;
@@ -21,7 +22,13 @@ import org.json.JSONException;
 
 import java.math.BigDecimal;
 
-public class ConfirmBookingActivity extends AppCompatActivity {
+public class BookingActivity extends AppCompatActivity {
+
+    // TODO: NumberPicker.
+    private NumberPicker seniorsPicker;
+    private NumberPicker adultsPicker;
+    private NumberPicker teenagersPicker;
+    private NumberPicker infantsPicker;
 
     public static final int PAYPAL_REQUEST_CODE = 7171;
 
@@ -30,6 +37,7 @@ public class ConfirmBookingActivity extends AppCompatActivity {
             .clientId(Config.PAYPAL_CLIENT_ID);
 
     Button buttonPayNow;
+
     EditText editTextAmount;
 
     String amount = "";
@@ -81,9 +89,10 @@ public class ConfirmBookingActivity extends AppCompatActivity {
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if (confirmation != null) {
                     try {
+                        // TODO: Create booking record by POST to the API with booking object and details.
                         String paymentDetails = confirmation.toJSONObject().toString(4);
 
-                        startActivity(new Intent(this, PaymentDetailsActivity.class)
+                        startActivity(new Intent(this, BookingDetailsActivity.class)
                                 .putExtra("PaymentDetails", paymentDetails)
                                 .putExtra("PaymentAmount", amount)
                         );

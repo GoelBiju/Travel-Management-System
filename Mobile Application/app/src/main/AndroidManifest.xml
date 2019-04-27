@@ -13,8 +13,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".JourneySearchActivity"></activity>
-        <activity android:name=".PaymentDetailsActivity" />
-        <activity android:name=".ConfirmBookingActivity" />
+        <activity android:name=".BookingDetailsActivity" />
+        <activity android:name=".BookingActivity" />
         <activity
             android:name=".NavigationActivity"
             android:label="@string/title_activity_navigation"

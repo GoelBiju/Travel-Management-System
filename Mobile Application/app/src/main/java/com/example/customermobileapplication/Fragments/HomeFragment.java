@@ -19,7 +19,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.customermobileapplication.Adapter.StopSpinAdapter;
-import com.example.customermobileapplication.ConfirmBookingActivity;
+import com.example.customermobileapplication.BookingActivity;
 import com.example.customermobileapplication.JourneySearchActivity;
 import com.example.customermobileapplication.Model.Stop;
 import com.example.customermobileapplication.R;
@@ -28,14 +28,11 @@ import com.example.customermobileapplication.Utilities.API.APIResponse;
 import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -109,7 +106,7 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.buttonViewBookings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startIntent = new Intent(getActivity(), ConfirmBookingActivity.class);
+                Intent startIntent = new Intent(getActivity(), BookingActivity.class);
                 startActivity(startIntent);
             }
         });

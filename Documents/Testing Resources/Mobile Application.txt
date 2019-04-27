@@ -1,5 +1,6 @@
 Customer login:
 ---------------
+goel@test.com - testpassword123
 
 
 PayPal login for mobile testing:

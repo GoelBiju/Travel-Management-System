@@ -11,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.customermobileapplication.Model.Journey;
 import com.example.customermobileapplication.Model.JourneyListItem;
 import com.example.customermobileapplication.R;
+import com.example.customermobileapplication.Utilities.API.Helpers;
 
 import org.w3c.dom.Text;
 
@@ -20,16 +22,15 @@ import java.util.List;
 
 public class JourneySearchAdapter extends RecyclerView.Adapter<JourneySearchAdapter.ViewHolder> {
 
-    private List<JourneyListItem> listItems;
+    private List<Journey> listItems;
     private Context context;
 
-    public JourneySearchAdapter(List<JourneyListItem> listItems, Context context) {
+    public JourneySearchAdapter(List<Journey> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
 
-
-
+    
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -41,19 +42,20 @@ public class JourneySearchAdapter extends RecyclerView.Adapter<JourneySearchAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        final JourneyListItem listItem = listItems.get(i);
+        final Journey listItem = listItems.get(i);
 
         // Set journey information.
-        viewHolder.textViewJourneyTitle.setText(listItem.getJourneyTitle());
-        viewHolder.textViewJourneyDepartureTime.setText(listItem.getJourneyDeparture());
-        viewHolder.textViewJourneyArrivalTime.setText(listItem.getJourneyArrival());
+        viewHolder.textViewJourneyTitle.setText(listItem.getJourneyId() + ": " +
+                listItem.getRoute().getDepartureStation() + " to " + listItem.getRoute().getArrivalStation());
+        viewHolder.textViewJourneyDepartureTime.setText(Helpers.formatAPIDateTime(listItem.getDepartureDateTime().toString()));
+        viewHolder.textViewJourneyArrivalTime.setText(Helpers.formatAPIDateTime(listItem.getArrivalDateTime().toString()));
         viewHolder.textViewCoachStatus.setText(listItem.getCoachStatus());
 
         // Open the bookings activity.
         viewHolder.linearLayoutJourneyItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "You clicked " + listItem.getJourneyTitle(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "You clicked " + listItem.getJourneyId(), Toast.LENGTH_LONG).show();
             }
         });
     }

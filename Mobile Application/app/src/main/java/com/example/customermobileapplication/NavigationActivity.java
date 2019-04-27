@@ -53,7 +53,6 @@ public class NavigationActivity extends AppCompatActivity
         if (customerId > 0) {
             Log.d("Response", "Customer Id present.");
             apiTest(customerId);
-            setupAppNavigation();
         } else {
             Log.d("Response", "Customer Id not present, re-directing to start screen.");
             Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -89,6 +88,9 @@ public class NavigationActivity extends AppCompatActivity
                 Log.d("Response", "API test successful.");
 
                 Customer customer = (Customer) responseObject;
+
+                // Setup the app after success.
+                setupAppNavigation();
                 Toast.makeText(getApplicationContext(),  "Logged in successfully as: " + customer.getEmailAddress(), Toast.LENGTH_LONG).show();
             }
 

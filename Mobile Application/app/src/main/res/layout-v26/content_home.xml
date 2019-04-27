@@ -8,24 +8,6 @@
     tools:context=".HomeActivity"
     tools:showIn="@layout/activity_home">
 
-    <Button
-        android:id="@+id/buttonViewJourneys"
-        android:layout_width="314dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="624dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/services"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <!--<EditText-->
         <!--android:id="@+id/editTextEndStop"-->
         <!--android:layout_width="213dp"-->
@@ -62,8 +44,8 @@
 
     <EditText
         android:id="@+id/editTextTime"
-        android:layout_width="222dp"
-        android:layout_height="46dp"
+        android:layout_width="309dp"
+        android:layout_height="63dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="292dp"
@@ -94,15 +76,15 @@
         android:text="@string/history"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.117" />
 
     <EditText
         android:id="@+id/editTextDate"
-        android:layout_width="226dp"
-        android:layout_height="51dp"
+        android:layout_width="305dp"
+        android:layout_height="63dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="188dp"
@@ -115,15 +97,14 @@
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
+        app:layout_constraintVertical_bias="0.021" />
 
     <Button
         android:id="@+id/buttonFindJourneys"
-        android:layout_width="177dp"
-        android:layout_height="51dp"
+        android:layout_width="181dp"
+        android:layout_height="59dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="360dp"
@@ -157,16 +138,16 @@
 
     <Spinner
         android:id="@+id/spinnerDepartureStop"
-        android:spinnerMode="dialog"
-        android:prompt="@string/departure_spinner_prompt"
-        android:layout_width="226dp"
-        android:layout_height="63dp"
+        android:layout_width="311dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:prompt="@string/departure_spinner_prompt"
+        android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -175,16 +156,16 @@
 
     <Spinner
         android:id="@+id/spinnerArrivalStop"
-        android:spinnerMode="dialog"
-        android:prompt="@string/arrival_spinner_prompt"
-        android:layout_width="224dp"
-        android:layout_height="56dp"
+        android:layout_width="311dp"
+        android:layout_height="62dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:prompt="@string/arrival_spinner_prompt"
+        android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

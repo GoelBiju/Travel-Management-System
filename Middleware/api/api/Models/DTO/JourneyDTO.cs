@@ -37,5 +37,8 @@ namespace api.Models.DTO
 
         [JsonProperty("coachStatus")]
         public string CoachStatus { get; set; }
+
+        [JsonProperty("route")]
+        public RouteDTO Route { get; set; }
     }
 }

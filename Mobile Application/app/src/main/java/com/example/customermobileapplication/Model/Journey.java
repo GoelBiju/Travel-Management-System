@@ -32,4 +32,87 @@ public class Journey {
 
     @SerializedName("coachStatus")
     public String coachStatus;
+
+    @SerializedName("route")
+    public Route route;
+
+    public int getJourneyId() {
+        return journeyId;
+    }
+
+    public void setJourneyId(int journeyId) {
+        this.journeyId = journeyId;
+    }
+
+    public int getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(int routeId) {
+        this.routeId = routeId;
+    }
+
+    public int getCoachId() {
+        return coachId;
+    }
+
+    public void setCoachId(int coachId) {
+        this.coachId = coachId;
+    }
+
+    public Date getDepartureDateTime() {
+        return departureDateTime;
+    }
+
+    public void setDepartureDateTime(Date departureDateTime) {
+        this.departureDateTime = departureDateTime;
+    }
+
+    public Date getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
+    public void setArrivalDateTime(Date arrivalDateTime) {
+        this.arrivalDateTime = arrivalDateTime;
+    }
+
+    public Integer getCurrentStop() {
+        return currentStop;
+    }
+
+    public void setCurrentStop(Integer currentStop) {
+        this.currentStop = currentStop;
+    }
+
+    public Date getStopArrivalDateTime() {
+        return stopArrivalDateTime;
+    }
+
+    public void setStopArrivalDateTime(Date stopArrivalDateTime) {
+        this.stopArrivalDateTime = stopArrivalDateTime;
+    }
+
+    public Date getStopDepartedDateTime() {
+        return stopDepartedDateTime;
+    }
+
+    public void setStopDepartedDateTime(Date stopDepartedDateTime) {
+        this.stopDepartedDateTime = stopDepartedDateTime;
+    }
+
+    public String getCoachStatus() {
+        return coachStatus;
+    }
+
+    public void setCoachStatus(String coachStatus) {
+        this.coachStatus = coachStatus;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 }

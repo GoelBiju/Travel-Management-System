@@ -32,6 +32,7 @@ namespace api.Controllers
                            {
                                JourneyId = (int)j.JOURNEY_ID,
                                RouteId = (int)j.ROUTE_ID,
+                               // Customers do not need to see shiftId; needs separate controllers?
                                ShiftId = (int)j.SHIFT_ID,
                                CoachId = (int)j.COACH_ID,
                                DepartureDateTime = j.DEPARTURE_DATETIME,
@@ -39,7 +40,15 @@ namespace api.Controllers
                                CurrentStop = (int)j.CURRENT_STOP,
                                StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
                                StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
-                               CoachStatus = j.COACH_STATUS
+                               CoachStatus = j.COACH_STATUS,
+                               Route = new RouteDTO()
+                               {
+                                   RouteId = (int)j.ROUTE.ROUTE_ID,
+                                   DepartureStationId = (int)j.ROUTE.STOP.STOP_ID,
+                                   DepartureStation = j.ROUTE.STOP.STOP_NAME,
+                                   ArrivalStationId = (int)j.ROUTE.STOP1.STOP_ID,
+                                   ArrivalStation = j.ROUTE.STOP1.STOP_NAME
+                               }
                            };
 
             return journeys;

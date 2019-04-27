@@ -29,6 +29,9 @@ namespace api.Models.DTO
         [JsonProperty("passengersSenior")]
         public int PassengersSenior { get; set; }
 
+        [JsonProperty("passengersAdult")]
+        public int PassengersAdult { get; set; }
+
         [JsonProperty("passengersTeenager")]
         public int PassengersTeenager { get; set; }
 
@@ -36,9 +39,9 @@ namespace api.Models.DTO
         public int PassengersInfant { get; set; }
 
         [JsonProperty("amountPaid")]
-        public int AmountPaid { get; set; }
+        public decimal AmountPaid { get; set; }
 
         [JsonProperty("status")]
-        public int Status { get; set; }
+        public string Status { get; set; }
     }
 }

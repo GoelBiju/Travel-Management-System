@@ -12,7 +12,7 @@ import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 
 import org.json.JSONException;
 
-public class ViewAccountDetails extends AppCompatActivity {
+public class ViewAccountDetailsActivity extends AppCompatActivity {
 
     APIConnection apiConnection;
 

@@ -24,11 +24,20 @@ import java.math.BigDecimal;
 
 public class BookingActivity extends AppCompatActivity {
 
+    //
+
+
+    EditText editTextAmount;
+
+    String amount = "";
+
     // TODO: NumberPicker.
     private NumberPicker seniorsPicker;
     private NumberPicker adultsPicker;
-    private NumberPicker teenagersPicker;
+    private NumberPicker childrenPicker;
     private NumberPicker infantsPicker;
+
+    Button buttonPayNow;
 
     public static final int PAYPAL_REQUEST_CODE = 7171;
 
@@ -36,11 +45,6 @@ public class BookingActivity extends AppCompatActivity {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
 
-    Button buttonPayNow;
-
-    EditText editTextAmount;
-
-    String amount = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +56,30 @@ public class BookingActivity extends AppCompatActivity {
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         startService(intent);
 
-        buttonPayNow = (Button)findViewById(R.id.buttonPayNow);
-        editTextAmount = (EditText)findViewById(R.id.editAmount);
+        //
+        adultsPicker = findViewById(R.id.numberPickerAdults);
+        seniorsPicker = findViewById(R.id.numberPickerSeniors);
+        childrenPicker = findViewById(R.id.numberPickerChildren);
+        infantsPicker = findViewById(R.id.numberPickerInfants);
 
+        //
+        adultsPicker.setMinValue(0);
+        seniorsPicker.setMinValue(0);
+        childrenPicker.setMinValue(0);
+        infantsPicker.setMinValue(0);
+
+        adultsPicker.setMaxValue(20);
+        seniorsPicker.setMaxValue(10);
+        childrenPicker.setMaxValue(10);
+        infantsPicker.setMaxValue(5);
+
+        adultsPicker.setWrapSelectorWheel(false);
+        seniorsPicker.setWrapSelectorWheel(false);
+        childrenPicker.setWrapSelectorWheel(false);
+        infantsPicker.setWrapSelectorWheel(false);
+        //
+        buttonPayNow = (Button)findViewById(R.id.buttonPayNow);
+        //editTextAmount = (EditText)findViewById(R.id.editAmount);
 
         // Handle booking event.
         buttonPayNow.setOnClickListener(new View.OnClickListener() {

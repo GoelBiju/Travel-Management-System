@@ -15,13 +15,13 @@ namespace api.Models.DTO
         public int CustomerId { get; set; }
 
         [JsonProperty("journeyId")]
-        public int JourneyId { get; set; }
+        public JourneyDTO Journey { get; set; }
 
         [JsonProperty("departingStop")]
-        public int DepartingStop { get; set; }
+        public StopDTO DepartingStop { get; set; }
 
         [JsonProperty("arrivalStop")]
-        public int ArrivalStop { get; set; }
+        public StopDTO ArrivalStop { get; set; }
 
         [JsonProperty("bookedDateTime")]
         public DateTime BookedDateTime { get; set; }

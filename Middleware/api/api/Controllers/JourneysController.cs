@@ -22,6 +22,7 @@ namespace api.Controllers
         private Entities db = new Entities();
 
         // GET: api/Journeys
+        [AllowAnonymous]
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(JourneyDTO))]
@@ -37,7 +38,8 @@ namespace api.Controllers
                                CoachId = (int)j.COACH_ID,
                                DepartureDateTime = j.DEPARTURE_DATETIME,
                                ArrivalDateTime = j.ARRIVAL_DATETIME,
-                               CurrentStop = (int)j.CURRENT_STOP,
+                               // TODO: CurrentStopId can be null.
+                               CurrentStopId = (int)j.CURRENT_STOP,
                                StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
                                StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
                                CoachStatus = j.COACH_STATUS,
@@ -48,42 +50,86 @@ namespace api.Controllers
                                    DepartureStation = j.ROUTE.STOP.STOP_NAME,
                                    ArrivalStationId = (int)j.ROUTE.STOP1.STOP_ID,
                                    ArrivalStation = j.ROUTE.STOP1.STOP_NAME
-                               }
+                               },
+                               CurrentStop = (j.CURRENT_STOP != null) ? db.STOPS.Select(s =>
+                               new StopDTO()
+                               {
+                                   StopId = (int)s.STOP_ID,
+                                   StopName = s.STOP_NAME,
+                                   IsStation = s.IS_STATION,
+                                   StopPostcode = s.STOP_POSTCODE,
+                                   StopLatitude = s.STOP_LATITUDE,
+                                   StopLongitude = s.STOP_LONGITUDE
+                               }).FirstOrDefault(s => s.StopId == j.CURRENT_STOP) : null
                            };
+
+            // If the CurrentStop is not null create the 
+            //from s in db.STOPS.Where(s => s.STOP_ID == j.CURRENT_STOP)
+            //select new StopDTO()
+            //{
+            //    StopId = (int)s.STOP_ID,
+            //    StopName = s.STOP_NAME,
+            //    IsStation = s.IS_STATION,
+            //    StopPostcode = s.STOP_POSTCODE,
+            //    StopLatitude = s.STOP_LATITUDE,
+            //    StopLongitude = s.STOP_LONGITUDE
+            //} : 
+            //foreach (var journey in journeys)
+            //{
+            //    if (journey.CurrentStopId != null)
+            //    {
+            //        // Fetch the stop information for the current stop.
+            //        //var stop = db.STOPS.Select(s =>
+            //        //new StopDTO()
+            //        //{
+            //        //    StopId = (int)s.STOP_ID,
+            //        //    StopName = s.STOP_NAME,
+            //        //    IsStation = s.IS_STATION,
+            //        //    StopPostcode = s.STOP_POSTCODE,
+            //        //    StopLatitude = s.STOP_LATITUDE,
+            //        //    StopLongitude = s.STOP_LONGITUDE
+            //        //}).SingleOrDefault(s => s.StopId == journey.CurrentStopId);
+
+            //        journey.CurrentStop = new StopDTO()
+            //        {
+            //            StopId = (int)journey.Route.ArrivalStationId
+            //        };
+            //    }
+            //}
 
             return journeys;
         }
 
         //// GET: api/Journeys/5
-        [HttpGet]
-        [Route("{id:int}")]
-        [ResponseType(typeof(JourneyDTO))]
-        public async Task<IHttpActionResult> GetJOURNEY(decimal id)
-        {
-            //JOURNEY jOURNEY = db.JOURNEYS.Find(id);
+        //[HttpGet]
+        //[Route("{id:int}")]
+        //[ResponseType(typeof(JourneyDTO))]
+        //public async Task<IHttpActionResult> GetJOURNEY(decimal id)
+        //{
+        //    //JOURNEY jOURNEY = db.JOURNEYS.Find(id);
 
-            var journey = await db.JOURNEYS.Select(j =>
-                new JourneyDTO()
-                {
-                    JourneyId = (int)j.JOURNEY_ID,
-                    RouteId = (int)j.ROUTE_ID,
-                    ShiftId = (int)j.SHIFT_ID,
-                    CoachId = (int)j.COACH_ID,
-                    DepartureDateTime = j.DEPARTURE_DATETIME,
-                    ArrivalDateTime = j.ARRIVAL_DATETIME,
-                    CurrentStop = (int)j.CURRENT_STOP,
-                    StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
-                    StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
-                    CoachStatus = j.COACH_STATUS
-                }).SingleOrDefaultAsync(j => j.JourneyId == id);
+        //    var journey = await db.JOURNEYS.Select(j =>
+        //        new JourneyDTO()
+        //        {
+        //            JourneyId = (int)j.JOURNEY_ID,
+        //            RouteId = (int)j.ROUTE_ID,
+        //            ShiftId = (int)j.SHIFT_ID,
+        //            CoachId = (int)j.COACH_ID,
+        //            DepartureDateTime = j.DEPARTURE_DATETIME,
+        //            ArrivalDateTime = j.ARRIVAL_DATETIME,
+        //            CurrentStop = (int)j.CURRENT_STOP,
+        //            StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
+        //            StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
+        //            CoachStatus = j.COACH_STATUS
+        //        }).SingleOrDefaultAsync(j => j.JourneyId == id);
 
-            if (journey == null)
-            {
-                return NotFound();
-            }
+        //    if (journey == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(journey);
-        }
+        //    return Ok(journey);
+        //}
 
         //// PUT: api/Journeys/5
         //[ResponseType(typeof(void))]

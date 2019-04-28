@@ -73,4 +73,7 @@
     <!-- Home Fragment -->
     <string name="departure_spinner_prompt">Choose Departure Stop</string>
     <string name="arrival_spinner_prompt">Choose Arrival Stop</string>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

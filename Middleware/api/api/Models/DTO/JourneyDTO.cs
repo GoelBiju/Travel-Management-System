@@ -26,8 +26,8 @@ namespace api.Models.DTO
         [JsonProperty("arrivalDateTime")]
         public DateTime ArrivalDateTime { get; set; }
 
-        [JsonProperty("currentStop")]
-        public int? CurrentStop { get; set; }
+        [JsonProperty("currentStopId")]
+        public int? CurrentStopId { get; set; }
 
         [JsonProperty("stopArrivalDateTime")]
         public DateTime? StopArrivalDateTime { get; set; }
@@ -40,5 +40,8 @@ namespace api.Models.DTO
 
         [JsonProperty("route")]
         public RouteDTO Route { get; set; }
+
+        [JsonProperty("currentStop")]
+        public StopDTO CurrentStop { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 create or replace TRIGGER trg_check_journey_start_date
 
-BEFORE INSERT OR UPDATE ON journeys
+BEFORE INSERT ON journeys
 
 FOR EACH ROW
 

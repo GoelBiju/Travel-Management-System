@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 //        viewAccountButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent viewAccountDetailsIntent = new Intent(getApplicationContext(), ViewAccountDetails.class);
+//                Intent viewAccountDetailsIntent = new Intent(getApplicationContext(), ViewAccountDetailsActivity.class);
 //                //viewAccountDetailsIntent.putExtra("customerId", customerId);
 //                startActivity(viewAccountDetailsIntent);
 //            }

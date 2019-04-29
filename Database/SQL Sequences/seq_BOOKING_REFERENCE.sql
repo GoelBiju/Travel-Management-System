@@ -1,0 +1,5 @@
+CREATE SEQUENCE seq_booking_reference
+    START WITH 300
+    INCREMENT BY 1
+    NOCYCLE
+    NOCACHE;

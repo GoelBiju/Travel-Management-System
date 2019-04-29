@@ -22,23 +22,21 @@ namespace api.Controllers
         private Entities db = new Entities();
 
         // GET: api/Journeys
-        [AllowAnonymous]
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(JourneyDTO))]
         public IQueryable<JourneyDTO> GetJOURNEYS()
         {
+            // Customers do not need to see shiftId; needs separate controllers?
             var journeys = from j in db.JOURNEYS
                            select new JourneyDTO()
                            {
                                JourneyId = (int)j.JOURNEY_ID,
                                RouteId = (int)j.ROUTE_ID,
-                               // Customers do not need to see shiftId; needs separate controllers?
                                ShiftId = (int)j.SHIFT_ID,
                                CoachId = (int)j.COACH_ID,
                                DepartureDateTime = j.DEPARTURE_DATETIME,
                                ArrivalDateTime = j.ARRIVAL_DATETIME,
-                               // TODO: CurrentStopId can be null.
                                CurrentStopId = (int)j.CURRENT_STOP,
                                StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
                                StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
@@ -63,115 +61,126 @@ namespace api.Controllers
                                }).FirstOrDefault(s => s.StopId == j.CURRENT_STOP) : null
                            };
 
-            // If the CurrentStop is not null create the 
-            //from s in db.STOPS.Where(s => s.STOP_ID == j.CURRENT_STOP)
-            //select new StopDTO()
-            //{
-            //    StopId = (int)s.STOP_ID,
-            //    StopName = s.STOP_NAME,
-            //    IsStation = s.IS_STATION,
-            //    StopPostcode = s.STOP_POSTCODE,
-            //    StopLatitude = s.STOP_LATITUDE,
-            //    StopLongitude = s.STOP_LONGITUDE
-            //} : 
-            //foreach (var journey in journeys)
-            //{
-            //    if (journey.CurrentStopId != null)
-            //    {
-            //        // Fetch the stop information for the current stop.
-            //        //var stop = db.STOPS.Select(s =>
-            //        //new StopDTO()
-            //        //{
-            //        //    StopId = (int)s.STOP_ID,
-            //        //    StopName = s.STOP_NAME,
-            //        //    IsStation = s.IS_STATION,
-            //        //    StopPostcode = s.STOP_POSTCODE,
-            //        //    StopLatitude = s.STOP_LATITUDE,
-            //        //    StopLongitude = s.STOP_LONGITUDE
-            //        //}).SingleOrDefault(s => s.StopId == journey.CurrentStopId);
-
-            //        journey.CurrentStop = new StopDTO()
-            //        {
-            //            StopId = (int)journey.Route.ArrivalStationId
-            //        };
-            //    }
-            //}
-
             return journeys;
         }
 
-        //// GET: api/Journeys/5
-        //[HttpGet]
-        //[Route("{id:int}")]
-        //[ResponseType(typeof(JourneyDTO))]
-        //public async Task<IHttpActionResult> GetJOURNEY(decimal id)
-        //{
-        //    //JOURNEY jOURNEY = db.JOURNEYS.Find(id);
+        // GET: api/Journeys/5
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("{id:int}")]
+        [ResponseType(typeof(JourneyDTO))]
+        public async Task<IHttpActionResult> GetJOURNEY(decimal id)
+        {
+            //JOURNEY jOURNEY = db.JOURNEYS.Find(id);
 
-        //    var journey = await db.JOURNEYS.Select(j =>
-        //        new JourneyDTO()
-        //        {
-        //            JourneyId = (int)j.JOURNEY_ID,
-        //            RouteId = (int)j.ROUTE_ID,
-        //            ShiftId = (int)j.SHIFT_ID,
-        //            CoachId = (int)j.COACH_ID,
-        //            DepartureDateTime = j.DEPARTURE_DATETIME,
-        //            ArrivalDateTime = j.ARRIVAL_DATETIME,
-        //            CurrentStop = (int)j.CURRENT_STOP,
-        //            StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
-        //            StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
-        //            CoachStatus = j.COACH_STATUS
-        //        }).SingleOrDefaultAsync(j => j.JourneyId == id);
+            var journey = await db.JOURNEYS.Select(j =>
+                new JourneyDTO()
+                {
+                    JourneyId = (int)j.JOURNEY_ID,
+                    RouteId = (int)j.ROUTE_ID,
+                    ShiftId = (int)j.SHIFT_ID,
+                    CoachId = (int)j.COACH_ID,
+                    DepartureDateTime = j.DEPARTURE_DATETIME,
+                    ArrivalDateTime = j.ARRIVAL_DATETIME,
+                    CurrentStopId = (int)j.CURRENT_STOP,
+                    StopArrivalDateTime = j.STOP_ARRIVAL_DATETIME,
+                    StopDepartedDateTime = j.STOP_DEPARTED_DATETIME,
+                    CoachStatus = j.COACH_STATUS,
+                    Route = new RouteDTO()
+                    {
+                        RouteId = (int)j.ROUTE.ROUTE_ID,
+                        DepartureStationId = (int)j.ROUTE.STOP.STOP_ID,
+                        DepartureStation = j.ROUTE.STOP.STOP_NAME,
+                        ArrivalStationId = (int)j.ROUTE.STOP1.STOP_ID,
+                        ArrivalStation = j.ROUTE.STOP1.STOP_NAME
+                    },
+                    CurrentStop = (j.CURRENT_STOP != null) ? db.STOPS.Select(s =>
+                    new StopDTO()
+                    {
+                        StopId = (int)s.STOP_ID,
+                        StopName = s.STOP_NAME,
+                        IsStation = s.IS_STATION,
+                        StopPostcode = s.STOP_POSTCODE,
+                        StopLatitude = s.STOP_LATITUDE,
+                        StopLongitude = s.STOP_LONGITUDE
+                    }).FirstOrDefault(s => s.StopId == j.CURRENT_STOP) : null
+                }).SingleOrDefaultAsync(j => j.JourneyId == id);
 
-        //    if (journey == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (journey == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(journey);
-        //}
+            return Ok(journey);
+        }
 
-        //// PUT: api/Journeys/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutJOURNEY(decimal id, JOURNEY jOURNEY)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // PUT: api/Journeys/5
+        [HttpPut, Authorize(Roles = "Employee")]
+        [Route("{id:int}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutJOURNEY(decimal id, [FromBody] JourneyUpdateBindingModel journey)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (id != jOURNEY.JOURNEY_ID)
-        //    {
-        //        return BadRequest();
-        //    }
+            //if (id != jOURNEY.JOURNEY_ID)
+            //{
+            //    return BadRequest();
+            //}
 
-        //    db.Entry(jOURNEY).State = EntityState.Modified;
+            //db.Entry(jOURNEY).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!JOURNEYExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            // Update the relevant attributes from the binding model 
+            // with our record in the database.
+            if (journey.JourneyId > 0 && id == journey.JourneyId)
+            {
+                var journeyRecord = db.JOURNEYS.FirstOrDefault(j => j.JOURNEY_ID == id);
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+                if (journeyRecord != null)
+                {
+                    journeyRecord.CURRENT_STOP = journey.CurrentStopId;
+                    journeyRecord.STOP_ARRIVAL_DATETIME = journey.StopArrivalDateTime;
+                    journeyRecord.STOP_DEPARTED_DATETIME = journey.StopDepartedDateTime;
+                    journeyRecord.COACH_STATUS = journey.CoachStatus;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                BadRequest();
+            }
 
-        //// POST: api/Journeys
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!JOURNEYExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/Journeys
         [HttpPost, Authorize(Roles = "Employee")]
         [Route("")]
         [ResponseType(typeof(JourneyDTO))]
-        public IHttpActionResult PostJOURNEY([FromBody] JourneyBindingModel journey)
+        public IHttpActionResult PostJOURNEY([FromBody] JourneyCreationBindingModel journey)
         {
+            // Create a new journey object as "Scheduled".
             JOURNEY jOURNEY = new JOURNEY()
             {
                 JOURNEY_ID = 0,

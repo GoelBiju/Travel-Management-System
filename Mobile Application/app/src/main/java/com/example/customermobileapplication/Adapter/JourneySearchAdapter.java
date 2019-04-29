@@ -64,8 +64,10 @@ public class JourneySearchAdapter extends RecyclerView.Adapter<JourneySearchAdap
                 // TODO: Departing stop/arriving stop for a booking is needed.
                 v.getContext().startActivity(new Intent(context, BookingActivity.class)
                         .putExtra("journeyId", listItem.getJourneyId())
-                        .putExtra("departingStop", listItem.getRoute().getDepartureStationId())
-                        .putExtra("arrivalStop", listItem.getRoute().getArrivalStationId())
+
+                        // TODO: Pass in the customer's departing and arrival stop id's.
+                        //.putExtra("departingStop", listItem.getRoute().getDepartureStationId())
+                        //.putExtra("arrivalStop", listItem.getRoute().getArrivalStationId())
                 );
 
                 //

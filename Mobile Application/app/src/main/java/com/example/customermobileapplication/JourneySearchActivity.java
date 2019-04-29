@@ -18,6 +18,7 @@ import com.example.customermobileapplication.Utilities.API.APIResponse;
 import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONObject;
 
@@ -77,7 +78,7 @@ public class JourneySearchActivity extends AppCompatActivity {
             @Override
             public void onSuccess(APIResponse response) {
 
-                Log.d("Response", "Stops received successfully.");
+                Log.d("Response", "Journeys received successfully.");
 
                 // Convert JSONArray response to Journeys[].
                 List<Journey> journeys = new ArrayList<>();
@@ -85,9 +86,14 @@ public class JourneySearchActivity extends AppCompatActivity {
 
                 for (JSONObject jsonObject : response.getResponse()) {
                     // Convert each JSONObject to journey object.
-                    Journey journey = gson.fromJson(jsonObject.toString(), Journey.class);
-                    Log.d("Response", "Added Journey: " + journey.journeyId);
-                    journeys.add(journey);
+                    try {
+                        Journey journey = gson.fromJson(jsonObject.toString(), Journey.class);
+                        Log.d("Response", "Added Journey: " + journey.journeyId);
+                        journeys.add(journey);
+                    } catch (JsonSyntaxException e) {
+                        e.printStackTrace();
+                        Log.d("Response", "Failed to convert json object: " + jsonObject);
+                    }
                 }
 
                 //
@@ -98,7 +104,7 @@ public class JourneySearchActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(APIResponse response) {
-                Toast.makeText(getApplicationContext(), "Failed to retrieve stops.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failed to retrieve journeys.", Toast.LENGTH_SHORT).show();
             }
         });
     }

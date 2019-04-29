@@ -6,12 +6,8 @@ using System.Web;
 
 namespace api.Models.BindingModels
 {
-    public class JourneyBindingModel
+    public class JourneyCreationBindingModel
     {
-        //[JsonProperty("journeyid")]
-        //[JsonRequired]
-        //public int JourneyId { get; set; }
-
         [JsonProperty("routeId")]
         [JsonRequired]
         public int RouteId { get; set; }
@@ -24,12 +20,14 @@ namespace api.Models.BindingModels
         [JsonRequired]
         public int CoachId { get; set; }
 
-        [JsonProperty("startDateTime")]
+        [JsonProperty("departureDateTime")]
         [JsonRequired]
         public DateTime DepartureDateTime { get; set; }
 
-        [JsonProperty("endDateTime")]
+        [JsonProperty("arrivalDateTime")]
         [JsonRequired]
         public DateTime ArrivalDateTime { get; set; }
+
+
     }
 }

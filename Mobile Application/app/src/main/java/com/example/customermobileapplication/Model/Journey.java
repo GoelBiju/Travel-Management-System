@@ -21,8 +21,8 @@ public class Journey {
     @SerializedName("arrivalDateTime")
     public Date arrivalDateTime;
 
-    @SerializedName("currentStop")
-    public Integer currentStop;
+    @SerializedName("currentStopId")
+    public Integer currentStopId;
 
     @SerializedName("stopArrivalDateTime")
     public Date stopArrivalDateTime;
@@ -35,6 +35,9 @@ public class Journey {
 
     @SerializedName("route")
     public Route route;
+
+    @SerializedName("currentStop")
+    public Stop currentStop;
 
     public int getJourneyId() {
         return journeyId;
@@ -76,12 +79,12 @@ public class Journey {
         this.arrivalDateTime = arrivalDateTime;
     }
 
-    public Integer getCurrentStop() {
-        return currentStop;
+    public Integer getCurrentStopId() {
+        return currentStopId;
     }
 
-    public void setCurrentStop(Integer currentStop) {
-        this.currentStop = currentStop;
+    public void setCurrentStopId(Integer currentStopId) {
+        this.currentStopId = currentStopId;
     }
 
     public Date getStopArrivalDateTime() {
@@ -114,5 +117,13 @@ public class Journey {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public Stop getCurrentStop() {
+        return currentStop;
+    }
+
+    public void setCurrentStop(Stop currentStop) {
+        this.currentStop = currentStop;
     }
 }

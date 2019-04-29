@@ -103,13 +103,13 @@ public class HomeFragment extends Fragment {
         });
 
         //
-        view.findViewById(R.id.buttonViewBookings).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent startIntent = new Intent(getActivity(), BookingActivity.class);
-                startActivity(startIntent);
-            }
-        });
+//        view.findViewById(R.id.buttonViewBookings).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent startIntent = new Intent(getActivity(), BookingActivity.class);
+//                startActivity(startIntent);
+//            }
+//        });
 
 
         // Load stops into the departure and arrival spinners.

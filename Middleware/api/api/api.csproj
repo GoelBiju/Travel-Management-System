@@ -199,6 +199,7 @@
     <Compile Include="Controllers\RoutesArchiveController.cs" />
     <Compile Include="Controllers\RouteStopsController.cs" />
     <Compile Include="Controllers\StopsController.cs" />
+    <Compile Include="Models\BindingModels\JourneyUpdateBindingModel.cs" />
     <Compile Include="Models\BindingModels\RouteCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\RouteStopCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\RouteStopsDeletionBindingModel.cs" />
@@ -311,7 +312,7 @@
     <Compile Include="Models\BindingModels\CoachBindingModel.cs" />
     <Compile Include="Models\BindingModels\EmployeeCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\EmployeeLoginBindingModel.cs" />
-    <Compile Include="Models\BindingModels\JourneyBindingModel.cs" />
+    <Compile Include="Models\BindingModels\JourneyCreationBindingModel.cs" />
     <Compile Include="Models\DTO\CoachDTO.cs" />
     <Compile Include="Models\DTO\CustomerDTO.cs" />
     <Compile Include="Models\BindingModels\CustomerLoginBindingModel.cs" />

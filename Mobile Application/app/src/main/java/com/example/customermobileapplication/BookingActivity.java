@@ -9,9 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.customermobileapplication.Model.Journey;
+import com.example.customermobileapplication.Utilities.API.APIConnection;
+import com.example.customermobileapplication.Utilities.API.APIResponse;
 import com.example.customermobileapplication.Utilities.API.Config;
+import com.example.customermobileapplication.Utilities.API.CustomCallback;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -25,11 +30,24 @@ import java.math.BigDecimal;
 public class BookingActivity extends AppCompatActivity {
 
     //
+    private APIConnection apiConnection;
 
+    //
+    private int journeyId;
 
-    EditText editTextAmount;
-
+    //EditText editTextAmount;
     String amount = "";
+
+    //
+    private TextView textViewJourneyId;
+    private TextView textViewDepartureStation;
+    private TextView textViewDepartureTime;
+    private TextView textViewArrivalStation;
+    private TextView textViewArrivalTime;
+    private TextView textViewCustomerDepartureStop;
+    private TextView textViewCustomerArrivalStop;
+
+    private TextView textViewAmountToPay;
 
     // TODO: NumberPicker.
     private NumberPicker seniorsPicker;
@@ -51,16 +69,55 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
+        // API Connection.
+        apiConnection = new APIConnection(getApplicationContext(), getResources().getString(R.string.api_base_url));
+
+        // Get the journey id passed on.
+        Intent prevIntent = getIntent();
+        journeyId = prevIntent.getIntExtra("journeyId", 0);
+
         // Start the PayPal service.
         Intent intent = new Intent(this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         startService(intent);
+
+        // Bind all fields and set them up for use.
+        bindAndSetupViews();
+
+        // Handle booking event.
+        buttonPayNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processPayment();
+            }
+        });
+
+        // Load the journey information into the booking activity.
+        loadJourneyInformation();
+    }
+
+    private void bindAndSetupViews() {
+
+        //
+        textViewJourneyId = findViewById(R.id.textViewJourneyId);
+        textViewDepartureStation = findViewById(R.id.textViewDepartureStation);
+        textViewDepartureTime = findViewById(R.id.textViewDepartureTime);
+        textViewArrivalStation = findViewById(R.id.textViewArrivalStation);
+        textViewArrivalTime = findViewById(R.id.textViewArrivalTime);
+        textViewCustomerDepartureStop = findViewById(R.id.textViewCustomerDepartureStop);
+        textViewCustomerDepartureStop = findViewById(R.id.textViewCustomerDepartureStop);
+
+        textViewAmountToPay = findViewById(R.id.textViewAmountToPay);
 
         //
         adultsPicker = findViewById(R.id.numberPickerAdults);
         seniorsPicker = findViewById(R.id.numberPickerSeniors);
         childrenPicker = findViewById(R.id.numberPickerChildren);
         infantsPicker = findViewById(R.id.numberPickerInfants);
+
+        //
+        buttonPayNow = (Button)findViewById(R.id.buttonConfirmBooking);
+        //editTextAmount = (EditText)findViewById(R.id.editAmount);
 
         //
         adultsPicker.setMinValue(0);
@@ -77,15 +134,23 @@ public class BookingActivity extends AppCompatActivity {
         seniorsPicker.setWrapSelectorWheel(false);
         childrenPicker.setWrapSelectorWheel(false);
         infantsPicker.setWrapSelectorWheel(false);
-        //
-        buttonPayNow = (Button)findViewById(R.id.buttonPayNow);
-        //editTextAmount = (EditText)findViewById(R.id.editAmount);
+    }
 
-        // Handle booking event.
-        buttonPayNow.setOnClickListener(new View.OnClickListener() {
+    private void loadJourneyInformation() {
+
+        apiConnection.getCustomJsonObject("journeys/" + this.journeyId, Journey.class, new CustomCallback() {
             @Override
-            public void onClick(View v) {
-                processPayment();
+            public void onSuccess(Object responseObject) {
+                // Get the journey object.
+                Journey journey = (Journey) responseObject;
+
+                // Update the journey information on the booking activity textviews.
+                textViewJourneyId.setText(journey.getJourneyId());
+            }
+
+            @Override
+            public void onFailure(APIResponse errorResponse) {
+
             }
         });
     }
@@ -98,7 +163,9 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void processPayment() {
-        amount = editTextAmount.getText().toString();
+        // Get the amount from the final amount textview.
+        //amount = editTextAmount.getText().toString();
+        amount = textViewAmountToPay.getText().toString();
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), "GBP",
                 "Payment for your booking.", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(this, PaymentActivity.class);

@@ -22,9 +22,11 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.*;
 import datamodel.*;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -48,6 +50,39 @@ public class APIConnection {
         this.mapper = new ObjectMapper()
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
     }
+    
+    public Integer login(String endpoint){
+        try
+        {
+            String urlParameters = "grant_type=password&username=data1&password=data2&login_type=data3";
+
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            int postDataLength = postData.length;
+
+            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endpoint;
+            URL url = new URL(uri);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setInstanceFollowRedirects(false);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
+            connection.setRequestProperty("charset", "utf-8");
+            connection.setRequestProperty("Content-Length", Integer.toString(postDataLength ));
+            connection.setUseCaches(false);
+
+                try(DataOutputStream wr = new DataOutputStream(connection.getOutputStream())){
+                    wr.write(postData);
+                }
+        
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        return 
+    }
+
     
     public Object[] getListData(String endPoint, Class tableClass)
     {
@@ -93,8 +128,13 @@ public class APIConnection {
             connection.setRequestMethod("PUT");
             connection.setDoOutput(true);
             
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
+//            connection.setRequestProperty("Content-Type", "application/json");
+//            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            
+            connection.setRequestProperty("Accept", "application/x-www-form-urlencoded");
+            //connection.setRequestProperty("authorization", "Bearer");
+            //String bearer = connection.getHeaderField("");
             
             try (OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream())) {
                 output.write(json);

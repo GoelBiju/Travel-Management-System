@@ -27,14 +27,16 @@ public class LoginController {
     public boolean loginRequest(Login loginModel){
         this.loginModel = loginModel;
         
-        HashMap<String, Object> loginResponse = apiConnection.PostData("employees/login", loginModel);
-        Integer responseCode = (Integer) loginResponse.get("responseCode");
+        loginModel = apiConnection.login("token");
+        //HashMap<String, Object> loginResponse = apiConnection.PostData("employees/login", loginModel);
         
-        if (responseCode >= 200 && responseCode < 300){
-            return true;
-        }
         
-        return false;
+        //Integer responseCode = (Integer) loginResponse.get("responseCode");
+        
+        //if (responseCode >= 200 && responseCode < 300){
+        //    return true;
+        //}
+        //return false;
     }
     
     public void showCoachView(){

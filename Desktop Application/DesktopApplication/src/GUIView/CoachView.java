@@ -281,7 +281,7 @@ public class CoachView extends javax.swing.JFrame {
     }//GEN-LAST:event_SignOutBtnActionPerformed
 
     private void PassengerPgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassengerPgBtnActionPerformed
-        //Passenger button changes to passenger page
+        
     }//GEN-LAST:event_PassengerPgBtnActionPerformed
 
     private void ShiftsPgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShiftsPgBtnActionPerformed

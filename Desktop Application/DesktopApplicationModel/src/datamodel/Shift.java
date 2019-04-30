@@ -17,10 +17,6 @@ public class Shift {
     
     private String employeeId;
     
-    private String routeId;
-    
-    private int coachId;
-    
     private Date startDatetime;
     
     private Date endDatetime;
@@ -42,22 +38,6 @@ public class Shift {
         this.employeeId = employeeId;
     }
 
-    public String getRouteId() {
-        return routeId;
-    }
-
-    public void setRouteId(String routeId) {
-        this.routeId = routeId;
-    }
-
-    public int getCoachId() {
-        return coachId;
-    }
-
-    public void setCoachId(int coachId) {
-        this.coachId = coachId;
-    }
-
     public Date getStartDatetime() {
         return startDatetime;
     }
@@ -72,8 +52,5 @@ public class Shift {
 
     public void setEndDatetime(Date endDatetime) {
         this.endDatetime = endDatetime;
-    }
-    
-    
-    
+    }    
 }

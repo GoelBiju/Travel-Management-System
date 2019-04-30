@@ -16,7 +16,7 @@ public class StartJourney {
     private Employee employee;
     
     public StartJourney(){
-        this.apiConnection = new APIConnection();
+        this.apiConnection = APIConnection.getInstance();
         this.employee = new Employee();
     }
     

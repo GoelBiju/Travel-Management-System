@@ -10,18 +10,23 @@ package datamodel;
  * @author Will
  */
 public class Employee {
-        private String id;
-        private String firstName;
-        private String lastName;
-        private String jobRole;
-        private String password;
+    
+    private String employeeId;
+    
+    private String firstName;
+    
+    private String lastName;
+    
+    private String jobRole;
+    
+    //private String password;
 
-    public String getId() {
-        return id;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getFirstName() {
@@ -47,13 +52,4 @@ public class Employee {
     public void setJobRole(String jobRole) {
         this.jobRole = jobRole;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-        
 }

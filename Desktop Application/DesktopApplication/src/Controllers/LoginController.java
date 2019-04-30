@@ -21,12 +21,14 @@ public class LoginController {
     private LoginBindingModel loginModel; //Model
     
     public LoginController(){
-        apiConnection = new APIConnection();
+        apiConnection = APIConnection.getInstance();
     }
     
     public boolean loginRequest(LoginBindingModel loginModel){
         // this.loginModel = loginModel;
         
+        // Call the login request as an employee.
+        loginModel.setLoginType("employee");
         int responseCode = apiConnection.login(loginModel);
         //HashMap<String, Object> loginResponse = apiConnection.PostData("employees/login", loginModel);
         //Integer responseCode = (Integer) loginResponse.get("responseCode");

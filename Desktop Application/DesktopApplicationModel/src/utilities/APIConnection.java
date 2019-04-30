@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.core.type.TypeReference;
 import datamodel.*;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -30,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,28 +43,46 @@ import java.util.logging.Logger;
  */
 public class APIConnection {
     
+    private static APIConnection apiInstance;
+    
+    private String accessToken;
+    
     private final ObjectMapper mapper;
     
     private final String baseUrl = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/";
     private final String apiBaseUrl = baseUrl + "api/";
     private final String apiBaseTestUrl = "http://localhost:60019/api/";
         
-    public APIConnection() {
+    private APIConnection() {
         
         this.mapper = new ObjectMapper()
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+        
+        this.accessToken = "";
     }
+    
+    
+    public static APIConnection getInstance() {
+        if (apiInstance == null) {
+            apiInstance = new APIConnection();
+        }
+        return apiInstance;
+    }
+    
     
     public Integer login(LoginBindingModel loginModel){
         try
         {
             String urlParameters = "grant_type=password&username=" + loginModel.getEmployeeID() + 
-                    "&password=" + loginModel.getPassword() + "&login_type=employee";
+                    "&password=" + loginModel.getPassword() + "&login_type=" + loginModel.getLoginType();
 
             byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
 
             String uri = this.baseUrl + "token";
+            System.out.println("Login URL: " + uri);
+            
             URL url = new URL(uri);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             
@@ -78,6 +98,26 @@ public class APIConnection {
                 wr.write(postData);
             }
             
+            // Read the response body.
+            if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 300) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+                    
+                    // Convert the response object to the Java object.
+                    TokenResponse tokenResponse = this.mapper.readValue(sb.toString(), TokenResponse.class);
+                    
+                    // Store the access token returned.
+                    this.accessToken = tokenResponse.getAccessToken();
+                    //System.out.println(tokenResponse.getAccessToken());
+                }
+            }
+            
             return connection.getResponseCode();
         }
         catch (Exception ex) {
@@ -88,32 +128,80 @@ public class APIConnection {
     }
 
     
-    public Object[] getListData(String endPoint, Class tableClass)
+    public ArrayList getListData(String endPoint, TypeReference typeReference)
     {
-        Object[] object = null;
-        try 
-        {
-		String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endPoint;
-		URL url = new URL(uri);
-		object = (Object[]) mapper.readValue(url, tableClass);
-	} 
-        catch (Exception e)
-        {
+        ArrayList objectList = null;
+        try {
+            String uri = this.apiBaseUrl + endPoint;
+            
+            URL url = new URL(uri);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
+            connection.setRequestMethod("GET");
+            connection.setDoInput(true);
+            connection.setUseCaches(false);
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + this.accessToken);
+            
+            // Get the json string.
+            if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 300) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+                    
+                    // Convert the response object to the Java object.
+                    objectList = this.mapper.readValue(sb.toString(), typeReference);
+                }
+            }
+	} catch (Exception e) {
              e.printStackTrace();
         }
-       return object;
+        
+       return objectList;
     }
+    
     
     public Object getData(String tableName, Class tableClass, String id) {
         
         Object object = new Object();
         
         try {
-            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/coaches/"+ id;
+            String uri = this.apiBaseUrl + tableName +  "/" + id;
             System.out.println(uri);
-            URL url = new URL(uri);
             
-            object = this.mapper.readValue(url, Coach.class);
+            URL url = new URL(uri);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
+            connection.setRequestMethod("GET");
+            connection.setDoInput(true);
+            connection.setUseCaches(false);
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + this.accessToken);
+            
+            // Get the json string.
+            if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 300) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+                    
+                    // Convert the response object to the Java object.
+                    object = this.mapper.readValue(sb.toString(), tableClass);
+                }
+            }
+            
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -121,9 +209,10 @@ public class APIConnection {
         return object;
     }
     
+    
     public Integer putData(String endpoint, Object obj) {
         try {
-            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endpoint;
+            String uri = this.apiBaseUrl + endpoint;
             URL url = new URL(uri);
             
             String json = mapper.writeValueAsString(obj);
@@ -132,13 +221,9 @@ public class APIConnection {
             connection.setRequestMethod("PUT");
             connection.setDoOutput(true);
             
-//            connection.setRequestProperty("Content-Type", "application/json");
-//            connection.setRequestProperty("Accept", "application/json");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            
-            connection.setRequestProperty("Accept", "application/x-www-form-urlencoded");
-            //connection.setRequestProperty("authorization", "Bearer");
-            //String bearer = connection.getHeaderField("");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("authorization", "Bearer " + this.accessToken);
             
             try (OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream())) {
                 output.write(json);
@@ -154,12 +239,13 @@ public class APIConnection {
         return 400;
     }
     
+    
     public HashMap<String, Object> PostData (String endpoint, Object obj)
     {
         HashMap<String, Object> response = new HashMap<>();
         try {
             // URL for the API
-            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endpoint;
+            String uri = this.apiBaseUrl + endpoint;
             URL url = new URL(uri);
             
             // Build a JSON string to post
@@ -173,7 +259,7 @@ public class APIConnection {
             
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Accept", "application/json");
-            //connection.setRequestProperty("Authorization", /* AUTH CONTENT */ "");
+            connection.setRequestProperty("Authorization", "Bearer " + this.accessToken);
             
             try (OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream())) {
                 output.write(json);
@@ -181,7 +267,6 @@ public class APIConnection {
             }
             
             System.out.println(connection.getResponseMessage());
-            
             response.put("responseCode", connection.getResponseCode());
             
             if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 300) {
@@ -203,13 +288,15 @@ public class APIConnection {
     
     }
     
+    
     public int DeleteData(String endPoint)
     {
         try {
-            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endPoint;
+            String uri = this.apiBaseUrl + endPoint;
             URL url = new URL(uri);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Authorization", "Bearer " + this.accessToken);
             
             return connection.getResponseCode();
             
@@ -220,15 +307,15 @@ public class APIConnection {
     }
     
     
-    public Coach getCoachData (String id){
+    public Coach getCoachData (String coachId){
         
-        Coach coach = (Coach) getData("coaches", Coach.class, id);
+        Coach coach = (Coach) getData("coaches", Coach.class, coachId);
         System.out.println("Returned Coach ID: " + coach.getCoachId());
         System.out.println("Returned Coach Make: " + coach.getCoachMake());
         System.out.println("Returned Coach Model: " + coach.getCoachModel());
         System.out.println("Returned Coach Registration Plate: " + coach.getRegistrationPlate());
         System.out.println("Returned Coach Capacity: " + coach.getCoachCapacity());
-        System.out.println("Returned Coach Is Active: " + coach.isActive());
+        System.out.println("Returned Coach Is Active: " + coach.isAvailable());
         
         return coach;
     }
@@ -255,28 +342,30 @@ public class APIConnection {
 //        return object;
 //    }
     
+    
     public static void main(String[] args) {
         
-        Object object = new Object();
+        APIConnection api = APIConnection.getInstance();
+        LoginBindingModel loginModel = new LoginBindingModel();
+        loginModel.setEmployeeID("");
+        loginModel.setPassword("");
+        loginModel.setLoginType("employee");
         
-        
-        try {
-           String uri = "http://localhost:60019/api/coaches/1";
-           URL url = new URL(uri);
-        
-           
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        
+        int response = api.login(loginModel);
+        System.out.println(response);      
+
         Coach coach;
-        APIConnection conn = new APIConnection();
-        coach = (Coach) conn.getCoachData("1");
+        coach = (Coach) api.getCoachData("6");
         System.out.println(coach.getCoachCapacity());
         
-        //Employee employees = (Employee) getData("employees", Employee.class, "D5212");
+        Employee employees = (Employee) api.getData("employees", Employee.class, "");
+        System.out.println(employees.getFirstName());
+        System.out.println(employees.getLastName());
         
-        //System.out.println(employees.getFirstName());
-        //System.out.println(employees.getLastName());  
+        TypeReference<List<Journey>> typeReference = new TypeReference<List<Journey>>() {};
+        ArrayList<Journey> journeys = (ArrayList<Journey>) api.getListData("journeys", typeReference);
+        
+        Journey j = journeys.get(0);
+        System.out.println(j.getJourneyId());
     }
 }

@@ -10,8 +10,12 @@ package datamodel.BindingModels;
  * @author adbellas
  */
 public class LoginBindingModel {
+    
     private String employeeID;
+    
     private String password;
+    
+    private String loginType;
 
     public String getEmployeeID() {
         return employeeID;
@@ -27,6 +31,14 @@ public class LoginBindingModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getLoginType() {
+        return loginType;
+    }
+
+    public void setLoginType(String loginType) {
+        this.loginType = loginType;
     }
     
     

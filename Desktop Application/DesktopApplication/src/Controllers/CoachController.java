@@ -19,7 +19,7 @@ public class CoachController {
     private APIConnection apiConnection;
     
     public CoachController(){
-        apiConnection = new APIConnection();
+        apiConnection = APIConnection.getInstance();
     }
     
     public Coach getCoachData (Coach coachDatamodel){

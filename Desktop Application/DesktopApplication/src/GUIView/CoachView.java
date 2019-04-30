@@ -47,7 +47,7 @@ public class CoachView extends javax.swing.JFrame {
         String capacity = Integer.toString(coachCapacity);
         capacityLabelInput.setText(capacity);
         
-        if(coach.isActive()){
+        if(coach.isAvailable()){
             coachStatusLabel.setText("Active");
         }
         else{

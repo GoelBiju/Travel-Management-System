@@ -10,12 +10,18 @@ package datamodel;
  * @author vcastellani
  */
 public class Coach {
+    
     private int coachId;
+    
     private String coachMake;
+    
     private String coachModel;
+    
     private String registrationPlate;
+    
     private int coachCapacity;
-    private boolean isActive;
+    
+    private boolean isAvailable;
 
     public int getCoachId() {
         return coachId;
@@ -57,11 +63,11 @@ public class Coach {
         this.coachCapacity = coachCapacity;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 }

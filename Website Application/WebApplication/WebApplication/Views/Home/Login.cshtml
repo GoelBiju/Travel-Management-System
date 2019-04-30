@@ -7,7 +7,6 @@
     <title>National Coach</title>
     <meta charset="utf-8" />
 
-    <script type="text/javascript" src="~/Scripts/HelpFunctionScript.js"></script>
 </head>
 
 <body>
@@ -21,7 +20,7 @@
                     <br />
                     <p id="loginlabel">Please enter your credentials to login</p>
                     @*<input type="username" id="inputfields" name="username" placeholder="Employee ID..." />
-                    @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "inputfields", placeholder = "Employee ID..." } })
                     @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
 
@@ -35,20 +34,20 @@
                     <button type="submit" value="Login" class="loginbutton loginbuttontransition">LogIn</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="button" onclick="HelpFunction()" class="helpbutton loginbuttontransition">Help</button>
+                    <button type="button" onclick="loginHelp()" class="helpbutton loginbuttontransition">Help</button>
 
                 </center>
             </div>
         }
     </center>
 
-    @* <div class="bottom">NationalCoach 2019 ©</div>*@
 </body>
 
-@*Please don't remove, this is what styles it*@
+@*Please don't remove, this is what styles it and allows the help function to work*@
 @section Scripts
 {
     <link href="~/Content/LoginStyle.css" rel="stylesheet" />
+    @Scripts.Render("~/Scripts/LoginHelpFunction.js")
 }
 
 </html>

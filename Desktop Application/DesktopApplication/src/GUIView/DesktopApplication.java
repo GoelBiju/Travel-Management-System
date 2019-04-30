@@ -5,6 +5,8 @@
  */
 package GUIView;
 
+import Controllers.LoginController;
+
 /**
  *
  * @author adbellas
@@ -17,6 +19,9 @@ public class DesktopApplication {
     public static void main(String[] args) {
         
         // 
+        LoginController loginController = new LoginController();
+        
+        //
         
     }
     

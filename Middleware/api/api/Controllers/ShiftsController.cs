@@ -66,7 +66,6 @@ namespace api.Controllers
         }
 
         // GET: Shifts by employee id.
-        // Return shifts only on the day that the service supposed to run.
         [HttpGet]
         [Route("employee/{employeeId}", Name = "GetShiftsByEmployeeId")]
         [ResponseType(typeof(ShiftDTO))]

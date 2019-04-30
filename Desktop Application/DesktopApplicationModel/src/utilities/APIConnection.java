@@ -240,7 +240,7 @@ public class APIConnection {
     }
     
     
-    public HashMap<String, Object> PostData (String endpoint, Object obj)
+    public HashMap<String, Object> postData (String endpoint, Object obj)
     {
         HashMap<String, Object> response = new HashMap<>();
         try {
@@ -254,9 +254,9 @@ public class APIConnection {
             System.out.println(json);
             
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
-            
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Authorization", "Bearer " + this.accessToken);
@@ -289,13 +289,16 @@ public class APIConnection {
     }
     
     
-    public int DeleteData(String endPoint)
+    public int deleteData(String endPoint)
     {
         try {
             String uri = this.apiBaseUrl + endPoint;
             URL url = new URL(uri);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
             connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Authorization", "Bearer " + this.accessToken);
             
             return connection.getResponseCode();
@@ -343,29 +346,29 @@ public class APIConnection {
 //    }
     
     
-    public static void main(String[] args) {
-        
-        APIConnection api = APIConnection.getInstance();
-        LoginBindingModel loginModel = new LoginBindingModel();
-        loginModel.setEmployeeID("");
-        loginModel.setPassword("");
-        loginModel.setLoginType("employee");
-        
-        int response = api.login(loginModel);
-        System.out.println(response);      
-
-        Coach coach;
-        coach = (Coach) api.getCoachData("6");
-        System.out.println(coach.getCoachCapacity());
-        
-        Employee employees = (Employee) api.getData("employees", Employee.class, "");
-        System.out.println(employees.getFirstName());
-        System.out.println(employees.getLastName());
-        
-        TypeReference<List<Journey>> typeReference = new TypeReference<List<Journey>>() {};
-        ArrayList<Journey> journeys = (ArrayList<Journey>) api.getListData("journeys", typeReference);
-        
-        Journey j = journeys.get(0);
-        System.out.println(j.getJourneyId());
-    }
+//    public static void main(String[] args) {
+//        
+//        APIConnection api = APIConnection.getInstance();
+//        LoginBindingModel loginModel = new LoginBindingModel();
+//        loginModel.setEmployeeID("");
+//        loginModel.setPassword("");
+//        loginModel.setLoginType("employee");
+//        
+//        int response = api.login(loginModel);
+//        System.out.println(response);      
+//
+//        Coach coach;
+//        coach = (Coach) api.getCoachData("6");
+//        System.out.println(coach.getCoachCapacity());
+//        
+//        Employee employees = (Employee) api.getData("employees", Employee.class, "");
+//        System.out.println(employees.getFirstName());
+//        System.out.println(employees.getLastName());
+//        
+//        TypeReference<List<Journey>> typeReference = new TypeReference<List<Journey>>() {};
+//        ArrayList<Journey> journeys = (ArrayList<Journey>) api.getListData("journeys", typeReference);
+//        
+//        Journey j = journeys.get(0);
+//        System.out.println(j.getJourneyId());
+//    }
 }

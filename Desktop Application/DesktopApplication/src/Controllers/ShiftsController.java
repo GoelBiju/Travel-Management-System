@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import GUIView.ShiftsPanel;
+import GUIView.Shifts.ShiftsPanel;
 
 /**
  *

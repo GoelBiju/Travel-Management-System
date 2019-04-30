@@ -3,6 +3,7 @@ package com.example.customermobileapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.constraint.solver.widgets.Helper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.example.customermobileapplication.Utilities.API.APIConnection;
 import com.example.customermobileapplication.Utilities.API.APIResponse;
 import com.example.customermobileapplication.Utilities.API.Config;
 import com.example.customermobileapplication.Utilities.API.CustomCallback;
+import com.example.customermobileapplication.Utilities.API.Helpers;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -76,6 +78,9 @@ public class BookingActivity extends AppCompatActivity {
         // Get the journey id passed on.
         Intent prevIntent = getIntent();
         journeyId = prevIntent.getIntExtra("journeyId", 0);
+        textViewCustomerDepartureStop.setText(prevIntent.getIntExtra("departureStopId", 0));
+        textViewCustomerArrivalStop.setText(prevIntent.getIntExtra("arrivalStopId", 0));
+        Log.d("Response", "Passed on Journey ID: " + journeyId);
 
         // Start the PayPal service.
         Intent intent = new Intent(this, PayPalService.class);
@@ -94,6 +99,14 @@ public class BookingActivity extends AppCompatActivity {
         });
 
         // Load the journey information into the booking activity.
+        loadJourneyInformation();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Reload journey information if the activity is resumed.
         loadJourneyInformation();
     }
 
@@ -146,9 +159,14 @@ public class BookingActivity extends AppCompatActivity {
 
                 // Get the journey object.
                 Journey journey = (Journey) responseObject;
+                Log.d("Response", "Journey object received: " + journey.getJourneyId());
 
                 // Update the journey information on the booking activity textviews.
-                textViewJourneyId.setText(journey.getJourneyId());
+                textViewJourneyId.setText(Integer.toString(journey.getJourneyId()));
+                textViewDepartureStation.setText(journey.getRoute().getDepartureStation());
+                textViewDepartureTime.setText(Helpers.formatDateTime(journey.getDepartureDateTime()));
+                textViewArrivalStation.setText(journey.getRoute().getArrivalStation());
+                textViewArrivalTime.setText(Helpers.formatDateTime(journey.getArrivalDateTime()));
             }
 
             @Override

@@ -12,8 +12,6 @@ import Controllers.CoachController;
  * @author vcastellani
  */
 public class CoachView extends javax.swing.JFrame {
-
-    
 //        int coachID;
 //        String coachMake;
 //        String coachModel;

@@ -23,7 +23,7 @@ public class CoachController {
     }
     
     public Coach getCoachData (Coach coachDatamodel){
-        coachDataModel = apiConnection.getCoachData("2");
+        coachDataModel = apiConnection.getCoachData("6");
         return coachDataModel;
     }
     

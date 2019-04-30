@@ -258,7 +258,7 @@
         app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.382" />
 
     <TextView
         android:id="@+id/textViewCustomerArrivalStopPrompt"
@@ -374,8 +374,8 @@
 
     <TextView
         android:id="@+id/textViewCustomerDepartureStop"
-        android:layout_width="152dp"
-        android:layout_height="22dp"
+        android:layout_width="130dp"
+        android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -385,15 +385,15 @@
         android:text="N/A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintVertical_bias="0.384" />
 
     <TextView
         android:id="@+id/textViewCustomerArrivalStop"
-        android:layout_width="152dp"
-        android:layout_height="22dp"
+        android:layout_width="127dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -403,10 +403,10 @@
         android:text="N/A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintHorizontal_bias="0.853"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.424" />
+        app:layout_constraintVertical_bias="0.431" />
 
     <TextView
         android:id="@+id/textViewJourneyId"

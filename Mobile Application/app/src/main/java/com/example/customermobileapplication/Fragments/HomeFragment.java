@@ -97,8 +97,18 @@ public class HomeFragment extends Fragment {
         findJourneysButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startIntent = new Intent(getActivity(), JourneySearchActivity.class);
-                startActivity(startIntent);
+                //
+                Stop departureStop = (Stop) spinnerDepartureStop.getSelectedItem();
+                Stop arrivalStop = (Stop) spinnerArrivalStop.getSelectedItem();
+
+                Log.d("Response", "Selected departure stop id: " + departureStop.getStopId());
+                Log.d("Response", "Selected departure stop id: " + arrivalStop.getStopId());
+
+                // Pass the selected departure and arrival stop id's.
+                startActivity(new Intent(getActivity(), JourneySearchActivity.class)
+                        .putExtra("departureStopId", departureStop.getStopId())
+                        .putExtra("arrivalStopId", arrivalStop.getStopId())
+                );
             }
         });
 

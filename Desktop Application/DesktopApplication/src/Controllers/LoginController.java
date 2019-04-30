@@ -7,7 +7,7 @@ package Controllers;
 
 import GUIView.CoachView;
 import GUIView.LoginScreen;
-import datamodel.Login;
+import datamodel.BindingModels.LoginBindingModel;
 import java.util.HashMap;
 import utilities.APIConnection;
 
@@ -18,25 +18,23 @@ import utilities.APIConnection;
 public class LoginController {
     private LoginScreen loginScreen; //View
     private APIConnection apiConnection;
-    private Login loginModel; //Model
+    private LoginBindingModel loginModel; //Model
     
     public LoginController(){
         apiConnection = new APIConnection();
     }
     
-    public boolean loginRequest(Login loginModel){
-        this.loginModel = loginModel;
+    public boolean loginRequest(LoginBindingModel loginModel){
+        // this.loginModel = loginModel;
         
-        loginModel = apiConnection.login("token");
+        int responseCode = apiConnection.login(loginModel);
         //HashMap<String, Object> loginResponse = apiConnection.PostData("employees/login", loginModel);
-        
-        
         //Integer responseCode = (Integer) loginResponse.get("responseCode");
         
-        //if (responseCode >= 200 && responseCode < 300){
-        //    return true;
-        //}
-        //return false;
+        if (responseCode >= 200 && responseCode < 300){
+            return true;
+        }
+        return false;
     }
     
     public void showCoachView(){

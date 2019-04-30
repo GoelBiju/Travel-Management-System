@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datamodel;
+package datamodel.BindingModels;
 
 /**
  *
  * @author adbellas
  */
-public class Login {
+public class LoginBindingModel {
     private String employeeID;
     private String password;
 

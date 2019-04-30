@@ -1,5 +1,6 @@
 package com.example.customermobileapplication;
 
+import android.content.Intent;
 import android.content.ReceiverCallNotAllowedException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,9 @@ public class JourneySearchActivity extends AppCompatActivity {
 
     private APIConnection apiConnection;
 
+    private int customerDepartureStop;
+    private int customerArrivalStop;
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
@@ -42,6 +46,11 @@ public class JourneySearchActivity extends AppCompatActivity {
 
         //
         apiConnection = new APIConnection(getApplicationContext(), getResources().getString(R.string.api_base_url));
+
+        //
+        Intent prevIntent = getIntent();
+        customerDepartureStop = prevIntent.getIntExtra("departureStopId", 0);
+        customerArrivalStop = prevIntent.getIntExtra("arrivalStopId", 0);
 
         //
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -98,6 +107,9 @@ public class JourneySearchActivity extends AppCompatActivity {
 
                 //
                 adapter = new JourneySearchAdapter(journeys, JourneySearchActivity.this);
+                ((JourneySearchAdapter) adapter).setCustomerDepartureStopId(customerDepartureStop);
+                ((JourneySearchAdapter) adapter).setCustomerArrivalStopId(customerArrivalStop);
+
                 recyclerView.setAdapter(adapter);
                 Log.d("Response", "Set adapter.");
             }

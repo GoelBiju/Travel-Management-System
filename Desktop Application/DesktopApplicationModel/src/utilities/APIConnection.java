@@ -14,6 +14,7 @@ package utilities;
 //import java.util.ArrayList;
 //import java.util.Arrays;
 
+import datamodel.BindingModels.LoginBindingModel;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -42,7 +43,8 @@ public class APIConnection {
     
     private final ObjectMapper mapper;
     
-    private final String apiBaseUrl = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/";
+    private final String baseUrl = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/";
+    private final String apiBaseUrl = baseUrl + "api/";
     private final String apiBaseTestUrl = "http://localhost:60019/api/";
         
     public APIConnection() {
@@ -51,18 +53,19 @@ public class APIConnection {
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
     }
     
-    public Integer login(String endpoint){
+    public Integer login(LoginBindingModel loginModel){
         try
         {
-            String urlParameters = "grant_type=password&username=data1&password=data2&login_type=data3";
+            String urlParameters = "grant_type=password&username=" + loginModel.getEmployeeID() + 
+                    "&password=" + loginModel.getPassword() + "&login_type=employee";
 
             byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
 
-            String uri = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/api/" + endpoint;
+            String uri = this.baseUrl + "token";
             URL url = new URL(uri);
-
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
             connection.setDoOutput(true);
             connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("POST");
@@ -71,16 +74,17 @@ public class APIConnection {
             connection.setRequestProperty("Content-Length", Integer.toString(postDataLength ));
             connection.setUseCaches(false);
 
-                try(DataOutputStream wr = new DataOutputStream(connection.getOutputStream())){
-                    wr.write(postData);
-                }
-        
+            try(DataOutputStream wr = new DataOutputStream(connection.getOutputStream())){
+                wr.write(postData);
+            }
+            
+            return connection.getResponseCode();
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
         
-        return 
+        return 403;
     }
 
     

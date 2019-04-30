@@ -1,5 +1,7 @@
 package com.example.customermobileapplication.Utilities.API;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -57,6 +59,7 @@ public class CustomJsonObjectRequest extends Request {
     protected Response parseNetworkResponse(NetworkResponse response) {
         try {
             String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+            Log.d("Response", "Received JSON string: " + jsonString);
 
             return Response.success(gson.fromJson(jsonString, responseClass), HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {

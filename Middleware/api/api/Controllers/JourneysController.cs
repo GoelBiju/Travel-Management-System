@@ -64,8 +64,7 @@ namespace api.Controllers
             return journeys;
         }
 
-        // GET: api/Journeys/5
-        [AllowAnonymous]
+        // GET: api/Journeys/
         [HttpGet]
         [Route("{id:int}")]
         [ResponseType(typeof(JourneyDTO))]

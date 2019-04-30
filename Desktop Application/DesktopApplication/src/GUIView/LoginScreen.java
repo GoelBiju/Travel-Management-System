@@ -6,7 +6,7 @@
 package GUIView;
 import Controllers.LoginController;
 import datamodel.Coach;
-import datamodel.Login;
+import datamodel.BindingModels.LoginBindingModel;
 import java.net.*;
 import java.util.ArrayList;
 import java.lang.Object;
@@ -26,7 +26,7 @@ public class LoginScreen extends javax.swing.JFrame {
     
     
     LoginController loginController = new LoginController();
-    Login login = new Login();
+    LoginBindingModel login = new LoginBindingModel();
     
     
     /**
@@ -138,15 +138,13 @@ public class LoginScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         login.setEmployeeID(this.usernameField.getText());
-        login.setPassword(passwordField.getText());
+        login.setPassword(this.passwordField.getText());
         
         boolean accessGranted = loginController.loginRequest(login);
         
-        
         if (accessGranted == true){
             loginController.showCoachView();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Error processing login details. Please try again.");
         }
     }//GEN-LAST:event_loginBtnActionPerformed

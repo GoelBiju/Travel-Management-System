@@ -35,10 +35,14 @@ namespace WebApplication.Controllers
             return View(_Data);
         }
 
-        public ActionResult Details(string searchString)
+        public ActionResult Details(/*string sortOrder,*/ string searchString)
         {
+            //var employees = new List<EmployeeViewModel>();
             var _Data = new List<EmployeeViewModel>();
             List<EmployeeViewModel> searchedItems = new List<EmployeeViewModel>();
+
+            //ViewBag.FirstNSortParm = String.IsNullOrEmpty(sortOrder) ? "firstN_desc" : "";
+            //var employees = from employee in _Data select employee;
 
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("employees").Result;
             if (response.IsSuccessStatusCode)
@@ -48,9 +52,19 @@ namespace WebApplication.Controllers
                     var JsonString = response.Content.ReadAsStringAsync().Result;
                     _Data = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(JsonString);
                     
+                    //switch (sortOrder)
+                    //{
+                    //    case "firstN_desc":
+                    //        employees = employees.OrderByDescending(employee => employee.FirstName).ToList();
+                    //        break;
+                    //    default:
+                    //        employees = employees.OrderBy(employee => employee.LastName).ToList();
+                    //        break;
+                    //}
+
                     foreach(EmployeeViewModel employee in _Data)
                     {
-                        if(employee.JobRole == searchString)
+                        if (employee.JobRole == searchString)
                         {
                             searchedItems.Add(employee);
                         }

@@ -27,7 +27,9 @@
                 @Html.DisplayNameFor(model => model.EmployeeId)
             </th>
             <th>
+                @*<a asp-action="Details" asp-route-sortOrder="@ViewData["FirstNSortParm"]"> @Html.DisplayNameFor(model => model.FirstName)</a>*@
                 @Html.DisplayNameFor(model => model.FirstName)
+                @*@Html.ActionLink("First Name", "Details", new { sortOrder = ViewBag.FirstNSortParm})*@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastName)

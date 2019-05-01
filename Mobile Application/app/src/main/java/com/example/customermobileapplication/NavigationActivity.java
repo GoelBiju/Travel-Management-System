@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.customermobileapplication.Fragments.AccountFragment;
@@ -35,6 +36,9 @@ public class NavigationActivity extends AppCompatActivity
     private APIConnection apiConnection;
 
     private SharedPreferences pref;
+
+    private TextView textViewCustomerFullName;
+    private TextView textViewCustomerEmailAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,10 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        textViewCustomerFullName = (TextView) header.findViewById(R.id.textViewCustomerFullName);
+        textViewCustomerEmailAddress = (TextView) header.findViewById(R.id.textViewCustomerEmailAddress);
     }
 
     public void apiTest(final int customerId) {
@@ -87,10 +95,14 @@ public class NavigationActivity extends AppCompatActivity
             public void onSuccess(Object responseObject) {
                 Log.d("Response", "API test successful.");
 
-                Customer customer = (Customer) responseObject;
-
                 // Setup the app after success.
                 setupAppNavigation();
+
+                // Set the customer name and email address.
+                Customer customer = (Customer) responseObject;
+                textViewCustomerFullName.setText(customer.getFirstName() + " " + customer.getLastName());
+                textViewCustomerEmailAddress.setText(customer.getEmailAddress());
+
                 Toast.makeText(getApplicationContext(),  "Logged in successfully as: " + customer.getEmailAddress(), Toast.LENGTH_LONG).show();
             }
 

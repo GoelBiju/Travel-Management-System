@@ -38,6 +38,7 @@ namespace WebApplication.Controllers
         public ActionResult Details(string searchString)
         {
             var _Data = new List<EmployeeViewModel>();
+            List<EmployeeViewModel> searchedItems = new List<EmployeeViewModel>();
 
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("employees").Result;
             if (response.IsSuccessStatusCode)
@@ -45,18 +46,19 @@ namespace WebApplication.Controllers
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     var JsonString = response.Content.ReadAsStringAsync().Result;
-
-                    foreach (object obj in JsonString)
+                    _Data = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(JsonString);
+                    
+                    foreach(EmployeeViewModel employee in _Data)
                     {
-                        if (JsonString.Contains(searchString))
+                        if(employee.JobRole == searchString)
                         {
-                            _Data = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(JsonString);
+                            searchedItems.Add(employee);
                         }
                     }
                 }
             }
-            
-            return View(_Data);
+
+            return View(searchedItems);
         }
 
         [HttpGet]

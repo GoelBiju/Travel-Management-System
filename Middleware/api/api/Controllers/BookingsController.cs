@@ -76,7 +76,7 @@ namespace api.Controllers
                                BookedDateTime = b.BOOKED_DATETIME,
                                PassengersSenior = (int)b.PASSENGERS_SENIOR,
                                PassengersAdult = (int)b.PASSENGERS_ADULT,
-                               PassengersTeenager = (int)b.PASSENGERS_TEENAGER,
+                               PassengersChildren = (int)b.PASSENGERS_CHILDREN,
                                PassengersInfant = (int)b.PASSENGERS_INFANT,
                                AmountPaid = b.AMOUNT_PAID,
                                Status = b.STATUS
@@ -144,7 +144,7 @@ namespace api.Controllers
                     BookedDateTime = b.BOOKED_DATETIME,
                     PassengersSenior = (int)b.PASSENGERS_SENIOR,
                     PassengersAdult = (int)b.PASSENGERS_ADULT,
-                    PassengersTeenager = (int)b.PASSENGERS_TEENAGER,
+                    PassengersChildren = (int)b.PASSENGERS_CHILDREN,
                     PassengersInfant = (int)b.PASSENGERS_INFANT,
                     AmountPaid = b.AMOUNT_PAID,
                     Status = b.STATUS

@@ -19,5 +19,9 @@ namespace api.Models.BindingModels
         [JsonProperty("positionInRoute")]
         [JsonRequired]
         public int PositionInRoute { get; set; }
+
+        [JsonProperty("expectedArrivalDateTime")]
+        [JsonRequired]
+        public DateTime ExpectedArrivalDateTime { get; set; }
     }
 }

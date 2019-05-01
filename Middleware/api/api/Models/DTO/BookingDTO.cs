@@ -32,8 +32,8 @@ namespace api.Models.DTO
         [JsonProperty("passengersAdult")]
         public int PassengersAdult { get; set; }
 
-        [JsonProperty("passengersTeenager")]
-        public int PassengersTeenager { get; set; }
+        [JsonProperty("passengersChildren")]
+        public int PassengersChildren { get; set; }
 
         [JsonProperty("passengersInfant")]
         public int PassengersInfant { get; set; }

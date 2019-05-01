@@ -46,11 +46,16 @@ namespace api.Controllers
                 {
                     RouteId = (int)s.ROUTE_ID,
                     StopId = (int)s.STOP_ID,
-                    StopName = s.STOP.STOP_NAME,
-                    StopPostcode = s.STOP.STOP_POSTCODE,
-                    StopLatitude = s.STOP.STOP_LATITUDE,
-                    StopLongitude = s.STOP.STOP_LONGITUDE,
-                    PositionInRoute = (int)s.POSITION_IN_ROUTE
+                    PositionInRoute = (int)s.POSITION_IN_ROUTE,
+                    ExpectedArrivalDateTime = s.EXPECTED_ARRIVAL_DATETIME,
+                    Stop = new StopDTO()
+                    {
+                        StopId = (int)s.STOP.STOP_ID,
+                        StopName = s.STOP.STOP_NAME,
+                        StopPostcode = s.STOP.STOP_POSTCODE,
+                        StopLatitude = s.STOP.STOP_LATITUDE,
+                        StopLongitude = s.STOP.STOP_LONGITUDE
+                    }
                 }).ToListAsync();
 
             if (stops.Count == 0)
@@ -75,8 +80,16 @@ namespace api.Controllers
                 {
                     RouteId = (int)s.ROUTE_ID,
                     StopId = (int)s.STOP_ID,
-                    StopName = s.STOP.STOP_NAME,
-                    PositionInRoute = (int)s.POSITION_IN_ROUTE
+                    PositionInRoute = (int)s.POSITION_IN_ROUTE,
+                    ExpectedArrivalDateTime = s.EXPECTED_ARRIVAL_DATETIME,
+                    Stop = new StopDTO()
+                    {
+                        StopId = (int)s.STOP.STOP_ID,
+                        StopName = s.STOP.STOP_NAME,
+                        StopPostcode = s.STOP.STOP_POSTCODE,
+                        StopLatitude = s.STOP.STOP_LATITUDE,
+                        StopLongitude = s.STOP.STOP_LONGITUDE
+                    }
                 }).FirstOrDefaultAsync();
 
             if (stop == null)
@@ -132,7 +145,8 @@ namespace api.Controllers
             {
                 ROUTE_ID = routeStop.RouteId,
                 STOP_ID = routeStop.StopId,
-                POSITION_IN_ROUTE = routeStop.PositionInRoute
+                POSITION_IN_ROUTE = routeStop.PositionInRoute,
+                EXPECTED_ARRIVAL_DATETIME = routeStop.ExpectedArrivalDateTime
             };
 
             if (!ModelState.IsValid)

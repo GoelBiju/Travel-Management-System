@@ -20,12 +20,12 @@ namespace api.Models
         public decimal DEPARTING_STOP { get; set; }
         public decimal ARRIVAL_STOP { get; set; }
         public System.DateTime BOOKED_DATETIME { get; set; }
+        public string PAYMENT_ID { get; set; }
         public decimal PASSENGERS_SENIOR { get; set; }
         public decimal PASSENGERS_ADULT { get; set; }
-        public decimal PASSENGERS_TEENAGER { get; set; }
+        public decimal PASSENGERS_CHILDREN { get; set; }
         public decimal PASSENGERS_INFANT { get; set; }
         public decimal AMOUNT_PAID { get; set; }
-        public decimal AMOUNT_OF_PEOPLE { get; set; }
         public bool STATUS { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }

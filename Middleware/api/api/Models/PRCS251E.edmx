@@ -15,9 +15,10 @@
           <Property Name="DEPARTING_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ARRIVAL_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="BOOKED_DATETIME" Type="date" Nullable="false" />
+          <Property Name="PAYMENT_ID" Type="varchar2" MaxLength="100" Nullable="false" />
           <Property Name="PASSENGERS_SENIOR" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PASSENGERS_ADULT" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="PASSENGERS_TEENAGER" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PASSENGERS_CHILDREN" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PASSENGERS_INFANT" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="AMOUNT_PAID" Type="number" Precision="6" Scale="2" Nullable="false" />
           <Property Name="STATUS" Type="varchar2" MaxLength="10" Nullable="false" />
@@ -32,12 +33,12 @@
           <Property Name="DEPARTING_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ARRIVAL_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="BOOKED_DATETIME" Type="date" Nullable="false" />
+          <Property Name="PAYMENT_ID" Type="varchar2" MaxLength="100" Nullable="false" />
           <Property Name="PASSENGERS_SENIOR" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PASSENGERS_ADULT" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="PASSENGERS_TEENAGER" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PASSENGERS_CHILDREN" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PASSENGERS_INFANT" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="AMOUNT_PAID" Type="number" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="AMOUNT_OF_PEOPLE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STATUS" Type="number" Precision="1" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="COACHES">
@@ -132,6 +133,7 @@
           <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STOP_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="POSITION_IN_ROUTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EXPECTED_ARRIVAL_DATETIME" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="ROUTES">
           <Key>
@@ -488,9 +490,10 @@
           <Property Name="DEPARTING_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ARRIVAL_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="BOOKED_DATETIME" Type="DateTime" Nullable="false" />
+          <Property Name="PAYMENT_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PASSENGERS_SENIOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PASSENGERS_ADULT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="PASSENGERS_TEENAGER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PASSENGERS_CHILDREN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PASSENGERS_INFANT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="AMOUNT_PAID" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
@@ -509,12 +512,12 @@
           <Property Name="DEPARTING_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ARRIVAL_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="BOOKED_DATETIME" Type="DateTime" Nullable="false" />
+          <Property Name="PAYMENT_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PASSENGERS_SENIOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PASSENGERS_ADULT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="PASSENGERS_TEENAGER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PASSENGERS_CHILDREN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PASSENGERS_INFANT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="AMOUNT_PAID" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="AMOUNT_OF_PEOPLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STATUS" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CUSTOMER" Relationship="Self.BOOKINGS_HISTORY_CUSTOMER_ID_FK" FromRole="BOOKINGS_HISTORY" ToRole="CUSTOMERS" />
         </EntityType>
@@ -623,6 +626,7 @@
           <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STOP_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="POSITION_IN_ROUTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EXPECTED_ARRIVAL_DATETIME" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="ROUTE" Relationship="Self.ROUTE_STOPS_ROUTE_ID_FK" FromRole="ROUTE_STOPS" ToRole="ROUTES" />
           <NavigationProperty Name="STOP" Relationship="Self.ROUTE_STOPS_STOP_ID_FK" FromRole="ROUTE_STOPS" ToRole="STOPS" />
         </EntityType>
@@ -997,9 +1001,10 @@
                 <ScalarProperty Name="DEPARTING_STOP" ColumnName="DEPARTING_STOP" />
                 <ScalarProperty Name="ARRIVAL_STOP" ColumnName="ARRIVAL_STOP" />
                 <ScalarProperty Name="BOOKED_DATETIME" ColumnName="BOOKED_DATETIME" />
+                <ScalarProperty Name="PAYMENT_ID" ColumnName="PAYMENT_ID" />
                 <ScalarProperty Name="PASSENGERS_SENIOR" ColumnName="PASSENGERS_SENIOR" />
                 <ScalarProperty Name="PASSENGERS_ADULT" ColumnName="PASSENGERS_ADULT" />
-                <ScalarProperty Name="PASSENGERS_TEENAGER" ColumnName="PASSENGERS_TEENAGER" />
+                <ScalarProperty Name="PASSENGERS_CHILDREN" ColumnName="PASSENGERS_CHILDREN" />
                 <ScalarProperty Name="PASSENGERS_INFANT" ColumnName="PASSENGERS_INFANT" />
                 <ScalarProperty Name="AMOUNT_PAID" ColumnName="AMOUNT_PAID" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
@@ -1015,12 +1020,12 @@
                 <ScalarProperty Name="DEPARTING_STOP" ColumnName="DEPARTING_STOP" />
                 <ScalarProperty Name="ARRIVAL_STOP" ColumnName="ARRIVAL_STOP" />
                 <ScalarProperty Name="BOOKED_DATETIME" ColumnName="BOOKED_DATETIME" />
+                <ScalarProperty Name="PAYMENT_ID" ColumnName="PAYMENT_ID" />
                 <ScalarProperty Name="PASSENGERS_SENIOR" ColumnName="PASSENGERS_SENIOR" />
                 <ScalarProperty Name="PASSENGERS_ADULT" ColumnName="PASSENGERS_ADULT" />
-                <ScalarProperty Name="PASSENGERS_TEENAGER" ColumnName="PASSENGERS_TEENAGER" />
+                <ScalarProperty Name="PASSENGERS_CHILDREN" ColumnName="PASSENGERS_CHILDREN" />
                 <ScalarProperty Name="PASSENGERS_INFANT" ColumnName="PASSENGERS_INFANT" />
                 <ScalarProperty Name="AMOUNT_PAID" ColumnName="AMOUNT_PAID" />
-                <ScalarProperty Name="AMOUNT_OF_PEOPLE" ColumnName="AMOUNT_OF_PEOPLE" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1122,6 +1127,7 @@
                 <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
                 <ScalarProperty Name="STOP_ID" ColumnName="STOP_ID" />
                 <ScalarProperty Name="POSITION_IN_ROUTE" ColumnName="POSITION_IN_ROUTE" />
+                <ScalarProperty Name="EXPECTED_ARRIVAL_DATETIME" ColumnName="EXPECTED_ARRIVAL_DATETIME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

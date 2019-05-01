@@ -15,11 +15,13 @@
         
         - booked_datetime;
         
+        - payment_id;
+        
         - passengers_senior;
         
         - passengers_adult;
         
-        - passengers_teenager;
+        - passengers_children;
         
         - passengers_infant;
         
@@ -47,9 +49,10 @@ CREATE TABLE bookings(
         CONSTRAINT bookings_arrival_stop REFERENCES stops (stop_id),
     
     booked_datetime DATE 
-        CONSTRAINT bookings_booked_datetime NOT NULL,
-    
-    --amount_of_people NUMBER,
+        CONSTRAINT bookings_booked_datetime_nn NOT NULL,
+        
+    payment_id VARCHAR2(100)
+        CONSTRAINT bookings_payment_id_nn NOT NULL,
     
     passengers_senior NUMBER
         CONSTRAINT bookings_passengers_senior_nn NOT NULL,
@@ -57,8 +60,8 @@ CREATE TABLE bookings(
     passengers_adult NUMBER
         CONSTRAINT bookings_passengers_adult_nn NOT NULL,
         
-    passengers_teenager NUMBER
-        CONSTRAINT bookings_passengers_teenager_nn NOT NULL,
+    passengers_children NUMBER
+        CONSTRAINT bookings_passengers_children_nn NOT NULL,
         
     passengers_infant NUMBER
         CONSTRAINT bookings_passengers_infant_nn NOT NULL,

@@ -199,6 +199,8 @@
     <Compile Include="Controllers\RoutesArchiveController.cs" />
     <Compile Include="Controllers\RouteStopsController.cs" />
     <Compile Include="Controllers\StopsController.cs" />
+    <Compile Include="Models\BindingModels\BookingCreationBindingModel.cs" />
+    <Compile Include="Models\BindingModels\BookingUpdateBindingModel.cs" />
     <Compile Include="Models\BindingModels\JourneyUpdateBindingModel.cs" />
     <Compile Include="Models\BindingModels\RouteCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\RouteStopCreationBindingModel.cs" />

@@ -33,6 +33,9 @@ namespace api.Controllers
         //}
 
         // TODO: Get all bookings for a specific customer.
+        [HttpGet, Authorize(Roles = "Customer")]
+        [Route("customer/{id:int:}")]
+        [ResponseType(typeof(BookingDTO))]
         public IQueryable<BookingDTO> GetBookings(int id)
         {
             var bookings = from b in db.BOOKINGS.Where(b => b.CUSTOMER_ID == id)
@@ -47,9 +50,6 @@ namespace api.Controllers
                                    CoachId = (int)b.JOURNEY.COACH_ID,
                                    DepartureDateTime = b.JOURNEY.DEPARTURE_DATETIME,
                                    ArrivalDateTime = b.JOURNEY.ARRIVAL_DATETIME,
-                                   // TODO: Cannot get the stop information as it is not related
-                                   //       due to the fact that it can be null (if not null then issue 
-                                   //       another API request).
                                    CurrentStop = (b.JOURNEY.CURRENT_STOP != null) ? new StopDTO() : null,
                                    StopArrivalDateTime = b.JOURNEY.STOP_ARRIVAL_DATETIME,
                                    StopDepartedDateTime = b.JOURNEY.STOP_DEPARTED_DATETIME,
@@ -82,112 +82,121 @@ namespace api.Controllers
                                Status = b.STATUS
                            };
 
-
             return bookings;
         }
 
         // GET: api/Bookings/5
-        //[HttpGet, Authorize(Roles = "Customer")]
-        //[Route("{id:int}")]
-        //[ResponseType(typeof(BookingDTO))]
-        //public async Task<IHttpActionResult> GetBOOKING(decimal id)
-        //{
-        //    //ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
-        //    //var identification = User.Identity.GetUserId();
-
-        //    //BOOKING bOOKING = db.BOOKINGS.Find(id);
-        //    var booking = await db.BOOKINGS.Select(b =>
-        //        new BookingDTO()
-        //        {
-        //            BookingReference = (int)b.BOOKING_REFERENCE,
-        //            CustomerId = (int)b.CUSTOMER_ID,
-        //            Journey = new JourneyDTO()
-        //            {
-        //                JourneyId = (int)b.JOURNEY.JOURNEY_ID,
-        //                RouteId = (int)b.JOURNEY.ROUTE_ID,
-        //                CoachId = (int)b.JOURNEY.COACH_ID,
-        //                DepartureDateTime = b.JOURNEY.DEPARTURE_DATETIME,
-        //                ArrivalDateTime = b.JOURNEY.ARRIVAL_DATETIME,
-        //                // TODO: Cannot get the stop information as it is not related
-        //                //       due to the fact that it can be null (if not null then issue 
-        //                //       another API request).
-        //                CurrentStop = (int)b.JOURNEY.CURRENT_STOP,
-        //                StopArrivalDateTime = b.JOURNEY.STOP_ARRIVAL_DATETIME,
-        //                StopDepartedDateTime = b.JOURNEY.STOP_DEPARTED_DATETIME,
-        //                CoachStatus = b.JOURNEY.COACH_STATUS
-        //            },
-        //            DepartingStop = new StopDTO()
-        //            {
-        //                StopId = (int)b.STOP.STOP_ID,
-        //                StopName = b.STOP.STOP_NAME,
-        //                IsStation = b.STOP.IS_STATION,
-        //                StopPostcode = b.STOP.STOP_POSTCODE,
-        //                StopLatitude = b.STOP.STOP_LATITUDE,
-        //                StopLongitude = b.STOP.STOP_LONGITUDE
-        //            },
-        //            ArrivalStop = new StopDTO()
-        //            {
-        //                StopId = (int)b.STOP1.STOP_ID,
-        //                StopName = b.STOP.STOP_NAME,
-        //                IsStation = b.STOP.IS_STATION,
-        //                StopPostcode = b.STOP.STOP_POSTCODE,
-        //                StopLatitude = b.STOP.STOP_LATITUDE,
-        //                StopLongitude = b.STOP.STOP_LONGITUDE
-        //            },
-        //            BookedDateTime = b.BOOKED_DATETIME,
-        //            PassengersSenior = (int)b.PASSENGERS_SENIOR,
-        //            PassengersAdult = (int)b.PASSENGERS_ADULT,
-        //            PassengersTeenager = (int)b.PASSENGERS_TEENAGER,
-        //            PassengersInfant = (int)b.PASSENGERS_INFANT,
-        //            AmountPaid = b.AMOUNT_PAID,
-        //            Status = b.STATUS
-        //        }).SingleOrDefaultAsync(b => b.BookingReference == id);
-
-        //    if (booking == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(booking);
-        //}
-
-        // PUT: api/Bookings/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutBOOKING(decimal id, BOOKING bOOKING)
+        [HttpGet, Authorize(Roles = "Customer, Employee")]
+        [Route("{id:int}")]
+        [ResponseType(typeof(BookingDTO))]
+        public async Task<IHttpActionResult> GetBOOKING(decimal id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
+            //var identification = User.Identity.GetUserId();
 
-            if (id != bOOKING.BOOKING_REFERENCE)
-            {
-                return BadRequest();
-            }
+            //BOOKING bOOKING = db.BOOKINGS.Find(id);
 
-            db.Entry(bOOKING).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BOOKINGExists(id))
+            var booking = await db.BOOKINGS.Select(b =>
+                new BookingDTO()
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    BookingReference = (int)b.BOOKING_REFERENCE,
+                    CustomerId = (int)b.CUSTOMER_ID,
+                    Journey = new JourneyDTO()
+                    {
+                        JourneyId = (int)b.JOURNEY.JOURNEY_ID,
+                        RouteId = (int)b.JOURNEY.ROUTE_ID,
+                        CoachId = (int)b.JOURNEY.COACH_ID,
+                        DepartureDateTime = b.JOURNEY.DEPARTURE_DATETIME,
+                        ArrivalDateTime = b.JOURNEY.ARRIVAL_DATETIME,
+                        CurrentStopId = (int)b.JOURNEY.CURRENT_STOP,
+                        StopArrivalDateTime = b.JOURNEY.STOP_ARRIVAL_DATETIME,
+                        StopDepartedDateTime = b.JOURNEY.STOP_DEPARTED_DATETIME,
+                        CoachStatus = b.JOURNEY.COACH_STATUS,
+                        CurrentStop = (b.JOURNEY.CURRENT_STOP != null) ? db.STOPS.Select(s =>
+                        new StopDTO()
+                        {
+                            StopId = (int)s.STOP_ID,
+                            StopName = s.STOP_NAME,
+                            IsStation = s.IS_STATION,
+                            StopPostcode = s.STOP_POSTCODE,
+                            StopLatitude = s.STOP_LATITUDE,
+                            StopLongitude = s.STOP_LONGITUDE
+                        }).FirstOrDefault(s => s.StopId == b.JOURNEY.CURRENT_STOP) : null
+                    },
+                    DepartingStop = new StopDTO()
+                    {
+                        StopId = (int)b.STOP.STOP_ID,
+                        StopName = b.STOP.STOP_NAME,
+                        IsStation = b.STOP.IS_STATION,
+                        StopPostcode = b.STOP.STOP_POSTCODE,
+                        StopLatitude = b.STOP.STOP_LATITUDE,
+                        StopLongitude = b.STOP.STOP_LONGITUDE
+                    },
+                    ArrivalStop = new StopDTO()
+                    {
+                        StopId = (int)b.STOP1.STOP_ID,
+                        StopName = b.STOP.STOP_NAME,
+                        IsStation = b.STOP.IS_STATION,
+                        StopPostcode = b.STOP.STOP_POSTCODE,
+                        StopLatitude = b.STOP.STOP_LATITUDE,
+                        StopLongitude = b.STOP.STOP_LONGITUDE
+                    },
+                    BookedDateTime = b.BOOKED_DATETIME,
+                    PassengersSenior = (int)b.PASSENGERS_SENIOR,
+                    PassengersAdult = (int)b.PASSENGERS_ADULT,
+                    PassengersTeenager = (int)b.PASSENGERS_TEENAGER,
+                    PassengersInfant = (int)b.PASSENGERS_INFANT,
+                    AmountPaid = b.AMOUNT_PAID,
+                    Status = b.STATUS
+                }).SingleOrDefaultAsync(b => b.BookingReference == id);
+
+            if (booking == null)
+            {
+                return NotFound();
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(booking);
         }
 
+        // PUT: api/Bookings/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutBOOKING(decimal id, BOOKING bOOKING)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != bOOKING.BOOKING_REFERENCE)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    db.Entry(bOOKING).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!BOOKINGExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
+
         // POST: api/Bookings
-        [ResponseType(typeof(BOOKING))]
+        [HttpPost, Authorize(Roles = "Customer")]
+        [Route("")]
+        [ResponseType(typeof(void))]
         public IHttpActionResult PostBOOKING(BOOKING bOOKING)
         {
             if (!ModelState.IsValid)

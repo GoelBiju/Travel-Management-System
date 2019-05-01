@@ -28,8 +28,8 @@ namespace WebApplication.ViewModels
         [JsonProperty("coachCapacity")]
         public int CoachCapacity { get; set; }
 
-        [Display(Name = "Active")]
-        [JsonProperty("isActive")]
-        public bool IsActive { get; set; }
+        [Display(Name = "Available")]
+        [JsonProperty("isAvailable")]
+        public bool IsAvailable { get; set; }
     }
 }

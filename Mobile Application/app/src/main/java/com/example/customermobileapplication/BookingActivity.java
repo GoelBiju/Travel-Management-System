@@ -1,6 +1,8 @@
 package com.example.customermobileapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.constraint.solver.widgets.Helper;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.customermobileapplication.Model.Journey;
+import com.example.customermobileapplication.Model.Stop;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
 import com.example.customermobileapplication.Utilities.API.APIResponse;
 import com.example.customermobileapplication.Utilities.API.Config;
@@ -30,13 +33,16 @@ import org.json.JSONException;
 
 import java.math.BigDecimal;
 
-public class BookingActivity extends AppCompatActivity {
+public class BookingActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
     //
     private APIConnection apiConnection;
 
     //
     private int journeyId;
+
+    private int customerDepartureStopId;
+    private int customerArrivalStopId;
 
     //EditText editTextAmount;
     String amount = "";
@@ -78,8 +84,8 @@ public class BookingActivity extends AppCompatActivity {
         // Get the journey id passed on.
         Intent prevIntent = getIntent();
         journeyId = prevIntent.getIntExtra("journeyId", 0);
-        textViewCustomerDepartureStop.setText(prevIntent.getIntExtra("departureStopId", 0));
-        textViewCustomerArrivalStop.setText(prevIntent.getIntExtra("arrivalStopId", 0));
+        customerDepartureStopId = prevIntent.getIntExtra("departureStopId", 0);
+        customerArrivalStopId = prevIntent.getIntExtra("arrivalStopId", 0);
         Log.d("Response", "Passed on Journey ID: " + journeyId);
 
         // Start the PayPal service.
@@ -98,16 +104,19 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
-        // Load the journey information into the booking activity.
+        // Load the journey and stop information into the booking activity.
         loadJourneyInformation();
+        loadStopInformation();
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        // Reload journey information if the activity is resumed.
+        // Reload journey and stop information if the activity is resumed.
         loadJourneyInformation();
+        loadStopInformation();
     }
 
     private void bindAndSetupViews() {
@@ -119,7 +128,7 @@ public class BookingActivity extends AppCompatActivity {
         textViewArrivalStation = findViewById(R.id.textViewArrivalStation);
         textViewArrivalTime = findViewById(R.id.textViewArrivalTime);
         textViewCustomerDepartureStop = findViewById(R.id.textViewCustomerDepartureStop);
-        textViewCustomerDepartureStop = findViewById(R.id.textViewCustomerDepartureStop);
+        textViewCustomerArrivalStop = findViewById(R.id.textViewCustomerArrivalStop);
 
         textViewAmountToPay = findViewById(R.id.textViewAmountToPay);
 
@@ -148,6 +157,20 @@ public class BookingActivity extends AppCompatActivity {
         seniorsPicker.setWrapSelectorWheel(false);
         childrenPicker.setWrapSelectorWheel(false);
         infantsPicker.setWrapSelectorWheel(false);
+
+        // Set fixed fares for now.
+        // TODO: Fares and prices should be API request and select should be done before-hand.
+        adultsPicker.setOnValueChangedListener(this);
+        seniorsPicker.setOnValueChangedListener(this);
+        childrenPicker.setOnValueChangedListener(this);
+        infantsPicker.setOnValueChangedListener(this);
+    }
+
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        double totalToPay = (adultsPicker.getValue() * 5) + (seniorsPicker.getValue() * 2.5) +
+                (childrenPicker.getValue() * 3) + (infantsPicker.getValue());
+        textViewAmountToPay.setText(String.format("%.2f", totalToPay));
     }
 
     private void loadJourneyInformation() {
@@ -171,7 +194,65 @@ public class BookingActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(APIResponse errorResponse) {
+                // Show alert dialog with the error information.
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookingActivity.this);
+                alertDialogBuilder.setMessage("The journey you have selected is no longer valid or " +
+                        "there was an error fetching details in order to make a booking.")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Return to the login screen.
+                                Intent startIntent = new Intent(getApplicationContext(), NavigationActivity.class);
+                                startActivity(startIntent);
+
+                                // Finish this activity.
+                                finish();
+                            }
+                        })
+                        .setCancelable(false);
+
+                AlertDialog alert = alertDialogBuilder.create();
+                alert.setTitle("Journey Error");
+                alert.show();
+            }
+        });
+    }
+
+
+    private void loadStopInformation() {
+
+        apiConnection.getCustomJsonObject("stops/" + this.customerDepartureStopId, Stop.class, new CustomCallback() {
+            @Override
+            public void onSuccess(Object responseObject) {
+                Log.d("Response", "Successfully received stop object.");
+
+                Stop departureStop = (Stop) responseObject;
+                Log.d("Response", "Stop object received: " + departureStop.getStopId());
+
+                textViewCustomerDepartureStop.setText(departureStop.getStopName());
+            }
+
+            @Override
+            public void onFailure(APIResponse errorResponse) {
+                Log.d("Response", "Failed to retrieve stop with id: " + customerDepartureStopId);
+            }
+        });
+
+        apiConnection.getCustomJsonObject("stops/" + this.customerArrivalStopId, Stop.class, new CustomCallback() {
+            @Override
+            public void onSuccess(Object responseObject) {
+                Log.d("Response", "Successfully received stop object.");
+
+                Stop arrivalStop = (Stop) responseObject;
+                Log.d("Response", "Stop object received: " + arrivalStop.getStopId());
+
+                textViewCustomerArrivalStop.setText(arrivalStop.getStopName());
+            }
+
+            @Override
+            public void onFailure(APIResponse errorResponse) {
+                Log.d("Response", "Failed to retrieve stop with id: " + customerArrivalStopId);
             }
         });
     }

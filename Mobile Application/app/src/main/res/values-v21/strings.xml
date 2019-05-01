@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="day_of_travel">Day Of Travel</string>
+    <string name="day_of_travel">Tap to select Date Of Travel</string>
     <string name="find_your_journey">Find Your Journey</string>
     <string name="services">Services</string>
     <string name="account">Account</string>

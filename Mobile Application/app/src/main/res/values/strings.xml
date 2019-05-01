@@ -55,7 +55,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="day_of_travel">Day Of Travel</string>
-    <string name="departure_time">Departure Time</string>
+    <string name="departure_time">Tap to select Departure Time Period</string>
     <string name="find_your_journey">Find Your Journey</string>
     <string name="services">Services</string>
     <string name="account">Account</string>

@@ -100,7 +100,7 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
         buttonPayNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processPayment();
+                proceedToPayment();
             }
         });
 
@@ -141,6 +141,9 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
         //
         buttonPayNow = (Button)findViewById(R.id.buttonConfirmBooking);
         //editTextAmount = (EditText)findViewById(R.id.editAmount);
+
+        //
+        textViewAmountToPay.setText("0");
 
         //
         adultsPicker.setMinValue(0);
@@ -264,6 +267,35 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
         super.onDestroy();
     }
 
+    private void proceedToPayment() {
+        // Show alert dialog with the error information.
+        amount = textViewAmountToPay.getText().toString();
+        if (Double.parseDouble(amount) > 0) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookingActivity.this);
+            alertDialogBuilder.setMessage("Pay now via PayPal for your booking? \n\nPlease ensure that booking details are accurate.")
+                    .setPositiveButton("Pay Now", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            processPayment();
+                        }
+                    })
+                    .setNegativeButton("Go Back", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setCancelable(false);
+
+            AlertDialog alert = alertDialogBuilder.create();
+            alert.setTitle("Confirm Booking");
+            alert.show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Please select passengers for your booking.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void processPayment() {
         // Get the amount from the final amount textview.
         //amount = editTextAmount.getText().toString();
@@ -296,10 +328,10 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
                     }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED){
-                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cancelled payment.", Toast.LENGTH_SHORT).show();
             }
         } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid result from PayPal payment.", Toast.LENGTH_SHORT).show();
         }
     }
 }

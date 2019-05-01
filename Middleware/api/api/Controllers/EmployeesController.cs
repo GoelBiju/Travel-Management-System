@@ -122,7 +122,7 @@ namespace api.Controllers
                 FIRST_NAME = employee.FirstName,
                 LAST_NAME = employee.LastName,
                 JOB_ROLE = employee.JobRole,
-                EMPLOYEE_HASHED_PASSWORD = employee.Password,
+                EMPLOYEE_HASHED_PASSWORD = hashedPassword,
                 PASSWORD_SALT = generatedSalt
             };
 

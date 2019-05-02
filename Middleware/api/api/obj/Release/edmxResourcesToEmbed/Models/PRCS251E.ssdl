@@ -10,9 +10,10 @@
     <Property Name="DEPARTING_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ARRIVAL_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="BOOKED_DATETIME" Type="date" Nullable="false" />
+    <Property Name="PAYMENT_ID" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="PASSENGERS_SENIOR" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_ADULT" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PASSENGERS_TEENAGER" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PASSENGERS_CHILDREN" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_INFANT" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="AMOUNT_PAID" Type="number" Precision="6" Scale="2" Nullable="false" />
     <Property Name="STATUS" Type="varchar2" MaxLength="10" Nullable="false" />
@@ -27,12 +28,12 @@
     <Property Name="DEPARTING_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ARRIVAL_STOP" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="BOOKED_DATETIME" Type="date" Nullable="false" />
+    <Property Name="PAYMENT_ID" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="PASSENGERS_SENIOR" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_ADULT" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PASSENGERS_TEENAGER" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PASSENGERS_CHILDREN" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_INFANT" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="AMOUNT_PAID" Type="number" Precision="6" Scale="2" Nullable="false" />
-    <Property Name="AMOUNT_OF_PEOPLE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="STATUS" Type="number" Precision="1" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="COACHES">
@@ -127,6 +128,7 @@
     <Property Name="ROUTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="STOP_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="POSITION_IN_ROUTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EXPECTED_ARRIVAL_DATETIME" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="ROUTES">
     <Key>

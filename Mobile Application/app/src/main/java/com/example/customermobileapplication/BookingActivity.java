@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.constraint.solver.widgets.Helper;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.customermobileapplication.BindingModels.BookingCreationBindingModel;
 import com.example.customermobileapplication.Model.Journey;
 import com.example.customermobileapplication.Model.Stop;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
@@ -30,8 +32,13 @@ import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class BookingActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
@@ -39,6 +46,10 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
     private APIConnection apiConnection;
 
     //
+    private SharedPreferences pref;
+
+    //
+    private int customerId;
     private int journeyId;
 
     private int customerDepartureStopId;
@@ -66,6 +77,8 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
 
     Button buttonPayNow;
 
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.UK);
+
     public static final int PAYPAL_REQUEST_CODE = 7171;
 
     private static PayPalConfiguration config = new PayPalConfiguration()
@@ -80,6 +93,10 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
 
         // API Connection.
         apiConnection = new APIConnection(getApplicationContext(), getResources().getString(R.string.api_base_url));
+
+        //
+        pref = getApplicationContext().getSharedPreferences("userDetails", MODE_PRIVATE);
+        customerId = pref.getInt("customerId", 0);
 
         // Get the journey id passed on.
         Intent prevIntent = getIntent();
@@ -316,13 +333,19 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
                 if (confirmation != null) {
                     try {
                         // TODO: Create booking record by POST to the API with booking object and details.
-                        String paymentDetails = confirmation.toJSONObject().toString(4);
+                        JSONObject paymentConfirmation = confirmation.toJSONObject();
+                        String paymentDetails = paymentConfirmation.toString(4);
 
-                        startActivity(new Intent(this, BookingDetailsActivity.class)
-                                .putExtra("PaymentDetails", paymentDetails)
-                                .putExtra("PaymentAmount", amount)
-                        );
+                        processBooking(paymentConfirmation);
 
+//                        startActivity(new Intent(this, BookingDetailsActivity.class)
+//                                .putExtra("PaymentDetails", paymentDetails)
+//                                .putExtra("PaymentAmount", amount)
+
+
+                        // TODO: Re-direct to the my bookings fragment or Navigation Activity.
+
+//                        );
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -333,5 +356,65 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
         } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
             Toast.makeText(this, "Invalid result from PayPal payment.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    /**
+     *
+     * @param paymentConfirmation
+     */
+    private void processBooking(JSONObject paymentConfirmation) {
+        //
+        if (this.customerId > 0) {
+            pref = getApplicationContext().getSharedPreferences("userDetails", MODE_PRIVATE);
+
+            // Create the booking binding model.
+            BookingCreationBindingModel customerBooking = new BookingCreationBindingModel();
+            customerBooking.setCustomerId(this.customerId);
+            customerBooking.setJourneyId(this.journeyId);
+            customerBooking.setDepartingStopId(this.customerDepartureStopId);
+            customerBooking.setArrivalStopId(this.customerArrivalStopId);
+
+            // Get the create time from the payment confirmation response.
+            try {
+                Date bookedDateTime = formatter.parse(paymentConfirmation.getString("create_time"));
+                customerBooking.setBookedDateTime(bookedDateTime);
+                Log.d("Response", "Parsed datetime as: " + bookedDateTime.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                // In the event of an exception getting the create time from the PayPal API,
+                // then just use the current time.
+                customerBooking.setBookedDateTime(new Date());
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Log.d("Response", "Unable to parse/format the booked date time.");
+                customerBooking.setBookedDateTime(new Date());
+            }
+
+            // Get the PayPal transaction id in the event that the booking is altered or refunded(? - Need to confirm API)
+            try {
+                customerBooking.setPaymentId(paymentConfirmation.getString("id"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                customerBooking.setPaymentId("N/A");
+            }
+
+            customerBooking.setNumOfSeniors(seniorsPicker.getValue());
+            customerBooking.setNumOfAdults(adultsPicker.getValue());
+            customerBooking.setNumOfChildren(childrenPicker.getValue());
+            customerBooking.setNumOfInfants(infantsPicker.getValue());
+            customerBooking.setAmountPaid(Float.parseFloat(textViewAmountToPay.getText().toString()));
+
+            //
+        } else {
+            Log.d("Response", "Unable to process booking as customer id was not found.");
+        }
+    }
+
+    private void sendBooking(BookingCreationBindingModel bookingData) {
+        // Call the api to add the booking.
+        apiConnection.postCustomJsonObject("bookings", bookingData, Booking.class);
     }
 }

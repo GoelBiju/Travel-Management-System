@@ -1,28 +1,30 @@
-package com.example.customermobileapplication.Model;
+package com.example.customermobileapplication.BindingModels;
 
+import com.example.customermobileapplication.Model.Journey;
+import com.example.customermobileapplication.Model.Stop;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class Booking {
-
-    @SerializedName("bookingReference")
-    public int bookingReference;
+public class BookingCreationBindingModel {
 
     @SerializedName("customerId")
     public int customerId;
 
-    @SerializedName("journey")
-    public Journey journeyId;
+    @SerializedName("journeyId")
+    public int journeyId;
 
-    @SerializedName("departingStop")
-    public Stop departingStop;
+    @SerializedName("departingStopId")
+    public int departingStopId;
 
-    @SerializedName("arrivalStop")
-    public Stop arrivalStop;
+    @SerializedName("arrivalStopId")
+    public int arrivalStopId;
 
     @SerializedName("bookedDateTime")
     public Date bookedDateTime;
+
+    @SerializedName("paymentId")
+    public String paymentId;
 
     @SerializedName("passengersSenior")
     public int numOfSeniors;
@@ -39,17 +41,6 @@ public class Booking {
     @SerializedName("amountPaid")
     public float amountPaid;
 
-    @SerializedName("status")
-    public String status;
-
-    public int getBookingReference() {
-        return bookingReference;
-    }
-
-    public void setBookingReference(int bookingReference) {
-        this.bookingReference = bookingReference;
-    }
-
     public int getCustomerId() {
         return customerId;
     }
@@ -58,28 +49,28 @@ public class Booking {
         this.customerId = customerId;
     }
 
-    public Journey getJourneyId() {
+    public int getJourneyId() {
         return journeyId;
     }
 
-    public void setJourneyId(Journey journeyId) {
+    public void setJourneyId(int journeyId) {
         this.journeyId = journeyId;
     }
 
-    public Stop getDepartingStop() {
-        return departingStop;
+    public int getDepartingStopId() {
+        return departingStopId;
     }
 
-    public void setDepartingStop(Stop departingStop) {
-        this.departingStop = departingStop;
+    public void setDepartingStopId(int departingStopId) {
+        this.departingStopId = departingStopId;
     }
 
-    public Stop getArrivalStop() {
-        return arrivalStop;
+    public int getArrivalStopId() {
+        return arrivalStopId;
     }
 
-    public void setArrivalStop(Stop arrivalStop) {
-        this.arrivalStop = arrivalStop;
+    public void setArrivalStopId(int arrivalStopId) {
+        this.arrivalStopId = arrivalStopId;
     }
 
     public Date getBookedDateTime() {
@@ -88,6 +79,14 @@ public class Booking {
 
     public void setBookedDateTime(Date bookedDateTime) {
         this.bookedDateTime = bookedDateTime;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
     public int getNumOfSeniors() {
@@ -128,13 +127,5 @@ public class Booking {
 
     public void setAmountPaid(float amountPaid) {
         this.amountPaid = amountPaid;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

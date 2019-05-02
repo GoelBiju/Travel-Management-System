@@ -127,6 +127,11 @@ namespace api.Controllers
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
+            if (registrationDetails == null)
+            {
+                return BadRequest();
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

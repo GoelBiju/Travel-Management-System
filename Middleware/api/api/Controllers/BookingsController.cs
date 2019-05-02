@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using api.Models;
+using api.Models.BindingModels;
 using api.Models.DTO;
 using Microsoft.AspNet.Identity;
 
@@ -34,7 +35,7 @@ namespace api.Controllers
 
         // TODO: Get all bookings for a specific customer.
         [HttpGet, Authorize(Roles = "Customer")]
-        [Route("customer/{id:int:}")]
+        [Route("customer/{id:int}")]
         [ResponseType(typeof(BookingDTO))]
         public IQueryable<BookingDTO> GetBookings(int id)
         {
@@ -159,62 +160,43 @@ namespace api.Controllers
         }
 
         // PUT: api/Bookings/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutBOOKING(decimal id, BOOKING bOOKING)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != bOOKING.BOOKING_REFERENCE)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(bOOKING).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!BOOKINGExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        // POST: api/Bookings
-        [HttpPost, Authorize(Roles = "Customer")]
-        [Route("")]
+        [HttpPut, Authorize(Roles = "Employee")]
+        [Route("{id:int}")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PostBOOKING(BOOKING bOOKING)
+        public IHttpActionResult PutBOOKING(decimal id, [FromBody] BookingUpdateBindingModel booking)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.BOOKINGS.Add(bOOKING);
+            if (id != booking.BookingReference)
+            {
+                return BadRequest();
+            }
+
+            //db.Entry(bOOKING).State = EntityState.Modified;
+
+            var bookingRecord = db.BOOKINGS.FirstOrDefault(b => b.BOOKING_REFERENCE == id);
+
+            if (bookingRecord != null)
+            {
+                bookingRecord.STATUS = booking.Status;
+            }
+            else
+            {
+                return NotFound();
+            }
 
             try
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateConcurrencyException)
             {
-                if (BOOKINGExists(bOOKING.BOOKING_REFERENCE))
+                if (!BOOKINGExists(id))
                 {
-                    return Conflict();
+                    return NotFound();
                 }
                 else
                 {
@@ -222,11 +204,74 @@ namespace api.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = bOOKING.BOOKING_REFERENCE }, bOOKING);
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/Bookings
+        [HttpPost, Authorize(Roles = "Customer")]
+        [Route("")]
+        [ResponseType(typeof(BookingDTO))]
+        public async Task<IHttpActionResult> PostBOOKING([FromBody]BookingCreationBindingModel booking)
+        {
+            BOOKING newBooking = new BOOKING()
+            {
+                BOOKING_REFERENCE = 0,
+                CUSTOMER_ID = booking.CustomerId,
+                JOURNEY_ID = booking.JourneyId,
+                DEPARTING_STOP = booking.DepartingStopId,
+                ARRIVAL_STOP = booking.ArrivalStopId,
+                BOOKED_DATETIME = booking.BookedDateTime,
+                PAYMENT_ID = booking.PaymentId,
+                PASSENGERS_SENIOR = booking.PassengersSenior,
+                PASSENGERS_ADULT = booking.PassengersAdult,
+                PASSENGERS_CHILDREN = booking.PassengersChildren,
+                PASSENGERS_INFANT = booking.PassengersInfant,
+                AMOUNT_PAID = booking.AmountPaid,
+                STATUS = "Confirmed"
+            };
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.BOOKINGS.Add(newBooking);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                //if (BOOKINGExists(bOOKING.BOOKING_REFERENCE))
+                //{
+                //    return Conflict();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
+
+                return BadRequest();
+            }
+
+            // Get the latest booking by this customer; due to the fact that the booking reference is only updated by database.
+            var latestBooking = await db.BOOKINGS.OrderByDescending(b => b.BOOKED_DATETIME)
+                .Select(b => new BookingDTO()
+                {
+                    BookingReference = (int)b.BOOKING_REFERENCE,
+                    CustomerId = (int)b.CUSTOMER_ID
+                }).FirstOrDefaultAsync(b => b.CustomerId == booking.CustomerId);
+
+            //return CreatedAtRoute("DefaultApi", new { id = bOOKING.BOOKING_REFERENCE }, bOOKING);
+            HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Created, latestBooking);
+            return ResponseMessage(responseMessage);
         }
 
         // DELETE: api/Bookings/5
-        [ResponseType(typeof(BOOKING))]
+        [HttpDelete, Authorize(Roles = "Customer")]
+        [Route("{id:int}")]
+        [ResponseType(typeof(JOURNEY))]
         public IHttpActionResult DeleteBOOKING(decimal id)
         {
             BOOKING bOOKING = db.BOOKINGS.Find(id);

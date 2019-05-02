@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.customermobileapplication.Fragments.AccountFragment;
 import com.example.customermobileapplication.Fragments.HomeFragment;
+import com.example.customermobileapplication.Fragments.TimetableFragment;
 import com.example.customermobileapplication.Model.Customer;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
 import com.example.customermobileapplication.Utilities.API.APIResponse;
@@ -170,6 +171,10 @@ public class NavigationActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             fragment = new HomeFragment();
+//        } else if (id == R.id.nav_my_bookings) {
+//            fragment = new MyBookingsFragment();
+        } else if (id == R.id.nav_timetable) {
+            fragment = new TimetableFragment();
         } else if (id == R.id.nav_account) {
             fragment = new AccountFragment();
 //        } else if (id == R.id.nav_slideshow) {

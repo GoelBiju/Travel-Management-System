@@ -10,9 +10,10 @@
     <Property Name="DEPARTING_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ARRIVAL_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="BOOKED_DATETIME" Type="DateTime" Nullable="false" />
+    <Property Name="PAYMENT_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="PASSENGERS_SENIOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_ADULT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PASSENGERS_TEENAGER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PASSENGERS_CHILDREN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_INFANT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="AMOUNT_PAID" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
     <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
@@ -31,12 +32,12 @@
     <Property Name="DEPARTING_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ARRIVAL_STOP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="BOOKED_DATETIME" Type="DateTime" Nullable="false" />
+    <Property Name="PAYMENT_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="PASSENGERS_SENIOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_ADULT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PASSENGERS_TEENAGER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PASSENGERS_CHILDREN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="PASSENGERS_INFANT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="AMOUNT_PAID" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
-    <Property Name="AMOUNT_OF_PEOPLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="STATUS" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="CUSTOMER" Relationship="Self.BOOKINGS_HISTORY_CUSTOMER_ID_FK" FromRole="BOOKINGS_HISTORY" ToRole="CUSTOMERS" />
   </EntityType>
@@ -145,6 +146,7 @@
     <Property Name="ROUTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="STOP_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="POSITION_IN_ROUTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EXPECTED_ARRIVAL_DATETIME" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="ROUTE" Relationship="Self.ROUTE_STOPS_ROUTE_ID_FK" FromRole="ROUTE_STOPS" ToRole="ROUTES" />
     <NavigationProperty Name="STOP" Relationship="Self.ROUTE_STOPS_STOP_ID_FK" FromRole="ROUTE_STOPS" ToRole="STOPS" />
   </EntityType>

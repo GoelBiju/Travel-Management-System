@@ -10,9 +10,10 @@
           <ScalarProperty Name="DEPARTING_STOP" ColumnName="DEPARTING_STOP" />
           <ScalarProperty Name="ARRIVAL_STOP" ColumnName="ARRIVAL_STOP" />
           <ScalarProperty Name="BOOKED_DATETIME" ColumnName="BOOKED_DATETIME" />
+          <ScalarProperty Name="PAYMENT_ID" ColumnName="PAYMENT_ID" />
           <ScalarProperty Name="PASSENGERS_SENIOR" ColumnName="PASSENGERS_SENIOR" />
           <ScalarProperty Name="PASSENGERS_ADULT" ColumnName="PASSENGERS_ADULT" />
-          <ScalarProperty Name="PASSENGERS_TEENAGER" ColumnName="PASSENGERS_TEENAGER" />
+          <ScalarProperty Name="PASSENGERS_CHILDREN" ColumnName="PASSENGERS_CHILDREN" />
           <ScalarProperty Name="PASSENGERS_INFANT" ColumnName="PASSENGERS_INFANT" />
           <ScalarProperty Name="AMOUNT_PAID" ColumnName="AMOUNT_PAID" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
@@ -28,12 +29,12 @@
           <ScalarProperty Name="DEPARTING_STOP" ColumnName="DEPARTING_STOP" />
           <ScalarProperty Name="ARRIVAL_STOP" ColumnName="ARRIVAL_STOP" />
           <ScalarProperty Name="BOOKED_DATETIME" ColumnName="BOOKED_DATETIME" />
+          <ScalarProperty Name="PAYMENT_ID" ColumnName="PAYMENT_ID" />
           <ScalarProperty Name="PASSENGERS_SENIOR" ColumnName="PASSENGERS_SENIOR" />
           <ScalarProperty Name="PASSENGERS_ADULT" ColumnName="PASSENGERS_ADULT" />
-          <ScalarProperty Name="PASSENGERS_TEENAGER" ColumnName="PASSENGERS_TEENAGER" />
+          <ScalarProperty Name="PASSENGERS_CHILDREN" ColumnName="PASSENGERS_CHILDREN" />
           <ScalarProperty Name="PASSENGERS_INFANT" ColumnName="PASSENGERS_INFANT" />
           <ScalarProperty Name="AMOUNT_PAID" ColumnName="AMOUNT_PAID" />
-          <ScalarProperty Name="AMOUNT_OF_PEOPLE" ColumnName="AMOUNT_OF_PEOPLE" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -135,6 +136,7 @@
           <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
           <ScalarProperty Name="STOP_ID" ColumnName="STOP_ID" />
           <ScalarProperty Name="POSITION_IN_ROUTE" ColumnName="POSITION_IN_ROUTE" />
+          <ScalarProperty Name="EXPECTED_ARRIVAL_DATETIME" ColumnName="EXPECTED_ARRIVAL_DATETIME" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -14,7 +14,7 @@ namespace api.Models.DTO
         [JsonProperty("customerId")]
         public int CustomerId { get; set; }
 
-        [JsonProperty("journeyId")]
+        [JsonProperty("journey")]
         public JourneyDTO Journey { get; set; }
 
         [JsonProperty("departingStop")]

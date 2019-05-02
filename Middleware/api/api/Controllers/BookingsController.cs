@@ -260,7 +260,26 @@ namespace api.Controllers
                 .Select(b => new BookingDTO()
                 {
                     BookingReference = (int)b.BOOKING_REFERENCE,
-                    CustomerId = (int)b.CUSTOMER_ID
+                    CustomerId = (int)b.CUSTOMER_ID,
+                    Journey = new JourneyDTO()
+                    {
+                        JourneyId = (int)b.JOURNEY.JOURNEY_ID
+                    },
+                    DepartingStop = new StopDTO()
+                    {
+                        StopId = (int)b.STOP.STOP_ID
+                    },
+                    ArrivalStop = new StopDTO()
+                    {
+                        StopId = (int)b.STOP1.STOP_ID
+                    },
+                    BookedDateTime = b.BOOKED_DATETIME,
+                    PassengersSenior = (int)b.PASSENGERS_SENIOR,
+                    PassengersAdult = (int)b.PASSENGERS_ADULT,
+                    PassengersChildren = (int)b.PASSENGERS_CHILDREN,
+                    PassengersInfant = (int)b.PASSENGERS_INFANT,
+                    AmountPaid = b.AMOUNT_PAID,
+                    Status = b.STATUS
                 }).FirstOrDefaultAsync(b => b.CustomerId == booking.CustomerId);
 
             //return CreatedAtRoute("DefaultApi", new { id = bOOKING.BOOKING_REFERENCE }, bOOKING);

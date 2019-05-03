@@ -37,7 +37,7 @@ namespace api.Controllers
         [HttpGet, Authorize(Roles = "Customer")]
         [Route("customer/{id:int}")]
         [ResponseType(typeof(BookingDTO))]
-        public IQueryable<BookingDTO> GetBookings(int id)
+        public IQueryable<BookingDTO> GetBookingsByCustomer(int id)
         {
             var bookings = from b in db.BOOKINGS.Where(b => b.CUSTOMER_ID == id)
                            select new BookingDTO()
@@ -51,7 +51,69 @@ namespace api.Controllers
                                    CoachId = (int)b.JOURNEY.COACH_ID,
                                    DepartureDateTime = b.JOURNEY.DEPARTURE_DATETIME,
                                    ArrivalDateTime = b.JOURNEY.ARRIVAL_DATETIME,
-                                   CurrentStop = (b.JOURNEY.CURRENT_STOP != null) ? new StopDTO() : null,
+                                   CurrentStop = null,
+                                   StopArrivalDateTime = b.JOURNEY.STOP_ARRIVAL_DATETIME,
+                                   StopDepartedDateTime = b.JOURNEY.STOP_DEPARTED_DATETIME,
+                                   CoachStatus = b.JOURNEY.COACH_STATUS
+                               },
+                               DepartingStop = new StopDTO()
+                               {
+                                   StopId = (int)b.STOP.STOP_ID,
+                                   StopName = b.STOP.STOP_NAME,
+                                   IsStation = b.STOP.IS_STATION,
+                                   StopPostcode = b.STOP.STOP_POSTCODE,
+                                   StopLatitude = b.STOP.STOP_LATITUDE,
+                                   StopLongitude = b.STOP.STOP_LONGITUDE
+                               },
+                               ArrivalStop = new StopDTO()
+                               {
+                                   StopId = (int)b.STOP1.STOP_ID,
+                                   StopName = b.STOP.STOP_NAME,
+                                   IsStation = b.STOP.IS_STATION,
+                                   StopPostcode = b.STOP.STOP_POSTCODE,
+                                   StopLatitude = b.STOP.STOP_LATITUDE,
+                                   StopLongitude = b.STOP.STOP_LONGITUDE
+                               },
+                               BookedDateTime = b.BOOKED_DATETIME,
+                               PassengersSenior = (int)b.PASSENGERS_SENIOR,
+                               PassengersAdult = (int)b.PASSENGERS_ADULT,
+                               PassengersChildren = (int)b.PASSENGERS_CHILDREN,
+                               PassengersInfant = (int)b.PASSENGERS_INFANT,
+                               AmountPaid = b.AMOUNT_PAID,
+                               Status = b.STATUS
+                           };
+
+            return bookings;
+        }
+
+        [HttpGet, Authorize(Roles = "Employee")]
+        [Route("journey/{id:int}")]
+        [ResponseType(typeof(BookingDTO))]
+        public IQueryable<BookingDTO> GetBookingsByJourney(int id)
+        {
+            var bookings = from b in db.BOOKINGS.Where(b => b.JOURNEY_ID == id)
+                           select new BookingDTO()
+                           {
+                               BookingReference = (int)b.BOOKING_REFERENCE,
+                               CustomerId = (int)b.CUSTOMER_ID,
+                               Journey = new JourneyDTO()
+                               {
+                                   JourneyId = (int)b.JOURNEY.JOURNEY_ID,
+                                   RouteId = (int)b.JOURNEY.ROUTE_ID,
+                                   CoachId = (int)b.JOURNEY.COACH_ID,
+                                   DepartureDateTime = b.JOURNEY.DEPARTURE_DATETIME,
+                                   ArrivalDateTime = b.JOURNEY.ARRIVAL_DATETIME,
+                                   CurrentStop = (b.JOURNEY.CURRENT_STOP != null) ? db.STOPS.Select(s => 
+                                   new StopDTO()
+                                   {
+                                       StopId = (int)s.STOP_ID,
+                                       StopName = s.STOP_NAME,
+                                       IsStation = s.IS_STATION,
+                                       StopPostcode = s.STOP_POSTCODE,
+                                       StopLatitude = s.STOP_LATITUDE,
+                                       StopLongitude = s.STOP_LONGITUDE
+                                   }).FirstOrDefault(s => s.StopId == b.JOURNEY.CURRENT_STOP) : null,
+
                                    StopArrivalDateTime = b.JOURNEY.STOP_ARRIVAL_DATETIME,
                                    StopDepartedDateTime = b.JOURNEY.STOP_DEPARTED_DATETIME,
                                    CoachStatus = b.JOURNEY.COACH_STATUS
@@ -158,6 +220,9 @@ namespace api.Controllers
 
             return Ok(booking);
         }
+
+
+
 
         // PUT: api/Bookings/5
         [HttpPut, Authorize(Roles = "Employee")]

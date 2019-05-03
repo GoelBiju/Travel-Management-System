@@ -97,7 +97,6 @@ namespace api.Controllers
                     new StopDTO()
                     {
                         StopId = (int)s.STOP_ID,
-                        StopName = s.STOP_NAME,
                         IsStation = s.IS_STATION,
                         StopPostcode = s.STOP_POSTCODE,
                         StopLatitude = s.STOP_LATITUDE,

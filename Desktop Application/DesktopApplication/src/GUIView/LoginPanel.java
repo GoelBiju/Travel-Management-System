@@ -5,12 +5,16 @@
  */
 package GUIView;
 
+import GUIView.Shifts.ShiftsPanel;
+
 /**
  *
  * @author adbellas
  */
 public class LoginPanel extends javax.swing.JPanel {
 
+    private ApplicationFrame parent;
+    
     /**
      * Creates new form LoginPanel
      */
@@ -18,6 +22,10 @@ public class LoginPanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void setParent(ApplicationFrame applicationFrame) {
+        this.parent = applicationFrame;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,6 +118,11 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
+        this.parent.removeAll();
+        this.parent.applicationPanels.removeAll();
+        this.parent.applicationPanels.add(new ShiftsPanel());
+        this.parent.applicationPanels.repaint();
+        this.parent.revalidate();
     }//GEN-LAST:event_loginBtnActionPerformed
 
 

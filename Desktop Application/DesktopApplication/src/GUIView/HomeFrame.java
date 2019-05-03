@@ -32,8 +32,12 @@ public class HomeFrame extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        journeyPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        coachPanel = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        journeyButton = new javax.swing.JButton();
+        coachButton = new javax.swing.JButton();
 
         jButton1.setText("Sign Out");
 
@@ -42,31 +46,51 @@ public class HomeFrame extends javax.swing.JPanel {
 
         jLayeredPane1.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1247, Short.MAX_VALUE)
+        jLabel2.setText("Stop Information:");
+
+        javax.swing.GroupLayout journeyPanelLayout = new javax.swing.GroupLayout(journeyPanel);
+        journeyPanel.setLayout(journeyPanelLayout);
+        journeyPanelLayout.setHorizontalGroup(
+            journeyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(journeyPanelLayout.createSequentialGroup()
+                .addGap(558, 558, 558)
+                .addComponent(jLabel2)
+                .addContainerGap(604, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+        journeyPanelLayout.setVerticalGroup(
+            journeyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(journeyPanelLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel2)
+                .addContainerGap(379, Short.MAX_VALUE))
         );
 
-        jLayeredPane1.add(jPanel1, "card2");
+        jLayeredPane1.add(journeyPanel, "card2");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1247, Short.MAX_VALUE)
+        jLabel3.setText("Coach Details");
+
+        javax.swing.GroupLayout coachPanelLayout = new javax.swing.GroupLayout(coachPanel);
+        coachPanel.setLayout(coachPanelLayout);
+        coachPanelLayout.setHorizontalGroup(
+            coachPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, coachPanelLayout.createSequentialGroup()
+                .addContainerGap(587, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(595, 595, 595))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+        coachPanelLayout.setVerticalGroup(
+            coachPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(coachPanelLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel3)
+                .addContainerGap(358, Short.MAX_VALUE))
         );
 
-        jLayeredPane1.add(jPanel3, "card3");
+        jLayeredPane1.add(coachPanel, "card3");
+
+        journeyButton.setText("My Journey");
+
+        coachButton.setText("My Coach");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -87,6 +111,12 @@ public class HomeFrame extends javax.swing.JPanel {
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2))
                         .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(journeyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218)
+                .addComponent(coachButton, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,8 +126,12 @@ public class HomeFrame extends javax.swing.JPanel {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(journeyButton, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(coachButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLayeredPane1)
@@ -105,14 +139,19 @@ public class HomeFrame extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton coachButton;
+    private javax.swing.JPanel coachPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton journeyButton;
+    private javax.swing.JPanel journeyPanel;
     // End of variables declaration//GEN-END:variables
 }

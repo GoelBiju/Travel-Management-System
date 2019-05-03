@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUIView;
+package GUIView.Coach;
 
 import datamodel.Coach;
 import Controllers.CoachController; 
+import GUIView.LoginScreen;
 /**
  *
  * @author vcastellani

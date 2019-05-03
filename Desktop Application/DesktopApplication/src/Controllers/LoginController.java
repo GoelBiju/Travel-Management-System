@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import GUIView.CoachView;
+import GUIView.Coach.CoachView;
 import GUIView.LoginScreen;
 import datamodel.BindingModels.LoginBindingModel;
 import java.util.HashMap;

@@ -17,9 +17,6 @@ namespace api.Models.DTO
         [JsonProperty("coachId")]
         public int CoachId { get; set; }
 
-        [JsonProperty("shiftId")]
-        public int ShiftId { get; set; }
-
         [JsonProperty("requestedDateTime")]
         public DateTime RequestedDateTime { get; set; }
 

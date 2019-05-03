@@ -207,67 +207,10 @@
     <Compile Include="Models\BindingModels\RouteStopsDeletionBindingModel.cs" />
     <Compile Include="Models\BindingModels\ShiftCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\StopCreationBindingModel.cs" />
-    <Compile Include="Models\BOOKING.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BOOKINGS_HISTORY.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\COACH.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\COACHES_ARCHIVE.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CUSTOMER.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DTO\BookingDTO.cs" />
     <Compile Include="Models\DTO\ReplacementDTO.cs" />
     <Compile Include="Models\DTO\RouteStopDTO.cs" />
     <Compile Include="Models\DTO\StopDTO.cs" />
-    <Compile Include="Models\EMPLOYEE.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EMPLOYEES_ARCHIVE.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JOURNEY.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PRCS251E.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PRCS251E.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PRCS251E.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PRCS251E.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PRCS251E.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\REPLACEMENT.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ROUTE.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ROUTES_ARCHIVE.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ROUTE_STOPS.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SHIFT.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\STOP.cs">
-      <DependentUpon>PRCS251E.tt</DependentUpon>
-    </Compile>
     <Compile Include="Providers\OAuthProvider.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
@@ -338,16 +281,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\PRCS251E.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PRCS251E.edmx</DependentUpon>
-      <LastGenOutput>PRCS251E.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\PRCS251E.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PRCS251E.edmx</DependentUpon>
-      <LastGenOutput>PRCS251E.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -373,13 +306,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="libman.json" />
-    <EntityDeploy Include="Models\PRCS251E.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PRCS251E.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PRCS251E.edmx.diagram">
-      <DependentUpon>PRCS251E.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

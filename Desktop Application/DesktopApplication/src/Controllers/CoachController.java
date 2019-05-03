@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import GUIView.CoachView;
+import GUIView.Coach.CoachView;
 import datamodel.Coach;
 import utilities.APIConnection;
 

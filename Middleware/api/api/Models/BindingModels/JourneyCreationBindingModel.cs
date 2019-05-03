@@ -16,10 +16,6 @@ namespace api.Models.BindingModels
         [JsonRequired]
         public int RouteId { get; set; }
 
-        [JsonProperty("shiftId")]
-        [JsonRequired]
-        public int ShiftId { get; set; }
-
         [JsonProperty("coachId")]
         [JsonRequired]
         public int CoachId { get; set; }

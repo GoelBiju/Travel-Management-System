@@ -33,7 +33,6 @@ namespace api.Controllers
                            {
                                JourneyId = (int)j.JOURNEY_ID,
                                RouteId = (int)j.ROUTE_ID,
-                               ShiftId = (int)j.SHIFT_ID,
                                CoachId = (int)j.COACH_ID,
                                DepartureDateTime = j.DEPARTURE_DATETIME,
                                ArrivalDateTime = j.ARRIVAL_DATETIME,
@@ -77,7 +76,6 @@ namespace api.Controllers
                 {
                     JourneyId = (int)j.JOURNEY_ID,
                     RouteId = (int)j.ROUTE_ID,
-                    ShiftId = (int)j.SHIFT_ID,
                     CoachId = (int)j.COACH_ID,
                     DepartureDateTime = j.DEPARTURE_DATETIME,
                     ArrivalDateTime = j.ARRIVAL_DATETIME,
@@ -184,7 +182,6 @@ namespace api.Controllers
                 JOURNEY_ID = 0,
                 ROUTE_ID = journey.RouteId,
                 COACH_ID = journey.CoachId,
-                SHIFT_ID = journey.ShiftId,
                 DEPARTURE_DATETIME = journey.DepartureDateTime,
                 ARRIVAL_DATETIME = journey.ArrivalDateTime,
                 COACH_STATUS = "Scheduled"

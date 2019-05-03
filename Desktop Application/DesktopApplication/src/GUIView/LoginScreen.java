@@ -144,6 +144,7 @@ public class LoginScreen extends javax.swing.JFrame {
         
         if (accessGranted == true){
             loginController.showCoachView();
+            this.setVisible(false); 
         } else {
             JOptionPane.showMessageDialog(null, "Error processing login details. Please try again.");
         }

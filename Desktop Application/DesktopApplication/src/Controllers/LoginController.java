@@ -43,6 +43,6 @@ public class LoginController {
         CoachView coachView = new CoachView();
         coachView.setVisible(true);
         
-        loginScreen.setVisible(false);
+      //  loginScreen.setVisible(false);
     }
 }

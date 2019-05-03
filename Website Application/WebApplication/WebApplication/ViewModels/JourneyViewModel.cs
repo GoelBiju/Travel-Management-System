@@ -34,9 +34,9 @@ namespace WebApplication.ViewModels
         public DateTime ArrivalDateTime { get; set; }
 
         [Display(Name = "Current Stop")]
-        [JsonProperty("currentStop")]
+        [JsonProperty("currentStopId")]
         [DisplayFormat(NullDisplayText = "In-active")]
-        public int? CurrentStop { get; set; }
+        public int? CurrentStopId { get; set; }
 
         [Display(Name = "Current Stop - Arrival")]
         [JsonProperty("stopArrivalDateTime")]

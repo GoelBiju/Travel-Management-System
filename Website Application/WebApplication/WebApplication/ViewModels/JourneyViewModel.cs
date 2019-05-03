@@ -17,10 +17,6 @@ namespace WebApplication.ViewModels
         [JsonProperty("routeId")]
         public int RouteId { get; set; }
 
-        [Display(Name = "Shift No.")]
-        [JsonProperty("shiftId")]
-        public int ShiftId { get; set; }
-
         [Display(Name = "Coach No.")]
         [JsonProperty("coachId")]
         public int CoachId { get; set; }

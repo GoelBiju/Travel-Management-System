@@ -15,9 +15,7 @@ public class Journey {
     
     private int journeyId;
     
-    private int routeId;
-    
-    private int shiftId;
+    private int routeId;   
     
     private int coachId;
     

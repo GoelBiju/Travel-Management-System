@@ -36,4 +36,102 @@ public class Booking {
     private double amountPaid;
     
     private String status;
+
+    public int getBookingReference() {
+        return bookingReference;
+    }
+
+    public void setBookingReference(int bookingReference) {
+        this.bookingReference = bookingReference;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public Journey getJourney() {
+        return journey;
+    }
+
+    public void setJourney(Journey journey) {
+        this.journey = journey;
+    }
+
+    public Stop getDepartingStop() {
+        return departingStop;
+    }
+
+    public void setDepartingStop(Stop departingStop) {
+        this.departingStop = departingStop;
+    }
+
+    public Stop getArrivalStop() {
+        return arrivalStop;
+    }
+
+    public void setArrivalStop(Stop arrivalStop) {
+        this.arrivalStop = arrivalStop;
+    }
+
+    public Date getBookedDateTime() {
+        return bookedDateTime;
+    }
+
+    public void setBookedDateTime(Date bookedDateTime) {
+        this.bookedDateTime = bookedDateTime;
+    }
+
+    public int getPassengersSenior() {
+        return passengersSenior;
+    }
+
+    public void setPassengersSenior(int passengersSenior) {
+        this.passengersSenior = passengersSenior;
+    }
+
+    public int getPassengersAdult() {
+        return passengersAdult;
+    }
+
+    public void setPassengersAdult(int passengersAdult) {
+        this.passengersAdult = passengersAdult;
+    }
+
+    public int getPassengersTeenager() {
+        return passengersTeenager;
+    }
+
+    public void setPassengersTeenager(int passengersTeenager) {
+        this.passengersTeenager = passengersTeenager;
+    }
+
+    public int getPassengersInfant() {
+        return passengersInfant;
+    }
+
+    public void setPassengersInfant(int passengersInfant) {
+        this.passengersInfant = passengersInfant;
+    }
+
+    public double getAmountPaid() {
+        return amountPaid;
+    }
+
+    public void setAmountPaid(double amountPaid) {
+        this.amountPaid = amountPaid;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
 }

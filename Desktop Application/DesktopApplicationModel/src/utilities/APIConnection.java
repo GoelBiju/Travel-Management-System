@@ -51,7 +51,9 @@ public class APIConnection {
     
     private final String baseUrl = "http://web.socem.plymouth.ac.uk/IntProj/PRCS252E/";
     private final String apiBaseUrl = baseUrl + "api/";
-    private final String apiBaseTestUrl = "http://localhost:60019/api/";
+    
+    private final String baseTestUrl = "http://localhost:60019/";
+    private final String apiBaseTestUrl = baseTestUrl + "api/";
         
     private APIConnection() {
         
@@ -80,7 +82,7 @@ public class APIConnection {
             byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
 
-            String uri = this.baseUrl + "token";
+            String uri = this.baseTestUrl + "token";
             System.out.println("Login URL: " + uri);
             
             URL url = new URL(uri);
@@ -132,7 +134,8 @@ public class APIConnection {
     {
         ArrayList objectList = null;
         try {
-            String uri = this.apiBaseUrl + endPoint;
+            String uri = this.apiBaseTestUrl + endPoint;
+            System.out.println(uri);
             
             URL url = new URL(uri);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -144,6 +147,8 @@ public class APIConnection {
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Authorization", "Bearer " + this.accessToken);
             
+            System.out.println(connection.getResponseCode());
+            
             // Get the json string.
             if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 300) {
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -154,6 +159,8 @@ public class APIConnection {
                         sb.append(line + "\n");
                     }
                     br.close();
+                    
+                    System.out.println(sb.toString());
                     
                     // Convert the response object to the Java object.
                     objectList = this.mapper.readValue(sb.toString(), typeReference);
@@ -212,7 +219,7 @@ public class APIConnection {
     
     public Integer putData(String endpoint, Object obj) {
         try {
-            String uri = this.apiBaseUrl + endpoint;
+            String uri = this.apiBaseTestUrl + endpoint;
             URL url = new URL(uri);
             
             String json = mapper.writeValueAsString(obj);

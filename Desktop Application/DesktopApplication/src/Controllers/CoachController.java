@@ -16,19 +16,19 @@ import utilities.APIConnection;
 public class CoachController {
     private CoachView coachview; //View
     private Coach coachDataModel;//Model 
-    //private APIConnection apiConnection;
+    private APIConnection apiConnection;
     
     public CoachController(){
-        //apiConnection = APIConnection.getInstance();
+       apiConnection = APIConnection.getInstance();
     }
     
-//    public Coach getCoachData (Coach coachDatamodel){
-//        coachDataModel = apiConnection.getCoachData("6");
-//        return coachDataModel;
-//    }
-//    
-//    public void postCoachData(Coach dataModel){
-//        this.coachDataModel = dataModel;
-//        apiConnection.putData("coaches", dataModel);
-//    }
+    public Coach getCoachData (Coach coachDatamodel){
+        coachDataModel = apiConnection.getCoachData("6");
+        return coachDataModel;
+    }
+    
+    public void postCoachData(Coach dataModel){
+        this.coachDataModel = dataModel;
+        apiConnection.putData("coaches", dataModel);
+    }
 }

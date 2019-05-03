@@ -33,9 +33,6 @@ CREATE TABLE journeys(
     route_id NUMBER NOT NULL
         CONSTRAINT journeys_route_id_fk REFERENCES routes(route_id),
       
-    shift_id NUMBER NOT NULL
-        CONSTRAINT journeys_shift_id_fk REFERENCES shifts(shift_id),
-      
     coach_id NUMBER NOT NULL
         CONSTRAINT coaches_coach_id_fk REFERENCES coaches(coach_id),
         

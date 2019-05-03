@@ -29,9 +29,6 @@ CREATE TABLE replacements(
     coach_id NUMBER NOT NULL
         CONSTRAINT replacements_coach_id_fk REFERENCES coaches (coach_id),
         
-    shift_id NUMBER NOT NULL
-        CONSTRAINT replacements_shift_id_fk REFERENCES shifts (shift_id),
-        
     requested_datetime DATE 
         CONSTRAINT replacements_request_datetime_nn NOT NULL,
        

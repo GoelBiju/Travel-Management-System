@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.EmployeeId)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.JourneyId)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.StartDateTime)
         </th>
         <th>
@@ -35,14 +38,17 @@
             @Html.DisplayFor(modelItem => item.EmployeeId)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.JourneyId)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.StartDateTime)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EndDateTime)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id= item.ShiftId}) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ShiftId }) 
+            @Html.ActionLink("Edit", "Edit", new { id = item.ShiftId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ShiftId })
 
         </td>
     </tr>

@@ -16,7 +16,11 @@ namespace WebApplication.ViewModels
         [Display(Name = "Employee No.")]
         [JsonProperty("employeeId")]
         public string EmployeeId { get; set; }
-    
+
+        [Display(Name = "Journey No.")]
+        [JsonProperty("journeyId")]
+        public int JourneyId { get; set; }
+
         [Display(Name = "Start of Shift")]
         [JsonProperty("startDateTime")]
         [DataType(DataType.DateTime)]

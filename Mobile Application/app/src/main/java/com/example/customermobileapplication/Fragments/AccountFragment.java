@@ -19,6 +19,7 @@ import com.example.customermobileapplication.R;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
 import com.example.customermobileapplication.Utilities.API.APIResponse;
 import com.example.customermobileapplication.Utilities.API.CustomCallback;
+import com.example.customermobileapplication.Utilities.API.Helpers;
 import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 
 import org.json.JSONException;
@@ -123,7 +124,7 @@ public class AccountFragment extends Fragment {
 
                             //customerIDInput.setText(accountDetails.getCustomerId());
 
-                            dateOfBirthInput.setText(accountDetails.getDateOfBirth().toString());
+                            dateOfBirthInput.setText(Helpers.formatDateOnly(accountDetails.getDateOfBirth()));
 
                             addressLine1Input.setText(accountDetails.getAddressLineOne());
 

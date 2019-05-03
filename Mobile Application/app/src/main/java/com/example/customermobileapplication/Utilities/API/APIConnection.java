@@ -153,7 +153,7 @@ public class APIConnection {
         };
 
         // Set timeout and retry policy.
-        loginRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 20,
+        loginRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 2,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         //

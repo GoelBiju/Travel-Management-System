@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.customermobileapplication.BindingModels.BookingCreationBindingModel;
+import com.example.customermobileapplication.Model.Booking;
 import com.example.customermobileapplication.Model.Journey;
 import com.example.customermobileapplication.Model.Stop;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
@@ -331,6 +332,7 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
             if (resultCode == RESULT_OK) {
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if (confirmation != null) {
+                    Log.d("Response", "PayPal confirmation received.");
                     try {
                         // TODO: Create booking record by POST to the API with booking object and details.
                         JSONObject paymentConfirmation = confirmation.toJSONObject();
@@ -349,12 +351,18 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    Log.d("Response", "PayPal confirmation was null.");
                 }
             } else if (resultCode == Activity.RESULT_CANCELED){
-                Toast.makeText(this, "Cancelled payment.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Cancelled payment.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Unknown response result code: " + resultCode, Toast.LENGTH_SHORT).show();
             }
         } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-            Toast.makeText(this, "Invalid result from PayPal payment.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Response error - Invalid result from PayPal payment.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Request error: " + resultCode, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -376,29 +384,28 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
             customerBooking.setArrivalStopId(this.customerArrivalStopId);
 
             // Get the create time from the payment confirmation response.
+            Log.d("Response", paymentConfirmation.toString());
             try {
-                Date bookedDateTime = formatter.parse(paymentConfirmation.getString("create_time"));
+                Log.d("Response", paymentConfirmation.getJSONObject("response").getString("create_time"));
+                String createTime = paymentConfirmation.getJSONObject("response").getString("create_time");
+                Date bookedDateTime = Helpers.toAPIDateTime(createTime);
+
                 customerBooking.setBookedDateTime(bookedDateTime);
-                Log.d("Response", "Parsed datetime as: " + bookedDateTime.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
 
                 // In the event of an exception getting the create time from the PayPal API,
                 // then just use the current time.
                 customerBooking.setBookedDateTime(new Date());
-            } catch (ParseException e) {
-                e.printStackTrace();
-                Log.d("Response", "Unable to parse/format the booked date time.");
-                customerBooking.setBookedDateTime(new Date());
             }
 
             // Get the PayPal transaction id in the event that the booking is altered or refunded(? - Need to confirm API)
             try {
+                Log.d("Response", paymentConfirmation.getString("id"));
                 customerBooking.setPaymentId(paymentConfirmation.getString("id"));
             } catch (JSONException e) {
                 e.printStackTrace();
-
-                customerBooking.setPaymentId("N/A");
+                //customerBooking.setPaymentId("N/A");
             }
 
             customerBooking.setNumOfSeniors(seniorsPicker.getValue());
@@ -407,14 +414,33 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
             customerBooking.setNumOfInfants(infantsPicker.getValue());
             customerBooking.setAmountPaid(Float.parseFloat(textViewAmountToPay.getText().toString()));
 
-            //
+            // Send the booking to the API.
+            sendBooking(customerBooking);
+
+            Log.d("Response", "Sent booking to API.");
         } else {
             Log.d("Response", "Unable to process booking as customer id was not found.");
         }
     }
 
     private void sendBooking(BookingCreationBindingModel bookingData) {
+
         // Call the api to add the booking.
-        apiConnection.postCustomJsonObject("bookings", bookingData, Booking.class);
+        apiConnection.postCustomJsonObject("bookings", bookingData, Booking.class, new CustomCallback() {
+            @Override
+            public void onSuccess(Object responseObject) {
+                //
+                Booking confirmedBooking = (Booking) responseObject;
+
+                Log.d("Response", "Confirmed booking with booking reference: " + confirmedBooking.getBookingReference());
+                Toast.makeText(getApplicationContext(), "Booking confirmed with booking reference: " +
+                        confirmedBooking.getBookingReference(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(APIResponse errorResponse) {
+                Log.d("Response", "Unable to post booking to API.");
+            }
+        });
     }
 }

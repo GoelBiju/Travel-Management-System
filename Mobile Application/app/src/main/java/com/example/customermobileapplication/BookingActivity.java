@@ -388,9 +388,10 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
             try {
                 Log.d("Response", "Create Time: " + paymentConfirmation.getJSONObject("response").getString("create_time"));
                 String createTime = paymentConfirmation.getJSONObject("response").getString("create_time");
-                //Date bookedDateTime = Helpers.toAPIDateTime(createTime);
+                Date bookedDateTime = Helpers.toAPIDateTime(createTime);
 
-                customerBooking.setBookedDateTime(new Date());
+                //customerBooking.setBookedDateTime(new Date());
+                customerBooking.setBookedDateTime(bookedDateTime);
             } catch (JSONException e) {
                 e.printStackTrace();
 

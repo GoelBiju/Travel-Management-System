@@ -31,7 +31,7 @@ public class Helpers {
         Date formattedDate = new Date();
 
         try {
-            formattedDate = (new SimpleDateFormat(API_DATETIME_PATTERN, Locale.UK)).parse(dateTime);
+            formattedDate = new SimpleDateFormat(API_DATETIME_PATTERN, Locale.UK).parse(dateTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }

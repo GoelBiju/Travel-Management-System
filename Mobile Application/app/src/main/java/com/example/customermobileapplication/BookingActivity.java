@@ -386,26 +386,27 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
             // Get the create time from the payment confirmation response.
             Log.d("Response", paymentConfirmation.toString());
             try {
-                Log.d("Response", paymentConfirmation.getJSONObject("response").getString("create_time"));
+                Log.d("Response", "Create Time: " + paymentConfirmation.getJSONObject("response").getString("create_time"));
                 String createTime = paymentConfirmation.getJSONObject("response").getString("create_time");
-                Date bookedDateTime = Helpers.toAPIDateTime(createTime);
+                //Date bookedDateTime = Helpers.toAPIDateTime(createTime);
 
-                customerBooking.setBookedDateTime(bookedDateTime);
+                customerBooking.setBookedDateTime(new Date());
             } catch (JSONException e) {
                 e.printStackTrace();
 
-                // In the event of an exception getting the create time from the PayPal API,
+                // In the event of an exception getting the create time from the PayPal API.
                 // then just use the current time.
                 customerBooking.setBookedDateTime(new Date());
             }
 
             // Get the PayPal transaction id in the event that the booking is altered or refunded(? - Need to confirm API)
             try {
-                Log.d("Response", paymentConfirmation.getString("id"));
-                customerBooking.setPaymentId(paymentConfirmation.getString("id"));
+                Log.d("Response", paymentConfirmation.getJSONObject("response").getString("id"));
+                customerBooking.setPaymentId(paymentConfirmation.getJSONObject("response").getString("id"));
             } catch (JSONException e) {
                 e.printStackTrace();
-                //customerBooking.setPaymentId("N/A");
+                Log.d("Response","Payment Id was not found in the JSON Object.");
+                customerBooking.setPaymentId("N/A");
             }
 
             customerBooking.setNumOfSeniors(seniorsPicker.getValue());

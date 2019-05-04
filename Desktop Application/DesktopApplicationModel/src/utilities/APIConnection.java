@@ -73,7 +73,7 @@ public class APIConnection {
     }
     
     
-    public Integer login(LoginBindingModel loginModel){
+    public boolean login(LoginBindingModel loginModel){
         try
         {
             String urlParameters = "grant_type=password&username=" + loginModel.getEmployeeID() + 
@@ -117,16 +117,17 @@ public class APIConnection {
                     // Store the access token returned.
                     this.accessToken = tokenResponse.getAccessToken();
                     //System.out.println(tokenResponse.getAccessToken());
+                    return true;
                 }
             }
             
-            return connection.getResponseCode();
+            return false;
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
         
-        return 403;
+        return false;
     }
 
     

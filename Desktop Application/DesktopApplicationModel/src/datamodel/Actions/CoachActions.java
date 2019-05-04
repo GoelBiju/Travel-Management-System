@@ -58,7 +58,7 @@ public class CoachActions {
         loginModel.setPassword("testpassword123");
         loginModel.setLoginType("employee");
         
-        int response = actions.apiConnection.login(loginModel);
+        boolean response = actions.apiConnection.login(loginModel);
         System.out.println(response);
         
         //

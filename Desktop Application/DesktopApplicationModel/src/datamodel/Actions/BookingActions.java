@@ -66,8 +66,7 @@ public class BookingActions {
         if(status == BookingStatus.CHECKED_IN){
             updateBooking.setBookingReference(booking.getBookingReference());
             updateBooking.setStatus("Checked-In");
-        }
-        else if(status == BookingStatus.COMPLETE){
+        } else if (status == BookingStatus.COMPLETE){
             updateBooking.setBookingReference(booking.getBookingReference());
             updateBooking.setStatus("Complete");
         }

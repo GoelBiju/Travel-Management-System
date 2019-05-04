@@ -29,7 +29,8 @@ public class Journey {
     
     private Date stopDepartedDateTime;
     
-    private String coachStatus;
+    //private String coachStatus;
+    private CoachStatus coachStatus;
     
     private Route route;
     
@@ -99,11 +100,19 @@ public class Journey {
         this.stopDepartedDateTime = stopDepartedDateTime;
     }
 
-    public String getCoachStatus() {
+//    public String getCoachStatus() {
+//        return coachStatus;
+//    }
+//
+//    public void setCoachStatus(String coachStatus) {
+//        this.coachStatus = coachStatus;
+//    }
+
+    public CoachStatus getCoachStatus() {
         return coachStatus;
     }
 
-    public void setCoachStatus(String coachStatus) {
+    public void setCoachStatus(CoachStatus coachStatus) {
         this.coachStatus = coachStatus;
     }
 
@@ -122,6 +131,4 @@ public class Journey {
     public void setCurrentStop(Stop currentStop) {
         this.currentStop = currentStop;
     }
-    
-    
 }

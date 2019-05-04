@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import datamodel.*;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -57,9 +58,12 @@ public class APIConnection {
         
     private APIConnection() {
         
+        // TODO: Ensure that the enums are written and read correctly.
         this.mapper = new ObjectMapper()
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+//                .enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
+//                .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
         
         this.accessToken = "";
     }
@@ -118,7 +122,7 @@ public class APIConnection {
                     
                     // Store the access token returned.
                     this.accessToken = tokenResponse.getAccessToken();
-                    System.out.println(tokenResponse.getAccessToken());
+                    // System.out.println(tokenResponse.getAccessToken());
                     return true;
                 }
             }

@@ -18,14 +18,14 @@ namespace WebApplication
 
         static GlobalVariables()
         {
-            WebApiClient.BaseAddress = new Uri(BASE_URL + "api/");
+            WebApiClient.BaseAddress = new Uri(TEST_URL + "api/");
             ResetHeaders();
         }
 
         public static bool WebLogin(string username, string password)
         {
             HttpClient tempClient = new HttpClient();
-            tempClient.BaseAddress = new Uri(BASE_URL);
+            tempClient.BaseAddress = new Uri(TEST_URL);
 
             var request = new HttpRequestMessage(HttpMethod.Post, "token");
 

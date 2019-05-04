@@ -31,6 +31,7 @@ namespace api.Controllers
                          {
                              ShiftId = (int)s.SHIFT_ID,
                              EmployeeId = s.EMPLOYEE_ID,
+                             JourneyId = (int)s.JOURNEY_ID,
                              StartDateTime = s.START_DATETIME,
                              EndDateTime = s.END_DATETIME
                          };
@@ -52,6 +53,7 @@ namespace api.Controllers
                 {
                     ShiftId = (int)s.SHIFT_ID,
                     EmployeeId = s.EMPLOYEE_ID,
+                    JourneyId = (int)s.JOURNEY_ID,
                     StartDateTime = s.START_DATETIME,
                     EndDateTime = s.END_DATETIME
                 }).SingleOrDefaultAsync(s => s.ShiftId == id);
@@ -76,6 +78,7 @@ namespace api.Controllers
                 {
                     ShiftId = (int)s.SHIFT_ID,
                     EmployeeId = s.EMPLOYEE_ID,
+                    JourneyId = (int)s.JOURNEY_ID,
                     StartDateTime = s.START_DATETIME,
                     EndDateTime = s.END_DATETIME
                 }).Where(s => s.EmployeeId == employeeId).ToList();
@@ -133,6 +136,7 @@ namespace api.Controllers
             {
                 SHIFT_ID = 0,
                 EMPLOYEE_ID = shift.EmployeeId,
+                JOURNEY_ID = shift.JourneyId,
                 START_DATETIME = shift.StartDateTime,
                 END_DATETIME = shift.EndDateTime
             };

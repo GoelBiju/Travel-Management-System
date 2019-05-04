@@ -18,11 +18,16 @@ public class DesktopApplication {
      */
     public static void main(String[] args) {
         
-        // 
+        // Instantiate the model for the controller.
+        
+        
+        // Instantiate the controller.
         LoginController loginController = new LoginController();
         
-        //
+        // Instantiate the view.
         
+        
+        // Set view to visible.
     }
     
 }

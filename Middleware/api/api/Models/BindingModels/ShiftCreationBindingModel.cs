@@ -12,6 +12,10 @@ namespace api.Models.BindingModels
         [JsonRequired]
         public string EmployeeId { get; set; }
 
+        [JsonProperty("journeyId")]
+        [JsonRequired]
+        public int JourneyId { get; set; }
+
         [JsonProperty("startDateTime")]
         [JsonRequired]
         public DateTime StartDateTime { get; set; }

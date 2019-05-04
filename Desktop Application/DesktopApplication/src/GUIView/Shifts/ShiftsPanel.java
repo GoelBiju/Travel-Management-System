@@ -7,6 +7,7 @@ package GUIView.Shifts;
 
 import GUIView.ApplicationFrame;
 import GUIView.HomePanel;
+import GUIView.LoginPanel;
 
 /**
  *
@@ -44,6 +45,11 @@ public class ShiftsPanel extends javax.swing.JPanel {
         startShiftButton = new javax.swing.JButton();
 
         signoutButton.setText("Sign Out");
+        signoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signoutButtonActionPerformed(evt);
+            }
+        });
 
         shiftsLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         shiftsLabel.setText("Your Shifts");
@@ -121,6 +127,16 @@ public class ShiftsPanel extends javax.swing.JPanel {
         this.parent.applicationPanels.revalidate();
         
     }//GEN-LAST:event_startShiftButtonActionPerformed
+
+    private void signoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutButtonActionPerformed
+        // TODO add your handling code here:
+        LoginPanel login = new LoginPanel();
+        this.parent.applicationPanels.removeAll();
+        login.setParent(this.parent);
+        this.parent.applicationPanels.add(login);
+        this.parent.applicationPanels.repaint();
+        this.parent.applicationPanels.revalidate();
+    }//GEN-LAST:event_signoutButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

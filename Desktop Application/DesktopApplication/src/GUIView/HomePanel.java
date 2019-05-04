@@ -45,6 +45,11 @@ public class HomePanel extends javax.swing.JPanel {
         coachPanelButton = new javax.swing.JButton();
 
         jButton1.setText("Sign Out");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("NationalCoach - Driver");
@@ -162,6 +167,17 @@ public class HomePanel extends javax.swing.JPanel {
         this.homeLayeredPane.revalidate();
         
     }//GEN-LAST:event_coachPanelButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        LoginPanel login = new LoginPanel();
+        this.parent.applicationPanels.removeAll();
+        login.setParent(this.parent);
+        this.parent.applicationPanels.add(login);
+        this.parent.applicationPanels.repaint();
+        this.parent.applicationPanels.revalidate();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
 

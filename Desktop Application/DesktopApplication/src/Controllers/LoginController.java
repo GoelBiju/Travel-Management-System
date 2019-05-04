@@ -29,14 +29,14 @@ public class LoginController {
         
         // Call the login request as an employee.
         loginModel.setLoginType("employee");
-        int responseCode = apiConnection.login(loginModel);
+        boolean responseCode = apiConnection.login(loginModel);
         //HashMap<String, Object> loginResponse = apiConnection.PostData("employees/login", loginModel);
         //Integer responseCode = (Integer) loginResponse.get("responseCode");
-        
-        if (responseCode >= 200 && responseCode < 300){
-            return true;
-        }
-        return false;
+//        
+//        if (responseCode >= 200 && responseCode < 300){
+//            return true;
+//        }
+        return responseCode;
     }
     
     public void showCoachView(){

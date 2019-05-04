@@ -136,4 +136,5 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     // End of variables declaration//GEN-END:variables
+
 }

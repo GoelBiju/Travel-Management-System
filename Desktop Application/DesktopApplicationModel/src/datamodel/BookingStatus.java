@@ -9,7 +9,7 @@ package datamodel;
  *
  * @author vcastellani
  */
-public enum BookingStatusEnum {
+public enum BookingStatus {
     CONFIRMED,
     CHECKED_IN,
     COMPLETE

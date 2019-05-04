@@ -5,17 +5,25 @@
  */
 package GUIView.Shifts;
 
+import GUIView.ApplicationFrame;
+import GUIView.HomePanel;
+
 /**
  *
  * @author Goel
  */
 public class ShiftsPanel extends javax.swing.JPanel {
 
+    private ApplicationFrame parent;
     /**
      * Creates new form ShiftsPanel
      */
     public ShiftsPanel() {
         initComponents();
+    }
+    
+        public void setParent(ApplicationFrame applicationFrame) {
+        this.parent = applicationFrame;
     }
 
     /**
@@ -47,6 +55,11 @@ public class ShiftsPanel extends javax.swing.JPanel {
         downButton.setText("DOWN");
 
         startShiftButton.setText("Start Shift");
+        startShiftButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startShiftButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -92,6 +105,22 @@ public class ShiftsPanel extends javax.swing.JPanel {
                 .addGap(35, 35, 35))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void startShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startShiftButtonActionPerformed
+        // TODO add your handling code here:
+        
+        //Logic
+        
+        //Switch to shift panel on the applicaiton frame
+        HomePanel homePanel = new HomePanel(); 
+        homePanel.setParent(this.parent);
+       
+        this.parent.applicationPanels.removeAll();
+        this.parent.applicationPanels.add(homePanel);
+        this.parent.applicationPanels.repaint();
+        this.parent.applicationPanels.revalidate();
+        
+    }//GEN-LAST:event_startShiftButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

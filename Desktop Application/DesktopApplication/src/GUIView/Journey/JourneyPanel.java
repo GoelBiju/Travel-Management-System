@@ -5,17 +5,26 @@
  */
 package GUIView.Journey;
 
+import GUIView.ApplicationFrame;
+import GUIView.HomePanel;
+
 /**
  *
  * @author Goel
  */
 public class JourneyPanel extends javax.swing.JPanel {
 
+    private HomePanel parent;
+    
     /**
      * Creates new form JourneyPanel
      */
     public JourneyPanel() {
         initComponents();
+    }
+    
+    public void setParent(HomePanel homePanel) {
+        this.parent = homePanel;
     }
 
     /**
@@ -343,4 +352,5 @@ public class JourneyPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
+
 }

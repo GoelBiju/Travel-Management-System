@@ -9,7 +9,7 @@ package datamodel;
  *
  * @author Goel
  */
-class Route {
+public class Route {
     
     private int routeId;
     

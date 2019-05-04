@@ -5,17 +5,25 @@
  */
 package GUIView.Coach;
 
+import GUIView.HomePanel;
+
 /**
  *
  * @author Goel
  */
 public class CoachPanel extends javax.swing.JPanel {
 
+    private HomePanel parent;
+    
     /**
      * Creates new form CoachPanel
      */
     public CoachPanel() {
         initComponents();
+    }
+
+    public void setParent(HomePanel homePanel) {
+        this.parent = homePanel;
     }
 
     /**
@@ -27,19 +35,157 @@ public class CoachPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        coachModelLabel = new javax.swing.JLabel();
+        regPlateLabel = new javax.swing.JLabel();
+        coachMakeLabel = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        coachStatusLabel = new javax.swing.JLabel();
+        breakdownAlertBtn = new javax.swing.JButton();
+        capacityLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        capacityLabelInput = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(1107, 716));
+        setMinimumSize(new java.awt.Dimension(1107, 716));
+        setPreferredSize(new java.awt.Dimension(1107, 716));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Model:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Make:");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Reg Plate:");
+
+        coachModelLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        coachModelLabel.setText("N/A");
+
+        regPlateLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        regPlateLabel.setText("N/A");
+
+        coachMakeLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        coachMakeLabel.setText("N/A");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Status:");
+
+        coachStatusLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        coachStatusLabel.setText("N/A");
+
+        breakdownAlertBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        breakdownAlertBtn.setText("Coach Brokendown");
+        breakdownAlertBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                breakdownAlertBtnActionPerformed(evt);
+            }
+        });
+
+        capacityLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        capacityLabel.setText("Capacity:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Alert Breakdown");
+
+        capacityLabelInput.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        capacityLabelInput.setText("N/A");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Coach Details");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(capacityLabelInput))
+                    .addComponent(capacityLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel10))
+                                .addGap(64, 64, 64)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(coachStatusLabel)
+                                    .addComponent(coachMakeLabel)
+                                    .addComponent(regPlateLabel)
+                                    .addComponent(coachModelLabel))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(256, 256, 256)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(227, 227, 227)
+                                .addComponent(breakdownAlertBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(breakdownAlertBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(coachStatusLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(coachMakeLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(coachModelLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(regPlateLabel))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(capacityLabel)
+                    .addComponent(capacityLabelInput))
+                .addContainerGap(480, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void breakdownAlertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breakdownAlertBtnActionPerformed
+        //Get the coach reg plate
+        System.out.println("Coach breakdown alert sent ");
+       // updateCoachStatus();
+    }//GEN-LAST:event_breakdownAlertBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton breakdownAlertBtn;
+    private javax.swing.JLabel capacityLabel;
+    private javax.swing.JLabel capacityLabelInput;
+    private javax.swing.JLabel coachMakeLabel;
+    private javax.swing.JLabel coachModelLabel;
+    private javax.swing.JLabel coachStatusLabel;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel regPlateLabel;
     // End of variables declaration//GEN-END:variables
 }

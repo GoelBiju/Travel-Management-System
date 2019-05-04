@@ -118,8 +118,10 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
+        ShiftsPanel shiftsPanel = new ShiftsPanel();
+        shiftsPanel.setParent(this.parent);
         this.parent.applicationPanels.removeAll();
-        this.parent.applicationPanels.add(new ShiftsPanel());
+        this.parent.applicationPanels.add(shiftsPanel);
         this.parent.applicationPanels.repaint();
         this.parent.applicationPanels.revalidate();
     }//GEN-LAST:event_loginBtnActionPerformed

@@ -12,7 +12,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import datamodel.BindingModels.BookingUpdateBindingModel;
 import datamodel.BindingModels.LoginBindingModel;
-import datamodel.BookingStatusEnum;
+import datamodel.BookingStatus;
 import datamodel.Customer;
 
 /**
@@ -52,9 +52,7 @@ public class BookingActions {
         return customerBookings;
     }
     
-<<<<<<< HEAD
-    public boolean updateBookingStatus(Booking booking, BookingStatusEnum status){
-=======
+    
     /**
      * 
      * @param booking
@@ -62,15 +60,14 @@ public class BookingActions {
      * @return 
      */
     public boolean updateBookingStatus(Booking booking, BookingStatus status){
->>>>>>> 97db19d5f4db6e3b398a6e58c4fa715ab8ba4e88
         
         BookingUpdateBindingModel updateBooking = new BookingUpdateBindingModel();
         
-        if(status == BookingStatusEnum.CHECKED_IN){
+        if(status == BookingStatus.CHECKED_IN){
             updateBooking.setBookingReference(booking.getBookingReference());
             updateBooking.setStatus("Checked-In");
         }
-        else if(status == BookingStatusEnum.COMPLETE){
+        else if(status == BookingStatus.COMPLETE){
             updateBooking.setBookingReference(booking.getBookingReference());
             updateBooking.setStatus("Complete");
         }

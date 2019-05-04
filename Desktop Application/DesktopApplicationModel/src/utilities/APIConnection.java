@@ -100,6 +100,8 @@ public class APIConnection {
                 wr.write(postData);
             }
             
+            System.out.println(connection.getResponseCode());
+            
             // Read the response body.
             if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 300) {
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -116,7 +118,7 @@ public class APIConnection {
                     
                     // Store the access token returned.
                     this.accessToken = tokenResponse.getAccessToken();
-                    //System.out.println(tokenResponse.getAccessToken());
+                    System.out.println(tokenResponse.getAccessToken());
                     return true;
                 }
             }

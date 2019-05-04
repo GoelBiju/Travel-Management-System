@@ -30,8 +30,8 @@ public class EmployeeActions {
     public boolean employeeLogin(LoginBindingModel bindingModel) {
         
         boolean validated = false;
-        if ((bindingModel.getEmployeeID().isEmpty() != false) && (bindingModel.getLoginType().isEmpty() != false)
-                && (bindingModel.getPassword().isEmpty() != false)) {
+        if (!bindingModel.getEmployeeID().isEmpty() && !bindingModel.getLoginType().isEmpty()
+                && !bindingModel.getPassword().isEmpty()) {
 
             validated = this.apiConnection.login(bindingModel);
         }

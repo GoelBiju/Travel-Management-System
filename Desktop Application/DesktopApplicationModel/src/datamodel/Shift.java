@@ -17,6 +17,8 @@ public class Shift {
     
     private String employeeId;
     
+    private int journeyId;
+    
     private Date startDatetime;
     
     private Date endDatetime;
@@ -38,6 +40,14 @@ public class Shift {
         this.employeeId = employeeId;
     }
 
+    public int getJourneyId() {
+        return journeyId;
+    }
+
+    public void setJourneyId(int journeyId) {
+        this.journeyId = journeyId;
+    }
+    
     public Date getStartDatetime() {
         return startDatetime;
     }

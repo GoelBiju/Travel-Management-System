@@ -51,14 +51,6 @@ public class Journey {
         this.routeId = routeId;
     }
 
-    public int getShiftId() {
-        return shiftId;
-    }
-
-    public void setShiftId(int shiftId) {
-        this.shiftId = shiftId;
-    }
-
     public int getCoachId() {
         return coachId;
     }

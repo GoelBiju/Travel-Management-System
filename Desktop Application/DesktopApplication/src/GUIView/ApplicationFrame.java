@@ -92,8 +92,10 @@ public class ApplicationFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ApplicationFrame frame = new ApplicationFrame();
+                LoginPanel login = new LoginPanel();
                 frame.applicationPanels.removeAll();
-                frame.applicationPanels.add(new LoginPanel());
+                login.setParent(frame);
+                frame.applicationPanels.add(login);
                 frame.applicationPanels.repaint();
                 frame.applicationPanels.revalidate();
                 frame.setVisible(true);

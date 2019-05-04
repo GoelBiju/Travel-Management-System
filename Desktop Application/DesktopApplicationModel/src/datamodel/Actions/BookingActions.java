@@ -28,14 +28,41 @@ public class BookingActions {
         this.apiConnection = APIConnection.getInstance();
     }
     
+    /**
+     * 
+     * @param bookingId
+     * @return 
+     */
+    public Booking getBooking(Integer bookingId) {
+        
+        Booking customerBooking = (Booking) apiConnection.getData("bookings", Booking.class, bookingId.toString());
+        
+        return customerBooking;
+    }
+    
+    /**
+     * 
+     * @param journeyId
+     * @return 
+     */
     public ArrayList<Booking> getBookingsByJourney (Integer journeyId){
         
         ArrayList<Booking> customerBookings = (ArrayList<Booking>) apiConnection.getListData("bookings/journey/" + journeyId, new TypeReference<List<Booking>>(){});
         
         return customerBookings;
-    }   
+    }
     
+<<<<<<< HEAD
     public boolean updateBookingStatus(Booking booking, BookingStatusEnum status){
+=======
+    /**
+     * 
+     * @param booking
+     * @param status
+     * @return 
+     */
+    public boolean updateBookingStatus(Booking booking, BookingStatus status){
+>>>>>>> 97db19d5f4db6e3b398a6e58c4fa715ab8ba4e88
         
         BookingUpdateBindingModel updateBooking = new BookingUpdateBindingModel();
         
@@ -54,20 +81,27 @@ public class BookingActions {
     }
    
     
-//    public static void main(String[] args) {
-//        
-//        BookingActions actions = new BookingActions();
-//        LoginBindingModel loginModel = new LoginBindingModel();
-//        loginModel.setEmployeeID("D1006");
-//        loginModel.setPassword("testpassword123");
-//        loginModel.setLoginType("employee");
-//        
-//        int response = actions.apiConnection.login(loginModel);
-//        System.out.println(response);      
-//
-//        Booking booking = actions.getBookingsByJourney(3).get(0);
-//        System.out.println(booking.getJourney().getJourneyId());
-//        
-//        actions.updateBookingStatus(booking, BookingStatus.COMPLETE);
-//    }
+    public static void main(String[] args) {
+        
+        BookingActions actions = new BookingActions();
+        
+        //
+        LoginBindingModel loginModel = new LoginBindingModel();
+        loginModel.setEmployeeID("D1006");
+        loginModel.setPassword("testpassword123");
+        loginModel.setLoginType("employee");
+        
+        int response = actions.apiConnection.login(loginModel);
+        System.out.println(response);      
+
+        //
+        Booking booking = actions.getBookingsByJourney(3).get(0);
+        System.out.println(booking.getJourney().getJourneyId());
+        
+        //
+        actions.updateBookingStatus(booking, BookingStatus.COMPLETE);
+        
+        // 
+        System.out.println(actions.getBooking(booking.getBookingReference()).getBookedDateTime());
+    }
 }

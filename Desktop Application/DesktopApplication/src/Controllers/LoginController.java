@@ -5,8 +5,10 @@
  */
 package Controllers;
 
+import GUIView.ApplicationFrame;
 import GUIView.Coach.CoachView;
-import GUIView.LoginScreen;
+import GUIView.LoginPanel;
+import datamodel.Actions.EmployeeActions;
 import datamodel.BindingModels.LoginBindingModel;
 import java.util.HashMap;
 import utilities.APIConnection;
@@ -16,33 +18,47 @@ import utilities.APIConnection;
  * @author adbellas
  */
 public class LoginController {
-    private LoginScreen loginScreen; //View
-    private APIConnection apiConnection;
-    private LoginBindingModel loginModel; //Model
     
-    public LoginController(){
-        apiConnection = APIConnection.getInstance();
+    private ApplicationFrame viewParent;
+    private LoginPanel view; //View
+    private EmployeeActions model; 
+//    private LoginBindingModel loginModel; //Model
+
+    public LoginController(ApplicationFrame parent, LoginPanel view, EmployeeActions model){
+        this.viewParent = parent;
+        this.view = view;
+        this.model = model;
+        
+        this.initialiseController();
+        this.switchPanels();
     }
     
-    public boolean loginRequest(LoginBindingModel loginModel){
-        // this.loginModel = loginModel;
+    private void initialiseController() {
+        this.view.getLoginBtn().addActionListener(e -> loginRequest());
+    }
+    
+    private void switchPanels() {
+        this.viewParent.applicationPanels.removeAll();
+        this.viewParent.applicationPanels.add(view);
+        this.viewParent.applicationPanels.repaint();
+        this.viewParent.applicationPanels.revalidate();
         
+        this.viewParent.applicationPanels.setVisible(true);
+    }
+    
+    public void loginRequest(){
+        
+        LoginBindingModel loginModel = new LoginBindingModel();
+
         // Call the login request as an employee.
+        loginModel.setEmployeeID(this.view.getEmployeeId());
+        loginModel.setPassword(this.view.getPassword());
         loginModel.setLoginType("employee");
-        boolean responseCode = apiConnection.login(loginModel);
-        //HashMap<String, Object> loginResponse = apiConnection.PostData("employees/login", loginModel);
-        //Integer responseCode = (Integer) loginResponse.get("responseCode");
-//        
-//        if (responseCode >= 200 && responseCode < 300){
-//            return true;
-//        }
-        return responseCode;
-    }
-    
-    public void showCoachView(){
-        CoachView coachView = new CoachView();
-        coachView.setVisible(true);
         
-      //  loginScreen.setVisible(false);
+        boolean response = model.employeeLogin(loginModel);
+        System.out.println(response);
+        
+        // TODO: Create the ShiftsController and pass in the relevant variables.
+        
     }
 }

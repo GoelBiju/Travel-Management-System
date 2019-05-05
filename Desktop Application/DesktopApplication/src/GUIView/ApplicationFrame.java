@@ -93,11 +93,13 @@ public class ApplicationFrame extends javax.swing.JFrame {
             public void run() {
                 ApplicationFrame frame = new ApplicationFrame();
                 LoginPanel login = new LoginPanel();
+                
                 frame.applicationPanels.removeAll();
                 login.setParent(frame);
                 frame.applicationPanels.add(login);
                 frame.applicationPanels.repaint();
                 frame.applicationPanels.revalidate();
+                
                 frame.setVisible(true);
             }
         });

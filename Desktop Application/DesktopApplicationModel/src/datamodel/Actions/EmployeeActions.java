@@ -15,11 +15,21 @@ import utilities.APIConnection;
  */
 public class EmployeeActions {
     
+    private static EmployeeActions actionsInstance;
+    
     private APIConnection apiConnection;
     
-    public EmployeeActions() {
+    private EmployeeActions() {
         
         this.apiConnection = APIConnection.getInstance();
+    }
+    
+    public static EmployeeActions getInstance(){
+        if (actionsInstance == null) {
+            actionsInstance = new EmployeeActions();
+        }
+        return actionsInstance;
+        
     }
     
     /**

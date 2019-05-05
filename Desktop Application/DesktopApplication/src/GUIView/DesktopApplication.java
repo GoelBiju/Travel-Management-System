@@ -6,6 +6,7 @@
 package GUIView;
 
 import Controllers.LoginController;
+import datamodel.Actions.EmployeeActions;
 
 /**
  *
@@ -18,16 +19,19 @@ public class DesktopApplication {
      */
     public static void main(String[] args) {
         
-        // Instantiate the model for the controller.
-        
-        
-        // Instantiate the controller.
-        LoginController loginController = new LoginController();
+        //
+        ApplicationFrame application = new ApplicationFrame();
         
         // Instantiate the view.
+        LoginPanel view = new LoginPanel();
         
+        // Instantiate the model for the controller.
+        EmployeeActions model = EmployeeActions.getInstance();
+        
+        // Instantiate the controller.
+        LoginController loginController = new LoginController(application, view, model);
         
         // Set view to visible.
+        application.setVisible(true);
     }
-    
 }

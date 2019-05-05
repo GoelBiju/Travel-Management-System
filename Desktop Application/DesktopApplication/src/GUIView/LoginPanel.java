@@ -5,7 +5,10 @@
  */
 package GUIView;
 
+import Controllers.LoginController;
 import GUIView.Shifts.ShiftsPanel;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 /**
  *
@@ -15,11 +18,14 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private ApplicationFrame parent;
     
+    //private LoginController controller;
+    
     /**
      * Creates new form LoginPanel
      */
     public LoginPanel() {
         initComponents();
+//        this.loginBtn.addActionListener((ActionListener) controller);
     }
 
     public void setParent(ApplicationFrame applicationFrame) {
@@ -47,7 +53,6 @@ public class LoginPanel extends javax.swing.JPanel {
         loginLabel.setText("Please Login Below:");
 
         employeeIDField.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        employeeIDField.setText("Employee ID...");
 
         passwordField.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
 
@@ -118,14 +123,28 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-        ShiftsPanel shiftsPanel = new ShiftsPanel();
-        shiftsPanel.setParent(this.parent);
-        this.parent.applicationPanels.removeAll();
-        this.parent.applicationPanels.add(shiftsPanel);
-        this.parent.applicationPanels.repaint();
-        this.parent.applicationPanels.revalidate();
+        
+        
+//        ShiftsPanel shiftsPanel = new ShiftsPanel();
+//        shiftsPanel.setParent(this.parent);
+//        this.parent.applicationPanels.removeAll();
+//        this.parent.applicationPanels.add(shiftsPanel);
+//        this.parent.applicationPanels.repaint();
+//        this.parent.applicationPanels.revalidate();
     }//GEN-LAST:event_loginBtnActionPerformed
 
+    public JButton getLoginBtn() {
+        return loginBtn;
+    }
+
+    
+    public String getEmployeeId() {
+        return this.employeeIDField.getText();
+    }
+    
+    public String getPassword() {
+        return this.passwordField.getText();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField employeeIDField;

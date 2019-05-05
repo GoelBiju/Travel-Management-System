@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  *
  * @author Goel
  */
-class Stop {
+public class Stop {
     
     private int stopId;
     
@@ -24,4 +24,54 @@ class Stop {
     private BigDecimal stopLatitude;
     
     private BigDecimal stopLongitude;
+
+    public int getStopId() {
+        return stopId;
+    }
+
+    public void setStopId(int stopId) {
+        this.stopId = stopId;
+    }
+
+    public String getStopName() {
+        return stopName;
+    }
+
+    public void setStopName(String stopName) {
+        this.stopName = stopName;
+    }
+
+    public boolean isIsStation() {
+        return isStation;
+    }
+
+    public void setIsStation(boolean isStation) {
+        this.isStation = isStation;
+    }
+
+    public String getStopPostcode() {
+        return stopPostcode;
+    }
+
+    public void setStopPostcode(String stopPostcode) {
+        this.stopPostcode = stopPostcode;
+    }
+
+    public BigDecimal getStopLatitude() {
+        return stopLatitude;
+    }
+
+    public void setStopLatitude(BigDecimal stopLatitude) {
+        this.stopLatitude = stopLatitude;
+    }
+
+    public BigDecimal getStopLongitude() {
+        return stopLongitude;
+    }
+
+    public void setStopLongitude(BigDecimal stopLongitude) {
+        this.stopLongitude = stopLongitude;
+    }
+    
+    
 }

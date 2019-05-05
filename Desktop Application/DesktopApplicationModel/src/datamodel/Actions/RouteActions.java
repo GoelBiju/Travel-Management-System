@@ -38,20 +38,21 @@ public class RouteActions {
     }
     
     
-    public static void main(String[] args){
-        RouteActions actions = new RouteActions();
-        
-        LoginBindingModel loginModel = new LoginBindingModel();
-        loginModel.setEmployeeID("D1006");
-        loginModel.setPassword("testpassword123");
-        loginModel.setLoginType("employee");
-        
-        boolean response = actions.apiConnection.login(loginModel);
-        System.out.println(response); 
-        
-        RouteStops route = actions.getRouteStops(4).get(0);
-        System.out.println(route.getStop());
-               
-    }
+    
+//    public static void main(String[] args){
+//        RouteActions actions = new RouteActions();
+//        
+//        LoginBindingModel loginModel = new LoginBindingModel();
+//        loginModel.setEmployeeID("D1006");
+//        loginModel.setPassword("testpassword123");
+//        loginModel.setLoginType("employee");
+//        
+//        boolean response = actions.apiConnection.login(loginModel);
+//        System.out.println(response); 
+//        
+//        RouteStops route = actions.getRouteStops(4).get(0);
+//        System.out.println(route.getStop());
+//               
+//    }
     
 }

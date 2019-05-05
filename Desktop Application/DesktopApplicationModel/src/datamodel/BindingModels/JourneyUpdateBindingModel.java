@@ -5,6 +5,7 @@
  */
 package datamodel.BindingModels;
 
+import datamodel.CoachStatus;
 import java.util.Date;
 
 /**
@@ -21,7 +22,7 @@ public class JourneyUpdateBindingModel {
     
     private Date stopDepartedDateTime;
     
-    private String coachStatus;
+    private CoachStatus coachStatus;
 
     public int getJourneyId() {
         return journeyId;
@@ -55,11 +56,19 @@ public class JourneyUpdateBindingModel {
         this.stopDepartedDateTime = stopDepartedDateTime;
     }
 
-    public String getCoachStatus() {
+//    public String getCoachStatus() {
+//        return coachStatus;
+//    }
+//
+//    public void setCoachStatus(String coachStatus) {
+//        this.coachStatus = coachStatus;
+//    }
+
+    public CoachStatus getCoachStatus() {
         return coachStatus;
     }
 
-    public void setCoachStatus(String coachStatus) {
+    public void setCoachStatus(CoachStatus coachStatus) {
         this.coachStatus = coachStatus;
     }
 }

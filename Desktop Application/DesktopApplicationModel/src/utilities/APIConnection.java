@@ -186,7 +186,7 @@ public class APIConnection {
         Object object = new Object();
         
         try {
-            String uri = this.apiBaseTestUrl + tableName +  "/" + id;
+            String uri = this.apiBaseUrl + tableName +  "/" + id;
             System.out.println(uri);
             
             URL url = new URL(uri);

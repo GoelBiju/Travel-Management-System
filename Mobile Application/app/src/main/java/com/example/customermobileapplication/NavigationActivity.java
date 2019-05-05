@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,7 +23,7 @@ import android.widget.Toast;
 
 import com.example.customermobileapplication.Fragments.AccountFragment;
 import com.example.customermobileapplication.Fragments.HomeFragment;
-import com.example.customermobileapplication.Fragments.TabFragment;
+import com.example.customermobileapplication.Fragments.MyBookingsFragment;
 import com.example.customermobileapplication.Fragments.TimetableFragment;
 import com.example.customermobileapplication.Model.Customer;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
@@ -187,8 +185,7 @@ public class NavigationActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             fragment = new HomeFragment();
         } else if (id == R.id.nav_my_bookings) {
-            //fragment = new MyBookingsFragment();
-            fragment = new TabFragment();
+            fragment = new MyBookingsFragment();
         } else if (id == R.id.nav_timetable) {
             fragment = new TimetableFragment();
         } else if (id == R.id.nav_account) {

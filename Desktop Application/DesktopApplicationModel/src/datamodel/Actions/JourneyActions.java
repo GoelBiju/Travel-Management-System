@@ -31,10 +31,12 @@ public class JourneyActions {
         return journey;
     }
     
-    public boolean updateJourneyInformation(Journey journey) {
+    public boolean updateJourneyInformation(JourneyUpdateBindingModel updateJourney) {
         
+        JourneyUpdateBindingModel updateJourney = new JourneyUpdateBindingModel();
+        updateJourney.set
         
-        if (coachStatus == CoachStatus.SCHEDULED) {
+        if (journey.getCoachStatus() == CoachStatus.SCHEDULED.getStatus()) {
             
         } else if (coachStatus == CoachStatus.DEPARTED) {
             
@@ -55,7 +57,9 @@ public class JourneyActions {
         }
         
         // Check the status and set the coach status;
-        int response = 
+        int response = this.apiConnection.putData("journeys/" + journey.getJourneyId(), updateJourney);
+        System.out.println(response);
+        return true;
     }
     
     

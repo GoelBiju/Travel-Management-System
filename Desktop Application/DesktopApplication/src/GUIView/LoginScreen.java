@@ -25,8 +25,8 @@ public class LoginScreen extends javax.swing.JFrame {
     }
     
     
-    LoginController loginController = new LoginController();
-    LoginBindingModel login = new LoginBindingModel();
+//    LoginController loginController = new LoginController();
+//    LoginBindingModel login = new LoginBindingModel();
     
     
     /**
@@ -60,11 +60,6 @@ public class LoginScreen extends javax.swing.JFrame {
 
         loginBtn.setFont(new java.awt.Font("Segoe UI Light", 0, 48)); // NOI18N
         loginBtn.setText("Login");
-        loginBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginBtnActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 48)); // NOI18N
         jLabel1.setText("Password:");
@@ -133,22 +128,6 @@ public class LoginScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
-        
-        login.setEmployeeID(this.usernameField.getText());
-        login.setPassword(this.passwordField.getText());
-        
-        boolean accessGranted = loginController.loginRequest(login);
-        
-        if (accessGranted == true){
-            loginController.showCoachView();
-            this.setVisible(false); 
-        } else {
-            JOptionPane.showMessageDialog(null, "Error processing login details. Please try again.");
-        }
-    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments

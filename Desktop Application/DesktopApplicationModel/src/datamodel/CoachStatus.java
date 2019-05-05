@@ -16,31 +16,31 @@ import java.util.Map;
 public enum CoachStatus {
     
 //    @JsonProperty("Scheduled")
-    SCHEDULED,
+    SCHEDULED("SCHEDULED"),
     
 //    @JsonProperty("Departed")
-    DEPARTED,
+    DEPARTED("DEPARTED"),
     
 //    @JsonProperty("On-route")
-    ON_ROUTE,
+    ON_ROUTE("ON_ROUTE"),
     
 //    @JsonProperty("At Stop")
-    AT_STOP,
+    AT_STOP("AT_STOP"),
     
 //    @JsonProperty("Arrived")
-    ARRIVED,
+    ARRIVED("ARRIVED"),
     
 //    @JsonProperty("Broken Down")
-    BROKEN_DOWN,
+    BROKEN_DOWN("BROKEN_DOWN"),
     
 //    @JsonProperty("Replacement Deployed")
-    REPLACEMENT_DEPLOYED,
+    REPLACEMENT_DEPLOYED("REPLACEMENT_DEPLOYED"),
     
 //    @JsonProperty("Cancelled")
-    CANCELLED,
+    CANCELLED("CANCELLED"),
     
 //    @JsonProperty("Complete")
-    COMPLETE;
+    COMPLETE("COMPLETE");
     
     private String coachStatus;
 //    

@@ -86,7 +86,7 @@ public class APIConnection {
             byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
 
-            String uri = this.baseTestUrl + "token";
+            String uri = this.baseUrl + "token";
             System.out.println("Login URL: " + uri);
             
             URL url = new URL(uri);
@@ -186,7 +186,7 @@ public class APIConnection {
         Object object = new Object();
         
         try {
-            String uri = this.apiBaseTestUrl + tableName +  "/" + id;
+            String uri = this.apiBaseUrl + tableName +  "/" + id;
             System.out.println(uri);
             
             URL url = new URL(uri);

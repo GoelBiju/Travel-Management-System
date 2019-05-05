@@ -31,37 +31,40 @@ public class JourneyActions {
         return journey;
     }
     
-    public boolean updateJourneyInformation(JourneyUpdateBindingModel updateJourney) {
+    public boolean updateJourneyInformation(Journey journey) {
         
         JourneyUpdateBindingModel updateJourney = new JourneyUpdateBindingModel();
-        updateJourney.set
+        updateJourney.setJourneyId(journey.getJourneyId());
+        updateJourney.setCurrentStopId(journey.getCurrentStopId());
+        updateJourney.setStopArrivalDateTime(journey.getStopArrivalDateTime());
+        updateJourney.setStopDepartedDateTime(journey.getStopDepartedDateTime());
         
-        if (journey.getCoachStatus() == CoachStatus.SCHEDULED.getStatus()) {
-            
-        } else if (coachStatus == CoachStatus.DEPARTED) {
-            
-        } else if (coachStatus == CoachStatus.ON_ROUTE) {
-            
-        } else if (coachStatus == CoachStatus.AT_STOP) {
-            
-        } else if (coachStatus == CoachStatus.BROKEN_DOWN) {
-            
-        } else if (coachStatus == CoachStatus.ARRIVED) {
-            
-        } else if (coachStatus == CoachStatus.REPLACEMENT_DEPLOYED) {
-            
-        } else if (coachStatus == CoachStatus.CANCELLED) {
-            
-        } else if (coachStatus == CoachStatus.COMPLETE) {
-            
-        }
+        
+        //updateJourney.setCoachStatus(coachStatus);
+        
+//        } else if (coachStatus == CoachStatus.DEPARTED) {
+//            
+//        } else if (coachStatus == CoachStatus.ON_ROUTE) {
+//            
+//        } else if (coachStatus == CoachStatus.AT_STOP) {
+//            
+//        } else if (coachStatus == CoachStatus.BROKEN_DOWN) {
+//            
+//        } else if (coachStatus == CoachStatus.ARRIVED) {
+//            
+//        } else if (coachStatus == CoachStatus.REPLACEMENT_DEPLOYED) {
+//            
+//        } else if (coachStatus == CoachStatus.CANCELLED) {
+//            
+//        } else if (coachStatus == CoachStatus.COMPLETE) {
+//            
+//        }
         
         // Check the status and set the coach status;
         int response = this.apiConnection.putData("journeys/" + journey.getJourneyId(), updateJourney);
         System.out.println(response);
         return true;
     }
-    
     
     public static void main(String[] args) {
         
@@ -77,5 +80,6 @@ public class JourneyActions {
         System.out.println(response);      
         
         System.out.println(actions.getJourney(3).getArrivalDateTime());
+        System.out.println(actions.getJourney(3).getCoachStatus());
     }
 }

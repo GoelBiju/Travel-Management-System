@@ -42,15 +42,15 @@ public enum CoachStatus {
 //    @JsonProperty("Complete")
     COMPLETE;
     
-//    private final String coachStatus;
+    private String coachStatus;
 //    
-//    CoachStatus(String coachStatus) {
-//        this.coachStatus = coachStatus;
-//    }
+    CoachStatus(String coachStatus) {
+        this.coachStatus = coachStatus;
+    }
 //    
-//    public String getStatus() {
-//        return coachStatus;
-//    }
+    public String getStatus() {
+        return coachStatus;
+    }
     
 //    @Override
 //    public String toString() {

@@ -7,6 +7,7 @@ package datamodel.Actions;
 
 import datamodel.BindingModels.JourneyUpdateBindingModel;
 import datamodel.BindingModels.LoginBindingModel;
+import datamodel.CoachStatus;
 import datamodel.Journey;
 import utilities.APIConnection;
 
@@ -30,11 +31,32 @@ public class JourneyActions {
         return journey;
     }
     
-//    public boolean updateJourneyInformation(Journey journey, JourneyUpdateBindingModel bindingModel) {
-//
-//        
-//        int response = 
-//    }
+    public boolean updateJourneyInformation(Journey journey) {
+        
+        
+        if (coachStatus == CoachStatus.SCHEDULED) {
+            
+        } else if (coachStatus == CoachStatus.DEPARTED) {
+            
+        } else if (coachStatus == CoachStatus.ON_ROUTE) {
+            
+        } else if (coachStatus == CoachStatus.AT_STOP) {
+            
+        } else if (coachStatus == CoachStatus.BROKEN_DOWN) {
+            
+        } else if (coachStatus == CoachStatus.ARRIVED) {
+            
+        } else if (coachStatus == CoachStatus.REPLACEMENT_DEPLOYED) {
+            
+        } else if (coachStatus == CoachStatus.CANCELLED) {
+            
+        } else if (coachStatus == CoachStatus.COMPLETE) {
+            
+        }
+        
+        // Check the status and set the coach status;
+        int response = 
+    }
     
     
     public static void main(String[] args) {

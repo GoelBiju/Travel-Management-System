@@ -1,5 +1,6 @@
 package com.example.customermobileapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,9 +42,13 @@ public class NavigationActivity extends AppCompatActivity
     private TextView textViewCustomerFullName;
     private TextView textViewCustomerEmailAddress;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        progressDialog = new ProgressDialog(this);
 
         // Initialise the APIConnection.
         apiConnection = new APIConnection(getApplicationContext(), getResources().getString(R.string.api_base_url));
@@ -91,10 +96,16 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     public void apiTest(final int customerId) {
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         apiConnection.getCustomJsonObject("customers/" + customerId, Customer.class, new CustomCallback() {
             @Override
             public void onSuccess(Object responseObject) {
                 Log.d("Response", "API test successful.");
+
+                progressDialog.hide();
 
                 // Setup the app after success.
                 setupAppNavigation();
@@ -110,6 +121,8 @@ public class NavigationActivity extends AppCompatActivity
             @Override
             public void onFailure(APIResponse errorResponse) {
                 Log.d("Response", "Request was unsuccessful.");
+
+                progressDialog.hide();
 
                 Log.d("Response", String.valueOf(errorResponse.getResponseStatusCode()));
                 if (errorResponse.getResponseStatusCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {

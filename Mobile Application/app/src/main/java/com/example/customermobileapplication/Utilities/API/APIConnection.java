@@ -4,9 +4,11 @@ package com.example.customermobileapplication.Utilities.API;
 //       Use Volley library for now and allow a JSONObject to be mapped to the Customer model i.e. using Jackson or Gson.
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;

@@ -339,15 +339,6 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
                         String paymentDetails = paymentConfirmation.toString(4);
 
                         processBooking(paymentConfirmation);
-
-//                        startActivity(new Intent(this, BookingDetailsActivity.class)
-//                                .putExtra("PaymentDetails", paymentDetails)
-//                                .putExtra("PaymentAmount", amount)
-
-
-                        // TODO: Re-direct to the my bookings fragment or Navigation Activity.
-
-//                        );
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -437,6 +428,13 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
                 Log.d("Response", "Confirmed booking with booking reference: " + confirmedBooking.getBookingReference());
                 Toast.makeText(getApplicationContext(), "Booking confirmed with booking reference: " +
                         confirmedBooking.getBookingReference(), Toast.LENGTH_SHORT).show();
+
+                // Start the Booking Details activity to show confirmed information.
+                startActivity(new Intent(BookingActivity.this, BookingDetailsActivity.class)
+                        .putExtra("bookingReference", confirmedBooking.getBookingReference())
+                );
+
+                finish();
             }
 
             @Override

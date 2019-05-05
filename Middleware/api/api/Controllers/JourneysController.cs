@@ -184,7 +184,7 @@ namespace api.Controllers
                 COACH_ID = journey.CoachId,
                 DEPARTURE_DATETIME = journey.DepartureDateTime,
                 ARRIVAL_DATETIME = journey.ArrivalDateTime,
-                COACH_STATUS = "Scheduled"
+                COACH_STATUS = "SCHEDULED"
             };
 
             if (!ModelState.IsValid)

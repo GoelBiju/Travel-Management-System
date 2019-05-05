@@ -53,8 +53,12 @@ CREATE TABLE journeys(
         
     coach_status VARCHAR2(20) 
         CONSTRAINT journeys_coach_status_nn NOT NULL
-        CONSTRAINT journeys_coach_status_chk
-            CHECK (coach_status IN 
-            ('Scheduled', 'Departed', 'On-route', 'At Stop', 'Arrived', 'Broken Down', 'Replacement Deployed', 
-            'Cancelled', 'Complete'))
+--        CONSTRAINT journeys_coach_status_chk
+--            CHECK (coach_status IN 
+--            ('Scheduled', 'Departed', 'On-route', 'At Stop', 'Arrived', 'Broken Down', 'Replacement Deployed', 
+--            'Cancelled', 'Complete'))
+       CONSTRAINT journeys_coach_status_chk
+        CHECK (coach_status IN 
+        ('SCHEDULED', 'DEPARTED', 'ON_ROUTE', 'AT_STOP', 'ARRIVED', 'BROKEN_DOWN', 'REPLACEMENT_DEPLOYED', 
+        'CANCELLED', 'COMPLETE'))
 );

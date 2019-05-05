@@ -1,5 +1,6 @@
 package com.example.customermobileapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.ReceiverCallNotAllowedException;
 import android.support.v7.app.AppCompatActivity;
@@ -39,10 +40,14 @@ public class JourneySearchActivity extends AppCompatActivity {
 
     private List<Journey> listItems;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_search);
+
+        progressDialog = new ProgressDialog(this);
 
         //
         apiConnection = new APIConnection(getApplicationContext(), getResources().getString(R.string.api_base_url));
@@ -79,7 +84,11 @@ public class JourneySearchActivity extends AppCompatActivity {
     }
 
     private void loadJourneys() {
+
         // Create JourneySearchBindingModel from search parameters.
+
+        progressDialog.setMessage("Loading Journeys...");
+        progressDialog.show();
 
         // Call the API to fetch the relevant journeys.
         // Call the api to get all stops.
@@ -88,6 +97,8 @@ public class JourneySearchActivity extends AppCompatActivity {
             public void onSuccess(APIResponse response) {
 
                 Log.d("Response", "Journeys received successfully.");
+
+                progressDialog.hide();
 
                 // Convert JSONArray response to Journeys[].
                 List<Journey> journeys = new ArrayList<>();
@@ -116,7 +127,14 @@ public class JourneySearchActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(APIResponse response) {
-                Toast.makeText(getApplicationContext(), "Failed to retrieve journeys.", Toast.LENGTH_SHORT).show();
+
+                progressDialog.hide();
+
+                Toast.makeText(getApplicationContext(), "Failed to retrieve journeys.", Toast.LENGTH_LONG).show();
+
+                startActivity(new Intent(JourneySearchActivity.this, NavigationActivity.class));
+
+                finish();
             }
         });
     }

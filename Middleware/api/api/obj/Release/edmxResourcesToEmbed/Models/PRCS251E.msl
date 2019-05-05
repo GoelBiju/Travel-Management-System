@@ -106,7 +106,6 @@
         <MappingFragment StoreEntitySet="JOURNEYS">
           <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
           <ScalarProperty Name="ROUTE_ID" ColumnName="ROUTE_ID" />
-          <ScalarProperty Name="SHIFT_ID" ColumnName="SHIFT_ID" />
           <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
           <ScalarProperty Name="DEPARTURE_DATETIME" ColumnName="DEPARTURE_DATETIME" />
           <ScalarProperty Name="ARRIVAL_DATETIME" ColumnName="ARRIVAL_DATETIME" />
@@ -123,7 +122,6 @@
           <ScalarProperty Name="REPLACEMENT_ID" ColumnName="REPLACEMENT_ID" />
           <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
           <ScalarProperty Name="COACH_ID" ColumnName="COACH_ID" />
-          <ScalarProperty Name="SHIFT_ID" ColumnName="SHIFT_ID" />
           <ScalarProperty Name="REQUESTED_DATETIME" ColumnName="REQUESTED_DATETIME" />
           <ScalarProperty Name="COMPLETED_DATETIME" ColumnName="COMPLETED_DATETIME" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
@@ -165,6 +163,7 @@
           <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
           <ScalarProperty Name="START_DATETIME" ColumnName="START_DATETIME" />
           <ScalarProperty Name="END_DATETIME" ColumnName="END_DATETIME" />
+          <ScalarProperty Name="JOURNEY_ID" ColumnName="JOURNEY_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

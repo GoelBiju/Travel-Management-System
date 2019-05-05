@@ -13,7 +13,7 @@ public class Booking {
     public int customerId;
 
     @SerializedName("journey")
-    public Journey journeyId;
+    public Journey journey;
 
     @SerializedName("departingStop")
     public Stop departingStop;
@@ -58,12 +58,12 @@ public class Booking {
         this.customerId = customerId;
     }
 
-    public Journey getJourneyId() {
-        return journeyId;
+    public Journey getJourney() {
+        return journey;
     }
 
-    public void setJourneyId(Journey journeyId) {
-        this.journeyId = journeyId;
+    public void setJourney(Journey journey) {
+        this.journey = journey;
     }
 
     public Stop getDepartingStop() {

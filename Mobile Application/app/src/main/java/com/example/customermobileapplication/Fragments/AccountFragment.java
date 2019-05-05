@@ -1,5 +1,6 @@
 package com.example.customermobileapplication.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,6 +44,8 @@ public class AccountFragment extends Fragment {
     // User details in SharedPreferences.
     private SharedPreferences pref;
 
+    private ProgressDialog progressDialog;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,6 +56,8 @@ public class AccountFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        progressDialog = new ProgressDialog(getActivity());
 
         // Initialise the API.
         apiConnection = new APIConnection(getActivity(), getResources().getString(R.string.api_base_url));
@@ -111,10 +116,16 @@ public class AccountFragment extends Fragment {
 
         if (customerId > 0) {
 
+            progressDialog.setMessage("Loading Account Information...");
+            progressDialog.show();
+
             apiConnection.getCustomJsonObject("customers/" + customerId, Customer.class ,
                     new CustomCallback() {
                         @Override
                         public void onSuccess(Object responseObject) {
+
+                            progressDialog.hide();
+
                             // Get Customer object from response.
                             Customer accountDetails = (Customer) responseObject;
 
@@ -139,6 +150,9 @@ public class AccountFragment extends Fragment {
 
                         @Override
                         public void onFailure(APIResponse errorResponse) {
+
+                            progressDialog.hide();
+
                             // Handle if error from the API.
                             Toast.makeText(getActivity(), "Error Response: " + errorResponse.toString(), Toast.LENGTH_LONG).show();
                         }

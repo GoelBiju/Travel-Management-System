@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.customermobileapplication.Utilities.API.APIConnection;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 public class BookingDetailsActivity extends AppCompatActivity {
+
+    private APIConnection apiConnection;
 
     // Transaction information.
     //TextView textId, textAmount, textStatus;

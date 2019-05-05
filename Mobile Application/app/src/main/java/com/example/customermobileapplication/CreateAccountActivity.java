@@ -243,7 +243,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         registrationBindingModel.setMobileNumber(mobileNumber);
 
         // Show progress dialog.
-        progressDialog.setMessage("Registering Account");
+        progressDialog.setMessage("Registering Account...");
         progressDialog.show();
 
         // Send the create account request.
@@ -320,6 +320,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                         // Convert the object to a Customer.
                         Customer createdCustomer = (Customer) responseObject;
 
+                        progressDialog.hide();
+
                         Log.d("Response", "Created user with id:" + createdCustomer.getCustomerId());
 
                         // Show alert dialog with the registered information.
@@ -345,7 +347,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                         alert.setTitle("Create Account");
 
                         // Hide the dialog box and show the alert.
-                        progressDialog.hide();
                         alert.show();
                     }
 

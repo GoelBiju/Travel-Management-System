@@ -2,6 +2,7 @@ package com.example.customermobileapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -86,11 +87,15 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
 
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+
+        progressDialog = new ProgressDialog(this);
 
         // API Connection.
         apiConnection = new APIConnection(getApplicationContext(), getResources().getString(R.string.api_base_url));
@@ -196,10 +201,15 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
 
     private void loadJourneyInformation() {
 
+        progressDialog.setMessage("Retrieving Journey Details...");
+        progressDialog.hide();
+
         apiConnection.getCustomJsonObject("journeys/" + this.journeyId, Journey.class, new CustomCallback() {
             @Override
             public void onSuccess(Object responseObject) {
                 Log.d("Response", "Successfully received journey object.");
+
+                progressDialog.hide();
 
                 // Get the journey object.
                 Journey journey = (Journey) responseObject;
@@ -216,6 +226,9 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
             @Override
             public void onFailure(APIResponse errorResponse) {
                 // Show alert dialog with the error information.
+
+                progressDialog.hide();
+
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookingActivity.this);
                 alertDialogBuilder.setMessage("The journey you have selected is no longer valid or " +
                         "there was an error fetching details in order to make a booking.")
@@ -418,10 +431,16 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
 
     private void sendBooking(BookingCreationBindingModel bookingData) {
 
+        progressDialog.setMessage("Finalising Your Booking...");
+        progressDialog.show();
+
         // Call the api to add the booking.
         apiConnection.postCustomJsonObject("bookings", bookingData, Booking.class, new CustomCallback() {
             @Override
             public void onSuccess(Object responseObject) {
+
+                progressDialog.hide();
+
                 //
                 Booking confirmedBooking = (Booking) responseObject;
 
@@ -440,6 +459,11 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
             @Override
             public void onFailure(APIResponse errorResponse) {
                 Log.d("Response", "Unable to post booking to API.");
+
+                progressDialog.hide();
+
+                Toast.makeText(getApplicationContext(), "We were unable to confirm your booking, Please create a booking at another time.",
+                        Toast.LENGTH_LONG).show();
             }
         });
     }

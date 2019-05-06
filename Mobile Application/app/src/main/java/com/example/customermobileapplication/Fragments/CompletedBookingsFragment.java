@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.customermobileapplication.Adapter.BookingsAdapter;
@@ -40,6 +41,8 @@ public class CompletedBookingsFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
+    private TextView textViewNoData;
+
     private List<Booking> listItems;
 
     private ProgressDialog progressDialog;
@@ -65,6 +68,8 @@ public class CompletedBookingsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        textViewNoData = (TextView) view.findViewById(R.id.textViewNoData);
+
         loadCompletedBookings();
     }
 
@@ -89,18 +94,28 @@ public class CompletedBookingsFragment extends Fragment {
                     for (JSONObject jsonObject : response.getResponse()) {
                         try {
                             Booking booking = gson.fromJson(jsonObject.toString(), Booking.class);
-                            Log.d("Response", "Added booking: " + booking.getBookingReference());
-                            bookings.add(booking);
+
+                            Log.d("Response", "Booking status: " + booking.getStatus());
+
+                            if (booking.getStatus().equals("Complete")) {
+                                Log.d("Response", "Added booking: " + booking.getBookingReference());
+                                bookings.add(booking);
+                            }
                         } catch (JsonSyntaxException e) {
                             e.printStackTrace();
                             Log.d("Response", "Failed to convert json object: " + jsonObject);
                         }
                     }
 
-                    //
-                    adapter = new BookingsAdapter(bookings, getActivity());
-                    recyclerView.setAdapter(adapter);
-                    Log.d("Response", "Set adapter.");
+                    // Show bookings as long as we receive some from the API.
+                    if (!bookings.isEmpty()) {
+                        //
+                        adapter = new BookingsAdapter(bookings, getActivity());
+                        recyclerView.setAdapter(adapter);
+                        Log.d("Response", "Set adapter.");
+                    } else {
+                        textViewNoData.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 @Override

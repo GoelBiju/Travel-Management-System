@@ -43,6 +43,16 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activeBookingsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textViewNoData"
+        android:visibility="invisible"
+        android:text="You currently have no bookings in this category."
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

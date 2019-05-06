@@ -66,7 +66,16 @@ public class HomeController {
         this.switchPanels(this.homeView.getLayeredPane(), this.journeyView);
         
         // TODO: Load shift and journey information.
-        loadCurrentJourney();
+        new Thread(new Runnable() {
+           public void run() {
+               loadCurrentJourney();
+           } 
+        }).start();
+        
+        // Load journey controller.
+        
+        
+        // Load coach controller.
     }
     
     private void loadCurrentJourney() {

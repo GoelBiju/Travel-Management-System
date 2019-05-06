@@ -39,6 +39,18 @@ public class Helpers {
         return formattedDate;
     }
 
+    public static Date toAPIDate(String dateTime) {
+        Date formattedDate = new Date();
+
+        try {
+            formattedDate = new SimpleDateFormat(DATE_ONLY_PATTERN, Locale.UK).parse(dateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return formattedDate;
+    }
+
     public static String formatDateOnly (Date inputDate) {
         DateFormat dateFormat = new SimpleDateFormat(DATE_ONLY_PATTERN, Locale.UK);
         return dateFormat.format(inputDate);

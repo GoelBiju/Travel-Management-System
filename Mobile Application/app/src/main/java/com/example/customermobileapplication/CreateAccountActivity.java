@@ -19,6 +19,7 @@ import com.example.customermobileapplication.Model.Customer;
 import com.example.customermobileapplication.Utilities.API.APIConnection;
 import com.example.customermobileapplication.Utilities.API.APIResponse;
 import com.example.customermobileapplication.Utilities.API.CustomCallback;
+import com.example.customermobileapplication.Utilities.API.Helpers;
 import com.example.customermobileapplication.Utilities.API.VolleyCallback;
 
 import org.json.JSONObject;
@@ -195,7 +196,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         // Get the values of the entered fields.
         String firstName = editTextFirstName.getText().toString();
         String lastName = editTextLastName.getText().toString();
-        String dateOfBirth = editTextDateOfBirth.getText().toString();
+//        Date dateOfBirth = Helpers.toAPIDateTime(editTextDateOfBirth.getText().toString());
+        Date dateOfBirth = Helpers.toAPIDate(editTextDateOfBirth.getText().toString());
         String addressLineOne = editTextAddressLineOne.getText().toString();
         String addressLineTwo = editTextAddressLineTwo.getText().toString();
         String postCode = editTextPostCode.getText().toString().toUpperCase();
@@ -373,7 +375,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                                 break;
 
                             case HttpURLConnection.HTTP_NOT_FOUND:
-                                Toast.makeText(getApplicationContext(), "There registered account record could not be found or there was error registering your details..", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "The registered account record could not be found or there was error registering your details..", Toast.LENGTH_SHORT).show();
                                 break;
                         }
                     }

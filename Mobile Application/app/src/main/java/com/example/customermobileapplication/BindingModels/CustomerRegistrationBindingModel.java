@@ -19,7 +19,7 @@ public class CustomerRegistrationBindingModel {
     public String lastName;
 
     @SerializedName("dateOfBirth")
-    public String dateOfBirth;
+    public Date dateOfBirth;
 
     @SerializedName("addressLineOne")
     public String addressLineOne;
@@ -65,11 +65,11 @@ public class CustomerRegistrationBindingModel {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

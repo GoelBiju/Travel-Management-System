@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.customermobileapplication.BookingActivity;
+import com.example.customermobileapplication.BookingDetailsActivity;
 import com.example.customermobileapplication.Model.Booking;
 import com.example.customermobileapplication.R;
 
@@ -52,17 +53,15 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.ViewHo
         viewHolder.textViewAmountPaid.setText("£ "+ String.format("%.2f", listItem.getAmountPaid()));
         viewHolder.textViewBookingStatus.setText(listItem.getStatus());
 
-//        viewHolder.linearLayoutBookingItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // TODO: Open the booking confirmation page by passing in the booking reference.
-////                v.getContext().startActivity(new Intent(context, BookingActivity.class)
-////                        .putExtra("journeyId", listItem.getJourneyId())
-////                        .putExtra("departureStopId", customerDepartureStopId)
-////                        .putExtra("arrivalStopId", customerArrivalStopId)
-////                );
-//            }
-//        });
+        viewHolder.linearLayoutBookingItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Open the booking confirmation page by passing in the booking reference.
+                v.getContext().startActivity(new Intent(context, BookingDetailsActivity.class)
+                        .putExtra("bookingReference", listItem.getBookingReference())
+                );
+            }
+        });
     }
 
     @Override

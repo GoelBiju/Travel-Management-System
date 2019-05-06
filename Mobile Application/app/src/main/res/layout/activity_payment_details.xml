@@ -232,8 +232,8 @@
 
     <TextView
         android:id="@+id/textViewDepartingStop"
-        android:layout_width="191dp"
-        android:layout_height="21dp"
+        android:layout_width="217dp"
+        android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -243,10 +243,10 @@
         android:text="None"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.459" />
+        app:layout_constraintVertical_bias="0.461" />
 
     <TextView
         android:id="@+id/textViewDepartureTime"

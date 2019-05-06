@@ -7,6 +7,8 @@ package GUIView;
 
 import GUIView.Journey.JourneyPanel;
 import GUIView.Coach.CoachPanel;
+import javax.swing.JButton;
+import javax.swing.JLayeredPane;
 
 /**
  *
@@ -27,6 +29,23 @@ public class HomePanel extends javax.swing.JPanel {
     public void setParent(ApplicationFrame applicationFrame) {
         this.parent = applicationFrame;
     }
+    
+    public JLayeredPane getLayeredPane() {
+        return this.homePanels;
+    }
+    
+    public JButton getJourneyButton() {
+        return this.journeyPanelButton;
+    }
+    
+    public JButton getCoachButton() {
+        return this.coachPanelButton;
+    }
+    
+    public JButton getSignOutButton() {
+        return this.signOutButton;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +58,7 @@ public class HomePanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         signOutButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        homeLayeredPane = new javax.swing.JLayeredPane();
+        homePanels = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -57,16 +76,11 @@ public class HomePanel extends javax.swing.JPanel {
         coachPanelButton = new javax.swing.JButton();
 
         signOutButton.setText("Sign Out");
-        signOutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signOutButtonActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("NationalCoach - Driver");
 
-        homeLayeredPane.setLayout(new java.awt.CardLayout());
+        homePanels.setLayout(new java.awt.CardLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Journey Overview"));
 
@@ -131,14 +145,15 @@ public class HomePanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalBookingsLabel)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(totalStopsLabel)
                         .addComponent(jLabel10)
-                        .addComponent(departureTimeLabel)))
+                        .addComponent(departureTimeLabel))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totalBookingsLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -151,18 +166,8 @@ public class HomePanel extends javax.swing.JPanel {
         );
 
         journeyPanelButton.setText("My Journey");
-        journeyPanelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                journeyPanelButtonActionPerformed(evt);
-            }
-        });
 
         coachPanelButton.setText("My Coach");
-        coachPanelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coachPanelButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -188,7 +193,7 @@ public class HomePanel extends javax.swing.JPanel {
                                     .addComponent(coachPanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(homeLayeredPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(homePanels, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1438, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -210,7 +215,7 @@ public class HomePanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(homeLayeredPane, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                        .addComponent(homePanels, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -219,53 +224,13 @@ public class HomePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void journeyPanelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_journeyPanelButtonActionPerformed
-        // TODO add your handling code here:
-        
-        //Show journeyPanel panel on home panel
-        JourneyPanel journeyPanel = new JourneyPanel();
-        journeyPanel.setParent(this);
-        
-        this.homeLayeredPane.removeAll();
-        this.homeLayeredPane.add(journeyPanel);
-        this.homeLayeredPane.repaint();
-        this.homeLayeredPane.revalidate();
-        
-        
-    }//GEN-LAST:event_journeyPanelButtonActionPerformed
-
-    private void coachPanelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coachPanelButtonActionPerformed
-        // TODO add your handling code here:
-        
-        //Show coach panel on home panel
-        CoachPanel coachPanel = new CoachPanel();
-        coachPanel.setParent(this);
-        
-        this.homeLayeredPane.removeAll();
-        this.homeLayeredPane.add(coachPanel);
-        this.homeLayeredPane.repaint();
-        this.homeLayeredPane.revalidate();
-        
-    }//GEN-LAST:event_coachPanelButtonActionPerformed
-
-    private void signOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signOutButtonActionPerformed
-        // TODO add your handling code here:
-        
-        LoginPanel login = new LoginPanel();
-        this.parent.applicationPanels.removeAll();
-        login.setParent(this.parent);
-        this.parent.applicationPanels.add(login);
-        this.parent.applicationPanels.repaint();
-        this.parent.applicationPanels.revalidate();
-    }//GEN-LAST:event_signOutButtonActionPerformed
-
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel arrivalTimeLabel;
     private javax.swing.JButton coachPanelButton;
     private javax.swing.JLabel departureTimeLabel;
-    private javax.swing.JLayeredPane homeLayeredPane;
+    private javax.swing.JLayeredPane homePanels;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

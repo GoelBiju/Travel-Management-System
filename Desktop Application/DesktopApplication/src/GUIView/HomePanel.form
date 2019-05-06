@@ -38,7 +38,7 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="homeLayeredPane" alignment="0" min="-2" pref="1438" max="-2" attributes="0"/>
+                              <Component id="homePanels" alignment="0" min="-2" pref="1438" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -70,7 +70,7 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="homeLayeredPane" pref="493" max="32767" attributes="0"/>
+                      <Component id="homePanels" pref="493" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -90,9 +90,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Sign Out"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signOutButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -102,7 +99,7 @@
         <Property name="text" type="java.lang.String" value="NationalCoach - Driver"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JLayeredPane" name="homeLayeredPane">
+    <Container class="javax.swing.JLayeredPane" name="homePanels">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
     </Container>
@@ -160,14 +157,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="totalBookingsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="totalStopsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="departureTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="totalBookingsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -251,17 +250,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="My Journey"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="journeyPanelButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="coachPanelButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="My Coach"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="coachPanelButtonActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

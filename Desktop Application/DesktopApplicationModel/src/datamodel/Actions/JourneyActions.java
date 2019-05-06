@@ -17,11 +17,20 @@ import utilities.APIConnection;
  */
 public class JourneyActions {
     
+    private static JourneyActions actionsInstance;
+    
     private APIConnection apiConnection;
     
-    public JourneyActions() {
+    private JourneyActions() {
         
         this.apiConnection = APIConnection.getInstance();
+    }
+    
+    public static JourneyActions getInstance() {
+        if (actionsInstance == null) {
+            actionsInstance = new JourneyActions();
+        }
+        return actionsInstance;
     }
     
     public Journey getJourney(Integer journeyId) {

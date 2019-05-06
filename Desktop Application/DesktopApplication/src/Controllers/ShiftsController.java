@@ -15,6 +15,7 @@ import datamodel.Shift;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -82,12 +83,19 @@ public class ShiftsController {
         
         // Get the shift id.
         try {
-            System.out.println("Selected item index: " + this.view.getSelectedShiftIndex());
-            Shift selectedShift = this.driverShifts.get(this.view.getSelectedShiftIndex());
+            int selectedIndex = this.view.getSelectedShiftIndex();
+            System.out.println("Selected item index: " + selectedIndex);
             
-            // Start the home controller.
-            HomeController home = new HomeController(viewParent, new HomePanel(), selectedShift);
+            if (selectedIndex > -1) {
+                Shift selectedShift = this.driverShifts.get(this.view.getSelectedShiftIndex());
+                System.out.println("Selected Journey from shifts: " + selectedShift.getJourneyId());
             
+                // Start the home controller.
+                HomeController home = new HomeController(viewParent, new HomePanel(), selectedShift);
+            } else {
+                JOptionPane.showMessageDialog(this.view, "Please select your shift to load the journey.",
+                        "NationalCoach - Shifts", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
             System.out.println("Could not retrieve the shift record.");

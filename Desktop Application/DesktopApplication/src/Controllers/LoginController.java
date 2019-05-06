@@ -69,7 +69,8 @@ public class LoginController {
             ShiftsController shifts = new ShiftsController(this.viewParent, new ShiftsPanel(), 
                     shiftActions, employeeId);
         } else {
-            JOptionPane.showMessageDialog(this.view, "The employee credentials you entered are incorrect.", "NationalCoach - Login", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this.view, "The employee credentials you entered are incorrect.",
+                    "NationalCoach - Login", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

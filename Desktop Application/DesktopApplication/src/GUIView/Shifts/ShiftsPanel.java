@@ -23,6 +23,8 @@ public class ShiftsPanel extends javax.swing.JPanel {
      */
     public ShiftsPanel() {
         initComponents();
+        
+        this.shiftsList.setSelectedIndex(0);
     }
     
     public void setParent(ApplicationFrame applicationFrame) {
@@ -140,13 +142,14 @@ public class ShiftsPanel extends javax.swing.JPanel {
 
     private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
         // TODO add your handling code here:
-        if (this.shiftsList.getSelectedIndex() != 0)
+        if (this.shiftsList.getSelectedIndex() != -1 && this.shiftsList.getSelectedIndex() != 0)
             this.shiftsList.setSelectedIndex(this.shiftsList.getSelectedIndex() - 1);
     }//GEN-LAST:event_upButtonActionPerformed
 
     private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
         // TODO add your handling code here:
-        if (this.shiftsList.getSelectedIndex() != (this.shiftsList.getModel().getSize() - 1))
+        if (this.shiftsList.getSelectedIndex() != -1 
+                && (this.shiftsList.getSelectedIndex() != (this.shiftsList.getModel().getSize() - 1)))
             this.shiftsList.setSelectedIndex(this.shiftsList.getSelectedIndex() + 1);
     }//GEN-LAST:event_downButtonActionPerformed
 

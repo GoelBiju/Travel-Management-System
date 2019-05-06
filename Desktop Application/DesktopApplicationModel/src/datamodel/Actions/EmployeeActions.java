@@ -29,7 +29,6 @@ public class EmployeeActions {
             actionsInstance = new EmployeeActions();
         }
         return actionsInstance;
-        
     }
     
     /**

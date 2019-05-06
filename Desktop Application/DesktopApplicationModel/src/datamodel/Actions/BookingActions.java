@@ -21,11 +21,21 @@ import datamodel.Customer;
  */
 public class BookingActions {
     
+    private static BookingActions actionsInstance;
+    
     private APIConnection apiConnection;
     
-    public BookingActions() {
+    private BookingActions() {
         
         this.apiConnection = APIConnection.getInstance();
+    }
+   
+    
+    public static BookingActions getInstance() {
+        if (actionsInstance == null) {
+            actionsInstance = new BookingActions();
+        }
+        return actionsInstance;
     }
     
     /**

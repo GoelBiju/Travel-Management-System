@@ -91,5 +91,20 @@ namespace WebApplication.Controllers
             return View(data);
         }
 
+        [HttpPost]
+        public ActionResult Edit(ShiftViewModel updatedShift)
+        {
+            try
+            {
+                HttpResponseMessage message = GlobalVariables.WebApiClient.PutAsJsonAsync("shifts/" + updatedShift.ShiftId, updatedShift).Result;
+
+                return RedirectToAction("Details");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

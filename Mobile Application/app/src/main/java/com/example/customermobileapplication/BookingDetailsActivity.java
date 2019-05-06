@@ -16,12 +16,11 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
     private APIConnection apiConnection;
 
-    // Transaction information.
-    //TextView textId, textAmount, textStatus;
-
     // Confirmation information.
     private int bookingReference;
 
+    // Transaction information.
+    private TextView textViewBookingReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

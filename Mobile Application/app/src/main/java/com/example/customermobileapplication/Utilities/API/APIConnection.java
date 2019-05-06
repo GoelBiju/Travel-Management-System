@@ -242,6 +242,8 @@ public class APIConnection {
         //
         final APIResponse getResponse = new APIResponse();
 
+        Log.d("Response", "Requesting: " + this.API_BASE_URL + resourceName);
+
         JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET,
                 this.API_BASE_URL + resourceName, null,
 
@@ -249,6 +251,8 @@ public class APIConnection {
 
                     @Override
                     public void onResponse(JSONArray response) {
+
+                        Log.d("Response", "JSONArray response:" + response.toString());
 
                         //
                         getResponse.setRequestSuccessful(true);

@@ -82,13 +82,14 @@ public class ActiveBookingsFragment extends Fragment {
             apiConnection.getManyApiRequest("bookings/customer/" + this.customerId, new VolleyCallback() {
                 @Override
                 public void onSuccess(APIResponse response) {
-                    Log.d("Response", "Bookings received successfully.");
+                    Log.d("Response", "Bookings received successfully:" + response.getResponse().toString());
 
                     progressDialog.hide();
 
                     List<Booking> bookings = new ArrayList<>();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 
+                    System.out.println("Response: " + response.getResponse());
                     for (JSONObject jsonObject : response.getResponse()) {
                         try {
                             Booking booking = gson.fromJson(jsonObject.toString(), Booking.class);

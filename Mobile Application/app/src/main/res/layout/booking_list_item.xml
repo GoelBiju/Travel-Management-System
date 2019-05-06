@@ -93,6 +93,25 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/textViewAmountPaidLabel"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Amount Paid: "
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/textViewAmountPaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="N/A" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
                         android:id="@+id/textViewBookingStatusLabel"
                         android:layout_margin="3dp"
                         android:layout_width="match_parent"
@@ -109,24 +128,7 @@
 
                 </TableRow>
 
-                <TableRow>
 
-                    <TextView
-                        android:id="@+id/textViewAmountPaidLabel"
-                        android:layout_margin="3dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Amount Paid: "
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/textViewAmountPaid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="3dp"
-                        android:text="N/A" />
-
-                </TableRow>
 
                 <!--<TableRow>-->
 

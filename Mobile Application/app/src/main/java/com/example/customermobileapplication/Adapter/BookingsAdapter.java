@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,25 +42,27 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Booking listItem = listItems.get(i);
 
-        viewHolder.textViewBookingTitle.setText(listItem.getJourney().getJourneyId() + ": " +
-                listItem.getJourney().getRoute().getDepartureStation() + " to " +
-                listItem.getJourney().getRoute().getArrivalStation());
-        viewHolder.textViewJourneyId.setText(listItem.getJourney().getJourneyId());
+        // NOTE: Ensure the datatypes match as no errors will occur when datatypes are not matched,
+        //       resulting in an app crash.
+        viewHolder.textViewBookingTitle.setText(listItem.getDepartingStop().getStopName() +
+                " to " + listItem.getArrivalStop().getStopName());
+        viewHolder.textViewJourneyId.setText(Integer.toString(listItem.getJourney().getJourneyId()));
         viewHolder.textViewDepartingStop.setText(listItem.getDepartingStop().getStopName());
         viewHolder.textViewArrivalStop.setText(listItem.getArrivalStop().getStopName());
+        viewHolder.textViewAmountPaid.setText("£ "+ String.format("%.2f", listItem.getAmountPaid()));
         viewHolder.textViewBookingStatus.setText(listItem.getStatus());
 
-        viewHolder.linearLayoutBookingItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Open the booking confirmation page by passing in the booking reference.
-//                v.getContext().startActivity(new Intent(context, BookingActivity.class)
-//                        .putExtra("journeyId", listItem.getJourneyId())
-//                        .putExtra("departureStopId", customerDepartureStopId)
-//                        .putExtra("arrivalStopId", customerArrivalStopId)
-//                );
-            }
-        });
+//        viewHolder.linearLayoutBookingItem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO: Open the booking confirmation page by passing in the booking reference.
+////                v.getContext().startActivity(new Intent(context, BookingActivity.class)
+////                        .putExtra("journeyId", listItem.getJourneyId())
+////                        .putExtra("departureStopId", customerDepartureStopId)
+////                        .putExtra("arrivalStopId", customerArrivalStopId)
+////                );
+//            }
+//        });
     }
 
     @Override

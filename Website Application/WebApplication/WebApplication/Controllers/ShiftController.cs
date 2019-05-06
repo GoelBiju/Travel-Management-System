@@ -70,7 +70,26 @@ namespace WebApplication.Controllers
             }
             return View(_Data);
         }
+        [HttpGet]
+        public ActionResult Edit(string id = "")
+        {
+            ShiftViewModel data = new ShiftViewModel();
 
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Index");
+            }
+
+            HttpResponseMessage message = GlobalVariables.WebApiClient.GetAsync("shifts/" + id.ToString()).Result;
+
+            if (message.IsSuccessStatusCode)
+            {
+                var JsonString = message.Content.ReadAsStringAsync().Result;
+                data = JsonConvert.DeserializeObject<ShiftViewModel>(JsonString);
+            }
+
+            return View(data);
+        }
 
     }
 }

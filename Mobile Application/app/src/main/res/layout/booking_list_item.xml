@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutBookingItem"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewBookingTitle"
+                android:text="Booking Heading"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--journey number-->
+                <!--departing stop-->
+                <!--arrival stop-->
+                <!--status-->
+                <!--amount paid-->
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/textViewJourneyIdLabel"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Journey Number: "
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/textViewJourneyId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="N/A" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/textViewDepartingStopLabel"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Departing Stop: "
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/textViewDepartingStop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="N/A" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/textViewArrivalStopLabel"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Arrival Stop: "
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/textViewArrivalStop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="N/A" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/textViewBookingStatusLabel"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Booking Status: "
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/textViewBookingStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="N/A" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/textViewAmountPaidLabel"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Amount Paid: "
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/textViewAmountPaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="N/A" />
+
+                </TableRow>
+
+                <!--<TableRow>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/textViewDepartureTimeLabel"-->
+                        <!--android:layout_margin="3dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Departure Time: "-->
+                        <!--android:textStyle="bold"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/textViewDepartureTime"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="3dp"-->
+                        <!--android:text="N/A" />-->
+
+                <!--</TableRow>-->
+
+                <!--<TableRow>-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/textViewArrivalTimeLabel"-->
+                        <!--android:layout_margin="3dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Arrival Time: "-->
+                        <!--android:textStyle="bold" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/textViewArrivalTime"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="3dp"-->
+                        <!--android:text="N/A" />-->
+
+                <!--</TableRow>-->
+
+                <!--<TableRow>-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/textViewCoachStatusLabel"-->
+                        <!--android:layout_margin="3dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Coach Status: "-->
+                        <!--android:textStyle="bold" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/textViewCoachStatus"-->
+                        <!--android:layout_margin="3dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="N/A" />-->
+
+                <!--</TableRow>-->
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,6 +1,5 @@
 package com.example.customermobileapplication.Adapter;
 
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,15 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.customermobileapplication.BookingActivity;
 import com.example.customermobileapplication.Model.Journey;
-import com.example.customermobileapplication.Model.JourneyListItem;
 import com.example.customermobileapplication.R;
 import com.example.customermobileapplication.Utilities.API.Helpers;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -40,7 +35,7 @@ public class JourneySearchAdapter extends RecyclerView.Adapter<JourneySearchAdap
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.list_item, viewGroup, false);
+                .inflate(R.layout.journey_list_item, viewGroup, false);
         return new ViewHolder(v);
     }
 

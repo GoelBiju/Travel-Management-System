@@ -51,7 +51,7 @@ namespace api.Controllers
                                    CoachId = (int)b.JOURNEY.COACH_ID,
                                    DepartureDateTime = b.JOURNEY.DEPARTURE_DATETIME,
                                    ArrivalDateTime = b.JOURNEY.ARRIVAL_DATETIME,
-                                   CurrentStop = null,
+                                   //CurrentStop = null,
                                    StopArrivalDateTime = b.JOURNEY.STOP_ARRIVAL_DATETIME,
                                    StopDepartedDateTime = b.JOURNEY.STOP_DEPARTED_DATETIME,
                                    CoachStatus = b.JOURNEY.COACH_STATUS

@@ -6,7 +6,10 @@
 package Controllers;
 
 import GUIView.ApplicationFrame;
+import GUIView.HomePanel;
+import GUIView.LoginPanel;
 import GUIView.Shifts.ShiftsPanel;
+import datamodel.Actions.EmployeeActions;
 import datamodel.Actions.ShiftActions;
 import datamodel.Shift;
 import java.util.ArrayList;
@@ -26,6 +29,8 @@ public class ShiftsController {
     private String employeeId;
     private ArrayList<Shift> driverShifts;
     
+    private EmployeeActions employeeActions;
+    
     public ShiftsController(ApplicationFrame parent, ShiftsPanel view, 
             ShiftActions model, String employeeId) {
         this.viewParent = parent;
@@ -35,11 +40,17 @@ public class ShiftsController {
         this.employeeId = employeeId;
         this.driverShifts = new ArrayList<>();
         
+        this.employeeActions = EmployeeActions.getInstance();
+        
         this.initialiseController();
         this.switchPanels();
     }
     
     private void initialiseController() {
+        // Bind buttons to methods.
+        this.view.getStartShiftButton().addActionListener(e -> startShift());
+        this.view.getSignOutButton().addActionListener(e -> signOut());
+        
         this.loadDriverShifts();
     }
     
@@ -67,9 +78,26 @@ public class ShiftsController {
         this.view.setShiftsListModel(shiftsModel);
     }
  
+    public void startShift() {
+        
+        // Get the shift id.
+        try {
+            System.out.println("Selected item index: " + this.view.getSelectedShiftIndex());
+            Shift selectedShift = this.driverShifts.get(this.view.getSelectedShiftIndex());
+            
+            // Start the home controller.
+            HomeController home = new HomeController(viewParent, new HomePanel(), selectedShift);
+            
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            System.out.println("Could not retrieve the shift record.");
+        }
+    }
     
-    public void startHomePanel() {
+    public void signOut() {
         
-        
+        // Reset the connection information and start the login controller.
+        employeeActions.employeeSignOut();
+        LoginController login = new LoginController(viewParent, new LoginPanel(), EmployeeActions.getInstance());
     }
 }

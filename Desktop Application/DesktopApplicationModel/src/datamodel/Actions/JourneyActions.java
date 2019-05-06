@@ -38,27 +38,7 @@ public class JourneyActions {
         updateJourney.setCurrentStopId(journey.getCurrentStopId());
         updateJourney.setStopArrivalDateTime(journey.getStopArrivalDateTime());
         updateJourney.setStopDepartedDateTime(journey.getStopDepartedDateTime());
-        
-        
-        //updateJourney.setCoachStatus(coachStatus);
-        
-//        } else if (coachStatus == CoachStatus.DEPARTED) {
-//            
-//        } else if (coachStatus == CoachStatus.ON_ROUTE) {
-//            
-//        } else if (coachStatus == CoachStatus.AT_STOP) {
-//            
-//        } else if (coachStatus == CoachStatus.BROKEN_DOWN) {
-//            
-//        } else if (coachStatus == CoachStatus.ARRIVED) {
-//            
-//        } else if (coachStatus == CoachStatus.REPLACEMENT_DEPLOYED) {
-//            
-//        } else if (coachStatus == CoachStatus.CANCELLED) {
-//            
-//        } else if (coachStatus == CoachStatus.COMPLETE) {
-//            
-//        }
+        updateJourney.setCoachStatus(journey.getCoachStatus());
         
         // Check the status and set the coach status;
         int response = this.apiConnection.putData("journeys/" + journey.getJourneyId(), updateJourney);

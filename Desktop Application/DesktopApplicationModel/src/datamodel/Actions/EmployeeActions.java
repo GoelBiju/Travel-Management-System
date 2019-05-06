@@ -51,6 +51,14 @@ public class EmployeeActions {
     
     /**
      * 
+     * @return 
+     */
+    public void employeeSignOut() {
+        this.apiConnection.clearConnection();
+    }
+    
+    /**
+     * 
      * @param employeeId
      * @return 
      */

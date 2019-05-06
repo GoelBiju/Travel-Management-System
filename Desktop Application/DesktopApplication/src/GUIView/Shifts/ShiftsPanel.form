@@ -74,9 +74,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Sign Out"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signoutButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="shiftsLabel">
       <Properties>
@@ -125,9 +122,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Start Shift"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startShiftButtonActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

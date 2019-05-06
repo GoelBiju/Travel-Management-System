@@ -68,6 +68,10 @@ public class APIConnection {
         this.accessToken = "";
     }
     
+    public void clearConnection() {
+        this.accessToken = "";
+        this.apiInstance = null;
+    }
     
     public static APIConnection getInstance() {
         if (apiInstance == null) {

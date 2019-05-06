@@ -16,8 +16,8 @@ namespace WebApplication.ViewModels
         public int StopId { get; set; }
 
         [Display(Name = "Stop Name")]
-        [JsonProperty("stopName")]
-        public string StopName { get; set; }
+        [JsonProperty("stop")]
+        public StopViewModel Stop { get; set; }
 
         [Display(Name = "Position In Route")]
         [JsonProperty("positionInRoute")]

@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.StopName)
+            @Html.DisplayNameFor(model => model.Stop.StopName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PositionInRoute)
@@ -23,7 +23,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.StopName)
+            @Html.DisplayFor(modelItem => item.Stop.StopName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PositionInRoute)

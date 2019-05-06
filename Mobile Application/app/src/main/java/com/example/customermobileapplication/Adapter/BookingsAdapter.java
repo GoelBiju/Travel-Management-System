@@ -1,6 +1,8 @@
 package com.example.customermobileapplication.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -25,9 +27,19 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.ViewHo
     private List<Booking> listItems;
     private Context context;
 
+    private boolean isActiveBookings = true;
+
     public BookingsAdapter(List<Booking> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
+    }
+
+    public boolean isActiveBookings() {
+        return isActiveBookings;
+    }
+
+    public void setActiveBookings(boolean activeBookings) {
+        isActiveBookings = activeBookings;
     }
 
     @NonNull
@@ -55,11 +67,37 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.ViewHo
 
         viewHolder.linearLayoutBookingItem.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // TODO: Open the booking confirmation page by passing in the booking reference.
-                v.getContext().startActivity(new Intent(context, BookingDetailsActivity.class)
-                        .putExtra("bookingReference", listItem.getBookingReference())
-                );
+            public void onClick(final View v) {
+                if (isActiveBookings) {
+                    v.getContext().startActivity(new Intent(context, BookingDetailsActivity.class)
+                            .putExtra("bookingReference", listItem.getBookingReference())
+                    );
+                } else {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                    alertDialogBuilder.setMessage("Would you like to repeat this booking?")
+                            .setPositiveButton("Repeat Booking", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    v.getContext().startActivity(new Intent(context, BookingActivity.class)
+                                        .putExtra("journeyId", listItem.getJourney().getJourneyId())
+                                        .putExtra("departureStopId", listItem.getDepartingStop().getStopId())
+                                        .putExtra("arrivalStopId", listItem.getArrivalStop().getStopId())
+                                    );
+                                }
+                            })
+                            .setNegativeButton("Go Back", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .setCancelable(false);
+
+                    AlertDialog alert = alertDialogBuilder.create();
+                    alert.setTitle("Repeat Booking");
+                    alert.show();
+                }
             }
         });
     }

@@ -111,6 +111,7 @@ public class CompletedBookingsFragment extends Fragment {
                     if (!bookings.isEmpty()) {
                         //
                         adapter = new BookingsAdapter(bookings, getActivity());
+                        ((BookingsAdapter) adapter).setActiveBookings(false);
                         recyclerView.setAdapter(adapter);
                         Log.d("Response", "Set adapter.");
                     } else {

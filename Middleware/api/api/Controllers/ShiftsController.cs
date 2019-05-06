@@ -92,39 +92,55 @@ namespace api.Controllers
         }
 
         //// PUT: api/Shifts/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutSHIFT(decimal id, SHIFT sHIFT)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [HttpPut]
+        [Route("{id:int}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutSHIFT(int id, [FromBody] ShiftDTO sHIFT)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (id != sHIFT.SHIFT_ID)
-        //    {
-        //        return BadRequest();
-        //    }
+            if (id != sHIFT.ShiftId)
+            {
+                return BadRequest();
+            }
 
-        //    db.Entry(sHIFT).State = EntityState.Modified;
+            db.Entry(sHIFT).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!SHIFTExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            if(sHIFT.ShiftId > 0)
+            {
+                var shiftRecord = db.SHIFTS.FirstOrDefault(s => s.SHIFT_ID == sHIFT.ShiftId);
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+                shiftRecord.EMPLOYEE_ID = sHIFT.EmployeeId;
+                shiftRecord.START_DATETIME = sHIFT.StartDateTime;
+                shiftRecord.END_DATETIME = sHIFT.EndDateTime;
+                shiftRecord.JOURNEY_ID = sHIFT.JourneyId;
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SHIFTExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
         // POST: api/Shifts
         [HttpPost]

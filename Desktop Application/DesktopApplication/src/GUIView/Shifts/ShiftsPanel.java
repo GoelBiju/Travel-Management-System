@@ -8,6 +8,8 @@ package GUIView.Shifts;
 import GUIView.ApplicationFrame;
 import GUIView.HomePanel;
 import GUIView.LoginPanel;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 
 /**
  *
@@ -23,8 +25,32 @@ public class ShiftsPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-        public void setParent(ApplicationFrame applicationFrame) {
+    public void setParent(ApplicationFrame applicationFrame) {
         this.parent = applicationFrame;
+    }
+    
+    public void setShiftsListModel(DefaultListModel<String> model) {
+        this.shiftsList.setModel(model);
+    }
+    
+    public int getSelectedShiftIndex() {
+        return this.shiftsList.getSelectedIndex();
+    }
+    
+    public JButton getUpButton() {
+        return this.upButton;
+    }
+    
+    public JButton getDownButton() {
+        return this.downButton;
+    }
+    
+    public JButton getSignOutButton() {
+        return this.signoutButton;
+    }
+    
+    public JButton getStartShiftButton() {
+        return this.startShiftButton;
     }
 
     /**
@@ -57,8 +83,18 @@ public class ShiftsPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(shiftsList);
 
         upButton.setText("UP");
+        upButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upButtonActionPerformed(evt);
+            }
+        });
 
         downButton.setText("DOWN");
+        downButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downButtonActionPerformed(evt);
+            }
+        });
 
         startShiftButton.setText("Start Shift");
         startShiftButton.addActionListener(new java.awt.event.ActionListener() {
@@ -118,25 +154,37 @@ public class ShiftsPanel extends javax.swing.JPanel {
         //Logic
         
         //Switch to shift panel on the applicaiton frame
-        HomePanel homePanel = new HomePanel(); 
-        homePanel.setParent(this.parent);
-       
-        this.parent.applicationPanels.removeAll();
-        this.parent.applicationPanels.add(homePanel);
-        this.parent.applicationPanels.repaint();
-        this.parent.applicationPanels.revalidate();
+//        HomePanel homePanel = new HomePanel(); 
+//        homePanel.setParent(this.parent);
+//       
+//        this.parent.applicationPanels.removeAll();
+//        this.parent.applicationPanels.add(homePanel);
+//        this.parent.applicationPanels.repaint();
+//        this.parent.applicationPanels.revalidate();
         
     }//GEN-LAST:event_startShiftButtonActionPerformed
 
     private void signoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutButtonActionPerformed
         // TODO add your handling code here:
-        LoginPanel login = new LoginPanel();
-        this.parent.applicationPanels.removeAll();
-        login.setParent(this.parent);
-        this.parent.applicationPanels.add(login);
-        this.parent.applicationPanels.repaint();
-        this.parent.applicationPanels.revalidate();
+//        LoginPanel login = new LoginPanel();
+//        this.parent.applicationPanels.removeAll();
+//        login.setParent(this.parent);
+//        this.parent.applicationPanels.add(login);
+//        this.parent.applicationPanels.repaint();
+//        this.parent.applicationPanels.revalidate();
     }//GEN-LAST:event_signoutButtonActionPerformed
+
+    private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.shiftsList.getSelectedIndex() != 0)
+            this.shiftsList.setSelectedIndex(this.shiftsList.getSelectedIndex() - 1);
+    }//GEN-LAST:event_upButtonActionPerformed
+
+    private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.shiftsList.getSelectedIndex() != (this.shiftsList.getModel().getSize() - 1))
+            this.shiftsList.setSelectedIndex(this.shiftsList.getSelectedIndex() + 1);
+    }//GEN-LAST:event_downButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -141,7 +141,7 @@ public class APIConnection {
     {
         ArrayList objectList = null;
         try {
-            String uri = this.apiBaseTestUrl + endPoint;
+            String uri = this.apiBaseUrl + endPoint;
             System.out.println(uri);
             
             URL url = new URL(uri);
@@ -226,7 +226,7 @@ public class APIConnection {
     
     public Integer putData(String endpoint, Object obj) {
         try {
-            String uri = this.apiBaseTestUrl + endpoint;
+            String uri = this.apiBaseUrl + endpoint;
             URL url = new URL(uri);
             
             String json = mapper.writeValueAsString(obj);

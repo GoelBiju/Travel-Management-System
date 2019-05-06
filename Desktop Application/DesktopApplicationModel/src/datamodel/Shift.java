@@ -5,6 +5,7 @@
  */
 package datamodel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
@@ -19,10 +20,11 @@ public class Shift {
     
     private int journeyId;
     
-    private Date startDatetime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date startDateTime;
     
-    private Date endDatetime;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date endDateTime;
     
     public int getShiftId() {
         return shiftId;
@@ -49,18 +51,18 @@ public class Shift {
     }
     
     public Date getStartDatetime() {
-        return startDatetime;
+        return startDateTime;
     }
 
-    public void setStartDatetime(Date startDatetime) {
-        this.startDatetime = startDatetime;
+    public void setStartDatetime(Date startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
     public Date getEndDatetime() {
-        return endDatetime;
+        return endDateTime;
     }
 
-    public void setEndDatetime(Date endDatetime) {
-        this.endDatetime = endDatetime;
+    public void setEndDatetime(Date endDateTime) {
+        this.endDateTime = endDateTime;
     }    
 }

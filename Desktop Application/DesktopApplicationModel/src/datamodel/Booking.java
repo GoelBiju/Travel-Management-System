@@ -5,6 +5,7 @@
  */
 package datamodel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
@@ -23,6 +24,7 @@ public class Booking {
     
     private Stop arrivalStop;
     
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date bookedDateTime;
     
     private int passengersSenior;

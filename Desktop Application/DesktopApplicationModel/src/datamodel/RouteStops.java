@@ -5,6 +5,7 @@
  */
 package datamodel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
@@ -18,6 +19,7 @@ public class RouteStops {
     
     private int positionInRoute;
     
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date expectedArrivalDateTime;
     
     private Stop stop;

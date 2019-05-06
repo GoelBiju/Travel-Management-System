@@ -8,9 +8,12 @@ package Controllers;
 import GUIView.ApplicationFrame;
 import GUIView.Coach.CoachView;
 import GUIView.LoginPanel;
+import GUIView.Shifts.ShiftsPanel;
 import datamodel.Actions.EmployeeActions;
+import datamodel.Actions.ShiftActions;
 import datamodel.BindingModels.LoginBindingModel;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import utilities.APIConnection;
 
 /**
@@ -43,22 +46,30 @@ public class LoginController {
         this.viewParent.applicationPanels.repaint();
         this.viewParent.applicationPanels.revalidate();
         
-        this.viewParent.applicationPanels.setVisible(true);
+        //this.viewParent.applicationPanels.setVisible(true);
     }
     
     public void loginRequest(){
         
+        String employeeId = this.view.getEmployeeId();
+        String password = this.view.getPassword();
+        
         LoginBindingModel loginModel = new LoginBindingModel();
 
         // Call the login request as an employee.
-        loginModel.setEmployeeID(this.view.getEmployeeId());
-        loginModel.setPassword(this.view.getPassword());
+        loginModel.setEmployeeID(employeeId);
+        loginModel.setPassword(password);
         loginModel.setLoginType("employee");
         
-        boolean response = model.employeeLogin(loginModel);
-        System.out.println(response);
-        
-        // TODO: Create the ShiftsController and pass in the relevant variables.
-        
+        boolean validated = model.employeeLogin(loginModel);
+        if (validated) {
+            // TODO: Create the ShiftsController and pass in the relevant variables.  
+            ShiftActions shiftActions = ShiftActions.getInstance();
+            
+            ShiftsController shifts = new ShiftsController(this.viewParent, new ShiftsPanel(), 
+                    shiftActions, employeeId);
+        } else {
+            JOptionPane.showMessageDialog(this.view, "The employee credentials you entered are incorrect.", "NationalCoach - Login", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

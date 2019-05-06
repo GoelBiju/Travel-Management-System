@@ -17,12 +17,20 @@ import utilities.APIConnection;
  */
 public class ShiftActions {
     
+    private static ShiftActions actionsInstance;
+    
     private APIConnection apiConnection;
     
-    public ShiftActions() {
+    private ShiftActions() {
         apiConnection = APIConnection.getInstance();
     }
     
+    public static ShiftActions getInstance() {
+        if (actionsInstance == null) {
+            actionsInstance = new ShiftActions();
+        }
+        return actionsInstance;
+    }
     
     /**
      * 

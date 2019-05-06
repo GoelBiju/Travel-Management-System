@@ -18,8 +18,6 @@ public class Employee {
     private String lastName;
     
     private String jobRole;
-    
-    //private String password;
 
     public String getEmployeeId() {
         return employeeId;

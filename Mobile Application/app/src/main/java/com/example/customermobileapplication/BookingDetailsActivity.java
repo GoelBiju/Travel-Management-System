@@ -80,19 +80,19 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
                     // Update the view with the retrieved information.
                     textViewBookingReference.setText(Integer.toString(bookingReference));
-                    //                textViewJourneyId.setText(Integer.toString(booking.getJourney().getJourneyId()));
-                    //                textViewDepartingStop.setText(booking.getDepartingStop().getStopName());
-                    //                textViewArrivalStop.setText(booking.getArrivalStop().getStopName());
+                    textViewJourneyId.setText(Integer.toString(booking.getJourney().getJourneyId()));
+                    textViewDepartingStop.setText(booking.getDepartingStop().getStopName());
+                    textViewArrivalStop.setText(booking.getArrivalStop().getStopName());
 
                     //                textViewDepartureTime.setText();
                     //                textViewArrivalTime.setText();
 
-                    //                int numberOfPassengers = booking.getNumOfAdults() + booking.getNumOfSeniors() +
-                    //                        booking.getNumOfChildren() + booking.getNumOfInfants();
-                    //                Log.d("Response", "Number of passengers: " + numberOfPassengers);
-                    //                textViewNumPassenvers.setText(Integer.toString(numberOfPassengers));
-                    //                textViewBookedDateTime.setText(Helpers.formatDateTime(booking.getBookedDateTime()));
-                    //                textViewAmountPaid.setText(Float.toString(booking.getAmountPaid()));
+                    int numberOfPassengers = booking.getNumOfAdults() + booking.getNumOfSeniors() +
+                            booking.getNumOfChildren() + booking.getNumOfInfants();
+                                    Log.d("Response", "Number of passengers: " + numberOfPassengers);
+                    textViewNumPassenvers.setText(Integer.toString(numberOfPassengers));
+                    textViewBookedDateTime.setText(Helpers.formatDateTime(booking.getBookedDateTime()));
+                    textViewAmountPaid.setText(String.format("%.2f", booking.getAmountPaid()));
                 }
 
                 @Override
@@ -101,7 +101,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
                     alertDialogBuilder.setMessage("The booking you have selected is no longer valid or " +
-                            "there was an error fetching details in order to make a booking.")
+                            "there was an error fetching the details for this booking.")
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                                 @Override

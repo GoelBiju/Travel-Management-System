@@ -57,7 +57,7 @@ public class MyBookingsFragment extends Fragment {
 
             switch (i) {
                 case 0: return new ActiveBookingsFragment();
-                case 1: return new AccountFragment();
+                case 1: return new CompletedBookingsFragment();
             }
             return null;
         }

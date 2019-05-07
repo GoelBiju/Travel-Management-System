@@ -5,6 +5,7 @@
  */
 package datamodel.BindingModels;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import datamodel.CoachStatus;
 import java.util.Date;
 
@@ -18,8 +19,10 @@ public class JourneyUpdateBindingModel {
     
     private int currentStopId;
     
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date stopArrivalDateTime;
     
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date stopDepartedDateTime;
     
     private CoachStatus coachStatus;

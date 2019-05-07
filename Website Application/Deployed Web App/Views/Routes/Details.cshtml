@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication.ViewModels.RoutesViewModel>
+
+@{
+    ViewBag.Title = "Routes";
+}
+
+<h2>All Routes</h2>
+
+<p>
+    @Html.ActionLink("Create New Route", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.routeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.departureStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.arrivalStation)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.routeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.departureStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.arrivalStation)
+        </td>
+        <td>
+            @Html.ActionLink("Edit Stops", "Details", "RouteStops", new { id = item.routeId }, null)
+            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+
+</table>

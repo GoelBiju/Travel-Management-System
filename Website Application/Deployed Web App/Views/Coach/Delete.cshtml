@@ -1,0 +1,72 @@
+﻿@model WebApplication.ViewModels.CoachViewModel
+
+@{
+    ViewBag.Title = "Delete Coach";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Coach</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachMake)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachMake)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationPlate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationPlate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachCapacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachCapacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAvailable)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

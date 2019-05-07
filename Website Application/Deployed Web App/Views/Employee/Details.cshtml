@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebApplication.ViewModels.EmployeeViewModel>
+
+@{
+    ViewBag.Title = "Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Employees</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href="@Url.Action("Create", "Employee")" class="btn btn-default"><i class-"fa fa-plus"></i>Create New Employee</a>
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Job Role: @Html.TextBox("SearchString")
+        <input type="submit" value="Search">
+    </p>
+}
+
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </th>
+            <th>
+                @*<a asp-action="Details" asp-route-sortOrder="@ViewData["FirstNSortParm"]"> @Html.DisplayNameFor(model => model.FirstName)</a>*@
+                @Html.DisplayNameFor(model => model.FirstName)
+                @*@Html.ActionLink("First Name", "Details", new { sortOrder = ViewBag.FirstNSortParm})*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobRole)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobRole)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeId }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.EmployeeId }) |*@
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeId })
+        </td>
+    </tr>
+}
+
+</table>
+
+@*@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+    </script>
+    }*@

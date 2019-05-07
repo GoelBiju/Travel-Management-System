@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebApplication.ViewModels.CoachViewModel>
+
+@{
+    ViewBag.Title = "Coach";
+}
+
+<h2>All Coaches</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href="@Url.Action("Create", "Coach")" class="btn btn-default"><i class-"fa fa-plus"></i>Add New Coach</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CoachId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoachMake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoachModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistrationPlate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoachCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoachId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoachMake)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoachModel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegistrationPlate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoachCapacity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAvailable)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.CoachId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CoachId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CoachId })
+        </td>
+    </tr>
+}
+
+</table>

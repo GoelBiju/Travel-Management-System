@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NationalCoach - Website Application</title>
+
+    @Styles.Render("~/Content/SideMenuStyleSheet.css")
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+
+    @*<link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />*@
+    
+
+    @Styles.Render("~/Content/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    <div id="main" class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*<link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />*@
+    @RenderSection("scripts", required: false)
+
+    <!--Side Navigation Menu -->
+    <div class="sideMenu">
+
+        <!-- Employees Options -->
+        <button class="dropdown-btn">
+            Employees
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            @*<a>@Html.ActionLink("Create Employee", "Create", "Employee")</a>
+            <a>@Html.ActionLink("Update Employee", "Edit", "Employee")</a>*@
+            <a>@Html.ActionLink("View Employees", "Details", "Employee")</a>
+            @*<a>@Html.ActionLink("View Archived Employees", "Index", "EmployeeArchive")</a>*@
+        </div>
+
+
+        <!-- Driver Shifts Options -->
+        <button class="dropdown-btn">
+            Driver Shifts
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            @*<a href="#">Create a Shift</a>*@
+            <a>@Html.ActionLink("View Shifts", "Details", "Shift")</a>
+            @*<a href="#">Archive Shift</a>*@
+        </div>
+
+        <!-- Journeys Options -->
+        <button class="dropdown-btn">
+            Journeys
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a>@Html.ActionLink("View Journeys", "Index", "Journey")</a>
+           @* <a>@Html.ActionLink("Create New Journeys", "Create", "Journey")</a>*@
+            @*<a href="#">Archive Journey</a>*@
+        </div>
+
+        <!-- Routes Options -->
+        <button class="dropdown-btn">
+            Routes
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            @*<a href="#">Create New Route</a>
+            <a href="#">Update Route</a>*@
+            @*<a href="#">View Route</a>*@
+            <a>@Html.ActionLink("View Routes", "Details", "Routes")</a>
+            @*<a href="#">Archive Route</a>*@
+        </div>
+
+        <!-- Stops Options -->
+        <button class="dropdown-btn">
+            Stops
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a>@Html.ActionLink("View Stops", "Index", "Stop")</a>
+        </div>
+
+        <!-- Coaches Options -->
+        <button class="dropdown-btn">
+            Coaches
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            @*<a>@Html.ActionLink("Add Coach", "Create", "Coach")</a>
+            <a>@Html.ActionLink("Update Coach", "Edit", "Coach")</a>*@
+            <a>@Html.ActionLink("View Coaches", "Index", "Coach")</a>
+            @*<a>@Html.ActionLink("View Archived", "Index", "CoachArchive")</a>*@
+        </div>
+
+        <!-- Replacement Services -->
+        <a href="#">Replacement Services</a>
+
+        <a href="#">Help</a>
+
+        <a>@Html.ActionLink("Sign Out", "SignOut", "Home", null, new { id = "logout" }) </a>
+    </div>
+    <!-- End of Side Navigation Menu -->
+
+    @Scripts.Render("~/Scripts/SideMenuDropDown.js")
+
+</body>
+</html>

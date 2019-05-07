@@ -10,23 +10,24 @@ package datamodel.BindingModels;
  * @author vcastellani
  */
 public class BookingUpdateBindingModel {
-    public int BookingReference;
-    public String Status;
+    
+    public int bookingReference;
+    
+    public String status;
 
     public int getBookingReference() {
-        return BookingReference;
+        return bookingReference;
     }
 
-    public void setBookingReference(int BookingReference) {
-        this.BookingReference = BookingReference;
+    public void setBookingReference(int bookingReference) {
+        this.bookingReference = bookingReference;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
-    public void setStatus(String Status) {
-        this.Status = Status;
-    }
-    
+    public void setStatus(String status) {
+        this.status = status;
+    }   
 }

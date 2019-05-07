@@ -222,8 +222,6 @@ namespace api.Controllers
         }
 
 
-
-
         // PUT: api/Bookings/5
         [HttpPut, Authorize(Roles = "Employee")]
         [Route("{id:int}")]

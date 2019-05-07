@@ -10,6 +10,7 @@ import GUIView.Journey.JourneyPanel;
 import datamodel.Actions.BookingActions;
 import datamodel.Actions.JourneyActions;
 import datamodel.Booking;
+import datamodel.BookingStatus;
 import datamodel.CoachStatus;
 import datamodel.Journey;
 import datamodel.RouteStops;
@@ -45,6 +46,10 @@ public class JourneyController {
     
     private Stop currentStop;
     
+    private ArrayList<Booking> activeBookings;
+    
+    private ArrayList<Booking> completeBookings;
+    
     
     public JourneyController(HomePanel parent, JourneyPanel view, Journey journey, Queue<RouteStops> queue) {
         this.viewParent = parent;
@@ -57,6 +62,9 @@ public class JourneyController {
         this.routeStopsQueue = queue;
         this.totalStops = 0;
         this.remainingStops = 0;
+        
+        this.activeBookings = new ArrayList<>();
+        this.completeBookings = new ArrayList<>();
         
         this.initialiseController();
     }
@@ -84,7 +92,7 @@ public class JourneyController {
 //        this.view.getArrivedAtStopButton().addActionListener(e -> arrivedAtStop());
         
         //
-//        this.view.getAcceptBookingButton().addActionListener(e -> acceptBooking());
+        this.view.getAcceptBookingButton().addActionListener(e -> acceptBooking());
         
         //
 //        this.view.getCompleteBookingButton().addActionListener(e -> completeBooking());
@@ -123,6 +131,8 @@ public class JourneyController {
         this.view.getStartJourneyButton().setEnabled(false);
         this.view.getEndJourneyButton().setEnabled(true);
         this.view.getDepartFromStopButton().setEnabled(true);
+        this.view.getAcceptBookingButton().setEnabled(true);
+        this.view.getCompleteBookingButton().setEnabled(true);
         
         // Load all information for the next stop in the route 
         // from the queue.
@@ -144,18 +154,35 @@ public class JourneyController {
 //        
 //    }
 //    
-//    private void departFromStop() {
-//        
-//    }
-//    
-//    private void arrivedAtStop() {
-//        
-//    }
-//    
-//    private void acceptBooking() {
-//        
-//    }
-//    
+    private void departFromStop() {
+       
+        //
+        this.view.getDepartFromStopButton().setEnabled(false);
+        this.view.getArrivedAtStopButton().setEnabled(true);
+     
+        //
+        
+    }
+    
+    private void arrivedAtStop() {
+       
+        this.view.getDepartFromStopButton().setEnabled(false);
+        this.view.getArrivedAtStopButton().setEnabled(true);
+        
+        //
+        
+    }
+    
+    private void acceptBooking() {
+        
+        // Get the currently selected booking and change it's status to check-in.
+        Booking selectedBooking = this.activeBookings.get(this.view.getActiveBookingsList().getSelectedIndex());
+        System.out.println("Selected booking in active list: " + selectedBooking.getBookingReference());
+        this.bookingModel.updateBookingStatus(selectedBooking, BookingStatus.CHECKED_IN);
+        
+        loadStopBookings();
+    }
+
 //    private void completeBooking() {
 //        
 //    }
@@ -205,6 +232,7 @@ public class JourneyController {
         ArrayList<Booking> bookings = this.bookingModel.getBookingsByJourney(this.journey.getJourneyId());
         
         DefaultListModel<String> activeBookingsModel = new DefaultListModel<>();
+        DefaultListModel<String> completeBookingModel = new DefaultListModel<>();
         for (Booking booking : bookings) {
             System.out.println("Booking status: " + booking.getStatus() + ", Departing Stop: " + booking.getDepartingStop().getStopId());
             System.out.println("Current stop: " + this.currentStop.getStopId());
@@ -218,9 +246,22 @@ public class JourneyController {
                 activeBookingsModel.addElement(booking.getBookingReference() + " - Travelling to: " 
                         + booking.getArrivalStop().getStopName() + ", Total Passengers: " + 
                         totalPassengersInBooking);
-                System.out.println("Added booking: " + booking.getBookingReference());
+                
+                this.activeBookings.add(booking);
+                System.out.println("Added check-in booking: " + booking.getBookingReference());
+            } else if (booking.getStatus().equals("Checked-in") && (booking.getArrivalStop().getStopId() == this.currentStop.getStopId())) {
+                System.out.println("Complete at stop: " + booking.getBookingReference());
+                
+                int totalPassengersInBooking = booking.getPassengersAdult() + booking.getPassengersSenior() +
+                        booking.getPassengersInfant() + booking.getPassengersChildren();
+                
+                completeBookingModel.addElement(booking.getBookingReference() + " - Num. passengers leaving: " + totalPassengersInBooking);
+                
+                this.completeBookings.add(booking);
+                System.out.println("Added complete booking: " + booking.getBookingReference());
             }
         }
         this.view.getActiveBookingsList().setModel(activeBookingsModel);
+        this.view.getCompletedBookingsList().setModel(completeBookingModel);
     }
 }

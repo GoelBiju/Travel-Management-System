@@ -75,10 +75,12 @@ public class BookingActions {
         
         if(status == BookingStatus.CHECKED_IN){
             updateBooking.setBookingReference(booking.getBookingReference());
-            updateBooking.setStatus("Checked-In");
+            updateBooking.setStatus("Checked-in");
         } else if (status == BookingStatus.COMPLETE){
             updateBooking.setBookingReference(booking.getBookingReference());
             updateBooking.setStatus("Complete");
+        } else {
+            return false;
         }
         
         int response = this.apiConnection.putData("bookings/" + booking.getBookingReference(), updateBooking);

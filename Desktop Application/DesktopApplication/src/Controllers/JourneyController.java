@@ -9,9 +9,13 @@ import GUIView.HomePanel;
 import GUIView.Journey.JourneyPanel;
 import datamodel.Actions.BookingActions;
 import datamodel.Actions.JourneyActions;
+import datamodel.Booking;
+import datamodel.CoachStatus;
 import datamodel.Journey;
 import datamodel.RouteStops;
 import datamodel.Stop;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.DefaultListModel;
@@ -37,7 +41,10 @@ public class JourneyController {
     
     private int totalStops;
     
-    private int remainingStop;
+    private int remainingStops;
+    
+    private Stop currentStop;
+    
     
     public JourneyController(HomePanel parent, JourneyPanel view, Journey journey, Queue<RouteStops> queue) {
         this.viewParent = parent;
@@ -49,6 +56,7 @@ public class JourneyController {
         this.journey = journey;
         this.routeStopsQueue = queue;
         this.totalStops = 0;
+        this.remainingStops = 0;
         
         this.initialiseController();
     }
@@ -122,6 +130,12 @@ public class JourneyController {
         
         // Load booking information relevant to the stop.
         loadStopBookings();
+        
+        // Update journey information and send to API.
+        this.journey.setCurrentStopId(this.currentStop.getStopId());
+        this.journey.setStopArrivalDateTime(new Date());
+        this.journey.setCoachStatus(CoachStatus.AT_STOP);
+        this.journeyModel.updateJourneyInformation(journey);
     }
     
     
@@ -153,7 +167,8 @@ public class JourneyController {
         
         if (routeStop != null) {
             Stop stop = routeStop.getStop();
-        
+            this.currentStop = stop;
+            
             // Update the interface information.
             this.view.getCurrentStopNameLabel().setText(stop.getStopName());
             this.view.getCurrentStopPostcodeLabel().setText(stop.getStopPostcode());
@@ -180,9 +195,28 @@ public class JourneyController {
         }
     }
     
+    /**
+     * Get all the bookings for the journey and load them
+     * according to if they are active or complete at the current stop.
+     */
     private void loadStopBookings() {
         
         //
+        ArrayList<Booking> bookings = this.bookingModel.getBookingsByJourney(this.journey.getJourneyId());
         
+        DefaultListModel<String> activeBookingsModel = new DefaultListModel<>();
+        for (Booking booking : bookings) {
+            if (booking.getStatus() == "Confirmed" && 
+                    (booking.getDepartingStop().getStopId() == this.currentStop.getStopId())) {
+                System.out.println("Check-in at stop: " + booking.getBookingReference());
+                
+                int totalPassengersInBooking = booking.getPassengersAdult() + booking.getPassengersSenior() +
+                        booking.getPassengersInfant() + booking.getPassengersTeenager();
+                activeBookingsModel.addElement(booking.getBookingReference() + " - Travelling to: " 
+                        + booking.getDepartingStop().getStopName() + ", Total Passengers: " + 
+                        totalPassengersInBooking);
+            }
+        }
+        this.view.getActiveBookingsList().setModel(activeBookingsModel);
     }
 }

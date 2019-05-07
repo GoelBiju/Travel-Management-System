@@ -43,10 +43,10 @@ namespace api.Controllers
                                Route = new RouteDTO()
                                {
                                    RouteId = (int)j.ROUTE.ROUTE_ID,
-                                   DepartureStationId = (int)j.ROUTE.STOP.STOP_ID,
-                                   DepartureStation = j.ROUTE.STOP.STOP_NAME,
-                                   ArrivalStationId = (int)j.ROUTE.STOP1.STOP_ID,
-                                   ArrivalStation = j.ROUTE.STOP1.STOP_NAME
+                                   DepartureStationId = (int)j.ROUTE.STOP1.STOP_ID,
+                                   DepartureStation = j.ROUTE.STOP1.STOP_NAME,
+                                   ArrivalStationId = (int)j.ROUTE.STOP.STOP_ID,
+                                   ArrivalStation = j.ROUTE.STOP.STOP_NAME
                                },
                                CurrentStop = (j.CURRENT_STOP != null) ? db.STOPS.Select(s =>
                                new StopDTO()
@@ -86,10 +86,10 @@ namespace api.Controllers
                     Route = new RouteDTO()
                     {
                         RouteId = (int)j.ROUTE.ROUTE_ID,
-                        DepartureStationId = (int)j.ROUTE.STOP.STOP_ID,
-                        DepartureStation = j.ROUTE.STOP.STOP_NAME,
-                        ArrivalStationId = (int)j.ROUTE.STOP1.STOP_ID,
-                        ArrivalStation = j.ROUTE.STOP1.STOP_NAME
+                        DepartureStationId = (int)j.ROUTE.STOP1.STOP_ID,
+                        DepartureStation = j.ROUTE.STOP1.STOP_NAME,
+                        ArrivalStationId = (int)j.ROUTE.STOP.STOP_ID,
+                        ArrivalStation = j.ROUTE.STOP.STOP_NAME
                     },
                     CurrentStop = (j.CURRENT_STOP != null) ? db.STOPS.Select(s =>
                     new StopDTO()

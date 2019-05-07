@@ -12,9 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".JourneySearchActivity" />
-        <activity android:name=".BookingDetailsActivity" />
-        <activity android:name=".BookingActivity" />
+        <activity
+            android:name=".JourneySearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BookingDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BookingActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NavigationActivity"
             android:label="@string/title_activity_navigation"

@@ -58,8 +58,8 @@ namespace api.Controllers
                                },
                                DepartingStop = new StopDTO()
                                {
-                                   StopId = (int)b.STOP.STOP_ID,
-                                   StopName = b.STOP.STOP_NAME,
+                                   StopId = (int)b.STOP1.STOP_ID,
+                                   StopName = b.STOP1.STOP_NAME,
                                    IsStation = b.STOP.IS_STATION,
                                    StopPostcode = b.STOP.STOP_POSTCODE,
                                    StopLatitude = b.STOP.STOP_LATITUDE,
@@ -67,7 +67,7 @@ namespace api.Controllers
                                },
                                ArrivalStop = new StopDTO()
                                {
-                                   StopId = (int)b.STOP1.STOP_ID,
+                                   StopId = (int)b.STOP.STOP_ID,
                                    StopName = b.STOP.STOP_NAME,
                                    IsStation = b.STOP.IS_STATION,
                                    StopPostcode = b.STOP.STOP_POSTCODE,
@@ -120,8 +120,8 @@ namespace api.Controllers
                                },
                                DepartingStop = new StopDTO()
                                {
-                                   StopId = (int)b.STOP.STOP_ID,
-                                   StopName = b.STOP.STOP_NAME,
+                                   StopId = (int)b.STOP1.STOP_ID,
+                                   StopName = b.STOP1.STOP_NAME,
                                    IsStation = b.STOP.IS_STATION,
                                    StopPostcode = b.STOP.STOP_POSTCODE,
                                    StopLatitude = b.STOP.STOP_LATITUDE,
@@ -129,7 +129,7 @@ namespace api.Controllers
                                },
                                ArrivalStop = new StopDTO()
                                {
-                                   StopId = (int)b.STOP1.STOP_ID,
+                                   StopId = (int)b.STOP.STOP_ID,
                                    StopName = b.STOP.STOP_NAME,
                                    IsStation = b.STOP.IS_STATION,
                                    StopPostcode = b.STOP.STOP_POSTCODE,
@@ -188,8 +188,8 @@ namespace api.Controllers
                     },
                     DepartingStop = new StopDTO()
                     {
-                        StopId = (int)b.STOP.STOP_ID,
-                        StopName = b.STOP.STOP_NAME,
+                        StopId = (int)b.STOP1.STOP_ID,
+                        StopName = b.STOP1.STOP_NAME,
                         IsStation = b.STOP.IS_STATION,
                         StopPostcode = b.STOP.STOP_POSTCODE,
                         StopLatitude = b.STOP.STOP_LATITUDE,
@@ -197,7 +197,7 @@ namespace api.Controllers
                     },
                     ArrivalStop = new StopDTO()
                     {
-                        StopId = (int)b.STOP1.STOP_ID,
+                        StopId = (int)b.STOP.STOP_ID,
                         StopName = b.STOP.STOP_NAME,
                         IsStation = b.STOP.IS_STATION,
                         StopPostcode = b.STOP.STOP_POSTCODE,

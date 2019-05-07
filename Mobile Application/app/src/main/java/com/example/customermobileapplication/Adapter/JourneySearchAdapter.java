@@ -55,6 +55,8 @@ public class JourneySearchAdapter extends RecyclerView.Adapter<JourneySearchAdap
             @Override
             public void onClick(View v) {
 
+                System.out.println("Passing in departing stop id: " + customerDepartureStopId);
+                System.out.println("Passing in departing stop id: " + customerArrivalStopId);
                 // Open the bookings activity to make a booking for the journey.
                 // TODO: Departing stop/arriving stop for a booking is needed.
                 // TODO: Pass in the customer's departing and arrival stop id's.

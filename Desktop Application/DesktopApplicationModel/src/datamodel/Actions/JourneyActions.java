@@ -40,7 +40,7 @@ public class JourneyActions {
         return journey;
     }
     
-    public boolean updateJourneyInformation(Journey journey) {
+    public void updateJourneyInformation(Journey journey) {
         
         JourneyUpdateBindingModel updateJourney = new JourneyUpdateBindingModel();
         updateJourney.setJourneyId(journey.getJourneyId());
@@ -52,7 +52,6 @@ public class JourneyActions {
         // Check the status and set the coach status;
         int response = this.apiConnection.putData("journeys/" + journey.getJourneyId(), updateJourney);
         System.out.println(response);
-        return true;
     }
     
     public static void main(String[] args) {
@@ -68,7 +67,10 @@ public class JourneyActions {
         boolean response = actions.apiConnection.login(loginModel);
         System.out.println(response);      
         
-        System.out.println(actions.getJourney(3).getArrivalDateTime());
-        System.out.println(actions.getJourney(3).getCoachStatus());
+        Journey journey = actions.getJourney(3);
+        journey.setCoachStatus(CoachStatus.SCHEDULED);
+        actions.updateJourneyInformation(journey);
+        //System.out.println(.getArrivalDateTime());
+        //System.out.println(actions.getJourney(3).getCoachStatus());
     }
 }

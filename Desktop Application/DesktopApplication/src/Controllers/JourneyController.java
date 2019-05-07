@@ -135,7 +135,7 @@ public class JourneyController {
         this.journey.setCurrentStopId(this.currentStop.getStopId());
         this.journey.setStopArrivalDateTime(new Date());
         this.journey.setCoachStatus(CoachStatus.AT_STOP);
-//        this.journeyModel.updateJourneyInformation(journey);
+        this.journeyModel.updateJourneyInformation(journey);
     }
     
     

@@ -232,6 +232,7 @@ public class APIConnection {
         try {
             String uri = this.apiBaseUrl + endpoint;
             URL url = new URL(uri);
+            System.out.println("PUT to: " + uri);
             
             String json = mapper.writeValueAsString(obj);
             

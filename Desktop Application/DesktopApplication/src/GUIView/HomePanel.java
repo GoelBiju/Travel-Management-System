@@ -8,6 +8,7 @@ package GUIView;
 import GUIView.Journey.JourneyPanel;
 import GUIView.Coach.CoachPanel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 /**
@@ -44,6 +45,30 @@ public class HomePanel extends javax.swing.JPanel {
     
     public JButton getSignOutButton() {
         return this.signOutButton;
+    }
+    
+    public JLabel getTotalBookingsLabel() {
+        return this.totalBookingsLabel;
+    }
+    
+    public JLabel getNumCustomersLabel() {
+        return this.numCustomersLabel;
+    }
+    
+    public JLabel getTotalStopsLabel() {
+        return this.totalStopsLabel;
+    }
+    
+    public JLabel getRemainingStopsLabel() {
+        return this.remainingStopsLabel;
+    }
+    
+    public JLabel getDepartureTimeLabel() {
+        return this.departureTimeLabel;
+    }
+    
+    public JLabel getArrivalTimeLabel() {
+        return this.arrivalTimeLabel;
     }
     
     /**
@@ -137,9 +162,9 @@ public class HomePanel extends javax.swing.JPanel {
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(departureTimeLabel)
-                    .addComponent(arrivalTimeLabel))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(departureTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addComponent(arrivalTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

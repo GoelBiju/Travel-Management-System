@@ -13,6 +13,7 @@ import java.util.Date;
  * @author vcastellani
  */
 public class RouteStops {
+    
     private int routeId;
     
     private int stopId;

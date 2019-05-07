@@ -11,6 +11,8 @@ import utilities.APIConnection;
 import datamodel.RouteStops;
 import datamodel.Route;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -19,10 +21,20 @@ import java.util.List;
  */
 public class RouteActions {
     
+    private static RouteActions actionsInstance;
+    
     private APIConnection apiConnection;
     
     public RouteActions(){
+        
         this.apiConnection = APIConnection.getInstance();
+    }
+    
+    public static RouteActions getInstance() {
+        if (actionsInstance == null) {
+            actionsInstance = new RouteActions();
+        }
+        return actionsInstance;
     }
     
     public Route getRoutes(Integer routeId){
@@ -37,24 +49,25 @@ public class RouteActions {
         return currentRoute;
     }
     
-    
-    
-    
-    
-//    public static void main(String[] args){
-//        RouteActions actions = new RouteActions();
-//        
-//        LoginBindingModel loginModel = new LoginBindingModel();
-//        loginModel.setEmployeeID("D1006");
-//        loginModel.setPassword("testpassword123");
-//        loginModel.setLoginType("employee");
-//        
-//        boolean response = actions.apiConnection.login(loginModel);
-//        System.out.println(response); 
-//        
-//        RouteStops route = actions.getRouteStops(4).get(0);
-//        System.out.println(route.getStop());
-//               
-//    }
-    
+    public static void main(String[] args){
+        RouteActions actions = new RouteActions();
+        
+        LoginBindingModel loginModel = new LoginBindingModel();
+        loginModel.setEmployeeID("D1006");
+        loginModel.setPassword("testpassword123");
+        loginModel.setLoginType("employee");
+        
+        boolean response = actions.apiConnection.login(loginModel);
+        System.out.println(response); 
+        
+        ArrayList<RouteStops> route = actions.getRouteStops(18);
+        System.out.println(route.get(0).getStop());
+        
+        // 
+        Collections.sort(route, (rs1, rs2) -> rs1.getPositionInRoute() - rs2.getPositionInRoute());
+        
+        for (RouteStops routeStop : route) {
+            System.out.println("Stop pos: " + routeStop.getPositionInRoute());
+        }
+    }
 }

@@ -96,7 +96,7 @@ public class HomeController {
         
         
         // Load journey controller.
-        this.journeyController = new JourneyController(homeView, journeyView, routeStopsQueue);
+        this.journeyController = new JourneyController(homeView, journeyView, this.currentJourney, routeStopsQueue);
         
         // TODO: Load coach controller.
 //        this.coachController = new CoachController();

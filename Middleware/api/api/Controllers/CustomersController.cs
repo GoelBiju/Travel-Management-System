@@ -176,7 +176,13 @@ namespace api.Controllers
                 // A DbUpdateException will occur if the data does not match what the database expects
                 // i.e. constraints are violated, we can send back a bad request HTTP response.
                 //if (CUSTOMERExists(cUSTOMER.CUSTOMER_ID))
-                return BadRequest();
+                //return BadRequest();
+
+                // Return a 403 Forbidden with an error message.
+                HttpError err = new HttpError("Constraint failure.");
+                HttpResponseMessage responseMessage = Request.CreateErrorResponse(HttpStatusCode.BadRequest, err);
+
+                return ResponseMessage(responseMessage);
             }
 
             // Find the added user by the email address provided by the client.

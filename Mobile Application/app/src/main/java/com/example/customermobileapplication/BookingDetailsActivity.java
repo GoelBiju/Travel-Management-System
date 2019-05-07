@@ -35,7 +35,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
     private TextView textViewDepartureTime;
     private TextView textViewArrivalStop;
     private TextView textViewArrivalTime;
-    private TextView textViewNumPassenvers;
+    private TextView textViewNumPassengers;
     private TextView textViewBookedDateTime;
     private TextView textViewAmountPaid;
 
@@ -89,8 +89,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
                     int numberOfPassengers = booking.getNumOfAdults() + booking.getNumOfSeniors() +
                             booking.getNumOfChildren() + booking.getNumOfInfants();
-                                    Log.d("Response", "Number of passengers: " + numberOfPassengers);
-                    textViewNumPassenvers.setText(Integer.toString(numberOfPassengers));
+                    Log.d("Response", "Number of passengers: " + numberOfPassengers);
+                    textViewNumPassengers.setText(Integer.toString(numberOfPassengers));
                     textViewBookedDateTime.setText(Helpers.formatDateTime(booking.getBookedDateTime()));
                     textViewAmountPaid.setText(String.format("%.2f", booking.getAmountPaid()));
                 }
@@ -135,7 +135,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         textViewDepartureTime = (TextView) findViewById(R.id.textViewDepartureTime);
         textViewDepartureTime = (TextView) findViewById(R.id.textViewArrivalTime);
 
-        textViewNumPassenvers = (TextView) findViewById(R.id.textViewNumPassengers);
+        textViewNumPassengers = (TextView) findViewById(R.id.textViewNumPassengers);
         textViewBookedDateTime = (TextView) findViewById(R.id.textViewBookedDateTime);
         textViewAmountPaid = (TextView) findViewById(R.id.textViewAmountPaid);
 

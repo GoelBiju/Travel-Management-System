@@ -24,7 +24,7 @@ public class CustomerRegistrationBindingModel {
     @SerializedName("addressLineOne")
     public String addressLineOne;
 
-    @SerializedName("addressLIneTwo")
+    @SerializedName("addressLineTwo")
     public String addressLineTwo;
 
     @SerializedName("postCode")

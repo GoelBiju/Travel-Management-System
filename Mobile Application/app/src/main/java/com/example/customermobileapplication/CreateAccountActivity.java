@@ -195,9 +195,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         // Get the values of the entered fields.
         String firstName = editTextFirstName.getText().toString();
+        // TODO: Capitals letters following the starting letter is not handled correctly.
         String lastName = editTextLastName.getText().toString();
-//        Date dateOfBirth = Helpers.toAPIDateTime(editTextDateOfBirth.getText().toString());
-        Date dateOfBirth = Helpers.toAPIDate(editTextDateOfBirth.getText().toString());
+        Date dateOfBirth = Helpers.toAPIDateTime(editTextDateOfBirth.getText().toString());
+//        Date dateOfBirth = Helpers.toAPIDate(editTextDateOfBirth.getText().toString());
         String addressLineOne = editTextAddressLineOne.getText().toString();
         String addressLineTwo = editTextAddressLineTwo.getText().toString();
         String postCode = editTextPostCode.getText().toString().toUpperCase();
@@ -358,6 +359,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                         Log.d("Error.Response", errorResponse.toString());
 
                         progressDialog.hide();
+
+                        Log.d("Response", errorResponse.getResponse().toString());
 
                         // Display the error to the user.
                         // TODO: Place important toast messages in an alert dialog.

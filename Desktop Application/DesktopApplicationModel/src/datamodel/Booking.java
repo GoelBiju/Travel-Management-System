@@ -31,7 +31,7 @@ public class Booking {
     
     private int passengersAdult;
     
-    private int passengersTeenager;
+    private int passengersChildren;
     
     private int passengersInfant;
     
@@ -103,12 +103,12 @@ public class Booking {
         this.passengersAdult = passengersAdult;
     }
 
-    public int getPassengersTeenager() {
-        return passengersTeenager;
+    public int getPassengersChildren() {
+        return passengersChildren;
     }
 
-    public void setPassengersTeenager(int passengersTeenager) {
-        this.passengersTeenager = passengersTeenager;
+    public void setPassengersChildren(int passengersChildren) {
+        this.passengersChildren = passengersChildren;
     }
 
     public int getPassengersInfant() {

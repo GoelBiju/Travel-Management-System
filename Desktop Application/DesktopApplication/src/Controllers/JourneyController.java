@@ -135,7 +135,7 @@ public class JourneyController {
         this.journey.setCurrentStopId(this.currentStop.getStopId());
         this.journey.setStopArrivalDateTime(new Date());
         this.journey.setCoachStatus(CoachStatus.AT_STOP);
-        this.journeyModel.updateJourneyInformation(journey);
+//        this.journeyModel.updateJourneyInformation(journey);
     }
     
     
@@ -206,15 +206,19 @@ public class JourneyController {
         
         DefaultListModel<String> activeBookingsModel = new DefaultListModel<>();
         for (Booking booking : bookings) {
-            if (booking.getStatus() == "Confirmed" && 
-                    (booking.getDepartingStop().getStopId() == this.currentStop.getStopId())) {
+            System.out.println("Booking status: " + booking.getStatus() + ", Departing Stop: " + booking.getDepartingStop().getStopId());
+            System.out.println("Current stop: " + this.currentStop.getStopId());
+            
+            if (booking.getStatus().equals("Confirmed") && (booking.getDepartingStop().getStopId() == this.currentStop.getStopId())) {
                 System.out.println("Check-in at stop: " + booking.getBookingReference());
                 
                 int totalPassengersInBooking = booking.getPassengersAdult() + booking.getPassengersSenior() +
-                        booking.getPassengersInfant() + booking.getPassengersTeenager();
+                        booking.getPassengersInfant() + booking.getPassengersChildren();
+                
                 activeBookingsModel.addElement(booking.getBookingReference() + " - Travelling to: " 
-                        + booking.getDepartingStop().getStopName() + ", Total Passengers: " + 
+                        + booking.getArrivalStop().getStopName() + ", Total Passengers: " + 
                         totalPassengersInBooking);
+                System.out.println("Added booking: " + booking.getBookingReference());
             }
         }
         this.view.getActiveBookingsList().setModel(activeBookingsModel);

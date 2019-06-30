@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import utilities.Helpers;
 
 /**
@@ -83,19 +84,19 @@ public class JourneyController {
         this.view.getStartJourneyButton().addActionListener(e -> startJourney());
         
         //
-//        this.view.getEndJourneyButton().addActionListener(e -> endJourney());
-        
-        //
-//        this.view.getDepartFromStopButton().addActionListener(e -> departFromStop());
-        
-        //
-//        this.view.getArrivedAtStopButton().addActionListener(e -> arrivedAtStop());
-        
-        //
         this.view.getAcceptBookingButton().addActionListener(e -> acceptBooking());
         
         //
-//        this.view.getCompleteBookingButton().addActionListener(e -> completeBooking());
+        this.view.getDepartFromStopButton().addActionListener(e -> departFromStop());
+        
+         //
+        this.view.getArrivedAtStopButton().addActionListener(e -> arrivedAtStop());
+
+        //
+        this.view.getCompleteBookingButton().addActionListener(e -> completeBooking());
+
+        //
+        this.view.getEndJourneyButton().addActionListener(e -> endJourney());
     }
     
     private void updateQueueList() {
@@ -123,6 +124,9 @@ public class JourneyController {
         
         this.view.getAcceptBookingButton().setEnabled(false);
         this.view.getCompleteBookingButton().setEnabled(false);
+        
+        this.view.getCurrentStopDetailsPanel().setEnabled(false);
+        this.view.getNextStopDetailsPanel().setEnabled(false);
     }
     
     private void startJourney() {
@@ -133,6 +137,10 @@ public class JourneyController {
         this.view.getDepartFromStopButton().setEnabled(true);
         this.view.getAcceptBookingButton().setEnabled(true);
         this.view.getCompleteBookingButton().setEnabled(true);
+        
+        //
+        this.view.getCurrentStopDetailsPanel().setEnabled(true);
+        this.view.getNextStopDetailsPanel().setEnabled(true);
         
         // Load all information for the next stop in the route 
         // from the queue.
@@ -145,33 +153,10 @@ public class JourneyController {
         this.journey.setCurrentStopId(this.currentStop.getStopId());
         this.journey.setStopArrivalDateTime(new Date());
         this.journey.setCoachStatus(CoachStatus.AT_STOP);
+        
         this.journeyModel.updateJourneyInformation(journey);
     }
     
-    
-    
-//    private void endJourney() {
-//        
-//    }
-//    
-    private void departFromStop() {
-       
-        //
-        this.view.getDepartFromStopButton().setEnabled(false);
-        this.view.getArrivedAtStopButton().setEnabled(true);
-     
-        //
-        
-    }
-    
-    private void arrivedAtStop() {
-       
-        this.view.getDepartFromStopButton().setEnabled(false);
-        this.view.getArrivedAtStopButton().setEnabled(true);
-        
-        //
-        
-    }
     
     private void acceptBooking() {
         
@@ -181,11 +166,105 @@ public class JourneyController {
         this.bookingModel.updateBookingStatus(selectedBooking, BookingStatus.CHECKED_IN);
         
         loadStopBookings();
+        
+        if ((this.activeBookings.size() == 0) && (this.completeBookings.size() == 0)
+                && (this.currentStop.getStopId() == this.journey.getRoute().getDepartureStationId()) 
+                && (this.journey.getCoachStatus() == CoachStatus.AT_STOP)) {
+            // 
+            this.journey.setDepartureDateTime(new Date());
+            this.journey.setCoachStatus(CoachStatus.DEPARTED);
+            
+            this.journeyModel.updateJourneyInformation(journey);
+        }
     }
 
-//    private void completeBooking() {
-//        
-//    }
+
+//    
+    private void departFromStop() {
+       
+        if (this.activeBookings.size() == 0) {
+        
+            //
+            this.view.getDepartFromStopButton().setEnabled(false);
+            this.view.getArrivedAtStopButton().setEnabled(true);
+
+            //
+            this.view.getAcceptBookingButton().setEnabled(false);
+            this.view.getCompleteBookingButton().setEnabled(false);
+
+            //
+            this.journey.setStopArrivalDateTime(null);
+            this.journey.setStopDepartedDateTime(new Date());
+            this.journey.setCoachStatus(CoachStatus.ON_ROUTE);
+            this.journeyModel.updateJourneyInformation(journey);
+            
+        
+            //
+            this.loadStopsFromQueue();
+        } else {
+            JOptionPane.showMessageDialog(this.view, "Please ensure that all passengers"
+                    + " boarding at this stop have been accepted/checked-in.",
+                        "NationalCoach - Journey", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void arrivedAtStop() {
+        
+        this.view.getDepartFromStopButton().setEnabled(true);
+        this.view.getArrivedAtStopButton().setEnabled(false);
+        
+        //
+        this.view.getAcceptBookingButton().setEnabled(true);
+        this.view.getCompleteBookingButton().setEnabled(true);
+        
+        //
+        this.journey.setCurrentStop(this.currentStop);
+        this.journey.setStopArrivalDateTime(new Date());
+        this.journey.setStopDepartedDateTime(null);
+        this.journey.setCoachStatus(CoachStatus.AT_STOP);
+        this.journeyModel.updateJourneyInformation(journey);     
+        
+        if (this.routeStopsQueue.peek() == null) {
+            //
+            this.view.getDepartFromStopButton().setEnabled(false);
+            this.view.getArrivedAtStopButton().setEnabled(false);
+            
+            // 
+            this.journey.setArrivalDateTime(new Date());
+            this.journey.setDepartureDateTime(null);
+            this.journey.setCoachStatus(CoachStatus.ARRIVED);
+            
+            this.journeyModel.updateJourneyInformation(journey);
+        }
+    }
+    
+    private void completeBooking() {
+        
+        // Get the currently selected booking and change it's status to check-in.
+        Booking selectedBooking = this.completeBookings.get(this.view.getCompletedBookingsList().getSelectedIndex());
+        System.out.println("Selected booking in completed list: " + selectedBooking.getBookingReference());
+        this.bookingModel.updateBookingStatus(selectedBooking, BookingStatus.COMPLETE);
+        
+        loadStopBookings();
+    }
+    
+    private void endJourney() {
+        
+        //
+        if (this.completeBookings.size() > 0) {
+            JOptionPane.showMessageDialog(this.view, "Please ensure that all passengers"
+                    + " have left the coach and have completed their booking.",
+                        "NationalCoach - Journey", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.journey.setCoachStatus(CoachStatus.COMPLETE);
+            this.journeyModel.updateJourneyInformation(journey);
+            
+            this.view.setEnabled(false);
+            
+            JOptionPane.showMessageDialog(this.view, "You can now sign-out from your shift.",
+                        "NationalCoach - Journey", JOptionPane.OK_OPTION);
+        }
+    }
     
     private void loadStopsFromQueue() {
         
@@ -218,7 +297,16 @@ public class JourneyController {
                 this.view.getNextExpectedArrivalTimeLabel()
                         .setText(Helpers.formatDateTime(nextRouteStop.getExpectedArrivalDateTime()));
                 this.view.getNextStopPosLabel().setText(Integer.toString(nextRouteStop.getPositionInRoute()));
+            } else {
+                this.view.getNextStopNameLabel().setText("None");
+                this.view.getNextStopPostcodeLabel().setText("None");
+                this.view.getNextExpectedArrivalTimeLabel()
+                        .setText("None");
+                this.view.getNextStopPosLabel().setText("None");
+                this.view.getNextStopDetailsPanel().setEnabled(false);
             }
+        } else {
+            System.out.println("The next route stop from the queue returned null.");
         }
     }
     

@@ -96,7 +96,7 @@ public class HomeController {
         
         
         // Load journey controller.
-        this.journeyController = new JourneyController(homeView, journeyView, this.currentJourney, routeStopsQueue);
+        this.journeyController = new JourneyController(this.homeView, journeyView, this.currentJourney, routeStopsQueue);
         
         // TODO: Load coach controller.
 //        this.coachController = new CoachController();
@@ -155,21 +155,25 @@ public class HomeController {
         // Get the route for this journey by route id.
         ArrayList<RouteStops> route = this.routeModel.getRouteStops(this.currentJourney.getRouteId());
         
-        // Sort the routes.
-        Collections.sort(route, (rs1, rs2) -> rs1.getPositionInRoute() - rs2.getPositionInRoute());
-        
-        // Enqueue the route stops and add to the list model.
-        for (RouteStops routeStop : route) {
+        if (route != null || route.size() > 0) {
+            // Sort the routes.
+            Collections.sort(route, (rs1, rs2) -> rs1.getPositionInRoute() - rs2.getPositionInRoute());
+
+            // Enqueue the route stops and add to the list model.
+            for (RouteStops routeStop : route) {
+
+                // Get the route stop based on the position.
+                System.out.println("Current route stop pos: " + routeStop.getPositionInRoute());
+
+                // Add stop to queue.
+                this.routeStopsQueue.add(routeStop);   
+            }
             
-            // Get the route stop based on the position.
-            System.out.println("Current route stop pos: " + routeStop.getPositionInRoute());
-            
-            // Add stop to queue.
-            this.routeStopsQueue.add(routeStop);
+            // Update the stop count.
+            this.homeView.getTotalStopsLabel().setText(Integer.toString(this.routeStopsQueue.size()));
+        } else {
+            System.out.println("Error fetching route stops.");
         }
-        
-        // Update the stop count.
-        this.homeView.getTotalStopsLabel().setText(Integer.toString(this.routeStopsQueue.size()));
     }
     
     public void switchPanels(JLayeredPane layer, JPanel view) {

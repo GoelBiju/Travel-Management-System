@@ -434,6 +434,8 @@ public class BookingActivity extends AppCompatActivity implements NumberPicker.O
         progressDialog.setMessage("Finalising Your Booking...");
         progressDialog.show();
 
+        Log.d("Response", bookingData.toString());
+
         // Call the api to add the booking.
         apiConnection.postCustomJsonObject("bookings", bookingData, Booking.class, new CustomCallback() {
             @Override
